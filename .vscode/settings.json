@@ -1,0 +1,8 @@
+{
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "files.exclude": {
+        "src/**/*.js": true,
+        "test/**/*.js": true
+    },
+    "vsicons.presets.angular": false
+}

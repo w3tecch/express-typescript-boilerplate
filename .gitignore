@@ -1,0 +1,43 @@
+# @w3tec
+
+# Logs #
+/logs
+*.log
+*.log*
+
+# Node files #
+node_modules/
+bower_components/
+npm-debug.log
+yarn-error.log
+
+# OS generated files #
+.DS_Store
+Thumbs.db
+
+# Typing #
+typings/
+
+# Dist #
+dist/
+releases/
+
+# Cordova #
+cordova/plugins/
+cordova/platforms/
+www/
+plugins/
+platforms/
+
+# IDE #
+.idea/
+*.swp
+.awcache
+
+# Generated source-code #
+src/**/*.js
+test/**/*.js
+coverage/
+
+# Generated documentation #
+docs/

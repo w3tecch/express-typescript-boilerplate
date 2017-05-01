@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "7.7.3"
+install:
+  - npm run install:dev
+scripts:
+  - npm test
+notifications:
+  email: false

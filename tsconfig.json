@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "strictNullChecks": true
+    },
+    "filesGlob": [
+        "typings/**/*.d.ts",
+        "typings_custom/**/*.d.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
