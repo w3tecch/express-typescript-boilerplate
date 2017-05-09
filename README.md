@@ -62,17 +62,16 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * Run `npm run db:migrate` to migration the new schema to the database
 * Run `npm run db:migrate:rollback` to rollback one version
 
-
 ## Related Projects
 * [express-graphql-typescript-boilerplate](https://github.com/w3tecch/express-graphql-typescript-boilerplate) - A starter kit for building amazing GraphQL API's with TypeScript and express by @w3tecch
 * [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
-
-## License
-MIT
 
 ## Documentations
 * [Auth0 API Documentation](https://auth0.com/docs/api/management/v2#!/Users/get_users)
 * [Bookshelf Cheatsheet](http://ricostacruz.com/cheatsheets/bookshelf.html)
 
+## License
+ [MIT](/LICENSE)
+
 ---
-Made with ♥ by Gery Hirschfeld ([@GeryHirschfeld1](https://twitter.com/GeryHirschfeld1))
+Made with ♥ by Gery Hirschfeld ([@GeryHirschfeld1](https://twitter.com/GeryHirschfeld1)) and [contributors](https://github.com/w3tecch/express-typescript-boilerplate/graphs/contributors)
