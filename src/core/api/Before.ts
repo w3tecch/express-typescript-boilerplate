@@ -1,11 +1,11 @@
 import * as express from 'express';
 
-import * as core from '../index';
+import { Hookable } from './interfaces/Hookable';
+import { Log } from '../log';
 
+const log = new Log('core:Before');
 
-const log = new core.Log('core:Before');
-
-export function Before(hooks: core.Hookable[]): any {
+export function Before(hooks: Hookable[]): any {
     return function (target: Function, key: string, descriptor: PropertyDescriptor): PropertyDescriptor {
         return {
             value: async function (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> {

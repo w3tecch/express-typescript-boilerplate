@@ -1,11 +1,13 @@
 import * as express from 'express';
 
-import * as core from '../index';
+import { Hookable } from './interfaces/Hookable';
+import { Log } from '../log';
+import { Exception } from '../api';
 
 
-const log = new core.Log('core:After');
+const log = new Log('core:After');
 
-export function After(hooks: core.Hookable[]): any {
+export function After(hooks: Hookable[]): any {
     return function (target: Function, key: string, descriptor: PropertyDescriptor): PropertyDescriptor {
         return {
             value: async function (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> {
@@ -16,7 +18,7 @@ export function After(hooks: core.Hookable[]): any {
                 let body = await fun(req, res, next);
 
                 // check if the return value is an exception
-                if (body instanceof core.Exception) {
+                if (body instanceof Exception) {
                     return body;
                 }
 

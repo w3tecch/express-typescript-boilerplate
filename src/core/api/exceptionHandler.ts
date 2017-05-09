@@ -1,16 +1,25 @@
 import * as express from 'express';
-
 import * as core from '../index';
 
 
-export const exceptionHandler = (error: core.Exception, req: express.Request, res: express.Response, next: express.NextFunction) => {
-
-    // check if the return value is an exception
+/**
+ * @name exceptionHandler
+ * @description
+ * This handler catches all thrown exceptions from the api. Afterwards it
+ * send them to the client otherwise it moves to the next middleware or handler.
+ *
+ * @param {core.Exception} error
+ * @param {express.Request} req
+ * @param {express.Response} res
+ * @param {express.NextFunction} next
+ */
+export const exceptionHandler = (error: core.Exception | Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
     if (error instanceof core.Exception) {
-        res.status(error.code)
-            .send(error.message);
+        res.status(error.code).send(error.message);
+        next();
     } else {
+        console.error(error.stack);
+        res.status(500).send('Something broke!');
         next(error);
     }
-
 };

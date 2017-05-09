@@ -11,7 +11,6 @@ export * from './Exception';
 export * from './After';
 export * from './Before';
 export * from './ContentType';
-export * from './ExceptionHandling';
 
 // middlewares
 export * from './exceptionHandler';

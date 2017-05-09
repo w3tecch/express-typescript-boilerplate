@@ -1,23 +1,23 @@
 import * as Bookshelf from 'bookshelf';
-
-import * as core from '../../core';
 import * as models from '../models';
+// import { injectable } from 'inversify';
 
-const log = new core.Log('api:repos:UserRepository');
-
+/**
+ * UserRepository
+ *
+ * @export
+ * @class UserRepository
+ */
+// @injectable()
 export class UserRepository {
 
-    constructor(private userModel: typeof models.User) {
-        log.debug('constructed');
-    }
-
-    public async findAll(): Promise<Bookshelf.Collection<models.User>> {
-        const users = await this.userModel.fetchAll();
+    public static async findAll(): Promise<Bookshelf.Collection<models.User>> {
+        const users = await models.User.fetchAll();
         return <Bookshelf.Collection<models.User>>users;
     }
 
-    public async findOne(id: number): Promise<models.User> {
-        return this.userModel.fetchById(id);
+    public static async findOne(id: number): Promise<models.User> {
+        return models.User.fetchById(id);
     }
 
 }

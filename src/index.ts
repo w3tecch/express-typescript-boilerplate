@@ -1,48 +1,24 @@
 /**
- * express-typescript-boilerplate
+ * EXPRESS TYPESCRIPT BOILERPLATE
+ * ----------------------------------------
  *
- * @author Gery Hirscheld<@hirsch88>
+ * Gery Hirscheld<@hirsch88>
  *
- * @description
- * This is a boilerplate for Node.js app written in TypeScript. We used the framework Express.js
- * as a basic layer.
- *
+ * This is a boilerplate for Node.js app written in TypeScript.
+ * We used the framework Express.js as a basic layer.
  */
 
+// Define your debug scope level here
 process.env.DEBUG = 'app*,api*,core*';
 
 // Define the log adapter for this application
 import { DebugAdapter, Log } from './core/log';
 Log.setAdapter(DebugAdapter);
 
-const app = require('./app');
-const port = app.get('port');
-const server = app.listen(port);
-const log = new Log();
+// Import our app and the core server helper
+import app from './app';
+import * as core from './core';
 
-
-// Listen on server events
-server.on('listening', () => {
-    log.info(`started on ${app.get('host')}:${port}`);
-});
-
-
-server.on('error', (error) => {
-    if (error.syscall !== 'listen') {
-        throw error;
-    }
-    const addr = server.address();
-    switch (error.code) {
-        case 'EACCES':
-            log.error(`${this.bind(addr)} requires elevated privileges`);
-            process.exit(1);
-            break;
-        case 'EADDRINUSE':
-            log.error(`${this.bind(addr)} is already in use`);
-            process.exit(1);
-            break;
-        default:
-            throw error;
-    }
-});
-
+// Start our app and listen for it
+const server = app.listen(app.get('port'));
+core.Server.use(server, app);

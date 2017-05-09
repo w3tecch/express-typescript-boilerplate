@@ -2,13 +2,15 @@ import * as core from '../../core';
 import * as models from '../../api/models';
 
 /**
- * Defines the factory
+ * FACTORIES
+ * ----------------------------------------
+ * Define all your factories here. These factories are used to seed
+ * data very easy into your database.
  */
 const factory = core.Factory.getInstance();
 
-
 /**
- * Defines a factory for a default user
+ * USER - Factory
  */
 factory.define(models.User, (faker: Faker.FakerStatic) => {
     const gender = faker.random.number(1);
@@ -22,5 +24,6 @@ factory.define(models.User, (faker: Faker.FakerStatic) => {
         picture: faker.internet.avatar()
     };
 });
+
 
 export * from '../../core/database/Factory'
