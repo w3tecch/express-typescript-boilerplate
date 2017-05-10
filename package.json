@@ -21,8 +21,7 @@
     "db:migrate:rollback": "./node_modules/.bin/knex migrate:rollback",
     "db:seed": "./node_modules/.bin/knex seed:run",
     "db:clean": "./node_modules/.bin/ts-node ./src/console/CleanDatabaseCommand.ts",
-    "db:refresh": "npm run db:drop && npm run db:migrate",
-    "start": "./node_modules/.bin/ts-node ./src/index.ts"
+    "db:refresh": "npm run db:drop && npm run db:migrate"
   },
   "repository": "git+ssh://git@github.com/w3tec/express-typescript-boilerplate.git",
   "engines": {
@@ -89,9 +88,7 @@
     "serve-favicon": "^2.4.2",
     "ts-node": "^2.0.0",
     "typescript": "^2.3.2",
-    "winston": "^2.3.1"
-  },
-  "devDependencies": {
+    "winston": "^2.3.1",
     "@types/jest": "^19.2.2",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
