@@ -20,9 +20,9 @@
     "db:migrate": "./node_modules/.bin/knex migrate:latest",
     "db:migrate:rollback": "./node_modules/.bin/knex migrate:rollback",
     "db:seed": "./node_modules/.bin/knex seed:run",
-    "db:clean": "ts-node ./src/console/CleanDatabaseCommand.ts",
+    "db:clean": "./node_modules/.bin/ts-node ./src/console/CleanDatabaseCommand.ts",
     "db:refresh": "npm run db:drop && npm run db:migrate",
-    "start": "ts-node ./src/index.ts"
+    "start": "./node_modules/.bin/ts-node ./src/index.ts"
   },
   "repository": "git+ssh://git@github.com/w3tec/express-typescript-boilerplate.git",
   "engines": {
