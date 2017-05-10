@@ -22,6 +22,7 @@
     "db:seed": "./node_modules/.bin/knex seed:run",
     "db:clean": "ts-node ./src/console/CleanDatabaseCommand.ts",
     "db:refresh": "npm run db:drop && npm run db:migrate",
+    "prestart": "npm run db:clean && npm run db:migrate && npm run db:seed && npm run build",
     "start": "node ./src/index.js"
   },
   "repository": "git+ssh://git@github.com/w3tec/express-typescript-boilerplate.git",
