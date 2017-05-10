@@ -21,7 +21,8 @@
     "db:migrate:rollback": "./node_modules/.bin/knex migrate:rollback",
     "db:seed": "./node_modules/.bin/knex seed:run",
     "db:clean": "./node_modules/.bin/ts-node ./src/console/CleanDatabaseCommand.ts",
-    "db:refresh": "npm run db:drop && npm run db:migrate"
+    "db:refresh": "npm run db:drop && npm run db:migrate",
+    "start": "node src/index.js"
   },
   "repository": "git+ssh://git@github.com/w3tec/express-typescript-boilerplate.git",
   "engines": {
