@@ -21,8 +21,8 @@ export = <config.Environments>{
      */
     development: {
         database: {
-            connection: 'mysql://root@localhost:3306/my-database-dev',
-            client: 'mysql',
+            client: 'pg',
+            connection: 'postgres://root:root@localhost:5432/my-database-dev',
             migrations: {
                 directory: './src/database/migrations',
                 tableName: 'version'
@@ -56,8 +56,8 @@ export = <config.Environments>{
      */
     test: {
         database: {
-            connection: 'mysql://root:root@localhost:3306/my-database-test',
-            client: 'mysql',
+            client: 'pg',
+            connection: 'postgres://root:root@localhost:5432/my-database-test',
             migrations: {
                 directory: './src/database/migrations',
                 tableName: 'version'
@@ -91,8 +91,8 @@ export = <config.Environments>{
      */
     production: {
         database: {
-            connection: 'mysql://root:root@localhost:3306/my-database-prod',
-            client: 'mysql',
+            client: 'pg',
+            connection: 'postgres://root:root@localhost:5432/my-database',
             migrations: {
                 directory: './src/database/migrations',
                 tableName: 'version'
