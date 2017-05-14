@@ -21,7 +21,6 @@ declare module config {
     interface ServerConfiguration {
         host: string;
         port: string;
-        graphiql: boolean;
     }
 
     interface LoggerConfiguration {

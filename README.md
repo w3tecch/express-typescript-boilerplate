@@ -1,6 +1,6 @@
 # Express Typescript Boilerplate
 
-> Boilerplate for an restful express-apllication written in TypeScript
+> Boilerplate for an restful express-application written in TypeScript
 
 ## Getting Started
 ### Prerequisites
@@ -31,7 +31,7 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * Remove not needed libraries with `npm run install:clean`
 
 ### Linting
-* Run code analysis using `npm run lint`. This runs tshint.
+* Run code analysis using `npm run lint`. This runs tslint.
 * There is also a vscode task for this called lint.
 
 ### Tests

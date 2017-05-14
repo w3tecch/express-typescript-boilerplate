@@ -1,1 +1,2 @@
-export * from './UsersController';
+export * from './HomeController';
+export * from './UserController';

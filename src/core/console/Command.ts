@@ -14,7 +14,7 @@ export class Command {
     }
 
     public run(): void {
-        throw new Error('run implementatin is missing');
+        throw new Error('run implementation is missing');
     };
 
     protected done(): void {
@@ -24,7 +24,7 @@ export class Command {
 
     protected kill(): void {
         this.log('Finished with an error');
-        process.exit(1);
+        process.exit(0);
     }
 
 }

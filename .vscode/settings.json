@@ -4,5 +4,6 @@
         "src/**/*.js": true,
         "test/**/*.js": true
     },
-    "vsicons.presets.angular": false
+    "vsicons.presets.angular": false,
+    "cSpell.enabled": true
 }

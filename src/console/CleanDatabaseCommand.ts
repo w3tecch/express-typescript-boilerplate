@@ -1,10 +1,16 @@
 process.env.DEBUG = 'console*';
 
 import * as Knex from 'knex';
-
 import * as core from '../core';
 
 
+/**
+ * This command drop's all tables so we have a clean and
+ * empty database in the end.
+ *
+ * @class CleanDatabaseCommand
+ * @extends {core.Command}
+ */
 class CleanDatabaseCommand extends core.Command {
 
     private tables: string[] = [
@@ -26,7 +32,7 @@ class CleanDatabaseCommand extends core.Command {
         if (table) {
             this.db.schema.dropTable(table)
                 .then(() => {
-                    this.log('✓ - ' + table + ' was successfully droped');
+                    this.log('✓ - ' + table + ' was successfully dropped');
                     this.next();
                 })
                 .catch((e) => {

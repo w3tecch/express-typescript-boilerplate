@@ -1,14 +1,28 @@
+/**
+ * APPLICATION CONFIGURATION
+ * ----------------------------------------
+ * Here you should define all your configurable stuff like logger, host for
+ * other endpoints. So move all your config parts here.
+ *
+ * We use different environments for our configurations:
+ *  - development:
+ *      This is the local development environment, which is used by the developer's
+ *
+ *  - test:
+ *      This environment is used by the unit, migration and database test.
+ *
+ *  - production:
+ *      This configuration will be used by the cloud servers. You are abel to override
+ *      them with the local cloud environment variable to make it even more configurable.
+ */
 export = <config.Environments>{
     /**
      * Development Environment
-     * ------------------------------------------
-     *
-     * This is the local development environment, which is used by the developoers
      */
     development: {
         database: {
-            connection: 'mysql://root@localhost:3306/my-database-dev',
-            client: 'mysql',
+            client: 'pg',
+            connection: 'postgres://root:root@localhost:5432/my-database-dev',
             migrations: {
                 directory: './src/database/migrations',
                 tableName: 'version'
@@ -28,8 +42,7 @@ export = <config.Environments>{
         },
         server: {
             host: 'localhost',
-            port: process.env.PORT || '3000',
-            graphiql: true
+            port: process.env.PORT || '3000'
         },
         logger: {
             debug: 'app*',
@@ -40,14 +53,11 @@ export = <config.Environments>{
     },
     /**
      * Test Environment
-     * ------------------------------------------
-     *
-     * This environment is used by the unit, migration and database test.
      */
     test: {
         database: {
-            connection: 'mysql://root:root@localhost:3306/my-database-test',
-            client: 'mysql',
+            client: 'pg',
+            connection: 'postgres://root:root@localhost:5432/my-database-test',
             migrations: {
                 directory: './src/database/migrations',
                 tableName: 'version'
@@ -67,8 +77,7 @@ export = <config.Environments>{
         },
         server: {
             host: 'localhost',
-            port: process.env.PORT || '3000',
-            graphiql: false
+            port: process.env.PORT || '3000'
         },
         logger: {
             debug: '',
@@ -79,15 +88,11 @@ export = <config.Environments>{
     },
     /**
      * Production Environment
-     * ------------------------------------------
-     *
-     * This configuration will be used by the cloud servers. You are abel to override
-     * them with the local cloud environment variable to make it even more configurable.
      */
     production: {
         database: {
-            connection: 'mysql://root:root@localhost:3306/my-database-prod',
-            client: 'mysql',
+            client: 'pg',
+            connection: 'postgres://root:root@localhost:5432/my-database',
             migrations: {
                 directory: './src/database/migrations',
                 tableName: 'version'
@@ -107,8 +112,7 @@ export = <config.Environments>{
         },
         server: {
             host: 'localhost',
-            port: process.env.PORT || '3000',
-            graphiql: false
+            port: process.env.PORT || '3000'
         },
         logger: {
             debug: '',
