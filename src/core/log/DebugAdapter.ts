@@ -1,9 +1,9 @@
 import * as Debug from 'debug';
 
-import { ILogAdapater } from './ILogAdapter';
+import { ILogAdapter } from './ILogAdapter';
 
 
-export class DebugAdapter implements ILogAdapater {
+export class DebugAdapter implements ILogAdapter {
 
     private logger: Debug.IDebugger;
 

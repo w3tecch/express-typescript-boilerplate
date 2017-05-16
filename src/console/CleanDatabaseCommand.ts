@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 process.env.DEBUG = 'console*';
 
 import * as Knex from 'knex';

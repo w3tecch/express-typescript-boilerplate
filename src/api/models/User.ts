@@ -20,9 +20,6 @@ export class User extends core.Bookshelf.Model<User> {
     public get LastName(): string { return this.get('lastName'); }
     public set LastName(value: string) { this.set({ id: value }); };
 
-    public get Username(): string { return this.get('username'); }
-    public set Username(value: string) { this.set({ id: value }); };
-
     public get Email(): string { return this.get('email'); }
     public set Email(value: string) { this.set({ id: value }); };
 

@@ -1,10 +1,10 @@
 import * as winston from 'winston';
 
 import * as core from '../index';
-import { ILogAdapater } from './ILogAdapter';
+import { ILogAdapter } from './ILogAdapter';
 
 
-export class WinstonAdapter implements ILogAdapater {
+export class WinstonAdapter implements ILogAdapter {
 
     private logger: winston.LoggerInstance;
 
@@ -12,7 +12,7 @@ export class WinstonAdapter implements ILogAdapater {
         this.logger = new winston.Logger({
             transports: [
                 new winston.transports.Console({
-                    level: core.Environment.getConfig().logger.console.level,
+                    level: core.Environment.get<string>('LOG_LEVEL'),
                     timestamp: core.Environment.isProduction(),
                     handleExceptions: core.Environment.isProduction(),
                     json: core.Environment.isProduction(),

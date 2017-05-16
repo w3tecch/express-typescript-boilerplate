@@ -15,11 +15,15 @@ import * as core from '../index';
  */
 export const exceptionHandler = (error: core.Exception | Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
     if (error instanceof core.Exception) {
-        res.status(error.code).send(error.message);
+        res.status(error.code).json({
+            message: error.message
+        });
         next();
     } else {
         console.error(error.stack);
-        res.status(500).send('Something broke!');
+        res.status(500).json({
+            message: 'Something broke!'
+        });
         next(error);
     }
 };

@@ -50,7 +50,6 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * Run `npm run build` to generated all JavaScript files from your TypeScript sources. After this step you can deploy the app on any server.
 * There is also a vscode task for this called build.
 * To start the builded app use `npm start`.
-* With `npm run zip` it will generate the JavaScript source and pack them into to a deployable zip file into the dist folder.
 
 ### Docs
 * Run `npm run docs` to generate all doc files and serve it on `http://0.0.0.0:8080`

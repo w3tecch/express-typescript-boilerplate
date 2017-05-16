@@ -2,7 +2,6 @@ declare module 'auth0' {
 
     interface User {
         user_id: string;
-        username: string;
         email: string;
         email_verified: boolean;
         picture: string;
