@@ -14,9 +14,6 @@
     "build": "./node_modules/.bin/gulp build",
     "clean": "./node_modules/.bin/gulp clean",
     "zip": "./node_modules/.bin/gulp zip",
-    "docs": "npm run docs:generate && npm run docs:server",
-    "docs:generate": "./node_modules/.bin/gulp docs",
-    "docs:server": "./node_modules/.bin/http-server ./docs --cors",
     "db:migrate": "./node_modules/.bin/knex migrate:latest",
     "db:migrate:rollback": "./node_modules/.bin/knex migrate:rollback",
     "db:seed": "./node_modules/.bin/knex seed:run",
@@ -116,7 +113,6 @@
     "ts-jest": "^19.0.11",
     "ts-node": "^2.0.0",
     "tslint": "^4.3.1",
-    "typedoc": "^0.5.5",
     "typescript": "^2.2.1",
     "typings": "^2.1.0",
     "winston": "^2.3.1"

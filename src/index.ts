@@ -9,9 +9,10 @@
  */
 
 // Import our app and the core server helper
-import * as core from './core';
+import './core';
+import { Server } from './core/Server';
 import app from './app';
 
 // Start our app and listen for it
 const server = app.listen(app.get('port'));
-core.Server.use(server, app);
+Server.use(server, app);

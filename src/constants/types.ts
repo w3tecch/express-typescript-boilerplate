@@ -1,6 +1,9 @@
-const TYPES = {
+import { TYPE } from 'inversify-express-utils';
+
+
+const myType = {
     UserService: Symbol('UserService'),
     UserRepository: Symbol('UserRepository')
 };
 
-export default TYPES;
+export const Types = Object.assign(TYPE, myType);

@@ -1,8 +1,8 @@
-import * as core from '../../core';
-import { Tables } from '../../database/Tables';
+import { Bookshelf } from '../../core/Bookshelf';
+import { Tables } from '../../constants/Tables';
 
 
-export class User extends core.Bookshelf.Model<User> {
+export class User extends Bookshelf.Model<User> {
 
     public static async fetchById(id: number): Promise<User> {
         return await User.where<User>({ id: id }).fetch();

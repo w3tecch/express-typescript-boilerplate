@@ -1,15 +1,15 @@
-import { injectable, inject, named } from 'inversify';
 import * as Bookshelf from 'bookshelf';
-import * as core from '../../core';
-import * as models from '../models';
-import * as repo from '../repositories';
+import { injectable, inject, named } from 'inversify';
+import { Repository } from '../../constants/Targets';
+import { Types } from '../../constants/Types';
+import { Log } from '../../core/log';
 import { NotFoundException } from '../exceptions';
-import TYPES from '../../constants/types';
-import TAGS from '../../constants/tags';
 import { UserCreateRequest } from '../request/UserCreateRequest';
 import { UserUpdateRequest } from '../request/UserUpdateRequest';
+import { UserRepository } from '../repositories';
+import { User } from '../models';
 
-const log = new core.Log('api:services:UserService');
+const log = new Log('api:services:UserService');
 
 /**
  * UserService
@@ -21,15 +21,15 @@ const log = new core.Log('api:services:UserService');
 export class UserService {
 
     constructor(
-        @inject(TYPES.UserRepository) @named(TAGS.UserRepository) public userRepo: typeof repo.UserRepository
+        @inject(Types.UserRepository) @named(Repository.UserRepository) public userRepo: typeof UserRepository
     ) {
     }
 
-    public async findAll(): Promise<Bookshelf.Collection<models.User>> {
+    public async findAll(): Promise<Bookshelf.Collection<User>> {
         return this.userRepo.findAll();
     }
 
-    public async findOne(id: number): Promise<models.User> {
+    public async findOne(id: number): Promise<User> {
         let user = await this.userRepo.findOne(id);
         if (user === null) {
             log.warn(`User with the id=${id} was not found!`);
@@ -38,7 +38,7 @@ export class UserService {
         return user;
     }
 
-    public async create(data: any): Promise<models.User> {
+    public async create(data: any): Promise<User> {
         // Validate request payload
         const request = new UserCreateRequest(data);
         await request.validate();
@@ -48,7 +48,7 @@ export class UserService {
         return user;
     }
 
-    public async update(id: number, newUser: any): Promise<models.User> {
+    public async update(id: number, newUser: any): Promise<User> {
         const oldUserModel = await this.findOne(id);
         let oldUser = oldUserModel.toJSON();
         const request = new UserUpdateRequest(oldUser);

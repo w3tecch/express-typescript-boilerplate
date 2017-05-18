@@ -1,9 +1,9 @@
 import { injectable, inject } from 'inversify';
 import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response } from 'inversify-express-utils';
 import { my } from 'my-express';
-import { Log } from '../../core';
+import { Log } from '../../core/log';
 import { UserService } from '../services';
-import TYPES from '../../constants/types';
+import { Types } from '../../constants/Types';
 
 const log = new Log('api:ctrl.UserController');
 
@@ -17,7 +17,7 @@ const log = new Log('api:ctrl.UserController');
 @Controller('/v1/user')
 export class UserController {
 
-    constructor( @inject(TYPES.UserService) private userService: UserService) { }
+    constructor( @inject(Types.UserService) private userService: UserService) { }
 
     @Get('/')
     public async findAll( @Response() res: my.Response): Promise<any> {

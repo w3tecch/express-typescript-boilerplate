@@ -1,5 +1,5 @@
 import * as knex from 'knex';
-import { Environment } from './';
+import { Environment } from './Environment';
 
 
 export const Knex: knex = knex({

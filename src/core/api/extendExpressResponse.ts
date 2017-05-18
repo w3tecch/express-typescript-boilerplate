@@ -1,8 +1,12 @@
 import * as express from 'express';
 import { my } from 'my-express';
 
-
-
+/**
+ * Extend Express Response
+ * --------------------------------
+ * We use this middleware to extend the express response object, so
+ * we can access the new functionality in our controllers
+ */
 export const extendExpressResponse = (req: my.Request, res: my.Response, next: express.NextFunction) => {
 
     /**
@@ -59,11 +63,6 @@ export const extendExpressResponse = (req: my.Request, res: my.Response, next: e
 
 /**
  * This body parser is used to show successful responses to the client
- *
- * @export
- * @param {*} data
- * @param {my.ResponseOptions} [options={}]
- * @returns {*}
  */
 export function bodySuccessful<T>(data: T, options: my.ResponseOptions = {}): any {
     return {
@@ -76,11 +75,6 @@ export function bodySuccessful<T>(data: T, options: my.ResponseOptions = {}): an
 
 /**
  * This body parse is used for error messages to the client
- *
- * @export
- * @param {*} data
- * @param {my.ResponseOptions} [options={}]
- * @returns {*}
  */
 export function bodyFailed(message: string, error: any): any {
     return {

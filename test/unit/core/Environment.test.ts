@@ -1,18 +1,18 @@
-import * as core from '../../../src/core';
+import { Environment } from '../../../src/core/Environment';
 
 
 test('getName() should return the test env', () => {
-    expect(core.Environment.getNodeEnv()).toBe('test');
+    expect(Environment.getNodeEnv()).toBe('test');
 });
 
 test('isTest() should be true', () => {
-    expect(core.Environment.isTest()).toBeTruthy();
+    expect(Environment.isTest()).toBeTruthy();
 });
 
 test('isDevelopment() should be false', () => {
-    expect(core.Environment.isDevelopment()).toBeFalsy();
+    expect(Environment.isDevelopment()).toBeFalsy();
 });
 
 test('isProduction() should be false', () => {
-    expect(core.Environment.isProduction()).toBeFalsy();
+    expect(Environment.isProduction()).toBeFalsy();
 });

@@ -11,6 +11,7 @@
  * Loads your .env file data into the process.env
  */
 require('dotenv').config();
+import 'reflect-metadata';
 
 /**
  * Define the log adapter for this application
@@ -19,16 +20,3 @@ import { Log, WinstonAdapter, DebugAdapter } from './log';
 Log.addAdapter('winston', WinstonAdapter);
 Log.addAdapter('debug', DebugAdapter);
 Log.setAdapter(process.env.LOG_ADAPTER);
-
-/**
- * All core components
- */
-export * from './Environment';
-export * from './Bootstrap';
-export * from './Server';
-export * from './Knex';
-export * from './Bookshelf';
-
-export * from './log';
-export * from './api';
-export * from './database';

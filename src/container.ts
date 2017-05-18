@@ -1,9 +1,8 @@
-import { interfaces, TYPE } from 'inversify-express-utils';
+import { interfaces } from 'inversify-express-utils';
 import { Container } from 'inversify';
-import TYPES from './constants/types';
-import TAGS from './constants/tags';
-import { HomeController } from './api/controllers/HomeController';
-import { UserController } from './api/controllers';
+import { Types } from './constants/Types';
+import { Controller, Repository } from './constants/Targets';
+import { UserController, HomeController } from './api/controllers';
 import { UserService } from './api/services';
 import { UserRepository } from './api/repositories';
 
@@ -14,14 +13,17 @@ import { UserRepository } from './api/repositories';
  * Bind every controller and service to the ioc container. All controllers
  * will then be bonded to the express structure with their defined routes.
  */
-let container = new Container();
+const container = new Container();
 
-container.bind<interfaces.Controller>(TYPE.Controller).to(HomeController).whenTargetNamed(TAGS.HomeController);
-container.bind<interfaces.Controller>(TYPE.Controller).to(UserController).whenTargetNamed(TAGS.UserController);
+// Controllers
+container.bind<interfaces.Controller>(Types.Controller).to(HomeController).whenTargetNamed(Controller.HomeController);
+container.bind<interfaces.Controller>(Types.Controller).to(UserController).whenTargetNamed(Controller.UserController);
 
-container.bind<UserService>(TYPES.UserService).to(UserService);
+// Services
+container.bind<UserService>(Types.UserService).to(UserService);
 
-container.bind<UserRepository>(TYPES.UserRepository).toConstantValue(UserRepository).whenTargetNamed(TAGS.UserRepository);
+// Repositories
+container.bind<UserRepository>(Types.UserRepository).toConstantValue(UserRepository).whenTargetNamed(Repository.UserRepository);
 
 
 export default container;

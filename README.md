@@ -51,9 +51,6 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * There is also a vscode task for this called build.
 * To start the builded app use `npm start`.
 
-### Docs
-* Run `npm run docs` to generate all doc files and serve it on `http://0.0.0.0:8080`
-
 ### Seed
 * Run `npm run db:seed` to seed some data into the database
 

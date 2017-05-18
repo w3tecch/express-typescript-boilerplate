@@ -1,5 +1,16 @@
 export const isException = Symbol();
 
+/**
+ * Exception
+ * -----------------
+ * We use this extend error for our custom errors, which we
+ * call exceptions. They have a code property for the http-status,
+ * global message and a body, which we will return as a json.
+ *
+ * @export
+ * @class Exception
+ * @extends {Error}
+ */
 export class Exception extends Error {
 
     public code = 500;
