@@ -1,5 +1,5 @@
-import * as express from 'express';
-import * as core from '../index';
+import { my } from 'my-express';
+import { Exception, isException } from '../api/Exception';
 
 
 /**
@@ -13,17 +13,14 @@ import * as core from '../index';
  * @param {express.Response} res
  * @param {express.NextFunction} next
  */
-export const exceptionHandler = (error: core.Exception | Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
-    if (error instanceof core.Exception) {
-        res.status(error.code).json({
-            message: error.message
-        });
+export const exceptionHandler = (error: Exception | Error, req: my.Request, res: my.Response, next: my.NextFunction) => {
+    console.log('exceptionHandler', error.message, error['body']);
+    if (error instanceof Exception || error[isException]) {
+        res.failed(error['code'], error.message, error['body'] || null);
         next();
     } else {
         console.error(error.stack);
-        res.status(500).json({
-            message: 'Something broke!'
-        });
+        res.failed(500, 'Something broke!', error['body'] || null);
         next(error);
     }
 };

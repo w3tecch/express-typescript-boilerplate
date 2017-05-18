@@ -19,8 +19,7 @@ factory.define(models.User, (faker: Faker.FakerStatic) => {
     return {
         firstName: fn,
         lastName: ln,
-        email: faker.internet.email(fn, ln),
-        picture: faker.internet.avatar()
+        email: faker.internet.email(fn, ln)
     };
 });
 

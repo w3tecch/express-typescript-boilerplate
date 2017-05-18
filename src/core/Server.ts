@@ -1,6 +1,5 @@
 import * as http from 'http';
 import * as express from 'express';
-
 import { Log } from './log';
 
 const log = new Log('core:Server');

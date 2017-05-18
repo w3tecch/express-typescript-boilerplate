@@ -1,6 +1,6 @@
 import * as knex from 'knex';
-
 import { Environment } from './';
+
 
 export const Knex: knex = knex({
     client: Environment.get<string>('DB_CLIENT'),

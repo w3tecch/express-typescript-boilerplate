@@ -1,11 +1,9 @@
 import 'reflect-metadata';
-
 import * as express from 'express';
 import { Container } from 'inversify';
 import { InversifyExpressServer } from 'inversify-express-utils';
-
 import { Environment } from './Environment';
-import { exceptionHandler } from './api';
+import { exceptionHandler, extendExpressResponse } from './api';
 import { Log } from './log';
 
 const log = new Log('core:Bootstrap');
@@ -50,8 +48,9 @@ export class Bootstrap {
      * @memberof Bootstrap
      */
     static build(app: express.Application, container: Container): express.Application {
-        let server = new InversifyExpressServer(container, undefined, undefined, app);
+        let server = new InversifyExpressServer(container, undefined, { rootPath: '/api' }, app);
         log.debug('ioc is bonded');
+        server.setConfig((a) => a.use(extendExpressResponse));
         server.setErrorConfig((a) => a.use(exceptionHandler));
         return server.build();
     }

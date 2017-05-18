@@ -1,5 +1,4 @@
 import * as Debug from 'debug';
-
 import { ILogAdapter } from './ILogAdapter';
 
 

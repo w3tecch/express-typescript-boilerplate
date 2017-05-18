@@ -20,7 +20,6 @@
     "db:migrate": "./node_modules/.bin/knex migrate:latest",
     "db:migrate:rollback": "./node_modules/.bin/knex migrate:rollback",
     "db:seed": "./node_modules/.bin/knex seed:run",
-    "db:clean": "./node_modules/.bin/ts-node ./src/console/CleanDatabaseCommand.ts",
     "db:refresh": "npm run db:drop && npm run db:migrate",
     "start": "node src/index.js"
   },
@@ -74,6 +73,7 @@
     "body-parser": "^1.17.1",
     "bookshelf": "^0.10.3",
     "bookshelf-camelcase": "^1.1.4",
+    "class-validator": "^0.7.0",
     "compression": "^1.6.2",
     "cors": "^2.8.1",
     "debug": "^2.6.0",
