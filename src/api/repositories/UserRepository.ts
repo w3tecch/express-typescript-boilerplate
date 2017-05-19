@@ -46,7 +46,8 @@ export class UserRepository {
     public static async create(data: any): Promise<User> {
         const user = User.forge<User>(data);
         try {
-            return await user.save();
+            const createdUser = await user.save();
+            return await User.fetchById(createdUser.id);
         } catch (error) {
             throw new DatabaseException('Could not create the user!', error);
         }

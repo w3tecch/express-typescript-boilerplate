@@ -5,7 +5,11 @@ export class ApiResponeTest {
     constructor(private res: any) { }
 
     getBody<T>(): T {
-        return JSON.parse(this.res['body']);
+        return this.res['body'];
+    }
+
+    getData<T>(): T {
+        return this.getBody()['data'];
     }
 
     getHeaders<T>(): T {
@@ -24,8 +28,10 @@ export class ApiResponeTest {
 
     expectData(keys: string[]): ApiResponeTest {
         const a = keys.sort();
-        const b = Object.keys(this.getBody()).sort();
+        const d = _.isArray(this.getData()) ? this.getData()[0] : this.getData();
+        const b = Object.keys(d).sort();
         expect(_.isEqual(a, b)).toBeTruthy();
+        expect(this.getBody()['success']).toBeTruthy();
         return this;
     }
 }

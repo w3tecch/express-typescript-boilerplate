@@ -1,7 +1,7 @@
 import { api } from './lib/api';
 
 
-test('GET / - should return the api info as a json', async () => {
+test('GET   [/] - should return the api info as a json', async () => {
     const res = await api('GET', '/api');
     res.expectJson();
     res.expectStatusCode(200);
