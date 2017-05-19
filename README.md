@@ -44,7 +44,6 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 
 ### Cleaning the project
 * Run `npm run clean` to remove all generated JavaScript files.
-* Run `npm run db:clean` to drop all tables of the database.
 
 ### Building the project and run it
 * Run `npm run build` to generated all JavaScript files from your TypeScript sources. After this step you can deploy the app on any server.
