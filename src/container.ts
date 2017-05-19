@@ -2,9 +2,14 @@ import { interfaces } from 'inversify-express-utils';
 import { Container } from 'inversify';
 import { Types } from './constants/Types';
 import { Controller, Repository } from './constants/Targets';
-import { UserController, HomeController } from './api/controllers';
-import { UserService } from './api/services';
-import { UserRepository } from './api/repositories';
+
+// Home
+import { HomeController } from './api/controllers/HomeController';
+
+// User Resource
+import { UserController } from './api/controllers/UserController';
+import { UserService } from './api/services/UsersService';
+import { UserRepository } from './api/repositories/UserRepository';
 
 
 /**

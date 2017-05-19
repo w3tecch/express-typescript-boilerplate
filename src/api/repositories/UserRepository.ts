@@ -1,6 +1,7 @@
 import * as Bookshelf from 'bookshelf';
-import { User } from '../models';
-import { DatabaseException, NotFoundException } from '../exceptions';
+import { User } from '../models/User';
+import { DatabaseException } from '../exceptions/DatabaseException';
+import { NotFoundException } from '../exceptions/NotFoundException';
 
 /**
  * UserRepository
@@ -10,15 +11,38 @@ import { DatabaseException, NotFoundException } from '../exceptions';
  */
 export class UserRepository {
 
+    /**
+     * Retrieves all user data out of the database
+     *
+     * @static
+     * @returns {Promise<Bookshelf.Collection<User>>}
+     *
+     * @memberof UserRepository
+     */
     public static async findAll(): Promise<Bookshelf.Collection<User>> {
         const users = await User.fetchAll();
         return <Bookshelf.Collection<User>>users;
     }
 
+    /**
+     * Retrieves one user entity of the database
+     *
+     * @static
+     * @param {number} id of the user
+     * @returns {Promise<User>}
+     */
     public static async findOne(id: number): Promise<User> {
         return User.fetchById(id);
     }
 
+    /**
+     * Creates a new user entity in the database and returns
+     * the new created entity
+     *
+     * @static
+     * @param {*} data is the new user
+     * @returns {Promise<User>}
+     */
     public static async create(data: any): Promise<User> {
         const user = User.forge<User>(data);
         try {
@@ -28,6 +52,14 @@ export class UserRepository {
         }
     }
 
+    /**
+     * Updates a already existing entity and returns the new one
+     *
+     * @static
+     * @param {number} id
+     * @param {*} data
+     * @returns {Promise<User>}
+     */
     public static async update(id: number, data: any): Promise<User> {
         const user = User.forge<User>({ id: id });
         try {
@@ -37,6 +69,14 @@ export class UserRepository {
         }
     }
 
+    /**
+     * Removes a entity in the database, but if there is not user
+     * with the given id, we will throw a Not-Found exception
+     *
+     * @static
+     * @param {number} id
+     * @returns {Promise<void>}
+     */
     public static async destroy(id: number): Promise<void> {
         let user = User.forge<User>({ id: id });
         try {

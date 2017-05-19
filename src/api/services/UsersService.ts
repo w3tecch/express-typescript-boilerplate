@@ -3,16 +3,20 @@ import { injectable, inject, named } from 'inversify';
 import { Repository } from '../../constants/Targets';
 import { Types } from '../../constants/Types';
 import { Log } from '../../core/log';
-import { NotFoundException } from '../exceptions';
-import { UserCreateRequest } from '../request/UserCreateRequest';
-import { UserUpdateRequest } from '../request/UserUpdateRequest';
-import { UserRepository } from '../repositories';
-import { User } from '../models';
+import { NotFoundException } from '../exceptions/NotFoundException';
+import { UserCreateRequest } from '../requests/UserCreateRequest';
+import { UserUpdateRequest } from '../requests/UserUpdateRequest';
+import { UserRepository } from '../repositories/UserRepository';
+import { User } from '../models/User';
 
 const log = new Log('api:services:UserService');
 
 /**
  * UserService
+ * ------------------------------
+ * This service is here to validate and call the repository layer for
+ * database actions. Furthermore you should throw events here if
+ * necessary.
  *
  * @export
  * @class UserService
@@ -22,13 +26,21 @@ export class UserService {
 
     constructor(
         @inject(Types.UserRepository) @named(Repository.UserRepository) public userRepo: typeof UserRepository
-    ) {
-    }
+    ) { }
 
+    /**
+     * This returns all user database objects
+     */
     public async findAll(): Promise<Bookshelf.Collection<User>> {
         return this.userRepo.findAll();
     }
 
+    /**
+     * Returns the user with the given id or throws a Not-Found exception
+     *
+     * @param {number} id of the user
+     * @returns {Promise<User>}
+     */
     public async findOne(id: number): Promise<User> {
         let user = await this.userRepo.findOne(id);
         if (user === null) {
@@ -38,6 +50,13 @@ export class UserService {
         return user;
     }
 
+    /**
+     * We will validate the data and create a new user and
+     * return it, so the client get its new id
+     *
+     * @param {*} data is the json body of the request
+     * @returns {Promise<User>}
+     */
     public async create(data: any): Promise<User> {
         // Validate request payload
         const request = new UserCreateRequest(data);
@@ -48,6 +67,14 @@ export class UserService {
         return user;
     }
 
+    /**
+     * We will validate the data and update a user with the given id and
+     * return the new user
+     *
+     * @param {number} id of the user
+     * @param {*} newUser is the json body of the request
+     * @returns {Promise<User>}
+     */
     public async update(id: number, newUser: any): Promise<User> {
         const oldUserModel = await this.findOne(id);
         let oldUser = oldUserModel.toJSON();
@@ -65,6 +92,12 @@ export class UserService {
         return user;
     }
 
+    /**
+     * This will just delete a user
+     *
+     * @param {number} id of the user
+     * @returns {Promise<void>}
+     */
     public async destroy(id: number): Promise<void> {
         await this.userRepo.destroy(id);
     }

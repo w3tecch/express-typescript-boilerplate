@@ -63,8 +63,13 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
 
 ## Documentations
-* [Auth0 API Documentation](https://auth0.com/docs/api/management/v2#!/Users/get_users)
+* [Express](https://expressjs.com/)
+* [Knex](http://knexjs.org/)
+* [Bookshelf](http://bookshelfjs.org/)
 * [Bookshelf Cheatsheet](http://ricostacruz.com/cheatsheets/bookshelf.html)
+* [Inversify](http://inversify.io/)
+* [Inversify Express Utils](https://github.com/inversify/inversify-express-utils)
+* [Auth0 API Documentation](https://auth0.com/docs/api/management/v2#!/Users/get_users)
 
 ## License
  [MIT](/LICENSE)

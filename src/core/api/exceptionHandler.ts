@@ -1,7 +1,6 @@
 import { my } from 'my-express';
 import { Exception, isException } from '../api/Exception';
 
-
 /**
  * Exception Handler
  * ---------------------------

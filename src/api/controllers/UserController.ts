@@ -2,13 +2,14 @@ import { injectable, inject } from 'inversify';
 import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response } from 'inversify-express-utils';
 import { my } from 'my-express';
 import { Log } from '../../core/log';
-import { UserService } from '../services';
+import { UserService } from '../services/UsersService';
 import { Types } from '../../constants/Types';
 
 const log = new Log('api:ctrl.UserController');
 
 /**
- * UserController
+ * UserController is in charge of the user resource and should
+ * provide all crud actions.
  *
  * @export
  * @class UserController
