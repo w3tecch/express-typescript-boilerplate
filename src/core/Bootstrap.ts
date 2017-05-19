@@ -1,18 +1,16 @@
 import 'reflect-metadata';
-
 import * as express from 'express';
 import { Container } from 'inversify';
 import { InversifyExpressServer } from 'inversify-express-utils';
-
 import { Environment } from './Environment';
-import { exceptionHandler } from './api';
+import { exceptionHandler, extendExpressResponse } from './api';
 import { Log } from './log';
 
 const log = new Log('core:Bootstrap');
 
 /**
  * This class helps us to create an express app very easy and moreover
- * to give us a better posibility to extend the bootstrap process
+ * to give us a better possibility to extend the bootstrap process
  *
  * @export
  * @class Bootstrap
@@ -30,12 +28,11 @@ export class Bootstrap {
      */
     static getApp(): express.Application {
         const app = express();
-        const config = Environment.getConfig();
 
         // Set serve configs for running it
-        app.set('host', config.server.host);
-        app.set('port', Bootstrap.normalizePort(config.server.port));
-        log.debug('app is created');
+        app.set('host', Environment.get('APP_HOST'));
+        app.set('port', Bootstrap.normalizePort(Environment.get<string>('PORT') || Environment.get<string>('APP_PORT')));
+        log.debug('app is defined');
         return app;
     }
 
@@ -51,8 +48,9 @@ export class Bootstrap {
      * @memberof Bootstrap
      */
     static build(app: express.Application, container: Container): express.Application {
-        let server = new InversifyExpressServer(container, undefined, undefined, app);
+        let server = new InversifyExpressServer(container, undefined, { rootPath: '/api' }, app);
         log.debug('ioc is bonded');
+        server.setConfig((a) => a.use(extendExpressResponse));
         server.setErrorConfig((a) => a.use(exceptionHandler));
         return server.build();
     }

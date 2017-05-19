@@ -50,10 +50,6 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * Run `npm run build` to generated all JavaScript files from your TypeScript sources. After this step you can deploy the app on any server.
 * There is also a vscode task for this called build.
 * To start the builded app use `npm start`.
-* With `npm run zip` it will generate the JavaScript source and pack them into to a deployable zip file into the dist folder.
-
-### Docs
-* Run `npm run docs` to generate all doc files and serve it on `http://0.0.0.0:8080`
 
 ### Seed
 * Run `npm run db:seed` to seed some data into the database
@@ -67,8 +63,13 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
 
 ## Documentations
-* [Auth0 API Documentation](https://auth0.com/docs/api/management/v2#!/Users/get_users)
+* [Express](https://expressjs.com/)
+* [Knex](http://knexjs.org/)
+* [Bookshelf](http://bookshelfjs.org/)
 * [Bookshelf Cheatsheet](http://ricostacruz.com/cheatsheets/bookshelf.html)
+* [Inversify](http://inversify.io/)
+* [Inversify Express Utils](https://github.com/inversify/inversify-express-utils)
+* [Auth0 API Documentation](https://auth0.com/docs/api/management/v2#!/Users/get_users)
 
 ## License
  [MIT](/LICENSE)

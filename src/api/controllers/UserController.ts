@@ -1,35 +1,58 @@
 import { injectable, inject } from 'inversify';
-import { Controller, Get, RequestParam } from 'inversify-express-utils';
-import TYPES from '../../constants/types';
-import * as core from '../../core';
-import { UserService } from '../services';
+import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response } from 'inversify-express-utils';
+import { my } from 'my-express';
+import { Log } from '../../core/log';
+import { UserService } from '../services/UsersService';
+import { Types } from '../../constants/Types';
 
-const log = new core.Log('api:ctrl.UserController');
+const log = new Log('api:ctrl.UserController');
 
 /**
- * UserController
+ * UserController is in charge of the user resource and should
+ * provide all crud actions.
  *
  * @export
  * @class UserController
  */
 @injectable()
-@Controller('/users')
+@Controller('/v1/user')
 export class UserController {
 
-    constructor( @inject(TYPES.UserService) private userService: UserService) { }
+    constructor( @inject(Types.UserService) private userService: UserService) { }
 
     @Get('/')
-    public async findAll(): Promise<any> {
+    public async findAll( @Response() res: my.Response): Promise<any> {
         log.debug('findAll');
         const users = await this.userService.findAll();
-        return users.toJSON();
+        return res.found(users.toJSON());
     }
 
     @Get('/:id')
-    public async findOne( @RequestParam('id') id: string): Promise<any> {
+    public async findOne( @Response() res: my.Response, @RequestParam('id') id: string): Promise<any> {
         log.debug('findOne ', id);
         const user = await this.userService.findOne(parseInt(id, 10));
-        return user.toJSON();
+        return res.found(user.toJSON());
+    }
+
+    @Post('/')
+    public async create( @Response() res: my.Response, @RequestBody() body: any): Promise<any> {
+        log.debug('create ', body);
+        const user = await this.userService.create(body);
+        return res.created(user.toJSON());
+    }
+
+    @Put('/:id')
+    public async update( @Response() res: my.Response, @RequestParam('id') id: string, @RequestBody() body: any): Promise<any> {
+        log.debug('update ', body);
+        const user = await this.userService.update(parseInt(id, 10), body);
+        return res.updated(user.toJSON());
+    }
+
+    @Delete('/:id')
+    public async destroy( @Response() res: my.Response, @RequestParam('id') id: string): Promise<any> {
+        log.debug('destroy ', id);
+        await this.userService.destroy(parseInt(id, 10));
+        return res.destroyed();
     }
 
 }

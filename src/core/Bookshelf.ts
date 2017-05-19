@@ -1,5 +1,4 @@
 import * as bookshelf from 'bookshelf';
-
 import { Knex } from './Knex';
 
 

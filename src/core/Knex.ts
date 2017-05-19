@@ -1,14 +1,15 @@
 import * as knex from 'knex';
-
-import { Environment } from './';
-const databaseConfig = Environment.getConfig().database;
+import { Environment } from './Environment';
 
 
 export const Knex: knex = knex({
-    client: databaseConfig.client,
-    connection: databaseConfig.connection,
-    pool: { min: 0, max: 7 },
+    client: Environment.get<string>('DB_CLIENT'),
+    connection: Environment.get<string>('DB_CONNECTION'),
+    pool: {
+        min: Environment.get<number>('DB_POOL_MIN'),
+        max: Environment.get<number>('DB_POOL_MAX')
+    },
     migrations: {
-        tableName: 'migrations'
+        tableName: Environment.get<string>('DB_MIGRATION_TABLE')
     }
 });

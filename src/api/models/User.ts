@@ -1,8 +1,14 @@
-import * as core from '../../core';
-import { Tables } from '../../database/Tables';
+import { Bookshelf } from '../../core/Bookshelf';
+import { Tables } from '../../constants/Tables';
 
-
-export class User extends core.Bookshelf.Model<User> {
+/**
+ * User Model
+ *
+ * @export
+ * @class User
+ * @extends {Bookshelf.Model<User>}
+ */
+export class User extends Bookshelf.Model<User> {
 
     public static async fetchById(id: number): Promise<User> {
         return await User.where<User>({ id: id }).fetch();
@@ -20,14 +26,8 @@ export class User extends core.Bookshelf.Model<User> {
     public get LastName(): string { return this.get('lastName'); }
     public set LastName(value: string) { this.set({ id: value }); };
 
-    public get Username(): string { return this.get('username'); }
-    public set Username(value: string) { this.set({ id: value }); };
-
     public get Email(): string { return this.get('email'); }
     public set Email(value: string) { this.set({ id: value }); };
-
-    public get Picture(): string { return this.get('picture'); }
-    public set Picture(value: string) { this.set({ id: value }); };
 
     public get UpdatedAt(): Date { return this.get('updatedAt'); }
     public set UpdatedAt(value: Date) { this.set({ id: value }); };

@@ -1,4 +1,4 @@
-import * as core from '../../core';
+import { Factory } from '../../core/database';
 import * as models from '../../api/models';
 
 /**
@@ -7,7 +7,7 @@ import * as models from '../../api/models';
  * Define all your factories here. These factories are used to seed
  * data very easy into your database.
  */
-const factory = core.Factory.getInstance();
+const factory = Factory.getInstance();
 
 /**
  * USER - Factory
@@ -19,9 +19,7 @@ factory.define(models.User, (faker: Faker.FakerStatic) => {
     return {
         firstName: fn,
         lastName: ln,
-        username: faker.internet.userName(fn, ln),
-        email: faker.internet.email(fn, ln),
-        picture: faker.internet.avatar()
+        email: faker.internet.email(fn, ln)
     };
 });
 

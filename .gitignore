@@ -10,6 +10,7 @@ node_modules/
 bower_components/
 npm-debug.log
 yarn-error.log
+.env
 
 # OS generated files #
 .DS_Store

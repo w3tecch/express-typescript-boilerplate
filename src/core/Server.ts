@@ -1,12 +1,11 @@
 import * as http from 'http';
 import * as express from 'express';
-
 import { Log } from './log';
 
 const log = new Log('core:Server');
 
 /**
- * The Server class is responsilbe to listen to http server
+ * The Server class is responsible to listen to http server
  * events and to react to it.
  *
  * @export
