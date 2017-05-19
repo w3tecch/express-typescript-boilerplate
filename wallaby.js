@@ -37,6 +37,5 @@ module.exports = (wallaby) => {
         //     regular: 1
         // }
 
-
     };
 };

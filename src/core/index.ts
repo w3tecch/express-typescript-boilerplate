@@ -1,20 +1,18 @@
 /**
  * CORE
  * ----------------------------------------
- *
- * Gery Hirscheld<@hirsch88>
- *
- * Please use this file to use any of the core components
+ * It is very important that this file is loaded first, so we
+ * can preconfigure and load all necessary stuff.
  */
 
 /**
- * Loads your .env file data into the process.env
+ * Loads your .env file data into the process.env variable.
  */
 require('dotenv').config();
 import 'reflect-metadata';
 
 /**
- * Define the log adapter for this application
+ * Define all log adapters for this application and chose one.
  */
 import { Log, WinstonAdapter, DebugAdapter } from './log';
 Log.addAdapter('winston', WinstonAdapter);
