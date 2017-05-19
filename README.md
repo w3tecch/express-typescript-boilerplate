@@ -73,5 +73,11 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 ## License
  [MIT](/LICENSE)
 
+## ToDo's
+https://blog.risingstack.com/10-best-practices-for-writing-node-js-rest-apis/
+[ ] Add api doc - http://apidocjs.com
+[ ] Add black box testing https://www.npmjs.com/package/supertest
+
+
 ---
 Made with ♥ by Gery Hirschfeld ([@GeryHirschfeld1](https://twitter.com/GeryHirschfeld1)) and [contributors](https://github.com/w3tecch/express-typescript-boilerplate/graphs/contributors)

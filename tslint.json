@@ -1,9 +1,14 @@
 {
     "rules": {
+        "align": [
+            true,
+            "parameters"
+        ],
         "class-name": true,
         "comment-format": [
             true
         ],
+        "jsdoc-format": true,
         "curly": true,
         "eofline": true,
         "forin": true,

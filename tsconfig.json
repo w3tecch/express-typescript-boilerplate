@@ -1,19 +1,23 @@
 {
     "compilerOptions": {
+        "target": "es6",
         "module": "commonjs",
-        "target": "es5",
         "moduleResolution": "node",
+        "sourceRoot": "src",
+        "typeRoots": [
+            "node_modules/@types"
+        ],
         "sourceMap": true,
-        "noUnusedLocals": true,
+        "alwaysStrict": true,
+        "strict": true,
         "noUnusedParameters": false,
+        "noImplicitAny": false,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "strictNullChecks": true,
         "lib": [
-            "es6",
+            "es2017",
             "dom"
-        ],
-        "noImplicitAny": false
+        ]
     },
     "filesGlob": [
         "typings/**/*.d.ts",
