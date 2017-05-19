@@ -4,6 +4,7 @@ import { my } from 'my-express';
 import { Log } from '../../core/log';
 import { UserService } from '../services/UsersService';
 import { Types } from '../../constants/Types';
+import { authenticate } from '../middlewares/authenticate';
 
 const log = new Log('api:ctrl.UserController');
 
@@ -20,7 +21,7 @@ export class UserController {
 
     constructor( @inject(Types.UserService) private userService: UserService) { }
 
-    @Get('/')
+    @Get('/', authenticate)
     public async findAll( @Response() res: my.Response): Promise<any> {
         log.debug('findAll');
         const users = await this.userService.findAll();
