@@ -1,9 +1,14 @@
 {
     "rules": {
+        "align": [
+            true,
+            "parameters"
+        ],
         "class-name": true,
         "comment-format": [
             true
         ],
+        "jsdoc-format": true,
         "curly": true,
         "eofline": true,
         "forin": true,
@@ -46,7 +51,6 @@
         "no-switch-case-fall-through": true,
         "no-trailing-whitespace": true,
         "no-unused-expression": false,
-        "no-use-before-declare": true,
         "no-var-keyword": false,
         "one-line": [
             true,

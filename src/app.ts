@@ -17,7 +17,6 @@ import container from './container';
  * all your custom middlewares and routes
  */
 const app = Bootstrap.getApp()
-
     // Enabling the cors headers
     .options('*', cors())
     .use(cors())

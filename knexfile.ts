@@ -1,5 +1,9 @@
 require('dotenv').config();
 
+/**
+ * This is the database configuration for the migrations and
+ * the seeders.
+ */
 module.exports = {
     client: process.env.DB_CLIENT,
     connection: process.env.DB_CONNECTION,

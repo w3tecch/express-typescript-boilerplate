@@ -46,7 +46,8 @@ export class UserRepository {
     public static async create(data: any): Promise<User> {
         const user = User.forge<User>(data);
         try {
-            return await user.save();
+            const createdUser = await user.save();
+            return await User.fetchById(createdUser.id);
         } catch (error) {
             throw new DatabaseException('Could not create the user!', error);
         }
@@ -63,7 +64,9 @@ export class UserRepository {
     public static async update(id: number, data: any): Promise<User> {
         const user = User.forge<User>({ id: id });
         try {
-            return await user.save(data, { patch: true });
+            const updatedUser = await user.save(data, { patch: true });
+            return await User.fetchById(updatedUser.id);
+
         } catch (error) {
             throw new DatabaseException('Could not update the user!', error);
         }

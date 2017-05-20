@@ -1,6 +1,16 @@
-# Express Typescript Boilerplate
+# Express Typescript Boilerplate [![Build Status](https://travis-ci.org/w3tecch/express-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-typescript-boilerplate)
 
-> Boilerplate for an restful express-application written in TypeScript
+A delightful way to building a RESTful API with NodeJs & TypeScript.
+- **Beautiful Syntax** thanks to the awesome annotations from [Inversify Express Utils](https://github.com/inversify/inversify-express-utils).
+- **Easy API Testing** with included black-box testing.
+- **Dependency Injection** done with the nice framework from [Inversify](http://inversify.io/).
+- **Fast Database Building** with simple migration and seeding from [Knex](http://knexjs.org/).
+- **Simplified Database Query** with the ORM of [Knex](http://knexjs.org/) called [Bookshelf](http://bookshelfjs.org/).
+- **Clear Structure** with controllers, services, repositories, models, middlewares...
+- **Easy Exception Handling** with our own simple classes. You will see.
+- **Easy Data Seeding** with our own factories.
+- **Custom Commands** are also available in our setup and really easy to use.
+- **Smart Validation** thanks to [class-validator](https://github.com/pleerock/class-validator) with some nice annotations.
 
 ## Getting Started
 ### Prerequisites
@@ -12,8 +22,8 @@
 ## Installing
 * `fork` this repo
 * `clone` your fork
-* `install:dev` to install all dependencies and typings
-* Create new database. You will find the name in the `src/config.ts` file.
+* `yarn install` to install all dependencies and typings
+* Create new database. You will find the name in the .env files.
 * `npm run db:migrate` to create the schema
 * `npm run db:seed` to insert some test data
 * `npm run serve` to start the dev server in another tab
@@ -26,9 +36,6 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 ## Scripts / Commands
 ### Install
 * Install all dependencies with `yarn install`
-* Install all typings with `npm run install:typings`
-* To install all dependencies and typings use `npm run install:dev`
-* Remove not needed libraries with `npm run install:clean`
 
 ### Linting
 * Run code analysis using `npm run lint`. This runs tslint.
@@ -36,6 +43,7 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 
 ### Tests
 * Run the unit tests using `npm test`.
+* Run the black-box tests using `npm run test:black-box`.
 * There is also a vscode task for this called test.
 
 ### Running in dev mode
@@ -44,19 +52,20 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 
 ### Cleaning the project
 * Run `npm run clean` to remove all generated JavaScript files.
-* Run `npm run db:clean` to drop all tables of the database.
 
 ### Building the project and run it
 * Run `npm run build` to generated all JavaScript files from your TypeScript sources. After this step you can deploy the app on any server.
 * There is also a vscode task for this called build.
 * To start the builded app use `npm start`.
 
-### Seed
-* Run `npm run db:seed` to seed some data into the database
-
-### Migration
+### Database
 * Run `npm run db:migrate` to migration the new schema to the database
 * Run `npm run db:migrate:rollback` to rollback one version
+* Run `npm run db:seed` to seed some data into the database
+* Run `npm run db:reset` to clean the database and migrate again
+
+### Console
+* To run your own created cli script enter `npm run console <command-name>`
 
 ## Related Projects
 * [express-graphql-typescript-boilerplate](https://github.com/w3tecch/express-graphql-typescript-boilerplate) - A starter kit for building amazing GraphQL API's with TypeScript and express by @w3tecch
@@ -69,6 +78,8 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * [Bookshelf Cheatsheet](http://ricostacruz.com/cheatsheets/bookshelf.html)
 * [Inversify](http://inversify.io/)
 * [Inversify Express Utils](https://github.com/inversify/inversify-express-utils)
+* [class-validator](https://github.com/pleerock/class-validator)
+* [Jest](http://facebook.github.io/jest/)
 * [Auth0 API Documentation](https://auth0.com/docs/api/management/v2#!/Users/get_users)
 
 ## License

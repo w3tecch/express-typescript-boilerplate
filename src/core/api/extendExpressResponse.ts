@@ -71,7 +71,7 @@ export function bodySuccessful<T>(data: T, options: my.ResponseOptions = {}): an
         ...links(options.links),
         data: data
     };
-};
+}
 
 /**
  * This body parse is used for error messages to the client
@@ -82,7 +82,7 @@ export function bodyFailed(message: string, error: any): any {
         message: message,
         error: error
     };
-};
+}
 
 ///////////////////////////////////////////////////////
 function message(value?: string): any {

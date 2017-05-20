@@ -8,8 +8,8 @@ export const Knex: knex = knex({
     pool: {
         min: Environment.get<number>('DB_POOL_MIN'),
         max: Environment.get<number>('DB_POOL_MAX')
-    },
-    migrations: {
-        tableName: Environment.get<string>('DB_MIGRATION_TABLE')
     }
+    // migrations: {
+    //     tableName: Environment.get<string>('DB_MIGRATION_TABLE')
+    // }
 });
