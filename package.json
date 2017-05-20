@@ -1,7 +1,7 @@
 {
   "name": "express-typescript-boilerplate",
   "version": "1.2.0",
-  "description": "Boilerplate for an restful express-application written in TypeScript.",
+  "description": "A delightful way to building a RESTful API with NodeJs & TypeScript",
   "main": "src/index.ts",
   "scripts": {
     "lint": "./node_modules/.bin/gulp lint",
