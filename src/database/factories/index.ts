@@ -1,5 +1,5 @@
 import { Factory } from '../../core/database';
-import * as models from '../../api/models';
+import { User } from '../../api/models/User';
 
 /**
  * FACTORIES
@@ -12,7 +12,7 @@ const factory = Factory.getInstance();
 /**
  * USER - Factory
  */
-factory.define(models.User, (faker: Faker.FakerStatic) => {
+factory.define(User, (faker: Faker.FakerStatic) => {
     const gender = faker.random.number(1);
     const fn = faker.name.firstName(gender);
     const ln = faker.name.lastName(gender);
@@ -24,4 +24,4 @@ factory.define(models.User, (faker: Faker.FakerStatic) => {
 });
 
 
-export * from '../../core/database/Factory'
+export * from '../../core/database/Factory';
