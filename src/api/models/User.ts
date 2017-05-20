@@ -1,4 +1,4 @@
-import { Bookshelf } from '../../core/Bookshelf';
+import { Bookshelf } from '../../core/Database';
 import { Tables } from '../../constants/Tables';
 
 /**
