@@ -9,7 +9,6 @@ const $ = require('gulp-load-plugins')({
 });
 
 gulp.task('clean', [
-    'clean:docs',
     'clean:build'
 ]);
 
@@ -20,7 +19,6 @@ gulp.task('clean:build', [
     'clean:test:map'
 ]);
 
-gulp.task('clean:docs', () => cleaner(paths.docs));
 gulp.task('clean:src:src', () => cleaner(paths.src, 'js'));
 gulp.task('clean:src:map', () => cleaner(paths.src, 'map'));
 gulp.task('clean:test:src', () => cleaner(paths.test, 'js'));

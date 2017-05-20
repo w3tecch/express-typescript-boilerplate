@@ -20,8 +20,7 @@
         ]
     },
     "filesGlob": [
-        "typings/**/*.d.ts",
-        "typings_custom/**/*.d.ts"
+        "typings/**/*.d.ts"
     ],
     "exclude": [
         "node_modules"

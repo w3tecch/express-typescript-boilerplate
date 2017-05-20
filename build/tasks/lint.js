@@ -23,7 +23,6 @@ function lint(files) {
 
 gulp.task('lint', () => lint([
     './typings/index.d.ts',
-    './typings_custom/**/*.d.ts',
     path.join(paths.src, '/**/*.ts'),
     path.join(paths.test, '/**/*.ts')
 ]));
