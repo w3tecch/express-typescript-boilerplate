@@ -1,16 +1,16 @@
 # Express Typescript Boilerplate
 
-Delightful building a RESTful API in TypeScript.
-- *Beautiful Syntax* thanks to the awesome annotations from [Inversify Express Utils](https://github.com/inversify/inversify-express-utils).
-- *Easy API Testing* with included black-box testing.
-- *Dependency Injection* done with the nice framework from [Inversify](http://inversify.io/).
-- *Fast Database Building* with simple migration and seeding from [Knex](http://knexjs.org/).
-- *Simplified Database Query* with the ORM of [Knex](http://knexjs.org/) called [Bookshelf](http://bookshelfjs.org/).
-- *Clear Structure* with controllers, services, repositories, models, middlewares...
-- *Easy Exception Handling* with our own simple classes. You will see.
-- *Easy Data Seeding* with our own factories.
-- *Custom Commands* are also available in our setup and really easy to use.
-- *Smart Validation* thanks to [class-validator](https://github.com/pleerock/class-validator) with some nice annotations.
+A delightful way to building a RESTful API with NodeJs & TypeScript.
+- **Beautiful Syntax** thanks to the awesome annotations from [Inversify Express Utils](https://github.com/inversify/inversify-express-utils).
+- **Easy API Testing** with included black-box testing.
+- **Dependency Injection** done with the nice framework from [Inversify](http://inversify.io/).
+- **Fast Database Building** with simple migration and seeding from [Knex](http://knexjs.org/).
+- **Simplified Database Query** with the ORM of [Knex](http://knexjs.org/) called [Bookshelf](http://bookshelfjs.org/).
+- **Clear Structure** with controllers, services, repositories, models, middlewares...
+- **Easy Exception Handling** with our own simple classes. You will see.
+- **Easy Data Seeding** with our own factories.
+- **Custom Commands** are also available in our setup and really easy to use.
+- **Smart Validation** thanks to [class-validator](https://github.com/pleerock/class-validator) with some nice annotations.
 
 ## Getting Started
 ### Prerequisites
