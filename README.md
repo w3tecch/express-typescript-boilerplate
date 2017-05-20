@@ -1,4 +1,4 @@
-# Express Typescript Boilerplate
+# Express Typescript Boilerplate [![Build Status](https://travis-ci.org/w3tecch/express-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-typescript-boilerplate)
 
 A delightful way to building a RESTful API with NodeJs & TypeScript.
 - **Beautiful Syntax** thanks to the awesome annotations from [Inversify Express Utils](https://github.com/inversify/inversify-express-utils).
