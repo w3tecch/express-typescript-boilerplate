@@ -19,5 +19,14 @@ export const api = async <T>(method: string, path: string, options: ApiOptions<T
         json: true,
         body: options.body
     };
-    return new ApiResponeTest(await request(o));
+
+    let res = undefined;
+    let error = null;
+    try {
+        res = await request(o);
+    } catch (e) {
+        error = e;
+    }
+
+    return new ApiResponeTest(error, res);
 };

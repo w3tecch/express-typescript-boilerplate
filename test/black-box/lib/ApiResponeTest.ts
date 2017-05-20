@@ -2,7 +2,9 @@ import * as _ from 'lodash';
 
 
 export class ApiResponeTest {
-    constructor(private res: any) { }
+
+    constructor(private error: any, private res: any) {
+    }
 
     getBody<T>(): T {
         return this.res['body'];
@@ -13,11 +15,19 @@ export class ApiResponeTest {
     }
 
     getHeaders<T>(): T {
-        return this.res['headers'];
+        if (this.res) {
+            return this.res['headers'];
+        } else {
+            return this.error['response']['headers'];
+        }
     }
 
     expectStatusCode(code: number): ApiResponeTest {
-        expect(this.res['statusCode']).toBe(code);
+        if (this.res) {
+            expect(this.res['statusCode']).toBe(code);
+        } else {
+            expect(this.error['statusCode']).toBe(code);
+        }
         return this;
     }
 
@@ -34,4 +44,13 @@ export class ApiResponeTest {
         expect(this.getBody()['success']).toBeTruthy();
         return this;
     }
+
+    printResponse(): void {
+        console.log(this.res);
+    }
+
+    printError(): void {
+        console.log(this.error);
+    }
+
 }
