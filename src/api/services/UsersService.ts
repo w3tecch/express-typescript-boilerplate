@@ -51,6 +51,21 @@ export class UserService {
     }
 
     /**
+     * Returns the user with the given user_id or throws a Not-Found exception
+     *
+     * @param {number} id of the user
+     * @returns {Promise<User>}
+     */
+    public async findByUserId(userId: string): Promise<User> {
+        let user = await this.userRepo.findByUserId(userId);
+        if (user === null) {
+            log.warn(`User with the userId=${userId} was not found!`);
+            throw new NotFoundException(userId);
+        }
+        return user;
+    }
+
+    /**
      * We will validate the data and create a new user and
      * return it, so the client get its new id
      *

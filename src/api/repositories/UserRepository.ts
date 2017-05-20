@@ -36,6 +36,17 @@ export class UserRepository {
     }
 
     /**
+     * Retrieves one user entity of the database
+     *
+     * @static
+     * @param {number} id of the user
+     * @returns {Promise<User>}
+     */
+    public static async findByUserId(userId: string): Promise<User> {
+        return User.fetchByUserId(userId);
+    }
+
+    /**
      * Creates a new user entity in the database and returns
      * the new created entity
      *

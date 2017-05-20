@@ -1,10 +1,11 @@
 import { injectable, inject } from 'inversify';
-import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response } from 'inversify-express-utils';
+import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response, Request } from 'inversify-express-utils';
 import { my } from 'my-express';
 import { Log } from '../../core/log';
 import { UserService } from '../services/UsersService';
 import { Types } from '../../constants/Types';
 import { authenticate } from '../middlewares/authenticate';
+import { populateUser } from '../middlewares/populateUser';
 
 const log = new Log('api:ctrl.UserController');
 
@@ -16,16 +17,22 @@ const log = new Log('api:ctrl.UserController');
  * @class UserController
  */
 @injectable()
-@Controller('/v1/user')
+@Controller('/v1/user', authenticate)
 export class UserController {
 
     constructor( @inject(Types.UserService) private userService: UserService) { }
 
-    @Get('/', authenticate)
+    @Get('/')
     public async findAll( @Response() res: my.Response): Promise<any> {
         log.debug('findAll');
         const users = await this.userService.findAll();
         return res.found(users.toJSON());
+    }
+
+    @Get('/me', populateUser)
+    public async findMe( @Request() req: my.Request, @Response() res: my.Response): Promise<any> {
+        log.debug('findMe');
+        return res.found(req.user);
     }
 
     @Get('/:id')

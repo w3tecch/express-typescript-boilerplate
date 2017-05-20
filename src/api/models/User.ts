@@ -14,6 +14,10 @@ export class User extends Bookshelf.Model<User> {
         return await User.where<User>({ id: id }).fetch();
     }
 
+    public static async fetchByUserId(userId: string): Promise<User> {
+        return await User.where<User>({ auth_0_user_id: userId }).fetch();
+    }
+
     public get tableName(): string { return Tables.Users; }
     public get hasTimestamps(): boolean { return true; }
 
