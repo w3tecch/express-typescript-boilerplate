@@ -4,8 +4,7 @@ import { my } from 'my-express';
 import { Log } from '../../core/log';
 import { UserService } from '../services/UsersService';
 import { Types } from '../../constants/Types';
-import { authenticate } from '../middlewares/authenticate';
-import { populateUser } from '../middlewares/populateUser';
+import { authenticate, populateUser } from '../middlewares';
 
 const log = new Log('api:ctrl.UserController');
 

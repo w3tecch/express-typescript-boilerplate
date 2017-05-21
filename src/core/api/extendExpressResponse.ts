@@ -14,7 +14,8 @@ export const extendExpressResponse = (req: my.Request, res: my.Response, next: e
      * This is used for successful responses and a json body
      */
     res.ok = <T>(data: T, options: my.ResponseOptions = {}) => {
-        return res.status(200).json(bodySuccessful(data, options));
+        res.status(200);
+        return res.json(bodySuccessful(data, options));
     };
 
     /**
@@ -22,7 +23,8 @@ export const extendExpressResponse = (req: my.Request, res: my.Response, next: e
      * This is used for created resources
      */
     res.created = <T>(data: T, options: my.ResponseOptions = {}) => {
-        return res.status(201).json(bodySuccessful(data, options));
+        res.status(201);
+        return res.json(bodySuccessful(data, options));
     };
 
     /**
@@ -46,7 +48,8 @@ export const extendExpressResponse = (req: my.Request, res: my.Response, next: e
      * This is the response after a resource has been removed
      */
     res.destroyed = (options: my.ResponseOptions = {}) => {
-        return res.status(204).json(bodySuccessful(null));
+        res.status(204);
+        return res.json(bodySuccessful(null));
     };
 
     /**
@@ -54,7 +57,8 @@ export const extendExpressResponse = (req: my.Request, res: my.Response, next: e
      * This is used when a request has failed
      */
     res.failed = (status: number, message: string, error?: any) => {
-        return res.status(status).json(bodyFailed(message, error));
+        res.status(status);
+        return res.json(bodyFailed(message, error));
     };
 
     next();

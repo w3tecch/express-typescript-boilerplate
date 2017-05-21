@@ -18,7 +18,7 @@ const log = new Log('api:services:UserService');
  * database actions. Furthermore you should throw events here if
  * necessary.
  *
- * @export
+ * @export0'
  * @class UserService
  */
 @injectable()

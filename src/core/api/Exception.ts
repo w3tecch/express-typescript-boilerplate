@@ -20,8 +20,8 @@ export class Exception extends Error {
         super(args[0]);
         this.code = code;
         this.name = this.constructor.name;
-        this.message = args[0];
-        this.body = args[1];
+        this.message = args[0] || 'Unknown error' ;
+        this.body = args[1] || null;
         this[isException] = true;
         Error.captureStackTrace(this);
     }
