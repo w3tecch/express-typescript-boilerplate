@@ -43,7 +43,7 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 
 ### Tests
 * Run the unit tests using `npm test`.
-* Run the black-box tests using `npm run test:black-box`.
+* Run the black-box tests using `npm run test:black-box` and don't forget to start your application and your [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server).
 * There is also a vscode task for this called test.
 
 ### Running in dev mode
@@ -70,6 +70,7 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 ## Related Projects
 * [express-graphql-typescript-boilerplate](https://github.com/w3tecch/express-graphql-typescript-boilerplate) - A starter kit for building amazing GraphQL API's with TypeScript and express by @w3tecch
 * [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
+* [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server)
 
 ## Documentations
 * [Express](https://expressjs.com/)
