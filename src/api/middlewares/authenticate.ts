@@ -24,13 +24,13 @@ export const authenticate = (request: RequestAPI<Request, Options, RequiredUriUr
         log.debug('Token is provided');
 
         // Request user info at auth0 with the provided token
-        request.post({
+        request({
+            method: 'POST',
             url: `${process.env.AUTH0_HOST}/tokeninfo`,
             form: {
                 id_token: token
             }
         }, (error: any, response: RequestResponse, body: any) => {
-
             // Verify if the requests was successful and append user
             // information to our extended express request object
             if (!error && response.statusCode === 200) {
