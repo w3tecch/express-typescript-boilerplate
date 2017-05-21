@@ -64,6 +64,10 @@ export class Log {
         this.scope = (scope) ? scope : Log.DEFAULT_SCOPE;
     }
 
+    public getAdapter(): ILogAdapter {
+        return this.adapter;
+    }
+
     public debug(message: string, ...args: any[]): void {
         this.log('debug', message, args);
     }

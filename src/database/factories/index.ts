@@ -16,10 +16,13 @@ factory.define(User, (faker: Faker.FakerStatic) => {
     const gender = faker.random.number(1);
     const fn = faker.name.firstName(gender);
     const ln = faker.name.lastName(gender);
+    const e = faker.internet.email(fn, ln);
     return {
         firstName: fn,
         lastName: ln,
-        email: faker.internet.email(fn, ln)
+        email: e,
+        auth0UserId: 'auth0|' + e,
+        picture: faker.internet.avatar()
     };
 });
 

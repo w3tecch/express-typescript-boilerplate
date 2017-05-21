@@ -22,5 +22,10 @@ export class UserCreateRequest extends RequestBody {
     @IsEmail()
     email: string;
 
+    picture: string;
+
+    @IsNotEmpty()
+    auth0UserId: string;
+
 }
 

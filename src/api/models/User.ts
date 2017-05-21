@@ -1,4 +1,4 @@
-import { Bookshelf } from '../../core/Bookshelf';
+import { Bookshelf } from '../../core/Database';
 import { Tables } from '../../constants/Tables';
 
 /**
@@ -12,6 +12,10 @@ export class User extends Bookshelf.Model<User> {
 
     public static async fetchById(id: number): Promise<User> {
         return await User.where<User>({ id: id }).fetch();
+    }
+
+    public static async fetchByUserId(userId: string): Promise<User> {
+        return await User.where<User>({ auth_0_user_id: userId }).fetch();
     }
 
     public get tableName(): string { return Tables.Users; }

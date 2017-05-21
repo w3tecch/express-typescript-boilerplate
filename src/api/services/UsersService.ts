@@ -18,7 +18,7 @@ const log = new Log('api:services:UserService');
  * database actions. Furthermore you should throw events here if
  * necessary.
  *
- * @export
+ * @export0'
  * @class UserService
  */
 @injectable()
@@ -46,6 +46,21 @@ export class UserService {
         if (user === null) {
             log.warn(`User with the id=${id} was not found!`);
             throw new NotFoundException(id);
+        }
+        return user;
+    }
+
+    /**
+     * Returns the user with the given user_id or throws a Not-Found exception
+     *
+     * @param {number} id of the user
+     * @returns {Promise<User>}
+     */
+    public async findByUserId(userId: string): Promise<User> {
+        let user = await this.userRepo.findByUserId(userId);
+        if (user === null) {
+            log.warn(`User with the userId=${userId} was not found!`);
+            throw new NotFoundException(userId);
         }
         return user;
     }

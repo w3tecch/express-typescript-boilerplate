@@ -48,7 +48,7 @@ export class Bootstrap {
      * @memberof Bootstrap
      */
     static build(app: express.Application, container: Container): express.Application {
-        let server = new InversifyExpressServer(container, undefined, { rootPath: '/api' }, app);
+        let server = new InversifyExpressServer(container, undefined, { rootPath: Environment.get<string>('APP_URL_PREFIX') }, app);
         log.debug('ioc is bonded');
         server.setConfig((a) => a.use(extendExpressResponse));
         server.setErrorConfig((a) => a.use(exceptionHandler));

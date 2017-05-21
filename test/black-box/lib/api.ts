@@ -5,6 +5,7 @@ import { ApiResponeTest } from './ApiResponeTest';
 
 
 export interface ApiOptions<T> {
+    token?: string;
     body?: T;
     headers?: any;
 }
@@ -19,6 +20,11 @@ export const api = async <T>(method: string, path: string, options: ApiOptions<T
         json: true,
         body: options.body
     };
+
+    if (options.token) {
+        o.headers = {};
+        o.headers['authorization'] = `Bearer ${options.token}`;
+    }
 
     let res = undefined;
     let error = null;

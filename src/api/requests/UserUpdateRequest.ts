@@ -25,6 +25,11 @@ export class UserUpdateRequest extends RequestBody {
     @IsEmail()
     email: string;
 
+    picture: string;
+
+    @IsNotEmpty()
+    auth0UserId: string;
+
     setFirstName(value: string): void {
         this.update('firstName', value);
     }
