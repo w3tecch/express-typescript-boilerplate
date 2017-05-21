@@ -41,7 +41,13 @@ export const authenticate = (request: RequestAPI<Request, Options, RequiredUriUr
 
             // Catch auth0 exception and return it as it is
             log.warn(`Could not retrieve the user, because of`, body);
-            res.failed(response.statusCode || 401, body);
+            let statusCode = 401;
+            if (response && response.statusCode) {
+                statusCode = response.statusCode;
+            } else {
+                log.warn('It seems your oauth server is down!');
+            }
+            res.failed(statusCode, body);
 
         });
 
