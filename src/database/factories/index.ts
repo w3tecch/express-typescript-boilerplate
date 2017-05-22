@@ -1,4 +1,4 @@
-import { Factory } from '../../core/database';
+import { Factory } from '../../core/database/Factory';
 import { User } from '../../api/models/User';
 
 /**
