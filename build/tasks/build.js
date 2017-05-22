@@ -45,7 +45,7 @@ function transpiler(filePath, isTest, files) {
     let tsProject = !!isTest ? tsProjectTest : tsProjectSource;
     return gulp
         .src([
-            './typings/*.d.ts',
+            './typings/**/*.d.ts',
             path.join(filePath, files)
         ])
         .pipe($.plumber({ errorHandler: $.notify.onError('Error: <%= error.message %>') }))
