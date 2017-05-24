@@ -1,6 +1,6 @@
 {
   "name": "express-typescript-boilerplate",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "A delightful way to building a RESTful API with NodeJs & TypeScript",
   "main": "src/index.ts",
   "scripts": {
