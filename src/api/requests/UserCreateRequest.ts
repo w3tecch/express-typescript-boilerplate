@@ -24,7 +24,6 @@ export class UserCreateRequest extends RequestBody {
 
     picture: string;
 
-    @IsNotEmpty()
     auth0UserId: string;
 
 }

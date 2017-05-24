@@ -28,6 +28,13 @@ export class UserController {
         return res.found(users.toJSON());
     }
 
+    @Post('/')
+    public async create( @Response() res: my.Response, @RequestBody() body: any): Promise<any> {
+        log.debug('create ', body);
+        const user = await this.userService.create(body);
+        return res.created(user.toJSON());
+    }
+
     @Get('/me', populateUser)
     public async findMe( @Request() req: my.Request, @Response() res: my.Response): Promise<any> {
         log.debug('findMe');
@@ -39,13 +46,6 @@ export class UserController {
         log.debug('findOne ', id);
         const user = await this.userService.findOne(parseInt(id, 10));
         return res.found(user.toJSON());
-    }
-
-    @Post('/')
-    public async create( @Response() res: my.Response, @RequestBody() body: any): Promise<any> {
-        log.debug('create ', body);
-        const user = await this.userService.create(body);
-        return res.created(user.toJSON());
     }
 
     @Put('/:id')
