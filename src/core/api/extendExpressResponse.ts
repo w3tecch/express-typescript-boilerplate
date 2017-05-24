@@ -44,11 +44,11 @@ export const extendExpressResponse = (req: my.Request, res: my.Response, next: e
     };
 
     /**
-     * 204 - Destroyed
+     * 200 - Destroyed
      * This is the response after a resource has been removed
      */
     res.destroyed = (options: my.ResponseOptions = {}) => {
-        res.status(204);
+        res.status(200);
         return res.json(bodySuccessful(null));
     };
 

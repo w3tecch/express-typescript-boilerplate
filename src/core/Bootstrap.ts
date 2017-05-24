@@ -28,8 +28,6 @@ export class Bootstrap {
      */
     static getApp(): express.Application {
         const app = express();
-
-        // Set serve configs for running it
         app.set('host', Environment.get('APP_HOST'));
         app.set('port', Bootstrap.normalizePort(Environment.get<string>('PORT') || Environment.get<string>('APP_PORT')));
         log.debug('app is defined');
@@ -48,11 +46,47 @@ export class Bootstrap {
      * @memberof Bootstrap
      */
     static build(app: express.Application, container: Container): express.Application {
+        app = Bootstrap.setupSwagger(app);
         let server = new InversifyExpressServer(container, undefined, { rootPath: Environment.get<string>('APP_URL_PREFIX') }, app);
         log.debug('ioc is bonded');
+        server = Bootstrap.setupConfigurations(server);
+        return server.build();
+    }
+
+    /**
+     * Sets up the express middlewares witch are last in the chain
+     *
+     * @static
+     * @param {InversifyExpressServer} server
+     * @returns {InversifyExpressServer}
+     *
+     * @memberof Bootstrap
+     */
+    static setupConfigurations(server: InversifyExpressServer): InversifyExpressServer {
         server.setConfig((a) => a.use(extendExpressResponse));
         server.setErrorConfig((a) => a.use(exceptionHandler));
-        return server.build();
+        return server;
+    }
+
+    /**
+     * Sets up the swagger documentation
+     *
+     * @static
+     * @param {express.Application} app
+     * @returns {express.Application}
+     *
+     * @memberof Bootstrap
+     */
+    static setupSwagger(app: express.Application): express.Application {
+        if (Environment.get<string>('SWAGGER_ENABLED') === 'true') {
+            const basePath = __dirname.substring(0, __dirname.indexOf('/src/') + 4);
+            const swaggerUi = require('swagger-ui-express');
+            const swaggerDocument = require(basePath + Environment.get<string>('SWAGGER_FILE'));
+            const route = Environment.get<string>('APP_URL_PREFIX') + Environment.get<string>('SWAGGER_ROUTE');
+            app.use(route, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+            log.info(`Now you can access the swagger docs under -> ${app.get('host')}:${(app.get('port'))}${route}`);
+        }
+        return app;
     }
 
     /**

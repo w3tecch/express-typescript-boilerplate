@@ -39,7 +39,7 @@ export class Server {
      * @memberof Server
      */
     static onStartUp(app: express.Application): void {
-        log.info(`started on ${app.get('host')}:${app.get('port')}`);
+        log.info(`Aloha, your app is ready on ${app.get('host')}:${app.get('port')}`);
     }
 
     /**

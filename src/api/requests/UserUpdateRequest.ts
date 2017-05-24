@@ -27,7 +27,6 @@ export class UserUpdateRequest extends RequestBody {
 
     picture: string;
 
-    @IsNotEmpty()
     auth0UserId: string;
 
     setFirstName(value: string): void {
