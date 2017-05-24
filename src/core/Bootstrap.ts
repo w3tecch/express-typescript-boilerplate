@@ -79,11 +79,31 @@ export class Bootstrap {
      */
     static setupSwagger(app: express.Application): express.Application {
         if (Environment.get<string>('SWAGGER_ENABLED') === 'true') {
-            const basePath = __dirname.substring(0, __dirname.indexOf('/src/') + 4);
+            const swaggerJSDoc = require('swagger-jsdoc');
+            const basePath = __dirname.substring(0, __dirname.indexOf('/src/'));
+
+            const swaggerDefinition = require(basePath + '/swagger.json');
+            const packageJson = require(basePath + '/package.json');
+            swaggerDefinition.info = {
+                title: packageJson.name,
+                description: packageJson.description,
+                version: packageJson.version
+            };
+
+            const options = {
+                swaggerDefinition: swaggerDefinition,
+                apis: [
+                    './src/api/models/**/*.ts',
+                    './src/api/controllers/**/*.ts'
+                ]
+            };
+
+            // Initialize swagger-jsdoc -> returns validated swagger spec in json format
+            const swaggerSpec = swaggerJSDoc(options);
             const swaggerUi = require('swagger-ui-express');
-            const swaggerDocument = require(basePath + Environment.get<string>('SWAGGER_FILE'));
             const route = Environment.get<string>('APP_URL_PREFIX') + Environment.get<string>('SWAGGER_ROUTE');
-            app.use(route, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+            app.use(route, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
             log.info(`Now you can access the swagger docs under -> ${app.get('host')}:${(app.get('port'))}${route}`);
         }
         return app;

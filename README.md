@@ -11,6 +11,7 @@ A delightful way to building a RESTful API with NodeJs & TypeScript.
 - **Easy Data Seeding** with our own factories.
 - **Custom Commands** are also available in our setup and really easy to use.
 - **Smart Validation** thanks to [class-validator](https://github.com/pleerock/class-validator) with some nice annotations.
+- **Inline Swagger Documentation** thanks to [swagger-jsdoc](https://github.com/Surnet/swagger-jsdoc)
 
 ## Getting Started
 ### Prerequisites

@@ -104,6 +104,7 @@
     "require-dir": "^0.3.1",
     "run-sequence": "^1.2.2",
     "serve-favicon": "^2.4.3",
+    "swagger-jsdoc": "^1.9.4",
     "swagger-ui-express": "^2.0.0",
     "ts-jest": "^20.0.4",
     "ts-node": "^3.0.4",
