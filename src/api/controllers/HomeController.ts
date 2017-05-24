@@ -5,14 +5,23 @@ import { injectable } from 'inversify';
 /**
  * HomeController is a public controller to give some
  * information about this api
- *
- * @export
- * @class HomeController
  */
 @injectable()
-@Controller('/')
+@Controller('/v1')
 export class HomeController {
 
+    /**
+     * @swagger
+     * /:
+     *   get:
+     *     tags:
+     *     - Root
+     *     summary: Show API information
+     *     description: Gets the api information
+     *     responses:
+     *       200:
+     *         description: api information
+     */
     @Get('/')
     public get( @Response() res: express.Response): any {
         const pkg = require('../../../package.json');
