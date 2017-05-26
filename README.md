@@ -11,7 +11,7 @@ A delightful way to building a RESTful API with NodeJs & TypeScript.
 - **Easy Data Seeding** with our own factories.
 - **Custom Commands** are also available in our setup and really easy to use.
 - **Smart Validation** thanks to [class-validator](https://github.com/pleerock/class-validator) with some nice annotations.
-- **Inline Swagger Documentation** thanks to [swagger-jsdoc](https://github.com/Surnet/swagger-jsdoc)
+- **API Documentation** thanks to [swagger](http://swagger.io/).
 
 ## Getting Started
 ### Prerequisites
@@ -83,6 +83,7 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * [class-validator](https://github.com/pleerock/class-validator)
 * [Jest](http://facebook.github.io/jest/)
 * [Auth0 API Documentation](https://auth0.com/docs/api/management/v2#!/Users/get_users)
+* [swagger Documentation](http://swagger.io/)
 
 ## License
  [MIT](/LICENSE)
