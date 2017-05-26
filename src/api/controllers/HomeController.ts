@@ -10,18 +10,6 @@ import { injectable } from 'inversify';
 @Controller('/v1')
 export class HomeController {
 
-    /**
-     * @swagger
-     * /:
-     *   get:
-     *     tags:
-     *     - Root
-     *     summary: Show API information
-     *     description: Gets the api information
-     *     responses:
-     *       200:
-     *         description: api information
-     */
     @Get('/')
     public get( @Response() res: express.Response): any {
         const pkg = require('../../../package.json');

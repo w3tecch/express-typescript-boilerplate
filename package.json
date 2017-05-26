@@ -1,6 +1,6 @@
 {
   "name": "express-typescript-boilerplate",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "A delightful way to building a RESTful API with NodeJs & TypeScript",
   "main": "src/index.ts",
   "scripts": {
@@ -17,7 +17,7 @@
     "db:seed": "./node_modules/.bin/knex seed:run",
     "db:reset": "npm run console db:reset",
     "console": "./node_modules/.bin/ts-node ./src/console/commander.ts",
-    "serve": "./node_modules/.bin/nodemon --watch 'src/**/*.ts'",
+    "serve": "./node_modules/.bin/nodemon --watch 'src/**/*.ts' --watch 'src/**/*.json'",
     "start": "node src/index.js"
   },
   "repository": "git+ssh://git@github.com/w3tec/express-typescript-boilerplate.git",
