@@ -42,7 +42,10 @@ export class UserService {
      * @returns {Promise<User>}
      */
     public async findOne(id: number): Promise<User> {
-        let user = await this.userRepo.findOne(id);
+        const user = await this.userRepo.findOne(id);
+        console.log(user);
+        console.log(user === null);
+        console.log(user === undefined);
         if (user === null) {
             log.warn(`User with the id=${id} was not found!`);
             throw new NotFoundException(id);
@@ -57,7 +60,7 @@ export class UserService {
      * @returns {Promise<User>}
      */
     public async findByUserId(userId: string): Promise<User> {
-        let user = await this.userRepo.findByUserId(userId);
+        const user = await this.userRepo.findByUserId(userId);
         if (user === null) {
             log.warn(`User with the userId=${userId} was not found!`);
             throw new NotFoundException(userId);
@@ -78,7 +81,7 @@ export class UserService {
         await request.validate();
 
         // If the request body was valid we will create the user
-        let user = await this.userRepo.create(data);
+        const user = await this.userRepo.create(data);
         return user;
     }
 
@@ -92,7 +95,7 @@ export class UserService {
      */
     public async update(id: number, newUser: any): Promise<User> {
         const oldUserModel = await this.findOne(id);
-        let oldUser = oldUserModel.toJSON();
+        const oldUser = oldUserModel.toJSON();
         const request = new UserUpdateRequest(oldUser);
 
         request.setFirstName(newUser.firstName);
@@ -103,7 +106,7 @@ export class UserService {
         await request.validate();
 
         // If the request body was valid we will create the user
-        let user = await this.userRepo.update(id, request.toJSON());
+        const user = await this.userRepo.update(id, request.toJSON());
         return user;
     }
 

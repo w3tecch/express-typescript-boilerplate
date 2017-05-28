@@ -4,7 +4,6 @@ const gulp = require('gulp');
 const path = require('path');
 const runSequence = require('run-sequence');
 const paths = require('../paths');
-const util = require('../util');
 const $ = require('gulp-load-plugins')({
     lazy: true
 });
@@ -48,7 +47,6 @@ function transpiler(filePath, isTest, files) {
             './typings/**/*.d.ts',
             path.join(filePath, files)
         ])
-        .pipe($.plumber({ errorHandler: $.notify.onError('Error: <%= error.message %>') }))
         .pipe($.sourcemaps.init({ loadMaps: true }))
         .pipe(tsProject())
         .pipe($.sourcemaps.write()) // inline sourcemaps

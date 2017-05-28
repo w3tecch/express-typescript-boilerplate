@@ -89,7 +89,7 @@ describe('extendExpressResponse', () => {
         test('Should create to correct response format', () => {
             extendExpressResponse(req, res, next);
             res.destroyed();
-            expect(res.status).toHaveBeenCalledWith(204);
+            expect(res.status).toHaveBeenCalledWith(200);
             expect(res.json).toHaveBeenCalledWith({
                 success: true,
                 data: null
