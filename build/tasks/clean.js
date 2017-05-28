@@ -3,7 +3,6 @@
 const gulp = require('gulp');
 const path = require('path');
 const paths = require('../paths');
-const util = require('../util');
 const $ = require('gulp-load-plugins')({
     lazy: true
 });

@@ -7,7 +7,7 @@ import { injectable } from 'inversify';
  * information about this api
  */
 @injectable()
-@Controller('/v1')
+@Controller('/')
 export class HomeController {
 
     @Get('/')

@@ -23,7 +23,7 @@ export class ModelFactory {
     }
 
     public async create(amount: number = 1): Promise<any> {
-        let results = <any>[];
+        const results = <any>[];
         for (let i = 0; i < amount; i++) {
             const obj = await this.build();
             results.push(obj);

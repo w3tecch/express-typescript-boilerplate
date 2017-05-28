@@ -29,7 +29,7 @@ export class RequestBody {
      * Validates the body on the basis of the validator-annotations
      */
     public async validate(): Promise<void> {
-        let errors = await validate(this);
+        const errors = await validate(this);
         if (errors && errors.length > 0) {
             throw new ValidationException('Request body is not valid', errors);
         }
@@ -40,7 +40,7 @@ export class RequestBody {
      * Returns a new body object
      */
     public toJSON(): any {
-        let json = {};
+        const json = {};
         const keys = Object.keys(this);
         keys.forEach((key) => {
             if (this[key] !== undefined) {

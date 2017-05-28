@@ -1,28 +1,17 @@
 {
     "compilerOptions": {
-        "target": "es6",
         "module": "commonjs",
-        "moduleResolution": "node",
-        "sourceRoot": "src",
-        "typeRoots": [
-            "node_modules/@types"
-        ],
-        "sourceMap": true,
-        "alwaysStrict": true,
-        "strict": true,
-        "noUnusedParameters": false,
+        "target": "es6",
         "noImplicitAny": false,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "baseUrl": ".",
+        "alwaysStrict": true,
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "lib": [
-            "es2017",
-            "dom"
-        ]
+        "emitDecoratorMetadata": true
     },
-    "filesGlob": [
+    "include": [
+        "src/**/*",
         "typings/**/*.d.ts"
-    ],
-    "exclude": [
-        "node_modules"
     ]
 }
