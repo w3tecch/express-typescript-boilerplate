@@ -20,4 +20,8 @@ export class Environment {
         return process.env[key];
     }
 
+    static getPkg(): any {
+        return require('../../package.json');
+    }
+
 }

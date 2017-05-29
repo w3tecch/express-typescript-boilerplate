@@ -1,5 +1,4 @@
 export const Controller = {
-    ApiController: 'ApiController',
     UserController: 'UserController'
 };
 
