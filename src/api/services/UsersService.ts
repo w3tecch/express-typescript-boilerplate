@@ -3,6 +3,7 @@ import { injectable, inject, named } from 'inversify';
 import { Repository } from '../../constants/Targets';
 import { Types } from '../../constants/Types';
 import { Log } from '../../core/log';
+import { Validate, Request } from '../../core/api/Validate';
 import { NotFoundException } from '../exceptions/NotFoundException';
 import { UserCreateRequest } from '../requests/UserCreateRequest';
 import { UserUpdateRequest } from '../requests/UserUpdateRequest';
@@ -72,11 +73,8 @@ export class UserService {
      * @param {*} data is the json body of the request
      * @returns {Promise<User>}
      */
-    public async create(data: any): Promise<User> {
-        // Validate request payload
-        const request = new UserCreateRequest(data);
-        await request.validate();
-
+    @Validate
+    public async create( @Request(UserCreateRequest) data: any): Promise<User> {
         // If the request body was valid we will create the user
         const user = await this.userRepo.create(data);
         return user;
@@ -90,21 +88,17 @@ export class UserService {
      * @param {*} newUser is the json body of the request
      * @returns {Promise<User>}
      */
-    public async update(id: number, newUser: any): Promise<User> {
-        const oldUserModel = await this.findOne(id);
-        const oldUser = oldUserModel.toJSON();
-        const request = new UserUpdateRequest(oldUser);
-
-        request.setFirstName(newUser.firstName);
-        request.setLastName(newUser.lastName);
-        request.setEmail(newUser.email);
-
-        // Validate request payload
-        await request.validate();
-
-        // If the request body was valid we will create the user
-        const user = await this.userRepo.update(id, request.toJSON());
-        return user;
+    @Validate
+    public async update(id: number, @Request(UserUpdateRequest) newUser: any): Promise<User> {
+        // Find or fail
+        const user = await this.findOne(id);
+        // Set new values
+        user.FirstName = newUser.firstName;
+        user.LastName = newUser.lastName;
+        user.Email = newUser.email;
+        // Update user record
+        const updatedUser = await this.userRepo.update(id, user.toJSON());
+        return updatedUser;
     }
 
     /**
