@@ -22,22 +22,6 @@
             "args": [
                 "test"
             ]
-        },
-        {
-            // "npm run lint"
-            "taskName": "lint",
-            "args": [
-                "run",
-                "lint"
-            ]
-        },
-        {
-            // "npm run clean"
-            "taskName": "clean",
-            "args": [
-                "run",
-                "clean"
-            ]
         }
     ]
 }

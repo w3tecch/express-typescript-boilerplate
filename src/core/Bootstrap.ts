@@ -79,7 +79,8 @@ export class Bootstrap {
      */
     static setupSwagger(app: express.Application): express.Application {
         if (Environment.get<string>('SWAGGER_ENABLED') === 'true') {
-            const basePath = __dirname.substring(0, __dirname.indexOf('/src/'));
+            const baseFolder = __dirname.indexOf('/src/') >= 0 ? '/src/' : '/dist/';
+            const basePath = __dirname.substring(0, __dirname.indexOf(baseFolder));
             const swaggerFile = require(basePath + Environment.get<string>('SWAGGER_FILE'));
             const packageJson = require(basePath + '/package.json');
 

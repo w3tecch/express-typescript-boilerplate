@@ -43,9 +43,6 @@ export class UserService {
      */
     public async findOne(id: number): Promise<User> {
         const user = await this.userRepo.findOne(id);
-        console.log(user);
-        console.log(user === null);
-        console.log(user === undefined);
         if (user === null) {
             log.warn(`User with the id=${id} was not found!`);
             throw new NotFoundException(id);

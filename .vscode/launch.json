@@ -7,11 +7,13 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch App",
-            "stopOnEntry": true,
-            "program": "${workspaceRoot}/src/index.ts",
-            "cwd": "${workspaceRoot}",
-            "sourceMaps": true,
+            "name": "Debug",
+            "program": "${workspaceRoot}/dist/index.js",
+            "smartStep": true,
+            "outFiles": [
+                "../dist/**/*.js"
+            ],
+            "protocol": "inspector",
             "preLaunchTask": "build",
             "env": {
                 "NODE_ENV": "development"

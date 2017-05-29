@@ -13,7 +13,7 @@ const log = new Log('api:ctrl.UserController');
  * provide all crud actions.
  */
 @injectable()
-@Controller('/v1/user', authenticate)
+@Controller('/user', authenticate)
 export class UserController {
 
     constructor( @inject(Types.UserService) private userService: UserService) { }

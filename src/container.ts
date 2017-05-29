@@ -4,7 +4,7 @@ import { Types } from './constants/Types';
 import { Controller, Repository } from './constants/Targets';
 
 // Home
-import { HomeController } from './api/controllers/HomeController';
+import { ApiController } from './api/controllers/ApiController';
 
 // User Resource
 import { UserController } from './api/controllers/UserController';
@@ -21,7 +21,7 @@ import { UserRepository } from './api/repositories/UserRepository';
 const container = new Container();
 
 // Controllers
-container.bind<interfaces.Controller>(Types.Controller).to(HomeController).whenTargetNamed(Controller.HomeController);
+container.bind<interfaces.Controller>(Types.Controller).to(ApiController).whenTargetNamed(Controller.ApiController);
 container.bind<interfaces.Controller>(Types.Controller).to(UserController).whenTargetNamed(Controller.UserController);
 
 // Services

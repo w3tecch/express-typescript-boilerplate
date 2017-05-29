@@ -1,5 +1,5 @@
 export const Controller = {
-    HomeController: 'HomeController',
+    ApiController: 'ApiController',
     UserController: 'UserController'
 };
 
