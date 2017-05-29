@@ -28,8 +28,8 @@ export class RequestBody {
     /**
      * Validates the body on the basis of the validator-annotations
      */
-    public async validate(): Promise<void> {
-        const errors = await validate(this);
+    public async validate(skipMissingProperties: boolean = false): Promise<void> {
+        const errors = await validate(this, { skipMissingProperties: skipMissingProperties });
         if (errors && errors.length > 0) {
             throw new ValidationException('Request body is not valid', errors);
         }
