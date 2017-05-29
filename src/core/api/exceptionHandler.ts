@@ -1,4 +1,5 @@
 import { my } from 'my-express';
+import { Environment } from '../Environment';
 import { Exception, isException } from '../api/Exception';
 
 /**
@@ -12,7 +13,9 @@ export const exceptionHandler = (error: Exception | Error, req: my.Request, res:
         res.failed(error['code'], error.message, error['body'] || null);
         next();
     } else {
-        console.error(error.stack);
+        if (Environment.isDevelopment()) {
+            console.error(error.stack);
+        }
         res.failed(500, 'Something broke!', error['body'] || null);
         next(error);
     }
