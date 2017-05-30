@@ -6,10 +6,17 @@ const options = require('../../knexfile.ts');
 const log = new Log('app:console:DatabaseResetCommand');
 
 
+/**
+ * DatabaseResetCommand rollback all current migrations and
+ * then migrate to the latest one.
+ *
+ * @export
+ * @class DatabaseResetCommand
+ */
 export class DatabaseResetCommand {
 
     static command = 'db:reset';
-    static description = 'Reverse all migrations and migrate to latest.';
+    static description = 'Reverse all current migrations and migrate to latest.';
 
     static async action(): Promise<void> {
         try {

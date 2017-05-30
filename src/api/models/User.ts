@@ -1,4 +1,4 @@
-import { Bookshelf } from '../../core/Database';
+import { Bookshelf } from '../../config/Database';
 import { Tables } from '../../constants/Tables';
 
 /**
@@ -18,70 +18,44 @@ export class User extends Bookshelf.Model<User> {
         return await User.where<User>({ auth_0_user_id: userId }).fetch();
     }
 
+    /**
+     * Configurations
+     */
     public get tableName(): string { return Tables.Users; }
     public get hasTimestamps(): boolean { return true; }
 
+    /**
+     * Properties
+     */
     public get Id(): number { return this.get('id'); }
-    public set Id(value: number) { this.set({ id: value }); }
+    public set Id(value: number) { this.set('id', value); }
 
     public get FirstName(): string { return this.get('firstName'); }
-    public set FirstName(value: string) { this.set({ id: value }); }
+    public set FirstName(value: string) { this.set('firstName', value); }
 
     public get LastName(): string { return this.get('lastName'); }
-    public set LastName(value: string) { this.set({ id: value }); }
+    public set LastName(value: string) { this.set('lastName', value); }
 
     public get Email(): string { return this.get('email'); }
-    public set Email(value: string) { this.set({ id: value }); }
+    public set Email(value: string) { this.set('email', value); }
+
+    public get Picture(): string { return this.get('picture'); }
+    public set Picture(value: string) { this.set('picture', value); }
+
+    public get Auth0UserId(): string { return this.get('auth0UserId'); }
+    public set Auth0UserId(value: string) { this.set('auth0UserId', value); }
 
     public get UpdatedAt(): Date { return this.get('updatedAt'); }
-    public set UpdatedAt(value: Date) { this.set({ id: value }); }
+    public set UpdatedAt(value: Date) { this.set('updatedAt', value); }
 
     public get CreatedAt(): Date { return this.get('createdAt'); }
-    public set CreatedAt(value: Date) { this.set({ id: value }); }
+    public set CreatedAt(value: Date) { this.set('createdAt', value); }
 
+    /**
+     * Helper methods
+     */
     public fullName(): string {
         return this.FirstName + ' ' + this.LastName;
     }
 
 }
-
-/**
- * @swagger
- * definitions:
- *   NewUser:
- *     type: object
- *     properties:
- *       firstName:
- *         type: string
- *       lastName:
- *         type: string
- *       email:
- *         type: string
- *       picture:
- *         type: string
- */
-
-/**
- * @swagger
- * definitions:
- *   User:
- *     type: object
- *     properties:
- *       id:
- *         type: "integer"
- *         format: "int64"
- *       firstName:
- *         type: string
- *       lastName:
- *         type: string
- *       email:
- *         type: string
- *       picture:
- *         type: string
- *       updatedAt:
- *         type: string
- *         format: date-time
- *       createdAt:
- *         type: string
- *         format: date-time
- */

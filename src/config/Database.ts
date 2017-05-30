@@ -1,6 +1,16 @@
+/**
+ * config.Database
+ * ------------------------------------
+ *
+ * Here we configure our database connection and
+ * our ORM 'bookshelf'.
+ *
+ * Here would be the place to add more bookshelf plugins.
+ */
+
 import * as knex from 'knex';
 import * as bookshelf from 'bookshelf';
-import { Environment } from './Environment';
+import { Environment } from '../core/Environment';
 
 
 export const Knex = (): knex => knex({

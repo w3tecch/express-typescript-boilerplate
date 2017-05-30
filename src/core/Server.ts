@@ -1,16 +1,19 @@
+/**
+ * core.Server
+ * ------------------------------------
+ *
+ * The Server class is responsible to listen to http server
+ * events and to react to it.
+ */
+
 import * as http from 'http';
 import * as express from 'express';
 import { Log } from './log';
+import { Environment } from './Environment';
 
 const log = new Log('core:Server');
 
-/**
- * The Server class is responsible to listen to http server
- * events and to react to it.
- *
- * @export
- * @class Server
- */
+
 export class Server {
 
     /**
@@ -39,7 +42,25 @@ export class Server {
      * @memberof Server
      */
     static onStartUp(app: express.Application): void {
+        log.info(``);
         log.info(`Aloha, your app is ready on ${app.get('host')}:${app.get('port')}`);
+        log.info(`To shut it down, press <CTRL> + C at any time.`);
+        log.info(``);
+        log.debug('-------------------------------------------------------');
+        log.debug(`Environment  : ${Environment.getNodeEnv()}`);
+        log.debug(`Version      : ${Environment.getPkg().version}`);
+        log.debug(``);
+        if (Environment.get<string>('API_INFO_ENABLED') === 'true') {
+            log.debug(`API Info     : ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}${process.env.API_INFO_ROUTE}`);
+        }
+        if (Environment.get<string>('SWAGGER_ENABLED') === 'true') {
+            log.debug(`Swagger      : ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}${process.env.SWAGGER_ROUTE}`);
+        }
+        if (Environment.get<string>('MONITOR_ENABLED') === 'true') {
+            log.debug(`Monitor      : ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}${process.env.MONITOR_ROUTE}`);
+        }
+        log.debug('-------------------------------------------------------');
+        log.debug('');
     }
 
     /**
@@ -62,7 +83,7 @@ export class Server {
                 process.exit(1);
                 break;
             case 'EADDRINUSE':
-                log.error(`${this.bind(addr)} is already in use`);
+                log.error(`Port is already in use`);
                 process.exit(1);
                 break;
             default:

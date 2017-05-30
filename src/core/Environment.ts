@@ -1,3 +1,11 @@
+/**
+ * core.Environment
+ * ------------------------------------
+ *
+ * Helps us to simplify 'process.env' and also provide
+ * the content of the package.json.
+ */
+
 export class Environment {
 
     static getNodeEnv(): string {
@@ -18,6 +26,10 @@ export class Environment {
 
     static get<T>(key: string): T {
         return process.env[key];
+    }
+
+    static getPkg(): any {
+        return require('../../package.json');
     }
 
 }

@@ -12,7 +12,7 @@ export interface ApiOptions<T> {
 
 
 export const api = async <T>(method: string, path: string, options: ApiOptions<T> = {}) => {
-    let o: Options = {
+    const o: Options = {
         method: method,
         uri: `${process.env.APP_HOST}:${process.env.APP_PORT}${path}`,
         resolveWithFullResponse: true,

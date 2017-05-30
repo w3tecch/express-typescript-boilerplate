@@ -4,8 +4,6 @@ import { my } from 'my-express';
 import { Log } from '../../core/log';
 import { UserService } from '../services/UsersService';
 
-// const log = new Log('api:middleware.populateUser');
-
 /**
  * populateUser middleware
  * -----------------------
@@ -18,11 +16,11 @@ import { UserService } from '../services/UsersService';
  */
 export const populateUser = (lazyUserService: () => UserService, log: Log) =>
     (req: my.Request, res: my.Response, next: my.NextFunction) => {
-
+        // Check if the authenticate middleware was successful
         if (!req.tokeninfo || !req.tokeninfo.user_id) {
             return res.failed(400, 'Missing token information!');
         }
-
+        // Find user from the token and store him in the request object
         const userService = lazyUserService();
         userService.findByUserId(req.tokeninfo.user_id)
             .then((user) => {

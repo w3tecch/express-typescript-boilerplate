@@ -1,18 +1,24 @@
+/**
+ * core.api.exceptionHandler
+ * ------------------------------------------------
+ *
+ * This handler catches all thrown exceptions from the api layer. Afterwards it
+ * send them directly to the client or otherwise it calls the next middleware.
+ */
+
 import { my } from 'my-express';
+import { Environment } from '../Environment';
 import { Exception, isException } from '../api/Exception';
 
-/**
- * Exception Handler
- * ---------------------------
- * This handler catches all thrown exceptions from the api. Afterwards it
- * send them to the client otherwise it moves to the next middleware or handler.
- */
+
 export const exceptionHandler = (error: Exception | Error, req: my.Request, res: my.Response, next: my.NextFunction) => {
     if (error instanceof Exception || error[isException]) {
         res.failed(error['code'], error.message, error['body'] || null);
         next();
     } else {
-        console.error(error.stack);
+        if (Environment.isDevelopment()) {
+            console.error(error.stack);
+        }
         res.failed(500, 'Something broke!', error['body'] || null);
         next(error);
     }

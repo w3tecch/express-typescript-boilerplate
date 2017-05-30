@@ -1,3 +1,11 @@
+/**
+ * APPLICATION CONFIGURATION
+ * ----------------------------------------
+ *
+ * This is the place to add any other express module and register
+ * all your custom middlewares and routes.
+ */
+
 import * as path from 'path';
 import * as cors from 'cors';
 import * as morgan from 'morgan';
@@ -6,17 +14,16 @@ import * as express from 'express';
 import * as favicon from 'serve-favicon';
 import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
+import * as monitor from 'express-status-monitor';
 import { Bootstrap } from './core/Bootstrap';
 import { Log } from './core/log';
 import container from './container';
 
-/**
- * APPLICATION CONFIGURATION
- * ----------------------------------------
- * This is the place to add any other express module and register
- * all your custom middlewares and routes
- */
+
 const app = Bootstrap.getApp()
+    // Report real time server metrics for Express-based node servers
+    .use(monitor())
+
     // Enabling the cors headers
     .options('*', cors())
     .use(cors())
@@ -39,7 +46,7 @@ const app = Bootstrap.getApp()
     }))
 
     // Serve static filles like images from the public folder
-    .use(express.static(`${__dirname}/public`))
+    .use(express.static(`${__dirname}/public`, { maxAge: 31557600000 }))
 
     // A favicon is a visual cue that client software, like browsers, use to identify a site
     .use(favicon(path.join(__dirname, 'public', 'favicon.ico')))

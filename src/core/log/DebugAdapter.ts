@@ -1,8 +1,20 @@
+/**
+ * core.log.DebugAdapter
+ * ------------------------------------------------
+ *
+ * This adapter uses the debug module to print all logs
+ * to the terminal.
+ *
+ * It also is used by a lot of our third-party-libs, so
+ * just change the scope in the .env file and you are
+ * able to see more debug logs.
+ */
+
 import * as Debug from 'debug';
-import { ILogAdapter } from './ILogAdapter';
+import { LogAdapter } from './Log';
 
 
-export class DebugAdapter implements ILogAdapter {
+export class DebugAdapter implements LogAdapter {
 
     private logger: Debug.IDebugger;
 
