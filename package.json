@@ -1,6 +1,6 @@
 {
   "name": "express-typescript-boilerplate",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "description": "A delightful way to building a RESTful API with NodeJs & TypeScript",
   "main": "src/index.ts",
   "scripts": {
@@ -64,7 +64,7 @@
     "@types/helmet": "0.0.35",
     "@types/jest": "^19.2.3",
     "@types/jsonwebtoken": "^7.2.0",
-    "@types/knex": "0.0.50",
+    "@types/knex": "0.0.52",
     "@types/lodash": "^4.14.64",
     "@types/morgan": "^1.7.32",
     "@types/reflect-metadata": "0.0.5",
@@ -86,7 +86,7 @@
     "express-status-monitor": "^0.1.9",
     "faker": "^4.1.0",
     "helmet": "^3.6.1",
-    "inversify": "^4.1.0",
+    "inversify": "^4.1.1",
     "inversify-express-utils": "^3.5.1",
     "jest": "^20.0.3",
     "jsonwebtoken": "^7.4.1",

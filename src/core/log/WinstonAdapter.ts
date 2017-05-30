@@ -1,9 +1,19 @@
+/**
+ * core.log.WinstonAdapter
+ * ------------------------------------------------
+ *
+ * This adapter uses the winston module to print all logs
+ * to the terminal.
+ *
+ * Remote logging can be added here to this adapter.
+ */
+
 import * as winston from 'winston';
 import { Environment } from '../Environment';
-import { ILogAdapter } from './ILogAdapter';
+import { LogAdapter } from './Log';
 
 
-export class WinstonAdapter implements ILogAdapter {
+export class WinstonAdapter implements LogAdapter {
 
     private logger: winston.LoggerInstance;
 

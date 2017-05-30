@@ -1,3 +1,8 @@
+/**
+ * core.database.ModelFactory
+ * ------------------------------------------------
+ */
+
 import { BluePrint } from './BluePrint';
 
 

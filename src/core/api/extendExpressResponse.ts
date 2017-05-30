@@ -1,12 +1,16 @@
+/**
+ * core.api.extendExpressResponse
+ * ------------------------------------------------
+ *
+ * We use this middleware to extend the express response object, so
+ * we can access the new functionality in our controllers. The extension
+ * should simplify common responses.
+ */
+
 import * as express from 'express';
 import { my } from 'my-express';
 
-/**
- * Extend Express Response
- * --------------------------------
- * We use this middleware to extend the express response object, so
- * we can access the new functionality in our controllers
- */
+
 export const extendExpressResponse = (req: my.Request, res: my.Response, next: express.NextFunction) => {
 
     /**

@@ -1,3 +1,10 @@
+/**
+ * auth0
+ * ----------------------------------------
+ *
+ * Type definitions for the auth0 responses.
+ */
+
 declare module 'auth0' {
 
     interface User {

@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { Knex } from '../../../src/core/Database';
+import { Knex } from '../../../src/config/Database';
 import { Tables } from '../../../src/constants/Tables';
 
 

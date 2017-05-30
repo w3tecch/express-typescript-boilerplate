@@ -1,4 +1,4 @@
-import { Bookshelf } from '../../core/Database';
+import { Bookshelf } from '../../config/Database';
 import { Tables } from '../../constants/Tables';
 
 /**
@@ -51,6 +51,9 @@ export class User extends Bookshelf.Model<User> {
     public get CreatedAt(): Date { return this.get('createdAt'); }
     public set CreatedAt(value: Date) { this.set('createdAt', value); }
 
+    /**
+     * Helper methods
+     */
     public fullName(): string {
         return this.FirstName + ' ' + this.LastName;
     }

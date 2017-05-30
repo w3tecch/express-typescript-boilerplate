@@ -106,7 +106,7 @@ describe('User', () => {
 
     test('DELETE    /v1/user/:id    Should delete the user', async () => {
         const res = await api('DELETE', `/api/v1/user/${createdId}`, auth);
-        res.expectStatusCode(204);
+        res.expectStatusCode(200);
     });
 
     /**

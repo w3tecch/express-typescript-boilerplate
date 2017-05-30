@@ -1,15 +1,19 @@
+/**
+ * core.api.RequestBody
+ * ------------------------------------------------
+ *
+ * This class is used to verify a valid payload an prepare
+ * it for further actions in the services. To validate we
+ * use the module 'class-validator'.
+ *
+ * If you want to skip missing properties just override the
+ * validate method in your extended request class.
+ */
+
 import { validate } from 'class-validator';
 import { ValidationException } from '../../api/exceptions/ValidationException';
 
-/**
- * RequestBody
- * --------------------------
- * This Class is used to verify a valid payload an prepare
- * it for further actions in the repository
- *
- * @export
- * @class RequestBody
- */
+
 export class RequestBody {
 
     /**
@@ -36,34 +40,35 @@ export class RequestBody {
         return;
     }
 
-    /**
-     * Returns a new body object
-     */
-    public toJSON(): any {
-        const json = {};
-        const keys = Object.keys(this);
-        keys.forEach((key) => {
-            if (this[key] !== undefined) {
-                json[key] = this[key];
-            }
-        });
-        return json;
-    }
+    // TODO check if needed
+    // /**
+    //  * Returns a new body object
+    //  */
+    // public toJSON(): any {
+    //     const json = {};
+    //     const keys = Object.keys(this);
+    //     keys.forEach((key) => {
+    //         if (this[key] !== undefined) {
+    //             json[key] = this[key];
+    //         }
+    //     });
+    //     return json;
+    // }
 
-    /**
-     * Sets the values direct into the body object
-     */
-    protected set(key: string, value: any): void {
-        this[key] = value;
-    }
+    // /**
+    //  * Sets the values direct into the body object
+    //  */
+    // protected set(key: string, value: any): void {
+    //     this[key] = value;
+    // }
 
-    /**
-     * Updates the property only if the the value is given
-     */
-    protected update(key: string, value: any): void {
-        if (value !== undefined) {
-            this[key] = value;
-        }
-    }
+    // /**
+    //  * Updates the property only if the the value is given
+    //  */
+    // protected update(key: string, value: any): void {
+    //     if (value !== undefined) {
+    //         this[key] = value;
+    //     }
+    // }
 
 }

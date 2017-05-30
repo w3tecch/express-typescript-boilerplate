@@ -1,3 +1,11 @@
+/**
+ * my-express
+ * ----------------------------------------
+ *
+ * This type definitions is used to extend the express interfaces, so
+ * we can add new values and functions to those objects.
+ */
+
 declare module 'my-express' {
 
     import * as express from 'express';

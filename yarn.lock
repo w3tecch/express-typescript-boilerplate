@@ -87,9 +87,9 @@
   dependencies:
     "@types/node" "*"
 
-"@types/knex@*", "@types/knex@0.0.50":
-  version "0.0.50"
-  resolved "https://registry.yarnpkg.com/@types/knex/-/knex-0.0.50.tgz#17b3a2247323c8025a1aed700dcfd3ffd7abf8d4"
+"@types/knex@*", "@types/knex@0.0.52":
+  version "0.0.52"
+  resolved "https://registry.yarnpkg.com/@types/knex/-/knex-0.0.52.tgz#bf23ba48891d92da4e292137b465c8b4430dc67f"
   dependencies:
     "@types/bluebird" "*"
     "@types/node" "*"
@@ -1807,9 +1807,9 @@ inversify-express-utils@^3.5.1:
   dependencies:
     express "^4.14.1"
 
-inversify@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/inversify/-/inversify-4.1.0.tgz#e2fef98ebd7c754846d419857f412432125b4ee9"
+inversify@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/inversify/-/inversify-4.1.1.tgz#a95edb34ae082bb1175336d51dcd5f011134c625"
 
 invert-kv@^1.0.0:
   version "1.0.0"

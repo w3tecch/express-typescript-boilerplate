@@ -1,3 +1,8 @@
+/**
+ * core.database.Factory
+ * ------------------------------------------------
+ */
+
 import * as faker from 'faker';
 import * as bookshelf from 'bookshelf';
 import { BluePrint } from './BluePrint';

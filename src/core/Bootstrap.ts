@@ -1,4 +1,14 @@
-import 'reflect-metadata';
+/**
+ * core.Bootstrap
+ * ------------------------------------
+ *
+ * This class helps us to create an express app very easy and moreover
+ * to give us a better possibility to extend the bootstrap process.
+ *
+ * We also setup the swagger documentation, api info route and the
+ * small monitor app.
+ */
+
 import * as express from 'express';
 import * as monitor from 'express-status-monitor';
 import { Container } from 'inversify';
@@ -10,13 +20,7 @@ import { Log } from './log';
 
 const log = new Log('core:Bootstrap');
 
-/**
- * This class helps us to create an express app very easy and moreover
- * to give us a better possibility to extend the bootstrap process
- *
- * @export
- * @class Bootstrap
- */
+
 export class Bootstrap {
 
     /**
