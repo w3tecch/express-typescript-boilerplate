@@ -10,4 +10,4 @@
 
 require('dotenv').config();
 import 'reflect-metadata';
-import '../config/Logger.ts';
+import '../config/Logger';
