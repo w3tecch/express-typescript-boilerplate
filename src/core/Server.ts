@@ -43,7 +43,7 @@ export class Server {
      */
     static onStartUp(app: express.Application): void {
         log.info(``);
-        log.info(`Aloha, your app is ready on ${app.get('host')}:${app.get('port')}`);
+        log.info(`Aloha, your app is ready on ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}`);
         log.info(`To shut it down, press <CTRL> + C at any time.`);
         log.info(``);
         log.debug('-------------------------------------------------------');

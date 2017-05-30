@@ -9,7 +9,13 @@
 import { interfaces } from 'inversify-express-utils';
 import { Container } from 'inversify';
 import { Types } from './constants/Types';
-import { Controller, Service, Repository } from './constants/Targets';
+import { Core, Model, Controller, Service, Repository } from './constants/Targets';
+
+/**
+ * Core Features
+ */
+import { events, EventEmitter } from './core/api/events';
+import { Log } from './core/log';
 
 /**
  * User Resource
@@ -17,8 +23,18 @@ import { Controller, Service, Repository } from './constants/Targets';
 import { UserController } from './api/controllers/UserController';
 import { UserService } from './api/services/UsersService';
 import { UserRepository } from './api/repositories/UserRepository';
+import { User } from './api/models/User';
+
 
 const container = new Container();
+
+container.bind<EventEmitter>(Types.Core).toConstantValue(events).whenTargetNamed(Core.Events);
+container.bind<typeof Log>(Types.Core).toConstantValue(Log).whenTargetNamed(Core.Log);
+
+/**
+ * Model
+ */
+container.bind<any>(Types.Model).toConstantValue(User).whenTargetNamed(Model.User);
 
 /**
  * Controllers
@@ -33,7 +49,7 @@ container.bind<UserService>(Types.Service).to(UserService).whenTargetNamed(Servi
 /**
  * Repositories
  */
-container.bind<UserRepository>(Types.Repository).toConstantValue(UserRepository).whenTargetNamed(Repository.UserRepository);
+container.bind<UserRepository>(Types.Repository).to(UserRepository).whenTargetNamed(Repository.UserRepository);
 
 
 export default container;

@@ -6,6 +6,15 @@
  * our controllers, services and repositories
  */
 
+export const Lib = {
+    Request: 'Request'
+};
+
+export const Core = {
+    Events: 'Events',
+    Log: 'Log'
+};
+
 export const Controller = {
     UserController: 'UserController'
 };
@@ -14,6 +23,14 @@ export const Service = {
     UserService: 'UserService'
 };
 
+export const Model = {
+    User: 'User'
+};
+
 export const Repository = {
     UserRepository: 'UserRepository'
+};
+
+export const Middleware = {
+    AuthenticateMiddleware: 'AuthenticateMiddleware'
 };

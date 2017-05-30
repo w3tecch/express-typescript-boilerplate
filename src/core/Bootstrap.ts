@@ -9,6 +9,7 @@
  * small monitor app.
  */
 
+import * as fs from 'fs';
 import * as express from 'express';
 import * as monitor from 'express-status-monitor';
 import { Container } from 'inversify';
@@ -16,6 +17,7 @@ import { InversifyExpressServer } from 'inversify-express-utils';
 import { Environment } from './Environment';
 import { my } from 'my-express';
 import { exceptionHandler, extendExpressResponse } from './api';
+import { events } from './api/events';
 import { Log } from './log';
 
 const log = new Log('core:Bootstrap');
@@ -153,6 +155,27 @@ export class Bootstrap {
             app.get(Environment.get<string>('APP_URL_PREFIX') + Environment.get<string>('MONITOR_ROUTE'), monitor().pageRoute);
         }
         return app;
+    }
+
+    /**
+     * Sets up the event listeners and registers them.
+     *
+     * @static
+     *
+     * @memberof Bootstrap
+     */
+    static setupEventListeners(): void {
+        const baseFolder = __dirname.indexOf('/src/') >= 0 ? '/src/' : '/dist/';
+        const basePath = __dirname.substring(0, __dirname.indexOf(baseFolder));
+        const path = `${basePath}${baseFolder}api/listeners`;
+        fs.readdir(path, (err: any, items: string[]): void => {
+            for (let i = 0; i < items.length; i++) {
+                const name = items[i].substring(0, items[i].length - 3);
+                const Listener = require(`${path}/${items[i]}`)[name];
+                const listener = new Listener();
+                events.on(Listener.Event, (...args) => listener.run(...args));
+            }
+        });
     }
 
     /**

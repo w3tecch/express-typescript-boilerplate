@@ -1,16 +1,17 @@
 import * as Bookshelf from 'bookshelf';
 import { injectable, inject, named } from 'inversify';
-import { Repository } from '../../constants/Targets';
+import { Core, Repository } from '../../constants/Targets';
 import { Types } from '../../constants/Types';
 import { Log } from '../../core/log';
+import { EventEmitter } from '../../core/api/events';
 import { Validate, Request } from '../../core/api/Validate';
 import { NotFoundException } from '../exceptions/NotFoundException';
 import { UserCreateRequest } from '../requests/UserCreateRequest';
 import { UserUpdateRequest } from '../requests/UserUpdateRequest';
 import { UserRepository } from '../repositories/UserRepository';
 import { User } from '../models/User';
+import { UserCreatedListener } from '../listeners/UserCreatedListener';
 
-const log = new Log('api:services:UserService');
 
 /**
  * UserService
@@ -19,15 +20,21 @@ const log = new Log('api:services:UserService');
  * database actions. Furthermore you should throw events here if
  * necessary.
  *
- * @export0'
+ * @export
  * @class UserService
  */
 @injectable()
 export class UserService {
 
+    public log: Log;
+
     constructor(
-        @inject(Types.Repository) @named(Repository.UserRepository) public userRepo: typeof UserRepository
-    ) { }
+        @inject(Types.Repository) @named(Repository.UserRepository) public userRepo: UserRepository,
+        @inject(Types.Core) @named(Core.Log) public Logger: typeof Log,
+        @inject(Types.Core) @named(Core.Events) public events: EventEmitter
+    ) {
+        this.log = new Logger('api:services:UserService');
+    }
 
     /**
      * This returns all user database objects
@@ -45,7 +52,7 @@ export class UserService {
     public async findOne(id: number): Promise<User> {
         const user = await this.userRepo.findOne(id);
         if (user === null) {
-            log.warn(`User with the id=${id} was not found!`);
+            this.log.warn(`User with the id=${id} was not found!`);
             throw new NotFoundException(id);
         }
         return user;
@@ -60,7 +67,7 @@ export class UserService {
     public async findByUserId(userId: string): Promise<User> {
         const user = await this.userRepo.findByUserId(userId);
         if (user === null) {
-            log.warn(`User with the userId=${userId} was not found!`);
+            this.log.warn(`User with the userId=${userId} was not found!`);
             throw new NotFoundException(userId);
         }
         return user;
@@ -77,6 +84,7 @@ export class UserService {
     public async create( @Request(UserCreateRequest) data: any): Promise<User> {
         // If the request body was valid we will create the user
         const user = await this.userRepo.create(data);
+        this.events.emit(UserCreatedListener.Event, user.toJSON());
         return user;
     }
 

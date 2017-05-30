@@ -1,4 +1,7 @@
 import * as Bookshelf from 'bookshelf';
+import { injectable, inject, named } from 'inversify';
+import { Types } from '../../constants/Types';
+import { Model } from '../../constants/Targets';
 import { User } from '../models/User';
 import { DatabaseException } from '../exceptions/DatabaseException';
 import { NotFoundException } from '../exceptions/NotFoundException';
@@ -9,7 +12,12 @@ import { NotFoundException } from '../exceptions/NotFoundException';
  * @export
  * @class UserRepository
  */
+@injectable()
 export class UserRepository {
+
+    constructor(
+        @inject(Types.Model) @named(Model.User) public UserModel: typeof User
+    ) { }
 
     /**
      * Retrieves all user data out of the database
@@ -19,8 +27,8 @@ export class UserRepository {
      *
      * @memberof UserRepository
      */
-    public static async findAll(): Promise<Bookshelf.Collection<User>> {
-        const users = await User.fetchAll();
+    public async findAll(): Promise<Bookshelf.Collection<User>> {
+        const users = await this.UserModel.fetchAll();
         return <Bookshelf.Collection<User>>users;
     }
 
@@ -31,8 +39,8 @@ export class UserRepository {
      * @param {number} id of the user
      * @returns {Promise<User>}
      */
-    public static async findOne(id: number): Promise<User> {
-        return User.fetchById(id);
+    public async findOne(id: number): Promise<User> {
+        return this.UserModel.fetchById(id);
     }
 
     /**
@@ -42,8 +50,8 @@ export class UserRepository {
      * @param {number} id of the user
      * @returns {Promise<User>}
      */
-    public static async findByUserId(userId: string): Promise<User> {
-        return User.fetchByUserId(userId);
+    public async findByUserId(userId: string): Promise<User> {
+        return this.UserModel.fetchByUserId(userId);
     }
 
     /**
@@ -54,11 +62,11 @@ export class UserRepository {
      * @param {*} data is the new user
      * @returns {Promise<User>}
      */
-    public static async create(data: any): Promise<User> {
-        const user = User.forge<User>(data);
+    public async create(data: any): Promise<User> {
+        const user = this.UserModel.forge<User>(data);
         try {
             const createdUser = await user.save();
-            return await User.fetchById(createdUser.id);
+            return await this.UserModel.fetchById(createdUser.id);
         } catch (error) {
             throw new DatabaseException('Could not create the user!', error);
         }
@@ -72,11 +80,11 @@ export class UserRepository {
      * @param {*} data
      * @returns {Promise<User>}
      */
-    public static async update(id: number, data: any): Promise<User> {
-        const user = User.forge<User>({ id: id });
+    public async update(id: number, data: any): Promise<User> {
+        const user = this.UserModel.forge<User>({ id: id });
         try {
             const updatedUser = await user.save(data, { patch: true });
-            return await User.fetchById(updatedUser.id);
+            return await this.UserModel.fetchById(updatedUser.id);
 
         } catch (error) {
             throw new DatabaseException('Could not update the user!', error);
@@ -91,8 +99,8 @@ export class UserRepository {
      * @param {number} id
      * @returns {Promise<void>}
      */
-    public static async destroy(id: number): Promise<void> {
-        let user = User.forge<User>({ id: id });
+    public async destroy(id: number): Promise<void> {
+        let user = this.UserModel.forge<User>({ id: id });
         try {
             user = await user.fetch({ require: true });
         } catch (error) {
