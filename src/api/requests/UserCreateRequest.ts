@@ -23,7 +23,6 @@ export class UserCreateRequest extends RequestBody {
     email: string;
 
     picture: string;
-
     auth0UserId: string;
 
 }

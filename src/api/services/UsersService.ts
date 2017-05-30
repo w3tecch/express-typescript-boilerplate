@@ -26,7 +26,7 @@ const log = new Log('api:services:UserService');
 export class UserService {
 
     constructor(
-        @inject(Types.UserRepository) @named(Repository.UserRepository) public userRepo: typeof UserRepository
+        @inject(Types.Repository) @named(Repository.UserRepository) public userRepo: typeof UserRepository
     ) { }
 
     /**

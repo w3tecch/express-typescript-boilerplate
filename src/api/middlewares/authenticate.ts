@@ -2,8 +2,6 @@ import { RequestAPI, RequiredUriUrl, Options, Request, RequestResponse } from 'r
 import { my } from 'my-express';
 import { Log } from '../../core/log';
 
-// const log = new Log('api:middleware.authenticate');
-
 /**
  * authenticate middleware
  * -----------------------

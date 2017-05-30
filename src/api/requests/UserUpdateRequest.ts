@@ -27,6 +27,10 @@ export class UserUpdateRequest extends RequestBody {
     @IsNotEmpty()
     auth0UserId: string;
 
+    /**
+     * We override the validate method so we can skip the missing
+     * properties.
+     */
     public async validate(): Promise<void> {
         return super.validate(true);
     }

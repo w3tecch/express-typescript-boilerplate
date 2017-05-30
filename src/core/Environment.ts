@@ -1,3 +1,11 @@
+/**
+ * core.Environment
+ * ------------------------------------
+ *
+ * Helps us to simplify 'process.env' and also provide
+ * the content of the package.json.
+ */
+
 export class Environment {
 
     static getNodeEnv(): string {

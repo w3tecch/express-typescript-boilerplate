@@ -1,3 +1,8 @@
+/**
+ * core.database.BluePrint
+ * ------------------------------------------------
+ */
+
 import * as bookshelf from 'bookshelf';
 
 

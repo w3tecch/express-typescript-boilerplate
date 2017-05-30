@@ -1,21 +1,42 @@
-import { ILogAdapter, ILogAdapterConstructor } from './ILogAdapter';
+/**
+ * core.log.Log
+ * ------------------------------------------------
+ *
+ * This is the main Logger Object. You can create a scope logger
+ * or directly use the static log methods.
+ *
+ * By Default it uses the debug-adapter, but you are able to change
+ * this in the start up process in the core/index.ts file.
+ */
+
 import { DebugAdapter } from './DebugAdapter';
 
+
+export interface LogAdapter {
+    debug(message: string, ...args: any[]): void;
+    info(message: string, ...args: any[]): void;
+    warn(message: string, ...args: any[]): void;
+    error(message: string, ...args: any[]): void;
+}
+
+export interface LogAdapterConstructor {
+    new (scope: string): LogAdapter;
+}
 
 export class Log {
 
     public static DEFAULT_SCOPE = 'app';
     public static DefaultAdapter = DebugAdapter;
 
-    private static Adapter: ILogAdapterConstructor;
-    private static Log: ILogAdapter;
+    private static Adapter: LogAdapterConstructor;
+    private static Log: LogAdapter;
 
-    private static Adapters: Map<string, ILogAdapterConstructor> = new Map();
+    private static Adapters: Map<string, LogAdapterConstructor> = new Map();
 
     private scope: string;
-    private adapter: ILogAdapter;
+    private adapter: LogAdapter;
 
-    public static addAdapter(key: string, adapter: ILogAdapterConstructor): void {
+    public static addAdapter(key: string, adapter: LogAdapterConstructor): void {
         Log.Adapters.set(key, adapter);
     }
 
@@ -53,7 +74,7 @@ export class Log {
         }
     }
 
-    private static getLog(): ILogAdapter {
+    private static getLog(): LogAdapter {
         if (!Log.Log) {
             Log.Log = new Log.Adapter(Log.DEFAULT_SCOPE);
         }
@@ -64,7 +85,7 @@ export class Log {
         this.scope = (scope) ? scope : Log.DEFAULT_SCOPE;
     }
 
-    public getAdapter(): ILogAdapter {
+    public getAdapter(): LogAdapter {
         return this.adapter;
     }
 

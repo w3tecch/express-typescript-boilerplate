@@ -1,3 +1,11 @@
+/**
+ * core.Server
+ * ------------------------------------
+ *
+ * The Server class is responsible to listen to http server
+ * events and to react to it.
+ */
+
 import * as http from 'http';
 import * as express from 'express';
 import { Log } from './log';
@@ -5,13 +13,7 @@ import { Environment } from './Environment';
 
 const log = new Log('core:Server');
 
-/**
- * The Server class is responsible to listen to http server
- * events and to react to it.
- *
- * @export
- * @class Server
- */
+
 export class Server {
 
     /**

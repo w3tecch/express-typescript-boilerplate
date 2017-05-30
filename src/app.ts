@@ -1,3 +1,11 @@
+/**
+ * APPLICATION CONFIGURATION
+ * ----------------------------------------
+ *
+ * This is the place to add any other express module and register
+ * all your custom middlewares and routes.
+ */
+
 import * as path from 'path';
 import * as cors from 'cors';
 import * as morgan from 'morgan';
@@ -11,14 +19,9 @@ import { Bootstrap } from './core/Bootstrap';
 import { Log } from './core/log';
 import container from './container';
 
-/**
- * APPLICATION CONFIGURATION
- * ----------------------------------------
- * This is the place to add any other express module and register
- * all your custom middlewares and routes
- */
+
 const app = Bootstrap.getApp()
-    // Report realtime server metrics for Express-based node servers
+    // Report real time server metrics for Express-based node servers
     .use(monitor())
 
     // Enabling the cors headers
