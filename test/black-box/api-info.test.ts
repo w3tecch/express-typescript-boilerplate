@@ -1,9 +1,9 @@
 import { api } from './lib/api';
 
 
-describe('Home', () => {
-    test('GET   /   Should return the api info as a json', async () => {
-        const res = await api('GET', '/api');
+describe('API-Info', () => {
+    test('GET   /v1/info   Should return the api info as a json', async () => {
+        const res = await api('GET', '/api/v1/info');
         res.expectJson();
         res.expectStatusCode(200);
 

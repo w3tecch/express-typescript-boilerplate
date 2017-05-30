@@ -31,45 +31,45 @@ describe('RequestBody', () => {
             }
         });
     });
-    describe('toJSON', () => {
-        test('Should return the set values as new json object', () => {
-            const r = new RequestBody({ a: 1 });
-            const o = r.toJSON();
-            expect(o.a).toBe(1);
-        });
-    });
-    describe('set', () => {
-        test('Should set value the key property', () => {
-            class TestBody extends RequestBody {
-                @IsNotEmpty() value: string;
+    // describe('toJSON', () => {
+    //     test('Should return the set values as new json object', () => {
+    //         const r = new RequestBody({ a: 1 });
+    //         const o = r.toJSON();
+    //         expect(o.a).toBe(1);
+    //     });
+    // });
+    // describe('set', () => {
+    //     test('Should set value the key property', () => {
+    //         class TestBody extends RequestBody {
+    //             @IsNotEmpty() value: string;
 
-                setValue(value: string): void {
-                    this.set('value', value);
-                }
-            }
-            const tb = new TestBody();
-            tb.setValue('yes');
-            expect(tb.value).toBe('yes');
-        });
-    });
-    describe('update', () => {
-        test('Should set value the key property', () => {
-            class TestBody extends RequestBody {
-                @IsNotEmpty() valueA: string;
-                @IsNotEmpty() valueB: string;
+    //             setValue(value: string): void {
+    //                 this.set('value', value);
+    //             }
+    //         }
+    //         const tb = new TestBody();
+    //         tb.setValue('yes');
+    //         expect(tb.value).toBe('yes');
+    //     });
+    // });
+    // describe('update', () => {
+    //     test('Should set value the key property', () => {
+    //         class TestBody extends RequestBody {
+    //             @IsNotEmpty() valueA: string;
+    //             @IsNotEmpty() valueB: string;
 
-                updateValue(key: string, value: any): void {
-                    this.update(key, value);
-                }
-            }
-            const tb = new TestBody({
-                valueA: 'no',
-                valueB: 'no'
-            });
-            tb.updateValue('valueA', 'yes');
-            tb.updateValue('valueB', undefined);
-            expect(tb.valueA).toBe('yes');
-            expect(tb.valueB).toBe('no');
-        });
-    });
+    //             updateValue(key: string, value: any): void {
+    //                 this.update(key, value);
+    //             }
+    //         }
+    //         const tb = new TestBody({
+    //             valueA: 'no',
+    //             valueB: 'no'
+    //         });
+    //         tb.updateValue('valueA', 'yes');
+    //         tb.updateValue('valueB', undefined);
+    //         expect(tb.valueA).toBe('yes');
+    //         expect(tb.valueB).toBe('no');
+    //     });
+    // });
 });
