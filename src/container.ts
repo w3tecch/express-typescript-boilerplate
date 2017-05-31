@@ -32,13 +32,13 @@ ioc.configure((container: Container) => {
     /**
      * Core
      */
-    container.bind<EventEmitter>(Types.Core).toConstantValue(events).whenTargetNamed(Core.Events);
-    container.bind<typeof Log>(Types.Core).toConstantValue(Log).whenTargetNamed(Core.Log);
+    // container.bind<EventEmitter>(Types.Core).toConstantValue(events).whenTargetNamed(Core.Events);
+    // container.bind<typeof Log>(Types.Core).toConstantValue(Log).whenTargetNamed(Core.Log);
 
     /**
      * Model
      */
-    container.bind<any>(Types.Model).toConstantValue(User).whenTargetNamed(Model.User);
+    // container.bind<any>(Types.Model).toConstantValue(User).whenTargetNamed(Model.User);
 
     /**
      * Controllers

@@ -16,6 +16,9 @@ import { events, EventEmitter } from './api/events';
 import { Log } from './log';
 
 
+import { User } from '../api/models/User';
+
+
 class IoC {
 
     public container: Container;
@@ -34,8 +37,8 @@ class IoC {
     }
 
     public async bindModules(): Promise<void> {
-        // this.bindCore();
-        // this.bindModels();
+        this.bindCore();
+        await this.bindModels();
         // this.bindControllers();
 
         this.container = this.customConfiguration(this.container);
@@ -43,6 +46,7 @@ class IoC {
 
     private bindCore(): void {
         this.container.bind<typeof Log>(Types.Core).toConstantValue(Log).whenTargetNamed(Core.Log);
+        this.container.bind<EventEmitter>(Types.Core).toConstantValue(events).whenTargetNamed(Core.Events);
     }
 
     private async bindControllers(): Promise<void> {
@@ -59,18 +63,22 @@ class IoC {
         });
     }
 
-    private bindModels(): void {
-        console.log('Models');
-        this.getFiles('/models', (files: string[]) => {
-            files.forEach((file: any) => {
-                const fileExport = require(`${file.path}/${file.fileName}`);
-                this.validateExport(fileExport[file.name]);
-                this.validateTarget(Model, file.name);
-                console.log(Model[file.name]);
-                this.container
-                    .bind<any>(Types.Model)
-                    .to(fileExport[file.name])
-                    .whenTargetNamed(Model[file.name]);
+    private bindModels(): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            console.log('Models');
+            this.getFiles('/models', (files: string[]) => {
+                files.forEach((file: any) => {
+                    const fileExport = require(`${file.path}/${file.fileName}`);
+                    this.validateExport(fileExport[file.name]);
+                    this.validateTarget(Model, file.name);
+
+                    this.container
+                        .bind<any>(Types.Model)
+                        .toConstantValue(fileExport[file.name])
+                        .whenTargetNamed(Model[file.name]);
+
+                    resolve();
+                });
             });
         });
     }
