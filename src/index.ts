@@ -16,9 +16,15 @@
  */
 
 import './core';
-import { Server } from './core/Server';
-import app from './app';
+import './app';
+import { bootstrap } from './core/Bootstrap';
 
+bootstrap.main();
+
+// import { Server } from './core/Server';
 // Start our app and listen for it
-const server = app.listen(app.get('port'));
-Server.use(server, app);
+// const server = app.listen(app.get('port'));
+// Server.use(server, app);
+
+// console.log('app', app);
+// app.then(Server.use);
