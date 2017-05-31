@@ -15,8 +15,7 @@ import { Core, Controller, Model, Service, Repository } from '../constants/Targe
 import { events, EventEmitter } from './api/events';
 import { Log } from './log';
 
-
-import { User } from '../api/models/User';
+const log = new Log('core:IoC');
 
 
 class IoC {
@@ -39,7 +38,9 @@ class IoC {
     public async bindModules(): Promise<void> {
         this.bindCore();
         await this.bindModels();
-        // this.bindControllers();
+        await this.bindRepositories();
+        await this.bindServices();
+        await this.bindControllers();
 
         this.container = this.customConfiguration(this.container);
     }
@@ -49,36 +50,68 @@ class IoC {
         this.container.bind<EventEmitter>(Types.Core).toConstantValue(events).whenTargetNamed(Core.Events);
     }
 
-    private async bindControllers(): Promise<void> {
-        this.getFiles('/controllers', (files: string[]) => {
-            files.forEach((file: any) => {
-                console.log(file);
-                const fileExport = require(`${file.path}/${file.fileName}`);
-                console.log(fileExport);
-                this.container
-                    .bind<interfaces.Controller>(Types.Controller)
-                    .to(fileExport[file.name])
-                    .whenTargetNamed(Controller[file.name]);
-            });
+    private bindModels(): Promise<void> {
+        return this.bindFiles('/models', Model, (name: any, value: any) => {
+            this.container
+                .bind<any>(Types.Model)
+                .toConstantValue(value)
+                .whenTargetNamed(name);
         });
     }
 
-    private bindModels(): Promise<void> {
+    private bindRepositories(): Promise<void> {
+        return this.bindFiles('/repositories', Repository, (name: any, value: any) => {
+            this.container
+                .bind<any>(Types.Repository)
+                .to(value)
+                .whenTargetNamed(name);
+        });
+    }
+
+    private bindServices(): Promise<void> {
+        return this.bindFiles('/services', Service, (name: any, value: any) => {
+            this.container
+                .bind<any>(Types.Service)
+                .to(value)
+                .whenTargetNamed(name);
+        });
+    }
+
+    private bindControllers(): Promise<void> {
+        return this.bindFiles('/controllers', Controller, (name: any, value: any) => {
+            this.container
+                .bind<any>(Types.Controller)
+                .to(value)
+                .whenTargetNamed(name);
+        });
+    }
+
+    private bindFiles(path: string, target: any, callback: (name: any, value: any) => void): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            console.log('Models');
-            this.getFiles('/models', (files: string[]) => {
+            this.getFiles(path, (files: string[]) => {
                 files.forEach((file: any) => {
-                    const fileExport = require(`${file.path}/${file.fileName}`);
-                    this.validateExport(fileExport[file.name]);
-                    this.validateTarget(Model, file.name);
-
-                    this.container
-                        .bind<any>(Types.Model)
-                        .toConstantValue(fileExport[file.name])
-                        .whenTargetNamed(Model[file.name]);
-
-                    resolve();
+                    let fileExport;
+                    try {
+                        fileExport = require(`${file.path}/${file.fileName}`);
+                    } catch (e) {
+                        log.warn(e.message);
+                        return;
+                    }
+                    if (fileExport === undefined) {
+                        log.warn(`Could not find the file ${file.name}!`);
+                        return;
+                    }
+                    if (fileExport[file.name] === undefined) {
+                        log.warn(`Name of the file '${file.name}' does not match to the class name!`);
+                        return;
+                    }
+                    if (target && target[file.name] === undefined) {
+                        log.warn(`Please define your '${file.name}' class is in the target constants.`);
+                        return;
+                    }
+                    callback(target[file.name], fileExport[file.name]);
                 });
+                resolve();
             });
         });
     }
@@ -92,7 +125,8 @@ class IoC {
     private getFiles(path: string, done: (files: any[]) => void): void {
         fs.readdir(this.getBasePath() + path, (err: any, files: string[]): void => {
             if (err) {
-                console.error(err);
+                log.warn(`Could not read the folder ${path}!`);
+                return;
             }
             done(files.map((fileName: string) => ({
                 path: this.getBasePath() + path,
@@ -104,18 +138,6 @@ class IoC {
 
     private parseName(fileName: string): string {
         return fileName.substring(0, fileName.length - 3);
-    }
-
-    private validateExport(value: any): void {
-        if (!value) {
-            throw new Error(`${value} is not defined in the target constants`);
-        }
-    }
-
-    private validateTarget(target: any, value: any): void {
-        if (target && target[value] === undefined) {
-            throw new Error(`${value} is not defined in the target constants`);
-        }
     }
 
 }

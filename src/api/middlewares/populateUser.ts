@@ -2,7 +2,7 @@ import * as request from 'request';
 import { Container } from 'inversify';
 import { my } from 'my-express';
 import { Log } from '../../core/log';
-import { UserService } from '../services/UsersService';
+import { UserService } from '../services/UserService';
 
 /**
  * populateUser middleware

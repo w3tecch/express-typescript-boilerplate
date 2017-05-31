@@ -10,7 +10,7 @@ import { ioc } from '../../core/IoC';
 import { Log } from '../../core/log';
 import { Types } from '../../constants/Types';
 import { Service } from '../../constants/Targets';
-import { UserService } from '../services/UsersService';
+import { UserService } from '../services/UserService';
 
 import { authenticate as Authenticate } from './authenticate';
 import { populateUser as PopulateUser } from './populateUser';

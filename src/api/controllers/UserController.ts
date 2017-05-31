@@ -1,7 +1,7 @@
 import { injectable, inject, named } from 'inversify';
 import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response, Request } from 'inversify-express-utils';
 import { my } from 'my-express';
-import { UserService } from '../services/UsersService';
+import { UserService } from '../services/UserService';
 import { Types } from '../../constants/Types';
 import { Service } from '../../constants/Targets';
 import { authenticate, populateUser } from '../middlewares';

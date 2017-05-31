@@ -20,6 +20,7 @@ import { Log } from './core/log';
 
 
 bootstrap.configureExpress((app: express.Application) => app
+
     // Report real time server metrics for Express-based node servers
     .use(monitor())
 

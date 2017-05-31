@@ -72,12 +72,7 @@ export class Bootstrap {
 
     private async bindIoC(): Promise<void> {
         log.info('Binding IoC modules...');
-        try {
-            await ioc.bindModules();
-        } catch (error) {
-            // TODO
-            console.error(error);
-        }
+        await ioc.bindModules();
     }
 
     private setupIoC(): void {
