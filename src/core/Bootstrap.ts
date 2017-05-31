@@ -20,8 +20,9 @@ import { my } from 'my-express';
 import { exceptionHandler, extendExpressResponse } from './api';
 import { events } from './api/events';
 import { Server } from './Server';
+import { ioc } from './IoC';
 import { Log } from './log';
-import container from '../container';
+import '../container';
 
 const log = new Log('core:Bootstrap');
 
@@ -50,11 +51,12 @@ export class Bootstrap {
         this.defineExpressApp();
     }
 
-    public main(): void {
+    public async main(): Promise<void> {
         log.info('Configuring app...');
         this.app = this.appConfiguration(this.app);
 
-        this.bindIoC();
+        await this.bindIoC();
+        this.setupIoC();
         this.startServer();
     }
 
@@ -68,9 +70,14 @@ export class Bootstrap {
         this.app.set('port', Bootstrap.normalizePort(Environment.get<string>('PORT') || Environment.get<string>('APP_PORT')));
     }
 
-    private bindIoC(): void {
-        log.info('Binding IoC...');
-        this.inversifyExpressServer = new InversifyExpressServer(container, undefined, {
+    private async bindIoC(): Promise<void> {
+        log.info('Binding IoC modules...');
+        await ioc.bindModules();
+    }
+
+    private setupIoC(): void {
+        log.info('Setting up IoC...');
+        this.inversifyExpressServer = new InversifyExpressServer(ioc.Container, undefined, {
             rootPath: Environment.get<string>('APP_URL_PREFIX')
         }, this.app);
         this.inversifyExpressServer.setConfig((a) => a.use(extendExpressResponse));

@@ -16,6 +16,7 @@ import { Core, Model, Controller, Service, Repository } from './constants/Target
  */
 import { events, EventEmitter } from './core/api/events';
 import { Log } from './core/log';
+import { ioc } from './core/IoC';
 
 /**
  * User Resource
@@ -25,31 +26,34 @@ import { UserService } from './api/services/UsersService';
 import { UserRepository } from './api/repositories/UserRepository';
 import { User } from './api/models/User';
 
+ioc.configure((container: Container) => {
+    console.log('--> CONTAINER should be last');
 
-const container = new Container();
+    /**
+     * Core
+     */
+    container.bind<EventEmitter>(Types.Core).toConstantValue(events).whenTargetNamed(Core.Events);
+    container.bind<typeof Log>(Types.Core).toConstantValue(Log).whenTargetNamed(Core.Log);
 
-container.bind<EventEmitter>(Types.Core).toConstantValue(events).whenTargetNamed(Core.Events);
-container.bind<typeof Log>(Types.Core).toConstantValue(Log).whenTargetNamed(Core.Log);
+    /**
+     * Model
+     */
+    container.bind<any>(Types.Model).toConstantValue(User).whenTargetNamed(Model.User);
 
-/**
- * Model
- */
-container.bind<any>(Types.Model).toConstantValue(User).whenTargetNamed(Model.User);
+    /**
+     * Controllers
+     */
+    container.bind<interfaces.Controller>(Types.Controller).to(UserController).whenTargetNamed(Controller.UserController);
 
-/**
- * Controllers
- */
-container.bind<interfaces.Controller>(Types.Controller).to(UserController).whenTargetNamed(Controller.UserController);
+    /**
+     * Services
+     */
+    container.bind<UserService>(Types.Service).to(UserService).whenTargetNamed(Service.UserService);
 
-/**
- * Services
- */
-container.bind<UserService>(Types.Service).to(UserService).whenTargetNamed(Service.UserService);
+    /**
+     * Repositories
+     */
+    container.bind<UserRepository>(Types.Repository).to(UserRepository).whenTargetNamed(Repository.UserRepository);
 
-/**
- * Repositories
- */
-container.bind<UserRepository>(Types.Repository).to(UserRepository).whenTargetNamed(Repository.UserRepository);
-
-
-export default container;
+    return container;
+});

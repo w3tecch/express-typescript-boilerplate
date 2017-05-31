@@ -6,7 +6,7 @@
  */
 
 import * as request from 'request';
-import container from '../../container';
+import { ioc } from '../../core/IoC';
 import { Log } from '../../core/log';
 import { Types } from '../../constants/Types';
 import { Service } from '../../constants/Targets';
@@ -19,4 +19,4 @@ const logPrefix = 'api:middleware';
 
 
 export const authenticate = Authenticate(request, new Log(`${logPrefix}:authenticate`));
-export const populateUser = PopulateUser(() => container.getNamed<UserService>(Types.Service, Service.UserService), new Log(`${logPrefix}:populateUser`));
+export const populateUser = PopulateUser(() => ioc.Container.getNamed<UserService>(Types.Service, Service.UserService), new Log(`${logPrefix}:populateUser`));
