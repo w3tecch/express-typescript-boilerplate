@@ -35,5 +35,6 @@ export const Repository = {
 };
 
 export const Middleware = {
-    AuthenticateMiddleware: 'AuthenticateMiddleware'
+    AuthenticateMiddleware: 'AuthenticateMiddleware',
+    PopulateUserMiddleware: 'PopulateUserMiddleware'
 };

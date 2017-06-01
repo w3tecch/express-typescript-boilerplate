@@ -3,15 +3,22 @@ import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response
 import { my } from 'my-express';
 import { UserService } from '../services/UserService';
 import { Types } from '../../constants/Types';
-import { Service } from '../../constants/Targets';
-import { authenticate, populateUser } from '../middlewares';
+import { Service, Middleware } from '../../constants/Targets';
+// import { authenticate, populateUser } from '../middlewares';
+import { AuthenticateMiddleware } from '../middlewares/AuthenticateMiddleware';
+import { PopulateUserMiddleware } from '../middlewares/PopulateUserMiddleware';
+import { ioc } from '../../core/IoC';
+
+// Get middlewares
+const authenticate = ioc.Container.getNamed<AuthenticateMiddleware>(Types.Middleware, Middleware.AuthenticateMiddleware);
+const populateUser = ioc.Container.getNamed<PopulateUserMiddleware>(Types.Middleware, Middleware.PopulateUserMiddleware);
 
 /**
  * UserController is in charge of the user resource and should
  * provide all crud actions.
  */
 @injectable()
-@Controller('/user', authenticate)
+@Controller('/user', authenticate.use)
 export class UserController {
 
     constructor( @inject(Types.Service) @named(Service.UserService) private userService: UserService) { }
@@ -28,7 +35,7 @@ export class UserController {
         return res.created(user.toJSON());
     }
 
-    @Get('/me', populateUser)
+    @Get('/me', populateUser.use)
     public async findMe( @Request() req: my.Request, @Response() res: my.Response): Promise<any> {
         return res.found(req.user);
     }

@@ -11,7 +11,7 @@ import * as glob from 'glob';
 import { interfaces } from 'inversify-express-utils';
 import { Container } from 'inversify';
 import { Types } from '../constants/Types';
-import { Core, Controller, Model, Service, Repository } from '../constants/Targets';
+import { Core, Controller, Model, Service, Repository, Middleware } from '../constants/Targets';
 
 import { events, EventEmitter } from './api/events';
 import { Log } from './log';
@@ -22,6 +22,7 @@ const log = new Log('core:IoC');
 class IoC {
 
     public container: Container;
+    public libConfiguration: (container: Container) => Container;
     public customConfiguration: (container: Container) => Container;
 
     constructor() {
@@ -36,13 +37,20 @@ class IoC {
         this.customConfiguration = configuration;
     }
 
+    public configureLib(configuration: (container: Container) => Container): void {
+        this.libConfiguration = configuration;
+    }
+
     public async bindModules(): Promise<void> {
         this.bindCore();
-        await this.bindControllers();
+
+        this.container = this.libConfiguration(this.container);
 
         await this.bindModels();
         await this.bindRepositories();
         await this.bindServices();
+        await this.bindMiddlewares();
+        await this.bindControllers();
 
         this.container = this.customConfiguration(this.container);
     }
@@ -74,6 +82,15 @@ class IoC {
         return this.bindFiles('/services/**/*Service.ts', Service, (name: any, value: any) => {
             this.container
                 .bind<any>(Types.Service)
+                .to(value)
+                .whenTargetNamed(name);
+        });
+    }
+
+    private bindMiddlewares(): Promise<void> {
+        return this.bindFiles('/middlewares/**/*Middleware.ts', Middleware, (name: any, value: any) => {
+            this.container
+                .bind<any>(Types.Middleware)
                 .to(value)
                 .whenTargetNamed(name);
         });
