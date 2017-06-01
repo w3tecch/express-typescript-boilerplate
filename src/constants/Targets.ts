@@ -16,7 +16,10 @@ export const Core = {
 };
 
 export const Controller = {
-    UserController: 'UserController'
+    UserController: 'UserController',
+    auth: {
+        AuthController: 'auth.AuthController'
+    }
 };
 
 export const Service = {

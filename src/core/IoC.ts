@@ -7,6 +7,7 @@
  */
 
 import * as fs from 'fs';
+import * as glob from 'glob';
 import { interfaces } from 'inversify-express-utils';
 import { Container } from 'inversify';
 import { Types } from '../constants/Types';
@@ -37,10 +38,11 @@ class IoC {
 
     public async bindModules(): Promise<void> {
         this.bindCore();
+        await this.bindControllers();
+
         await this.bindModels();
         await this.bindRepositories();
         await this.bindServices();
-        await this.bindControllers();
 
         this.container = this.customConfiguration(this.container);
     }
@@ -51,7 +53,7 @@ class IoC {
     }
 
     private bindModels(): Promise<void> {
-        return this.bindFiles('/models', Model, (name: any, value: any) => {
+        return this.bindFiles('/models/**/*.ts', Model, (name: any, value: any) => {
             this.container
                 .bind<any>(Types.Model)
                 .toConstantValue(value)
@@ -60,7 +62,7 @@ class IoC {
     }
 
     private bindRepositories(): Promise<void> {
-        return this.bindFiles('/repositories', Repository, (name: any, value: any) => {
+        return this.bindFiles('/repositories/**/*Repository.ts', Repository, (name: any, value: any) => {
             this.container
                 .bind<any>(Types.Repository)
                 .to(value)
@@ -69,7 +71,7 @@ class IoC {
     }
 
     private bindServices(): Promise<void> {
-        return this.bindFiles('/services', Service, (name: any, value: any) => {
+        return this.bindFiles('/services/**/*Service.ts', Service, (name: any, value: any) => {
             this.container
                 .bind<any>(Types.Service)
                 .to(value)
@@ -78,7 +80,7 @@ class IoC {
     }
 
     private bindControllers(): Promise<void> {
-        return this.bindFiles('/controllers', Controller, (name: any, value: any) => {
+        return this.bindFiles('/controllers/**/*Controller.ts', Controller, (name: any, value: any) => {
             this.container
                 .bind<any>(Types.Controller)
                 .to(value)
@@ -90,9 +92,10 @@ class IoC {
         return new Promise<void>((resolve, reject) => {
             this.getFiles(path, (files: string[]) => {
                 files.forEach((file: any) => {
-                    let fileExport;
+                    let fileExport, fileClass, fileTarget;
+                    const isRecursive = file.name.indexOf('.') > 0;
                     try {
-                        fileExport = require(`${file.path}/${file.fileName}`);
+                        fileExport = require(`${file.path}`);
                     } catch (e) {
                         log.warn(e.message);
                         return;
@@ -101,19 +104,48 @@ class IoC {
                         log.warn(`Could not find the file ${file.name}!`);
                         return;
                     }
-                    if (fileExport[file.name] === undefined) {
+                    if (isRecursive) {
+                        fileClass = this.getClassOfFileExport(file.name, fileExport);
+                        fileTarget = this.getTargetOfFile(file.name, target);
+
+                    } else {
+                        fileClass = fileExport[file.name];
+                        fileTarget = target && target[file.name];
+                    }
+
+                    if (fileClass === undefined) {
                         log.warn(`Name of the file '${file.name}' does not match to the class name!`);
                         return;
                     }
-                    if (target && target[file.name] === undefined) {
+
+                    if (fileTarget === undefined) {
                         log.warn(`Please define your '${file.name}' class is in the target constants.`);
                         return;
                     }
-                    callback(target[file.name], fileExport[file.name]);
+
+                    callback(fileTarget, fileClass);
                 });
                 resolve();
             });
         });
+    }
+
+    private getClassOfFileExport(name: string, fileExport: any): any {
+        const fileParts = name.split('.');
+        let fileClass = fileExport;
+        fileParts.forEach((part) => {
+            fileClass = fileClass[part];
+        });
+        return fileClass;
+    }
+
+    private getTargetOfFile(name: string, target: any): any {
+        const fileParts = name.split('.');
+        let fileTarget = target;
+        fileParts.forEach((part) => {
+            fileTarget = fileTarget[part];
+        });
+        return fileTarget;
     }
 
     private getBasePath(): string {
@@ -123,21 +155,31 @@ class IoC {
     }
 
     private getFiles(path: string, done: (files: any[]) => void): void {
-        fs.readdir(this.getBasePath() + path, (err: any, files: string[]): void => {
+        glob(this.getBasePath() + path, (err: any, files: string[]) => {
             if (err) {
                 log.warn(`Could not read the folder ${path}!`);
                 return;
             }
-            done(files.map((fileName: string) => ({
-                path: this.getBasePath() + path,
-                fileName: fileName,
-                name: this.parseName(fileName)
-            })));
+            done(files.map((p: string) => this.parseFilePath(p)));
         });
     }
 
     private parseName(fileName: string): string {
         return fileName.substring(0, fileName.length - 3);
+    }
+
+    private parseFilePath(path: string): any {
+        const filePath = path.substring(this.getBasePath().length + 1);
+        const dir = filePath.split('/')[0];
+        const file = filePath.substr(dir.length + 1);
+        const name = file.replace('/', '.').substring(0, file.length - 3);
+        return {
+            path: path,
+            filePath: filePath,
+            dir: dir,
+            file: file,
+            name: name
+        };
     }
 
 }

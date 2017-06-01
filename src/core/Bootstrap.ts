@@ -22,6 +22,10 @@ import { events } from './api/events';
 import { Server } from './Server';
 import { ioc } from './IoC';
 import { Log } from './log';
+import { ApiInfo } from './ApiInfo';
+import { SwaggerUI } from './SwaggerUI';
+import { ApiMonitor } from './ApiMonitor';
+
 import '../container';
 
 const log = new Log('core:Bootstrap');
@@ -53,10 +57,12 @@ export class Bootstrap {
 
     public async main(): Promise<void> {
         log.info('Configuring app...');
+        this.setupMonitor();
         this.app = this.appConfiguration(this.app);
 
         await this.bindIoC();
         this.setupIoC();
+        this.setupCoreTools();
         this.startServer();
     }
 
@@ -82,7 +88,25 @@ export class Bootstrap {
         }, this.app);
         this.inversifyExpressServer.setConfig((a) => a.use(extendExpressResponse));
         this.inversifyExpressServer.setErrorConfig((a) => a.use(exceptionHandler));
-        this.app = this.inversifyExpressServer.build();
+        try {
+            this.app = this.inversifyExpressServer.build();
+        } catch (e) {
+            log.error(e.message);
+            process.exit(1);
+        }
+    }
+
+    private setupMonitor(): void {
+        const apiMonitor = new ApiMonitor(this.app);
+        apiMonitor.setup();
+    }
+
+    private setupCoreTools(): void {
+        const apiInfo = new ApiInfo(this.app);
+        apiInfo.setup();
+
+        const swaggerUI = new SwaggerUI(this.app);
+        swaggerUI.setup();
     }
 
     private startServer(): void {
