@@ -14,15 +14,11 @@ import * as express from 'express';
 import * as favicon from 'serve-favicon';
 import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
-import * as monitor from 'express-status-monitor';
 import { bootstrap } from './core/Bootstrap';
 import { Log } from './core/log';
 
 
 bootstrap.configureExpress((app: express.Application) => app
-
-    // Report real time server metrics for Express-based node servers
-    .use(monitor())
 
     // Enabling the cors headers
     .options('*', cors())
