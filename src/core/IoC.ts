@@ -188,6 +188,10 @@ class IoC {
     }
 
     private getFiles(path: string, done: (files: any[]) => void): void {
+        const isTypeScript = __dirname.indexOf('/src/') >= 0;
+        if (!isTypeScript) {
+            path = path.replace('.ts', '.js');
+        }
         glob(this.getBasePath() + path, (err: any, files: string[]) => {
             if (err) {
                 log.warn(`Could not read the folder ${path}!`);
