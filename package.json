@@ -124,7 +124,8 @@
       "js",
       "json"
     ],
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "setupTestFrameworkScriptFile": "./test/unit/lib/setup.ts"
   },
   "license": "MIT"
 }
