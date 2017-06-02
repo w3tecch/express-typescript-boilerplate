@@ -1,6 +1,5 @@
 import * as express from 'express';
 import * as swaggerUi from 'swagger-ui-express';
-import { my } from 'my-express';
 import { Environment } from './Environment';
 
 
@@ -23,7 +22,6 @@ export class SwaggerUI {
             };
 
             // Initialize swagger-jsdoc -> returns validated swagger spec in json format
-            // const swaggerUi = require('swagger-ui-express');
             const route = Environment.get<string>('APP_URL_PREFIX') + Environment.get<string>('SWAGGER_ROUTE');
             this.app.use(route, swaggerUi.serve, swaggerUi.setup(swaggerFile));
         }

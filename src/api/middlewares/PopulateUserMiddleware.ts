@@ -1,5 +1,4 @@
 import { inject, named } from 'inversify';
-import * as Request from 'request';
 import { my } from 'my-express';
 import { Log } from '../../core/log';
 import { UserService } from '../services/UserService';

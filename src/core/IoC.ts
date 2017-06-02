@@ -6,10 +6,8 @@
  * will then be bonded to the express structure with their defined routes.
  */
 
-import * as fs from 'fs';
 import * as glob from 'glob';
 import { Container, decorate, injectable } from 'inversify';
-import { interfaces } from 'inversify-express-utils';
 import { Types } from '../constants/Types';
 import { Core, Controller, Model, Service, Repository, Middleware, Listener } from '../constants/Targets';
 
@@ -199,10 +197,6 @@ class IoC {
             }
             done(files.map((p: string) => this.parseFilePath(p)));
         });
-    }
-
-    private parseName(fileName: string): string {
-        return fileName.substring(0, fileName.length - 3);
     }
 
     private parseFilePath(path: string): any {

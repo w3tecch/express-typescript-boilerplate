@@ -9,16 +9,11 @@
  * small monitor app.
  */
 
-import * as fs from 'fs';
 import * as http from 'http';
 import * as express from 'express';
-import * as monitor from 'express-status-monitor';
-import { Container } from 'inversify';
 import { InversifyExpressServer } from 'inversify-express-utils';
 import { Environment } from './Environment';
-import { my } from 'my-express';
 import { exceptionHandler, extendExpressResponse } from './api';
-import { events } from './api/events';
 import { Server } from './Server';
 import { ioc } from './IoC';
 import { Log } from './log';

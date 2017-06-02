@@ -1,6 +1,5 @@
 import * as express from 'express';
 import * as monitor from 'express-status-monitor';
-import { my } from 'my-express';
 import { Environment } from './Environment';
 
 
