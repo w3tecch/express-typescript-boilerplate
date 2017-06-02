@@ -15,10 +15,12 @@
  * are in the 'container.ts' file.
  */
 
-import './core';
-import { Server } from './core/Server';
-import app from './app';
+// Defines the main dependencies and returns the
+// bootstrap instance to get the server started.
+import { bootstrap } from './core';
 
-// Start our app and listen for it
-const server = app.listen(app.get('port'));
-Server.use(server, app);
+// Custom express application configuration.
+import './app';
+
+// Launch the server with all his awesome features.
+bootstrap.main();

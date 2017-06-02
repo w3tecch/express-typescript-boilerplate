@@ -10,10 +10,13 @@ import { TYPE } from 'inversify-express-utils';
 
 
 const myType = {
-    // UserService: Symbol('UserService'),
-    // UserRepository: Symbol('UserRepository'),
+    Lib: Symbol('Lib'),
+    Core: Symbol('Core'),
+    Model: Symbol('Model'),
     Service: Symbol('Service'),
-    Repository: Symbol('Repository')
+    Listener: Symbol('Listener'),
+    Repository: Symbol('Repository'),
+    Middleware: Symbol('Middleware')
 };
 
 export const Types = Object.assign(TYPE, myType);

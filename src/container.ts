@@ -6,34 +6,29 @@
  * will then be bonded to the express structure with their defined routes.
  */
 
-import { interfaces } from 'inversify-express-utils';
-import { Container } from 'inversify';
+import { Container, decorate, injectable } from 'inversify';
+import { ioc } from './core/IoC';
 import { Types } from './constants/Types';
-import { Controller, Service, Repository } from './constants/Targets';
+import { Lib } from './constants/Targets';
 
-/**
- * User Resource
- */
-import { UserController } from './api/controllers/UserController';
-import { UserService } from './api/services/UsersService';
-import { UserRepository } from './api/repositories/UserRepository';
-
-const container = new Container();
-
-/**
- * Controllers
- */
-container.bind<interfaces.Controller>(Types.Controller).to(UserController).whenTargetNamed(Controller.UserController);
-
-/**
- * Services
- */
-container.bind<UserService>(Types.Service).to(UserService).whenTargetNamed(Service.UserService);
-
-/**
- * Repositories
- */
-container.bind<UserRepository>(Types.Repository).toConstantValue(UserRepository).whenTargetNamed(Repository.UserRepository);
+import * as request from 'request';
 
 
-export default container;
+ioc.configureLib((container: Container) => {
+
+    decorate(injectable(), request);
+
+    container
+        .bind<any>(Types.Lib)
+        .toConstantValue(request)
+        .whenTargetNamed(Lib.Request);
+
+    return container;
+});
+
+
+ioc.configure((container: Container) => {
+
+
+    return container;
+});

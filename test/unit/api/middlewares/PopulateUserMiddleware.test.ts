@@ -1,16 +1,13 @@
-import { populateUser as PopulateUser } from '../../../../src/api/middlewares/populateUser';
+import { PopulateUserMiddleware } from '../../../../src/api/middlewares/PopulateUserMiddleware';
+import { LogMock } from '../../lib/LogMock';
 
 
-describe('populateUser', () => {
+describe('PopulateUserMiddleware', () => {
 
-    let populateUser, userService, log, res, req, next;
+    let populateUser, userService, res, req, next;
     beforeEach(() => {
         process.env.AUTH0_HOST = 'test';
-        log = {
-            debug: jest.fn(),
-            warn: jest.fn()
-        };
-        populateUser = PopulateUser(() => userService, log);
+        populateUser = new PopulateUserMiddleware(LogMock, userService);
         res = {
             failed: jest.fn()
         };
@@ -22,10 +19,10 @@ describe('populateUser', () => {
 
     test('Should fail because no tokeninfo or user_id is given', () => {
         req.tokeninfo.user_id = undefined;
-        populateUser(req, res, next);
+        populateUser.use(req, res, next);
         expect(res.failed).toBeCalledWith(400, 'Missing token information!');
         req.tokeninfo = undefined;
-        populateUser(req, res, next);
+        populateUser.use(req, res, next);
         expect(res.failed).toBeCalledWith(400, 'Missing token information!');
     });
 
@@ -39,13 +36,12 @@ describe('populateUser', () => {
                         })
                     });
                     expect(req.user.id).toBe(88);
-                    expect(log.debug).toHaveBeenCalledWith(`populated user with the id=88 to the request object`);
                     expect(next).toBeCalled();
                 });
             })
         };
-        const pop = PopulateUser(() => userService, log);
-        pop(req, res, next);
+        const pop = new PopulateUserMiddleware(LogMock, userService);
+        pop.use(req, res, next);
     });
 
     test('Should behave...', () => {
@@ -54,13 +50,12 @@ describe('populateUser', () => {
                 return new Promise((resolve, reject) => {
                     reject(new Error('test'));
                     expect(req.user).toBeUndefined();
-                    expect(log.warn).toHaveBeenCalledWith(`could not populate user to the request object`);
                     expect(next).toBeCalled();
                 });
             })
         };
-        const pop = PopulateUser(() => userService, log);
-        pop(req, res, next);
+        const pop = new PopulateUserMiddleware(LogMock, userService);
+        pop.use(req, res, next);
     });
 
 });

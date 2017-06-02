@@ -70,6 +70,13 @@ All script are defined in the package.json file, but the most important ones are
 ### Console
 * To run your own created cli script enter `npm run console <command-name>`
 
+## IoC
+Our IoC automatically looks through the `controllers`, `listeners` , `middlewares`, `services`,
+`repositories` and `models` for files to bind to our IoC - Container. So you have nothing to do.
+
+However it is very important to keep the naming, because otherwise our IoC will not find your
+created file.
+
 ## Using the debugger in VS Code
 Just set a breakpoint and hit `F5` in your Visual Studio Code.
 
@@ -92,6 +99,7 @@ The route prefix is by default `/api/v1`, but you can change this in the .env.ex
 | **src/**                      | Source-Files |
 | **src/api/controllers/**      | REST-API - Controllers |
 | **src/api/exceptions/**       | Exceptions like 404 NotFound |
+| **src/api/listeners/**        | Event-Listeners |
 | **src/api/middlewares/**      | Express Middlewares like populateUser |
 | **src/api/models/**           | Bookshelf Models |
 | **src/api/repositories/**     | Repository Layer |
@@ -99,8 +107,9 @@ The route prefix is by default `/api/v1`, but you can change this in the .env.ex
 | **src/api/services/**         | Service Layer |
 | **src/api/** swagger.json     | Swagger Documentation |
 | **src/console/**              | Command Line scripts |
+| **src/config/**               | Configurations like database or logger |
 | **src/constants/**            | Global Constants |
-| **src/core/**                 | All the libraries configurations and our small framework |
+| **src/core/**                 | Our small framework |
 | **src/database/factories/**   | Model Factories to generate database records |
 | **src/database/migrations/**  | Migrations scripts to build up our database schema |
 | **src/database/seeds/**       | Seed scripts to fake some data into our database |

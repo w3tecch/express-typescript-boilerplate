@@ -8,7 +8,6 @@
  * the given validation classes.
  */
 
-import { ValidationException } from '../../api/exceptions/ValidationException';
 import { RequestBody } from './RequestBody';
 
 
