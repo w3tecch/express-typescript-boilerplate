@@ -1,10 +1,17 @@
+/**
+ * UserController
+ * ----------------------------------------
+ *
+ * This controller is in charge of the user resource and should
+ * provide all crud actions.
+ */
+
 import { inject, named } from 'inversify';
 import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response, Request } from 'inversify-express-utils';
 import { my } from 'my-express';
 import { UserService } from '../services/UserService';
 import { Types } from '../../constants/Types';
 import { Service, Middleware } from '../../constants/Targets';
-// import { authenticate, populateUser } from '../middlewares';
 import { AuthenticateMiddleware } from '../middlewares/AuthenticateMiddleware';
 import { PopulateUserMiddleware } from '../middlewares/PopulateUserMiddleware';
 import { ioc } from '../../core/IoC';
@@ -13,10 +20,7 @@ import { ioc } from '../../core/IoC';
 const authenticate = ioc.Container.getNamed<AuthenticateMiddleware>(Types.Middleware, Middleware.AuthenticateMiddleware);
 const populateUser = ioc.Container.getNamed<PopulateUserMiddleware>(Types.Middleware, Middleware.PopulateUserMiddleware);
 
-/**
- * UserController is in charge of the user resource and should
- * provide all crud actions.
- */
+
 @Controller('/user', authenticate.use)
 export class UserController {
 

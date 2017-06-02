@@ -1,3 +1,13 @@
+/**
+ * UserService
+ * ------------------------------
+ *
+ * This service is here to validate and call the repository layer for
+ * database actions. Furthermore you should throw events here if
+ * necessary.
+ *
+ */
+
 import * as Bookshelf from 'bookshelf';
 import { inject, named } from 'inversify';
 import { Core, Repository } from '../../constants/Targets';
@@ -13,16 +23,6 @@ import { User } from '../models/User';
 import { UserCreatedListener } from '../listeners/UserCreatedListener';
 
 
-/**
- * UserService
- * ------------------------------
- * This service is here to validate and call the repository layer for
- * database actions. Furthermore you should throw events here if
- * necessary.
- *
- * @export
- * @class UserService
- */
 export class UserService {
 
     public log: Log;

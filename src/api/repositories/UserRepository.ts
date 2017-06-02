@@ -1,3 +1,8 @@
+/**
+ * UserRepository
+ * ------------------------------
+ */
+
 import * as Bookshelf from 'bookshelf';
 import { inject, named } from 'inversify';
 import { Types } from '../../constants/Types';
@@ -6,12 +11,7 @@ import { User } from '../models/User';
 import { DatabaseException } from '../exceptions/DatabaseException';
 import { NotFoundException } from '../exceptions/NotFoundException';
 
-/**
- * UserRepository
- *
- * @export
- * @class UserRepository
- */
+
 export class UserRepository {
 
     constructor(

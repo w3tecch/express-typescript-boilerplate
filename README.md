@@ -92,6 +92,7 @@ The route prefix is by default `/api/v1`, but you can change this in the .env.ex
 | **src/**                      | Source-Files |
 | **src/api/controllers/**      | REST-API - Controllers |
 | **src/api/exceptions/**       | Exceptions like 404 NotFound |
+| **src/api/listeners/**        | Event-Listeners |
 | **src/api/middlewares/**      | Express Middlewares like populateUser |
 | **src/api/models/**           | Bookshelf Models |
 | **src/api/repositories/**     | Repository Layer |

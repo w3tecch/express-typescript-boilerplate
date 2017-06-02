@@ -1,13 +1,12 @@
+/**
+ * User Model
+ * ------------------------------
+ */
+
 import { Bookshelf } from '../../config/Database';
 import { Tables } from '../../constants/Tables';
 
-/**
- * User Model
- *
- * @export
- * @class User
- * @extends {Bookshelf.Model<User>}
- */
+
 export class User extends Bookshelf.Model<User> {
 
     public static async fetchById(id: number): Promise<User> {
