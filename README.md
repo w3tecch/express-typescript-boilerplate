@@ -70,6 +70,13 @@ All script are defined in the package.json file, but the most important ones are
 ### Console
 * To run your own created cli script enter `npm run console <command-name>`
 
+## IoC
+Our IoC automatically looks through the `controllers`, `listeners` , `middlewares`, `services`,
+`repositories` and `models` for files to bind to our IoC - Container. So you have nothing to do.
+
+However it is very important to keep the naming, because otherwise our IoC will not find your
+created file.
+
 ## Using the debugger in VS Code
 Just set a breakpoint and hit `F5` in your Visual Studio Code.
 
