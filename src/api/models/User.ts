@@ -1,4 +1,3 @@
-import { injectable } from 'inversify';
 import { Bookshelf } from '../../config/Database';
 import { Tables } from '../../constants/Tables';
 
@@ -9,7 +8,6 @@ import { Tables } from '../../constants/Tables';
  * @class User
  * @extends {Bookshelf.Model<User>}
  */
-@injectable()
 export class User extends Bookshelf.Model<User> {
 
     public static async fetchById(id: number): Promise<User> {

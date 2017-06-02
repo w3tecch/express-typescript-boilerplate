@@ -1,4 +1,4 @@
-import { injectable, inject, named } from 'inversify';
+import { inject, named } from 'inversify';
 import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response, Request } from 'inversify-express-utils';
 import { my } from 'my-express';
 import { UserService } from '../services/UserService';
@@ -17,7 +17,6 @@ const populateUser = ioc.Container.getNamed<PopulateUserMiddleware>(Types.Middle
  * UserController is in charge of the user resource and should
  * provide all crud actions.
  */
-@injectable()
 @Controller('/user', authenticate.use)
 export class UserController {
 

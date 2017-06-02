@@ -1,4 +1,4 @@
-import { injectable, inject, named } from 'inversify';
+import { inject, named } from 'inversify';
 import * as Request from 'request';
 import { my } from 'my-express';
 import { Log } from '../../core/log';
@@ -7,7 +7,6 @@ import { Types } from '../../constants/Types';
 import { Service, Core } from '../../constants/Targets';
 
 
-@injectable()
 export class PopulateUserMiddleware {
 
     public log: Log;

@@ -8,10 +8,10 @@
 
 import * as fs from 'fs';
 import * as glob from 'glob';
+import { Container, decorate, injectable } from 'inversify';
 import { interfaces } from 'inversify-express-utils';
-import { Container } from 'inversify';
 import { Types } from '../constants/Types';
-import { Core, Controller, Model, Service, Repository, Middleware } from '../constants/Targets';
+import { Core, Controller, Model, Service, Repository, Middleware, Listener } from '../constants/Targets';
 
 import { events, EventEmitter } from './api/events';
 import { Log } from './log';
@@ -49,6 +49,8 @@ class IoC {
         await this.bindModels();
         await this.bindRepositories();
         await this.bindServices();
+
+        await this.bindListeners();
         await this.bindMiddlewares();
         await this.bindControllers();
 
@@ -62,6 +64,7 @@ class IoC {
 
     private bindModels(): Promise<void> {
         return this.bindFiles('/models/**/*.ts', Model, (name: any, value: any) => {
+            decorate(injectable(), value);
             this.container
                 .bind<any>(Types.Model)
                 .toConstantValue(value)
@@ -70,39 +73,52 @@ class IoC {
     }
 
     private bindRepositories(): Promise<void> {
-        return this.bindFiles('/repositories/**/*Repository.ts', Repository, (name: any, value: any) => {
-            this.container
-                .bind<any>(Types.Repository)
-                .to(value)
-                .whenTargetNamed(name);
-        });
+        return this.bindFiles(
+            '/repositories/**/*Repository.ts',
+            Repository,
+            (name: any, value: any) => this.bindFile(Types.Repository, name, value));
     }
 
     private bindServices(): Promise<void> {
-        return this.bindFiles('/services/**/*Service.ts', Service, (name: any, value: any) => {
-            this.container
-                .bind<any>(Types.Service)
-                .to(value)
-                .whenTargetNamed(name);
-        });
+        return this.bindFiles(
+            '/services/**/*Service.ts',
+            Service,
+            (name: any, value: any) => this.bindFile(Types.Service, name, value));
     }
 
     private bindMiddlewares(): Promise<void> {
-        return this.bindFiles('/middlewares/**/*Middleware.ts', Middleware, (name: any, value: any) => {
-            this.container
-                .bind<any>(Types.Middleware)
-                .to(value)
-                .whenTargetNamed(name);
-        });
+        return this.bindFiles(
+            '/middlewares/**/*Middleware.ts',
+            Middleware,
+            (name: any, value: any) => this.bindFile(Types.Middleware, name, value));
     }
 
     private bindControllers(): Promise<void> {
-        return this.bindFiles('/controllers/**/*Controller.ts', Controller, (name: any, value: any) => {
+        return this.bindFiles(
+            '/controllers/**/*Controller.ts',
+            Controller,
+            (name: any, value: any) => this.bindFile(Types.Controller, name, value));
+    }
+
+    private bindListeners(): Promise<void> {
+        return this.bindFiles('/listeners/**/*Listener.ts', Listener, (name: any, value: any) => {
+            decorate(injectable(), value);
             this.container
-                .bind<any>(Types.Controller)
+                .bind<any>(Types.Listener)
                 .to(value)
                 .whenTargetNamed(name);
+
+            const listener = ioc.Container.getNamed<any>(Types.Listener, name);
+            events.on(value.Event, (...args) => listener.run(...args));
         });
+    }
+
+    private bindFile(type: any, name: string, value: any): void {
+        decorate(injectable(), value);
+        this.container
+            .bind<any>(type)
+            .to(value)
+            .whenTargetNamed(name);
     }
 
     private bindFiles(path: string, target: any, callback: (name: any, value: any) => void): Promise<void> {

@@ -4,24 +4,21 @@ import { Core } from '../../constants/Targets';
 import { events } from '../../core/api/events';
 import { Log } from '../../core/log/';
 
-const log = new Log('api:listeners:UserCreated');
 
+export class UserAuthenticatedListener {
 
-export class UserCreatedListener {
-
-    static Event = Symbol('UserCreated');
+    static Event = Symbol('UserAuthenticatedListener');
 
     public log: Log;
 
     constructor(
         @inject(Types.Core) @named(Core.Log) Logger: typeof Log
     ) {
-        this.log = new Logger('api:listeners:UserCreatedListener');
+        this.log = new Logger('api:listeners:UserAuthenticatedListener');
     }
 
     public async run(user: any): Promise<void> {
-        log.info('Receive event UserCreated', user);
+        this.log.info('Receive event UserAuthenticatedListener', user);
     }
 
 }
-

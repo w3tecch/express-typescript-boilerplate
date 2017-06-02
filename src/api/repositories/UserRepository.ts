@@ -1,5 +1,5 @@
 import * as Bookshelf from 'bookshelf';
-import { injectable, inject, named } from 'inversify';
+import { inject, named } from 'inversify';
 import { Types } from '../../constants/Types';
 import { Model } from '../../constants/Targets';
 import { User } from '../models/User';
@@ -12,7 +12,6 @@ import { NotFoundException } from '../exceptions/NotFoundException';
  * @export
  * @class UserRepository
  */
-@injectable()
 export class UserRepository {
 
     constructor(

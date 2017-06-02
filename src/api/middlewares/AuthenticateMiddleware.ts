@@ -1,12 +1,13 @@
-import { injectable, inject, named } from 'inversify';
+import { inject, named } from 'inversify';
 import * as Request from 'request';
 import { my } from 'my-express';
 import { Log } from '../../core/log';
 import { Types } from '../../constants/Types';
 import { Lib, Core } from '../../constants/Targets';
+import { events } from '../../core/api/events';
+import { UserAuthenticatedListener } from '../listeners/UserAuthenticatedListener';
 
 
-@injectable()
 export class AuthenticateMiddleware {
 
     public log: Log;
@@ -20,8 +21,6 @@ export class AuthenticateMiddleware {
 
 
     public use = (req: my.Request, res: my.Response, next: my.NextFunction): void => {
-        // console.log(this.request());
-        // return next();
         const token = this.getToken(req);
 
         if (token === null) {
@@ -43,6 +42,7 @@ export class AuthenticateMiddleware {
             if (!error && response.statusCode === 200) {
                 req.tokeninfo = JSON.parse(body);
                 this.log.info(`Retrieved user ${req.tokeninfo.email}`);
+                events.emit(UserAuthenticatedListener.Event, req.tokeninfo);
                 return next();
             }
 

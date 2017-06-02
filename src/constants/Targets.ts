@@ -15,17 +15,6 @@ export const Core = {
     Log: 'Log'
 };
 
-export const Controller = {
-    UserController: 'UserController',
-    auth: {
-        AuthController: 'auth.AuthController'
-    }
-};
-
-export const Service = {
-    UserService: 'UserService'
-};
-
 export const Model = {
     User: 'User'
 };
@@ -34,7 +23,23 @@ export const Repository = {
     UserRepository: 'UserRepository'
 };
 
+export const Service = {
+    UserService: 'UserService'
+};
+
 export const Middleware = {
     AuthenticateMiddleware: 'AuthenticateMiddleware',
     PopulateUserMiddleware: 'PopulateUserMiddleware'
+};
+
+export const Listener = {
+    UserAuthenticatedListener: 'UserAuthenticatedListener',
+    UserCreatedListener: 'UserCreatedListener'
+};
+
+export const Controller = {
+    UserController: 'UserController',
+    auth: {
+        AuthController: 'auth.AuthController'
+    }
 };

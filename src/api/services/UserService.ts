@@ -1,5 +1,5 @@
 import * as Bookshelf from 'bookshelf';
-import { injectable, inject, named } from 'inversify';
+import { inject, named } from 'inversify';
 import { Core, Repository } from '../../constants/Targets';
 import { Types } from '../../constants/Types';
 import { Log } from '../../core/log';
@@ -23,7 +23,6 @@ import { UserCreatedListener } from '../listeners/UserCreatedListener';
  * @export
  * @class UserService
  */
-@injectable()
 export class UserService {
 
     public log: Log;
