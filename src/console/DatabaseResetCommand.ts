@@ -1,4 +1,3 @@
-import '../core';
 import { Log } from '../core/log';
 
 import * as Knex from 'knex';
