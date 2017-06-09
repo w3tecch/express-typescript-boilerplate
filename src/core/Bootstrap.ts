@@ -46,7 +46,6 @@ export class Bootstrap {
     }
 
     constructor() {
-        log.info('Defining app...');
         this.defineExpressApp();
     }
 
@@ -66,6 +65,7 @@ export class Bootstrap {
     }
 
     private defineExpressApp(): void {
+        log.info('Defining app...');
         this.app = express();
         this.app.set('host', Environment.get('APP_HOST'));
         this.app.set('port', Bootstrap.normalizePort(Environment.get<string>('PORT') || Environment.get<string>('APP_PORT')));
