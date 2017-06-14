@@ -1,0 +1,18 @@
+import { Bookshelf } from '../../{{deepness}}config/Database';
+
+
+export class {{name.capitalize}} extends Bookshelf.Model<{{name.capitalize}}> {
+
+    public static async fetchById(id: number): Promise<{{name.capitalize}}> {
+        return await {{name.capitalize}}.where<{{name.capitalize}}>({ id: id }).fetch();
+    }
+
+    public get tableName(): string { return '{{tableName}}'; }
+    public get hasTimestamps(): boolean { return {{hasTimestamps}}; }
+    {{#each properties}}
+
+    public get {{name.capitalize}}(): {{type}} { return this.get('{{name.camelCase}}'); }
+    public set {{name.capitalize}}(value: {{type}}) { this.set('{{name.camelCase}}', value); }
+    {{/each}}
+
+}

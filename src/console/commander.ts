@@ -22,20 +22,32 @@ import * as commander from 'commander';
 
 import { DatabaseResetCommand } from './DatabaseResetCommand';
 import { MakeModelCommand } from './MakeModelCommand';
-
+import { MakeRepoCommand } from './MakeRepoCommand';
+import { MakeServiceCommand } from './MakeServiceCommand';
+import { MakeControllerCommand } from './MakeControllerCommand';
+import { MakeExceptionCommand } from './MakeExceptionCommand';
+import { MakeListenerCommand } from './MakeListenerCommand';
+import { MakeMiddlewareCommand } from './MakeMiddlewareCommand';
+import { MakeRequestCommand } from './MakeRequestCommand';
 
 /**
- * DatabaseResetCommand
+ * Add your new commands here
  */
-commander
-    .command(DatabaseResetCommand.command)
-    .description(DatabaseResetCommand.description)
-    .action(() => DatabaseResetCommand.action());
-
-commander
-    .command(MakeModelCommand.command)
-    .description(MakeModelCommand.description)
-    .action(() => MakeModelCommand.action());
+[
+    DatabaseResetCommand,
+    MakeModelCommand,
+    MakeRepoCommand,
+    MakeServiceCommand,
+    MakeControllerCommand,
+    MakeExceptionCommand,
+    MakeListenerCommand,
+    MakeMiddlewareCommand,
+    MakeRequestCommand
+].forEach((command) =>
+    commander
+        .command(command.command)
+        .description(command.description)
+        .action(() => command.action()));
 
 
 commander.parse(process.argv);

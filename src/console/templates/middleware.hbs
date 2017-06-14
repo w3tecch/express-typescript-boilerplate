@@ -1,0 +1,24 @@
+import { inject, named } from 'inversify';
+import { my } from 'my-express';
+import { Log } from '../../{{deepness}}core/log';
+import { Types } from '../../{{deepness}}constants/Types';
+import { Core } from '../../{{deepness}}constants/Targets';
+
+
+export class {{name.capitalize}}Middleware {
+
+    public log: Log;
+
+    constructor(
+        @inject(Types.Core) @named(Core.Log) Logger: typeof Log
+    ) {
+        this.log = new Logger('api:middleware:{{name.capitalize}}Middleware');
+    }
+
+
+    public use = (req: my.Request, res: my.Response, next: my.NextFunction): void => {
+        // TODO add your middleware logic here
+        next();
+    }
+
+}

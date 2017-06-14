@@ -4,15 +4,19 @@
  *
  */
 import * as _ from 'lodash';
-import * as path from 'path';
 import * as inquirer from 'inquirer';
 import { writeTemplate } from './lib/template';
+import { askFileName, buildFilePath, existsFile, parseName } from './lib/utils';
 
 
 export class MakeModelCommand {
 
     static command = 'make:model';
-    static description = 'Generate new bookshelf model';
+    static description = 'Generate new model';
+    static type = 'Model';
+    static suffix = '';
+    static template = 'model.hbs';
+    static target = 'api/models';
 
     static async action(): Promise<void> {
         try {
@@ -24,48 +28,25 @@ export class MakeModelCommand {
     }
 
     static async run(): Promise<void> {
-
-        const head = await MakeModelCommand.askHead();
-
-        let properties = [];
-        if (head.hasProperties) {
-            console.log('');
-            console.log(`Let\'s add some ${head.name} properties now.`);
-            console.log(`Enter an empty property name when done.`);
-            console.log('');
-            properties = await MakeModelCommand.askProperties();
-        }
-
-        console.log('');
-        const filePath = path.join(__dirname, '/../api/models', `${head.name}.ts`);
-        try {
-            await writeTemplate('model.tpl', filePath, {
-                name: head.name,
-                tableName: head.tableName,
-                hasTimestamps: head.hasTimestamps,
-                properties: properties
-            });
-
-        } catch (err) {
-            console.error(err);
-            process.exit(1);
-        }
-
-        console.log('Model created in: ' + filePath);
+        const fileName = await askFileName(MakeModelCommand.type, MakeModelCommand.suffix);
+        const context = await MakeModelCommand.askMetaData(fileName);
+        const properties = await MakeModelCommand.askProperties(context);
+        const filePath = buildFilePath(MakeModelCommand.target, context.name);
+        await existsFile(filePath, true);
+        await writeTemplate(MakeModelCommand.template, filePath, {
+            name: parseName(context.name, MakeModelCommand.suffix),
+            tableName: context.tableName,
+            hasTimestamps: context.hasTimestamps,
+            properties: properties,
+            deepness: context.deepness
+        });
         process.exit(0);
-
     }
 
-    static async askHead(): Promise<any> {
-        const headPrompt = inquirer.createPromptModule();
-        return await headPrompt([
+    static async askMetaData(context: any): Promise<any> {
+        const prompt = inquirer.createPromptModule();
+        const prompts = await prompt([
             {
-                type: 'input',
-                name: 'name',
-                message: 'Enter the model name:',
-                filter: (value: any) => _.capitalize(_.camelCase(value)),
-                validate: (value: any) => !!value
-            }, {
                 type: 'input',
                 name: 'tableName',
                 message: 'Add the database table:',
@@ -83,9 +64,19 @@ export class MakeModelCommand {
                 default: true
             }
         ]);
+        return _.assign(context, prompts);
     }
 
-    static async askProperties(): Promise<any[]> {
+    static async askProperties(head: any): Promise<any[]> {
+        if (!head.hasProperties) {
+            return;
+        }
+
+        console.log('');
+        console.log(`Let\'s add some ${head.name} properties now.`);
+        console.log(`Enter an empty property name when done.`);
+        console.log('');
+
         let askAgain = true;
         const fieldPrompt = inquirer.createPromptModule();
         const properties = [];
@@ -115,7 +106,7 @@ export class MakeModelCommand {
             ]);
             if (askAgain) {
                 console.log('');
-                property.getter = _.capitalize(property.name);
+                property.name = parseName(property.name, '');
                 properties.push(property);
             }
         }
