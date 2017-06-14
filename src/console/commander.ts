@@ -29,6 +29,7 @@ import { MakeExceptionCommand } from './MakeExceptionCommand';
 import { MakeListenerCommand } from './MakeListenerCommand';
 import { MakeMiddlewareCommand } from './MakeMiddlewareCommand';
 import { MakeRequestCommand } from './MakeRequestCommand';
+import { UpdateTargetsCommand } from './UpdateTargetsCommand';
 
 /**
  * Add your new commands here
@@ -42,7 +43,8 @@ import { MakeRequestCommand } from './MakeRequestCommand';
     MakeExceptionCommand,
     MakeListenerCommand,
     MakeMiddlewareCommand,
-    MakeRequestCommand
+    MakeRequestCommand,
+    UpdateTargetsCommand
 ].forEach((command) =>
     commander
         .command(command.command)

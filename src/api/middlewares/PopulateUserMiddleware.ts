@@ -3,7 +3,8 @@ import { my } from 'my-express';
 import { Log } from '../../core/log';
 import { UserService } from '../services/UserService';
 import { Types } from '../../constants/Types';
-import { Service, Core } from '../../constants/Targets';
+import { Core } from '../../core/Targets';
+import { Service } from '../../constants/Targets';
 
 
 export class PopulateUserMiddleware {

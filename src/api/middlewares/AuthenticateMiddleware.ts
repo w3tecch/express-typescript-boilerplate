@@ -3,7 +3,7 @@ import * as Request from 'request';
 import { my } from 'my-express';
 import { Log } from '../../core/log';
 import { Types } from '../../constants/Types';
-import { Lib, Core } from '../../constants/Targets';
+import { Core } from '../../core/Targets';
 import { events } from '../../core/api/events';
 import { UserAuthenticatedListener } from '../listeners/UserAuthenticatedListener';
 
@@ -14,7 +14,7 @@ export class AuthenticateMiddleware {
 
     constructor(
         @inject(Types.Core) @named(Core.Log) Logger: typeof Log,
-        @inject(Types.Lib) @named(Lib.Request) private request: typeof Request
+        @inject(Types.Lib) @named('request') private request: typeof Request
     ) {
         this.log = new Logger('api:middleware:AuthenticateMiddleware');
     }

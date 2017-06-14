@@ -10,7 +10,8 @@
 
 import * as Bookshelf from 'bookshelf';
 import { inject, named } from 'inversify';
-import { Core, Repository } from '../../constants/Targets';
+import { Core } from '../../core/Targets';
+import { Repository } from '../../constants/Targets';
 import { Types } from '../../constants/Types';
 import { Log } from '../../core/log';
 import { EventEmitter } from '../../core/api/events';

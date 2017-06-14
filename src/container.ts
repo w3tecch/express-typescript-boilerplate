@@ -9,7 +9,6 @@
 import { Container, decorate, injectable } from 'inversify';
 import { ioc } from './core/IoC';
 import { Types } from './constants/Types';
-import { Lib } from './constants/Targets';
 
 import * as request from 'request';
 
@@ -21,7 +20,7 @@ ioc.configureLib((container: Container) => {
     container
         .bind<any>(Types.Lib)
         .toConstantValue(request)
-        .whenTargetNamed(Lib.Request);
+        .whenTargetNamed('request');
 
     return container;
 });

@@ -4,8 +4,6 @@
  *
  * This is for our IOC so have a unique key/target for
  * our controllers, services and repositories
- *
- * This file is generated with the task `$ npm run console update:targets`.
  */
 
 export const Model = {
@@ -31,8 +29,8 @@ export const Listener = {
 };
 
 export const Controller = {
+    UserController: 'UserController',
     auth: {
-        AuthController: 'AuthController'
-    },
-    UserController: 'UserController'
+        AuthController: 'auth.AuthController'
+    }
 };
