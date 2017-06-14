@@ -19,14 +19,15 @@ export class DatabaseResetCommand {
 
     static async action(): Promise<void> {
         try {
-            await DatabaseResetCommand.run();
+            const command = new DatabaseResetCommand();
+            await command.run();
             process.exit(0);
         } catch (e) {
             process.exit(1);
         }
     }
 
-    static async run(): Promise<void> {
+    public async run(): Promise<void> {
         const knex = Knex(options);
 
         const migrate: any = knex.migrate;

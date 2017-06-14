@@ -45,11 +45,11 @@ import { UpdateTargetsCommand } from './UpdateTargetsCommand';
     MakeMiddlewareCommand,
     MakeRequestCommand,
     UpdateTargetsCommand
-].forEach((command) =>
+].forEach((Command) =>
     commander
-        .command(command.command)
-        .description(command.description)
-        .action(() => command.action()));
+        .command(Command.command)
+        .description(Command.description)
+        .action(() => Command.action()));
 
 
 commander.parse(process.argv);

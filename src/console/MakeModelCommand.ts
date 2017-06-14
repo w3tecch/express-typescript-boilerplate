@@ -20,17 +20,18 @@ export class MakeModelCommand {
 
     static async action(): Promise<void> {
         try {
-            await MakeModelCommand.run();
+            const command = new MakeModelCommand();
+            await command.run();
             process.exit(0);
         } catch (e) {
             process.exit(1);
         }
     }
 
-    static async run(): Promise<void> {
+    public async run(): Promise<void> {
         const fileName = await askFileName(MakeModelCommand.type, MakeModelCommand.suffix);
-        const context = await MakeModelCommand.askMetaData(fileName);
-        const properties = await MakeModelCommand.askProperties(context);
+        const context = await this.askMetaData(fileName);
+        const properties = await this.askProperties(context);
         const filePath = buildFilePath(MakeModelCommand.target, context.name);
         await existsFile(filePath, true);
         await writeTemplate(MakeModelCommand.template, filePath, {
@@ -43,7 +44,7 @@ export class MakeModelCommand {
         process.exit(0);
     }
 
-    static async askMetaData(context: any): Promise<any> {
+    private async askMetaData(context: any): Promise<any> {
         const prompt = inquirer.createPromptModule();
         const prompts = await prompt([
             {
@@ -67,7 +68,7 @@ export class MakeModelCommand {
         return _.assign(context, prompts);
     }
 
-    static async askProperties(head: any): Promise<any[]> {
+    private async askProperties(head: any): Promise<any[]> {
         if (!head.hasProperties) {
             return;
         }

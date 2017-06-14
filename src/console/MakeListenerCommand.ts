@@ -7,7 +7,7 @@ import { writeTemplate } from './lib/template';
 import { askFileName, buildFilePath, existsFile, parseName } from './lib/utils';
 
 
-export class MakeListenerCommand {
+export class MakeListenerCommand{
 
     static command = 'make:listener';
     static description = 'Generate new listener';
@@ -18,14 +18,15 @@ export class MakeListenerCommand {
 
     static async action(): Promise<void> {
         try {
-            await MakeListenerCommand.run();
+            const command = new MakeListenerCommand();
+            await command.run();
             process.exit(0);
         } catch (e) {
             process.exit(1);
         }
     }
 
-    static async run(): Promise<void> {
+    public async run(): Promise<void> {
         const context = await askFileName(MakeListenerCommand.type, MakeListenerCommand.suffix);
         const filePath = buildFilePath(MakeListenerCommand.target, context.name);
         await existsFile(filePath, true);

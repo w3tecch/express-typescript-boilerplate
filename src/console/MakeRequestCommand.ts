@@ -18,14 +18,15 @@ export class MakeRequestCommand {
 
     static async action(): Promise<void> {
         try {
-            await MakeRequestCommand.run();
+            const command = new MakeRequestCommand();
+            await command.run();
             process.exit(0);
         } catch (e) {
             process.exit(1);
         }
     }
 
-    static async run(): Promise<void> {
+    public async run(): Promise<void> {
         const context = await askFileName(MakeRequestCommand.type, MakeRequestCommand.suffix);
         const filePath = buildFilePath(MakeRequestCommand.target, context.name);
         await existsFile(filePath, true);

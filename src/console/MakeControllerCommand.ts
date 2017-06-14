@@ -18,14 +18,14 @@ export class MakeControllerCommand {
 
     static async action(): Promise<void> {
         try {
-            await MakeControllerCommand.run();
-            process.exit(0);
+            const command = new MakeControllerCommand();
+            await command.run();
         } catch (e) {
             process.exit(1);
         }
     }
 
-    static async run(): Promise<void> {
+    public async run(): Promise<void> {
         const context = await askFileName(MakeControllerCommand.type, MakeControllerCommand.suffix);
         const filePath = buildFilePath(MakeControllerCommand.target, context.name);
         await existsFile(filePath, true);

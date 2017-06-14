@@ -18,14 +18,15 @@ export class MakeExceptionCommand {
 
     static async action(): Promise<void> {
         try {
-            await MakeExceptionCommand.run();
+            const command = new MakeExceptionCommand();
+            await command.run();
             process.exit(0);
         } catch (e) {
             process.exit(1);
         }
     }
 
-    static async run(): Promise<void> {
+    public async run(): Promise<void> {
         const context = await askFileName(MakeExceptionCommand.type, MakeExceptionCommand.suffix);
         const filePath = buildFilePath(MakeExceptionCommand.target, context.name);
         await existsFile(filePath, true);

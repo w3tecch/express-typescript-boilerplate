@@ -18,14 +18,15 @@ export class MakeMiddlewareCommand {
 
     static async action(): Promise<void> {
         try {
-            await MakeMiddlewareCommand.run();
+            const command = new MakeMiddlewareCommand();
+            await command.run();
             process.exit(0);
         } catch (e) {
             process.exit(1);
         }
     }
 
-    static async run(): Promise<void> {
+    public async run(): Promise<void> {
         const context = await askFileName(MakeMiddlewareCommand.type, MakeMiddlewareCommand.suffix);
         const filePath = buildFilePath(MakeMiddlewareCommand.target, context.name);
         await existsFile(filePath, true);
