@@ -68,7 +68,30 @@ All script are defined in the package.json file, but the most important ones are
 * Run `npm run db:reset` to clean the database and migrate again
 
 ### Console
-* To run your own created cli script enter `npm run console <command-name>`
+* To run your own created cli script enter `npm run console <command-name>`.
+* This list all your configured commands `npm run console:help`.
+
+### Generating Commands
+All the templates are located in the `src/console/templates` folder.
+
+* `npm run console make:controller <file>` - Generates a controller with the crud routes.
+* `npm run console make:service <file>` - Generates a service with the crud logic.
+* `npm run console make:repo <file>` - Generates a repository with the crud operations.
+* `npm run console make:model <file>` - Generates a model with the props and configurations.
+* `npm run console make:middleware <file>` - Generates a basic middleware.
+* `npm run console make:request <file>` - Generates a basic request.
+* `npm run console make:listener <file>` - Generates a basic listener.
+* `npm run console make:exception <file>` - Generates a basic exception.
+* `npm run console update:targets <file>` - Reads all the api files and generate a new `constants/Targets.ts` file out of it.
+
+**Example**
+```
+$ npm run console make:controller auth/auth
+// -> creates the `api/controllers/auth/AuthController.ts
+
+$ npm run console make:model user
+// -> creates the `api/models/User.ts
+```
 
 ## IoC
 Our IoC automatically looks through the `controllers`, `listeners` , `middlewares`, `services`,
