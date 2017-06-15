@@ -7,7 +7,7 @@ import { writeTemplate } from './lib/template';
 import { askFileName, buildFilePath, existsFile, parseName } from './lib/utils';
 
 
-export class MakeListenerCommand{
+export class MakeListenerCommand {
 
     static command = 'make:listener';
     static description = 'Generate new listener';
