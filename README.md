@@ -27,7 +27,8 @@ A delightful way to building a RESTful API with NodeJs & TypeScript.
 * `fork` this repo
 * `clone` your fork
 * `yarn install` to install all dependencies and typings
-* Create new database. You will find the name in the .env files.
+* `cp .env.example .env` to copy the example .env file.
+* Create new database. You will find the name in the .env file.
 * `npm run db:migrate` to create the schema
 * `npm run db:seed` to insert some test data
 * `npm run serve` to start the dev server in another tab
