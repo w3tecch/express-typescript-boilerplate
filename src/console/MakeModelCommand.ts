@@ -6,7 +6,7 @@
 import * as _ from 'lodash';
 import * as inquirer from 'inquirer';
 import { writeTemplate } from './lib/template';
-import { askFileName, buildFilePath, existsFile, parseName } from './lib/utils';
+import { askFileName, buildFilePath, existsFile, parseName, updateTargets } from './lib/utils';
 
 
 export class MakeModelCommand {
@@ -41,6 +41,7 @@ export class MakeModelCommand {
             properties: properties,
             deepness: context.deepness
         });
+        await updateTargets();
         process.exit(0);
     }
 

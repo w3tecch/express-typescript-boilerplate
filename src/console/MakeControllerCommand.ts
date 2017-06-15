@@ -4,7 +4,7 @@
  *
  */
 import { writeTemplate } from './lib/template';
-import { askFileName, buildFilePath, existsFile, parseName } from './lib/utils';
+import { askFileName, buildFilePath, existsFile, parseName, updateTargets } from './lib/utils';
 
 
 export class MakeControllerCommand {
@@ -33,6 +33,7 @@ export class MakeControllerCommand {
             name: parseName(context.name, MakeControllerCommand.suffix),
             deepness: context.deepness
         });
+        await updateTargets();
         process.exit(0);
     }
 

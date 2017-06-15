@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as _ from 'lodash';
 import * as path from 'path';
 import * as inquirer from 'inquirer';
+import { UpdateTargetsCommand } from '../UpdateTargetsCommand';
 
 
 export const parseName = (name: string, suffix: string) => ({
@@ -71,4 +72,21 @@ export const existsFile = async (path: string, stop: boolean = false) => {
             reject();
         });
     });
+};
+
+export const updateTargets = async () => {
+    console.log('');
+    const prompt = inquirer.createPromptModule();
+    const answer = await prompt([
+        {
+            type: 'confirm',
+            name: 'generateTargets',
+            message: 'Update IoC targets?',
+            default: true
+        }
+    ]);
+    if (answer.generateTargets === true) {
+        const command = new UpdateTargetsCommand();
+        await command.run();
+    }
 };

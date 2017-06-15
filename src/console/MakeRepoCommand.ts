@@ -4,7 +4,7 @@
  *
  */
 import { writeTemplate } from './lib/template';
-import { askFileName, buildFilePath, existsFile, parseName } from './lib/utils';
+import { askFileName, buildFilePath, existsFile, parseName, updateTargets } from './lib/utils';
 
 
 export class MakeRepoCommand {
@@ -34,6 +34,7 @@ export class MakeRepoCommand {
             name: parseName(context.name, MakeRepoCommand.suffix),
             deepness: context.deepness
         });
+        await updateTargets();
         process.exit(0);
     }
 

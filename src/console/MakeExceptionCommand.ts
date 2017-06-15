@@ -4,7 +4,7 @@
  *
  */
 import { writeTemplate } from './lib/template';
-import { askFileName, buildFilePath, existsFile, parseName } from './lib/utils';
+import { askFileName, buildFilePath, existsFile, parseName, updateTargets } from './lib/utils';
 
 
 export class MakeExceptionCommand {
@@ -34,6 +34,7 @@ export class MakeExceptionCommand {
             name: parseName(context.name, MakeExceptionCommand.suffix),
             deepness: context.deepness
         });
+        await updateTargets();
         process.exit(0);
     }
 
