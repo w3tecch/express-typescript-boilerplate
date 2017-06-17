@@ -29,6 +29,7 @@ export class MakeResourceCommand extends AbstractMakeCommand {
     public async run(): Promise<void> {
         this.context = await askFileName(this.context, this.type, this.suffix);
         this.context.properties = await askProperties(this.context.name);
+        this.context.hasProperties = true;
 
         // Get commands
         this.makeModelCommand = new MakeModelCommand(this.context);
