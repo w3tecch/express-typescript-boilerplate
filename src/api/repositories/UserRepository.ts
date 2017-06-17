@@ -27,8 +27,7 @@ export class UserRepository {
      * @memberof UserRepository
      */
     public async findAll(): Promise<Bookshelf.Collection<User>> {
-        const users = await this.UserModel.fetchAll();
-        return <Bookshelf.Collection<User>>users;
+        return this.UserModel.fetchAll<User>();
     }
 
     /**
