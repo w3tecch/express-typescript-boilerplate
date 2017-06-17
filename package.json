@@ -22,7 +22,7 @@
     "db:reset": "npm run console db:reset",
     "console": "./node_modules/.bin/ts-node ./src/console/commander.ts",
     "console:help": "./node_modules/.bin/ts-node ./src/console/commander.ts --help",
-    "serve": "./node_modules/.bin/nodemon --watch 'src/**/*.ts' --watch 'src/**/*.json'",
+    "serve": "./node_modules/.bin/nodemon --watch 'src/**/*.ts' --watch 'src/**/*.json' --watch '.env'",
     "start": "node dist/index.js"
   },
   "repository": "git+ssh://git@github.com/w3tec/express-typescript-boilerplate.git",
