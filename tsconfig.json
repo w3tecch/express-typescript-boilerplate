@@ -2,8 +2,6 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es6",
-        "noImplicitAny": false,
-        "noUnusedLocals": true,
         "moduleResolution": "node",
         "sourceMap": true,
         "baseUrl": ".",
@@ -11,6 +9,9 @@
         "alwaysStrict": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
+        "importHelpers": true,
+        "strict": true,
+        "noImplicitAny": false,
         "paths": {
             "*": [
                 "node_modules/*",

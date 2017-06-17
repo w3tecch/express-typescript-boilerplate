@@ -50,7 +50,7 @@ export const Validate = (target: any, propertyName: string, descriptor: TypedPro
                 await request.validate();
             }
         }
-        return method.apply(this, args);
+        return method && method.apply(this, args);
     };
 
     return descriptor;
