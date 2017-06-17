@@ -39,7 +39,7 @@ export class Factory {
     }
 
     private getNameOfModel(Model: typeof bookshelf.Model): string {
-        return (new Model()).constructor.name;
+        return new Model().constructor.name;
     }
 
 }
