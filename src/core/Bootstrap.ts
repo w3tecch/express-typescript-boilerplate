@@ -9,6 +9,8 @@
  * small monitor app.
  */
 
+import '../container';
+
 import * as http from 'http';
 import * as express from 'express';
 import { InversifyExpressServer } from 'inversify-express-utils';
@@ -20,8 +22,6 @@ import { Log } from './log';
 import { ApiInfo } from './ApiInfo';
 import { SwaggerUI } from './SwaggerUI';
 import { ApiMonitor } from './ApiMonitor';
-
-import '../container';
 
 const log = new Log('core:Bootstrap');
 

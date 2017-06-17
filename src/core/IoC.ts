@@ -11,7 +11,6 @@ import { Container, decorate, injectable } from 'inversify';
 import { Types } from '../constants/Types';
 import { Core } from './Targets';
 import { Controller, Model, Service, Repository, Middleware, Listener } from '../constants/Targets';
-
 import { events, EventEmitter } from './api/events';
 import { Log } from './log';
 
