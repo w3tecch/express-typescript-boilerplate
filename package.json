@@ -20,8 +20,9 @@
     "db:migrate:rollback": "./node_modules/.bin/knex migrate:rollback",
     "db:seed": "./node_modules/.bin/knex seed:run",
     "db:reset": "npm run console db:reset",
-    "console": "./node_modules/.bin/ts-node ./src/console/commander.ts",
-    "console:help": "./node_modules/.bin/ts-node ./src/console/commander.ts --help",
+    "console": "./node_modules/.bin/ts-node --fast ./src/console/commander.ts",
+    "console:dev": "./node_modules/.bin/ts-node ./src/console/commander.ts",
+    "console:help": "./node_modules/.bin/ts-node --fast ./src/console/commander.ts --help",
     "serve": "./node_modules/.bin/nodemon --watch 'src/**/*.ts' --watch 'src/**/*.json'",
     "start": "node dist/index.js"
   },
