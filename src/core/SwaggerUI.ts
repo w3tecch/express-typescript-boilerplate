@@ -8,7 +8,7 @@ export class SwaggerUI {
     constructor(public app: express.Application) { }
 
     public setup(): void {
-        if (Environment.get<string>('SWAGGER_ENABLED') === 'true') {
+        if (Environment.get<string>('SWAGGER_ENABLED').toLowerCase() === 'true') {
             const baseFolder = __dirname.indexOf('/src/') >= 0 ? '/src/' : '/dist/';
             const basePath = __dirname.substring(0, __dirname.indexOf(baseFolder));
             const swaggerFile = require(basePath + Environment.get<string>('SWAGGER_FILE'));

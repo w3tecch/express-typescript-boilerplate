@@ -50,13 +50,13 @@ export class Server {
         log.debug(`Environment  : ${Environment.getNodeEnv()}`);
         log.debug(`Version      : ${Environment.getPkg().version}`);
         log.debug(``);
-        if (Environment.get<string>('API_INFO_ENABLED') === 'true') {
+        if (Environment.get<string>('API_INFO_ENABLED').toLowerCase() === 'true') {
             log.debug(`API Info     : ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}${process.env.API_INFO_ROUTE}`);
         }
-        if (Environment.get<string>('SWAGGER_ENABLED') === 'true') {
+        if (Environment.get<string>('SWAGGER_ENABLED').toLowerCase() === 'true') {
             log.debug(`Swagger      : ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}${process.env.SWAGGER_ROUTE}`);
         }
-        if (Environment.get<string>('MONITOR_ENABLED') === 'true') {
+        if (Environment.get<string>('MONITOR_ENABLED').toLowerCase() === 'true') {
             log.debug(`Monitor      : ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}${process.env.MONITOR_ROUTE}`);
         }
         log.debug('-------------------------------------------------------');
