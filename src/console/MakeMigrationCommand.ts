@@ -36,7 +36,15 @@ export class MakeMigrationCommand extends AbstractMakeCommand {
                 }
             ]);
             this.context = Object.assign(this.context || {}, prompts);
-            this.context.name = `${(new Date()).getTime()}_${prompts.name}`;
+            const today = new Date();
+            const formatNumber = (n: number) => (n < 10) ? `0${n}` : `${n}`;
+            let timestamp = `${today.getFullYear()}`;
+            timestamp += `${formatNumber(today.getMonth())}`;
+            timestamp += `${formatNumber(today.getDay())}`;
+            timestamp += `${formatNumber(today.getHours())}`;
+            timestamp += `${formatNumber(today.getMinutes())}`;
+            timestamp += `${formatNumber(today.getSeconds())}`;
+            this.context.name = `${timestamp}_${prompts.name}`;
         }
 
     }
