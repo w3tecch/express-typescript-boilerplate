@@ -22,7 +22,7 @@ export class MakeMigrationCommand extends AbstractMakeCommand {
 
     public async run(): Promise<void> {
         if (this.context && this.context.tableName) {
-            this.context.name = `${(new Date()).getTime()}_create_table_${_.snakeCase(this.context.tableName)}`;
+            this.context.name = `${(new Date()).getTime()}_create_${_.snakeCase(this.context.tableName)}_table`;
 
         } else {
             const prompt = inquirer.createPromptModule();
@@ -42,19 +42,3 @@ export class MakeMigrationCommand extends AbstractMakeCommand {
     }
 
 }
-
-
-// const prompt = inquirer.createPromptModule();
-// const prompts = await prompt([
-//     {
-//         type: 'input',
-//         name: 'name',
-//         message: `Enter the name of the ${MakeMigrationCommand.type}:`,
-//         filter: v => _.snakeCase(v),
-//         validate: inputIsRequired
-//     }
-// ]);
-// const name = `${(new Date()).getTime()}_${prompts.name}`;
-// const filePath = buildFilePath(MakeMigrationCommand.target, name);
-// await existsFile(filePath, true);
-// await writeTemplate(MakeMigrationCommand.template, filePath, {});
