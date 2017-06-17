@@ -44,8 +44,14 @@ export class {{name.capitalize}}Service {
         const {{name.camelCase}} = await this.findOne(id);
 
         // Set new values
+        {{#if hasProperties}}
+        {{#each properties}}
+        {{../name.camelCase}}.{{name.capitalize}} = new{{../name.capitalize}}.{{name.camelCase}};
+        {{/each}}
+        {{else}}
         // TODO asign correct values
         // {{name.camelCase}}.Value = new{{name.capitalize}}.value;
+        {{/if}}
 
         // Update {{name.camelCase}} record
         const updated{{name.capitalize}} = await this.{{name.camelCase}}Repo.update(id, {{name.camelCase}}.toJSON());
