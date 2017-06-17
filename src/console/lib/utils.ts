@@ -28,21 +28,25 @@ export const buildFilePath = (targetPath: string, fileName: string) => path.join
 
 export const inputIsRequired = (value: any) => !!value;
 
-export const askFileName = async (name: string, suffix: string) => {
-    const prompt = inquirer.createPromptModule();
-    const prompts = await prompt([
-        {
-            type: 'input',
-            name: 'name',
-            message: `Enter the name of the ${name}:`,
-            filter: filterInput(suffix),
-            validate: inputIsRequired
-        }
-    ]);
-    const amount = prompts.name.split('/').length - 1;
-    prompts.deepness = '';
-    _.times(amount, () => prompts.deepness += '../');
-    return prompts;
+export const askFileName = async (context: any, name: string, suffix: string) => {
+    if (context === undefined || context.name === undefined) {
+        const prompt = inquirer.createPromptModule();
+        context = await prompt([
+            {
+                type: 'input',
+                name: 'name',
+                message: `Enter the name of the ${name}:`,
+                filter: filterInput(suffix),
+                validate: inputIsRequired
+            }
+        ]);
+        const amount = context.name.split('/').length - 1;
+        context.deepness = '';
+        _.times(amount, () => context.deepness += '../');
+    } else {
+        context.name = filterInput(suffix)(context.name);
+    }
+    return context;
 };
 
 export const existsFile = async (path: string, stop: boolean = false) => {
@@ -51,11 +55,12 @@ export const existsFile = async (path: string, stop: boolean = false) => {
         fs.exists(path, async (exists) => {
 
             if (exists) {
+                const fileName = path.split('/src/')[1];
                 const answer = await prompt([
                     {
                         type: 'confirm',
                         name: 'override',
-                        message: 'Override file?',
+                        message: `Override "src/${fileName}"?`,
                         default: true
                     }
                 ]);
@@ -89,4 +94,47 @@ export const updateTargets = async () => {
         const command = new UpdateTargetsCommand();
         await command.run();
     }
+};
+
+export const askProperties = async (name: string): Promise<any[]> => {
+    console.log('');
+    console.log(`Let\'s add some ${name} properties now.`);
+    console.log(`Enter an empty property name when done.`);
+    console.log('');
+
+    let askAgain = true;
+    const fieldPrompt = inquirer.createPromptModule();
+    const properties = [];
+    while (askAgain) {
+        const property = await fieldPrompt([
+            {
+                type: 'input',
+                name: 'name',
+                message: 'Property name:',
+                filter: (value: any) => _.camelCase(value)
+            }, {
+                type: 'list',
+                name: 'type',
+                message: 'Property type:',
+                when: (res: any) => {
+                    askAgain = !!res['name'];
+                    return askAgain;
+                },
+                choices: [
+                    'string',
+                    'number',
+                    'boolean',
+                    'Date',
+                    'any'
+                ]
+            }
+        ]);
+        if (askAgain) {
+            console.log('');
+            property.name = parseName(property.name, '');
+            properties.push(property);
+        }
+    }
+    console.log('');
+    return properties;
 };

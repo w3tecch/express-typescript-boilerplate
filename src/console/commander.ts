@@ -20,8 +20,9 @@ import '../config/Logger';
 
 import * as commander from 'commander';
 
-import { DatabaseResetCommand } from './DatabaseResetCommand';
-import { MakeModelCommand } from './MakeModelCommand';
+// import { DatabaseResetCommand } from './DatabaseResetCommand';
+// import { MakeResourceCommand } from './MakeResourceCommand';
+// import { MakeModelCommand } from './MakeModelCommand';
 import { MakeRepoCommand } from './MakeRepoCommand';
 import { MakeServiceCommand } from './MakeServiceCommand';
 import { MakeControllerCommand } from './MakeControllerCommand';
@@ -29,16 +30,17 @@ import { MakeExceptionCommand } from './MakeExceptionCommand';
 import { MakeListenerCommand } from './MakeListenerCommand';
 import { MakeMiddlewareCommand } from './MakeMiddlewareCommand';
 import { MakeRequestCommand } from './MakeRequestCommand';
-import { UpdateTargetsCommand } from './UpdateTargetsCommand';
-import { MakeMigrationCommand } from './MakeMigrationCommand';
+// import { UpdateTargetsCommand } from './UpdateTargetsCommand';
+// import { MakeMigrationCommand } from './MakeMigrationCommand';
 import { MakeSeedCommand } from './MakeSeedCommand';
 
 /**
  * Add your new commands here
  */
 [
-    DatabaseResetCommand,
-    MakeModelCommand,
+    // DatabaseResetCommand,
+    // MakeResourceCommand,
+    // MakeModelCommand,
     MakeRepoCommand,
     MakeServiceCommand,
     MakeControllerCommand,
@@ -46,14 +48,14 @@ import { MakeSeedCommand } from './MakeSeedCommand';
     MakeListenerCommand,
     MakeMiddlewareCommand,
     MakeRequestCommand,
-    MakeMigrationCommand,
-    MakeSeedCommand,
-    UpdateTargetsCommand
+    // MakeMigrationCommand,
+    MakeSeedCommand
+    // UpdateTargetsCommand
 ].forEach((Command) =>
     commander
         .command(Command.command)
         .description(Command.description)
-        .action(() => Command.action()));
+        .action(() => Command.action(new Command())));
 
 
 commander.parse(process.argv);

@@ -3,39 +3,17 @@
  * -------------------------------------
  *
  */
-import { writeTemplate } from './lib/template';
-import { askFileName, buildFilePath, existsFile, parseName, updateTargets } from './lib/utils';
+import { AbstractMakeCommand } from './AbstractMakeCommand';
 
 
-export class MakeListenerCommand {
+export class MakeListenerCommand extends AbstractMakeCommand {
 
     static command = 'make:listener';
     static description = 'Generate new listener';
-    static type = 'Listener';
-    static suffix = 'Listener';
-    static template = 'listener.hbs';
-    static target = 'api/listeners';
 
-    static async action(): Promise<void> {
-        try {
-            const command = new MakeListenerCommand();
-            await command.run();
-            process.exit(0);
-        } catch (e) {
-            process.exit(1);
-        }
-    }
-
-    public async run(): Promise<void> {
-        const context = await askFileName(MakeListenerCommand.type, MakeListenerCommand.suffix);
-        const filePath = buildFilePath(MakeListenerCommand.target, context.name);
-        await existsFile(filePath, true);
-        await writeTemplate(MakeListenerCommand.template, filePath, {
-            name: parseName(context.name, MakeListenerCommand.suffix),
-            deepness: context.deepness
-        });
-        await updateTargets();
-        process.exit(0);
-    }
+    public type = 'Listener';
+    public suffix = 'Listener';
+    public template = 'listener.hbs';
+    public target = 'api/listeners';
 
 }
