@@ -121,11 +121,20 @@ export const askProperties = async (name: string): Promise<any[]> => {
                     return askAgain;
                 },
                 choices: [
-                    'string',
-                    'number',
-                    'boolean',
-                    'Date',
-                    'any'
+                    'varchar (string)',
+                    'text (string)',
+
+                    'boolean (boolean)',
+
+                    'integer (number)',
+                    'bigInteger (number)',
+                    'float (number)',
+                    'decimal (number)',
+                    'binary (number)',
+
+                    'date (Date)',
+                    'time (Date)',
+                    'dateTime (Date)'
                 ]
             }
         ]);
@@ -135,6 +144,14 @@ export const askProperties = async (name: string): Promise<any[]> => {
             properties.push(property);
         }
     }
+    properties.map(p => {
+        const types = p.type.replace(/[()]/g, '').split(' ');
+        p.type = {
+            script: types[1],
+            database: types[0]
+        };
+        return p;
+    });
     console.log('');
     return properties;
 };

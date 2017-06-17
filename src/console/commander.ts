@@ -22,7 +22,7 @@ import * as commander from 'commander';
 
 // import { DatabaseResetCommand } from './DatabaseResetCommand';
 // import { MakeResourceCommand } from './MakeResourceCommand';
-// import { MakeModelCommand } from './MakeModelCommand';
+import { MakeModelCommand } from './MakeModelCommand';
 import { MakeRepoCommand } from './MakeRepoCommand';
 import { MakeServiceCommand } from './MakeServiceCommand';
 import { MakeControllerCommand } from './MakeControllerCommand';
@@ -31,7 +31,7 @@ import { MakeListenerCommand } from './MakeListenerCommand';
 import { MakeMiddlewareCommand } from './MakeMiddlewareCommand';
 import { MakeRequestCommand } from './MakeRequestCommand';
 // import { UpdateTargetsCommand } from './UpdateTargetsCommand';
-// import { MakeMigrationCommand } from './MakeMigrationCommand';
+import { MakeMigrationCommand } from './MakeMigrationCommand';
 import { MakeSeedCommand } from './MakeSeedCommand';
 
 /**
@@ -40,7 +40,7 @@ import { MakeSeedCommand } from './MakeSeedCommand';
 [
     // DatabaseResetCommand,
     // MakeResourceCommand,
-    // MakeModelCommand,
+    MakeModelCommand,
     MakeRepoCommand,
     MakeServiceCommand,
     MakeControllerCommand,
@@ -48,7 +48,7 @@ import { MakeSeedCommand } from './MakeSeedCommand';
     MakeListenerCommand,
     MakeMiddlewareCommand,
     MakeRequestCommand,
-    // MakeMigrationCommand,
+    MakeMigrationCommand,
     MakeSeedCommand
     // UpdateTargetsCommand
 ].forEach((Command) =>

@@ -11,8 +11,8 @@ export class {{name.capitalize}} extends Bookshelf.Model<{{name.capitalize}}> {
     public get hasTimestamps(): boolean { return {{hasTimestamps}}; }
     {{#each properties}}
 
-    public get {{name.capitalize}}(): {{type}} { return this.get('{{name.camelCase}}'); }
-    public set {{name.capitalize}}(value: {{type}}) { this.set('{{name.camelCase}}', value); }
+    public get {{name.capitalize}}(): {{type.script}} { return this.get('{{name.camelCase}}'); }
+    public set {{name.capitalize}}(value: {{type.script}}) { this.set('{{name.camelCase}}', value); }
     {{/each}}
 
 }
