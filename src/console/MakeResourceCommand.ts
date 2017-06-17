@@ -3,55 +3,51 @@
  * -------------------------------------
  *
  */
-import { askFileName, askProperties, updateTargets } from './lib/utils';
+import { askFileName, askProperties } from './lib/utils';
+import { AbstractMakeCommand } from './AbstractMakeCommand';
 import { MakeModelCommand } from './MakeModelCommand';
 import { MakeRepoCommand } from './MakeRepoCommand';
 import { MakeServiceCommand } from './MakeServiceCommand';
 import { MakeControllerCommand } from './MakeControllerCommand';
 
 
-export class MakeResourceCommand {
+export class MakeResourceCommand extends AbstractMakeCommand {
 
     static command = 'make:resource';
     static description = 'Generate a new resource';
-    static type = 'Resource';
-    static suffix = '';
 
+    public type = 'Resource';
+    public suffix = '';
     public context: any;
     public properties: any[];
 
-    static async action(): Promise<void> {
-        try {
-            const command = new MakeResourceCommand();
-            await command.run();
-            await updateTargets();
-        } catch (e) {
-            process.exit(1);
-        }
-    }
+    public makeModelCommand: AbstractMakeCommand;
+    public makeRepoCommand: AbstractMakeCommand;
+    public makeServiceCommand: AbstractMakeCommand;
+    public makeControllerCommand: AbstractMakeCommand;
 
     public async run(): Promise<void> {
-        this.context = await askFileName(this.context, MakeResourceCommand.type, MakeResourceCommand.suffix);
+        this.context = await askFileName(this.context, this.type, this.suffix);
         this.context.properties = await askProperties(this.context.name);
 
         // Get commands
-        const makeModelCommand = new MakeModelCommand(this.context);
-        const makeRepoCommand = new MakeRepoCommand(this.context);
-        const makeServiceCommand = new MakeServiceCommand(this.context);
-        const makeControllerCommand = new MakeControllerCommand(this.context);
+        this.makeModelCommand = new MakeModelCommand(this.context);
+        this.makeRepoCommand = new MakeRepoCommand(this.context);
+        this.makeServiceCommand = new MakeServiceCommand(this.context);
+        this.makeControllerCommand = new MakeControllerCommand(this.context);
 
         // Ask all meta-data
-        await makeModelCommand.run();
-        await makeRepoCommand.run();
-        await makeServiceCommand.run();
-        await makeControllerCommand.run();
+        await this.makeModelCommand.run();
+        await this.makeRepoCommand.run();
+        await this.makeServiceCommand.run();
+        await this.makeControllerCommand.run();
+    }
 
-        // Write all files
-        await makeModelCommand.write();
-        await makeRepoCommand.write();
-        await makeServiceCommand.write();
-        await makeControllerCommand.write();
-
+    public async write(): Promise<void> {
+        await this.makeModelCommand.write();
+        await this.makeRepoCommand.write();
+        await this.makeServiceCommand.write();
+        await this.makeControllerCommand.write();
     }
 
 }
