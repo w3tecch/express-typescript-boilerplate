@@ -22,7 +22,7 @@ export class MakeMigrationCommand extends AbstractMakeCommand {
 
     public async run(): Promise<void> {
         if (this.context && this.context.tableName) {
-            this.context.name = `${(new Date()).getTime()}_create_${_.snakeCase(this.context.tableName)}_table`;
+            this.context.name = `${this.getTimestamp()}_create_${_.snakeCase(this.context.tableName)}_table`;
 
         } else {
             const prompt = inquirer.createPromptModule();
@@ -36,17 +36,21 @@ export class MakeMigrationCommand extends AbstractMakeCommand {
                 }
             ]);
             this.context = Object.assign(this.context || {}, prompts);
-            const today = new Date();
-            const formatNumber = (n: number) => (n < 10) ? `0${n}` : `${n}`;
-            let timestamp = `${today.getFullYear()}`;
-            timestamp += `${formatNumber(today.getMonth())}`;
-            timestamp += `${formatNumber(today.getDay())}`;
-            timestamp += `${formatNumber(today.getHours())}`;
-            timestamp += `${formatNumber(today.getMinutes())}`;
-            timestamp += `${formatNumber(today.getSeconds())}`;
-            this.context.name = `${timestamp}_${prompts.name}`;
+            this.context.name = `${this.getTimestamp()}_${prompts.name}`;
         }
 
+    }
+
+    private getTimestamp(): string {
+        const today = new Date();
+        const formatNumber = (n: number) => (n < 10) ? `0${n}` : `${n}`;
+        let timestamp = `${today.getFullYear()}`;
+        timestamp += `${formatNumber(today.getMonth())}`;
+        timestamp += `${formatNumber(today.getDay())}`;
+        timestamp += `${formatNumber(today.getHours())}`;
+        timestamp += `${formatNumber(today.getMinutes())}`;
+        timestamp += `${formatNumber(today.getSeconds())}`;
+        return timestamp;
     }
 
 }

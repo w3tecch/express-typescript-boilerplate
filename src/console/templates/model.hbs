@@ -9,6 +9,9 @@ export class {{name.capitalize}} extends Bookshelf.Model<{{name.capitalize}}> {
 
     public get tableName(): string { return '{{tableName}}'; }
     public get hasTimestamps(): boolean { return {{hasTimestamps}}; }
+
+    public get Id(): number { return this.get('id'); }
+    public set Id(value: number) { this.set('id', value); }
     {{#each properties}}
 
     public get {{name.capitalize}}(): {{type.script}} { return this.get('{{name.camelCase}}'); }

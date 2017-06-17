@@ -26,7 +26,7 @@ export class MakeModelCommand extends AbstractMakeCommand {
         const metaData = await this.askMetaData(this.context);
         this.context = Object.assign(this.context || {}, metaData);
 
-        if (this.context.hasProperties && this.context.properties.length === 0) {
+        if (this.context.hasProperties && !this.context.properties) {
             this.context.properties = await askProperties(this.context);
         }
 
