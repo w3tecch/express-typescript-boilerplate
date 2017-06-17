@@ -27,6 +27,7 @@ export class AbstractMakeCommand {
     public context: any;
     public type = 'Type';
     public suffix = 'Suffix';
+    public prefix = '';
     public template = 'template.hbs';
     public target = 'api/target/path';
     public updateTargets = true;
@@ -49,7 +50,7 @@ export class AbstractMakeCommand {
     }
 
     public async run(): Promise<void> {
-        this.context = await askFileName(this.context, this.type, this.suffix);
+        this.context = await askFileName(this.context, this.type, this.suffix, this.prefix);
     }
 
     public async write(): Promise<void> {

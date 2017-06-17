@@ -17,18 +17,18 @@ export const removeSufix = (suffix: string, value: string) => {
     return value.replace(suffix, '');
 };
 
-export const filterInput = (suffix: string) => (value: string) => {
+export const filterInput = (suffix: string, prefix = '') => (value: string) => {
     let vs = value.split('/');
     vs = vs.map((v) => _.camelCase(v));
     vs[vs.length - 1] = _.capitalize(vs[vs.length - 1]);
-    return (vs.join('/')) + suffix;
+    return (vs.join('/')) + prefix + suffix;
 };
 
 export const buildFilePath = (targetPath: string, fileName: string) => path.join(__dirname, `/../../${targetPath}`, `${fileName}.ts`);
 
 export const inputIsRequired = (value: any) => !!value;
 
-export const askFileName = async (context: any, name: string, suffix: string) => {
+export const askFileName = async (context: any, name: string, suffix: string, prefix: string) => {
     if (context === undefined || context.name === undefined) {
         const prompt = inquirer.createPromptModule();
         context = await prompt([
@@ -36,7 +36,7 @@ export const askFileName = async (context: any, name: string, suffix: string) =>
                 type: 'input',
                 name: 'name',
                 message: `Enter the name of the ${name}:`,
-                filter: filterInput(suffix),
+                filter: filterInput(suffix, prefix),
                 validate: inputIsRequired
             }
         ]);
@@ -44,7 +44,7 @@ export const askFileName = async (context: any, name: string, suffix: string) =>
         context.deepness = '';
         _.times(amount, () => context.deepness += '../');
     } else {
-        context.name = filterInput(suffix)(context.name);
+        context.name = filterInput(suffix, prefix)(context.name);
     }
     return context;
 };
