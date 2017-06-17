@@ -20,7 +20,7 @@ import '../config/Logger';
 
 import * as commander from 'commander';
 
-// import { DatabaseResetCommand } from './DatabaseResetCommand';
+import { DatabaseResetCommand } from './DatabaseResetCommand';
 // import { MakeResourceCommand } from './MakeResourceCommand';
 import { MakeModelCommand } from './MakeModelCommand';
 import { MakeRepoCommand } from './MakeRepoCommand';
@@ -30,7 +30,7 @@ import { MakeExceptionCommand } from './MakeExceptionCommand';
 import { MakeListenerCommand } from './MakeListenerCommand';
 import { MakeMiddlewareCommand } from './MakeMiddlewareCommand';
 import { MakeRequestCommand } from './MakeRequestCommand';
-// import { UpdateTargetsCommand } from './UpdateTargetsCommand';
+import { UpdateTargetsCommand } from './UpdateTargetsCommand';
 import { MakeMigrationCommand } from './MakeMigrationCommand';
 import { MakeSeedCommand } from './MakeSeedCommand';
 
@@ -38,7 +38,7 @@ import { MakeSeedCommand } from './MakeSeedCommand';
  * Add your new commands here
  */
 [
-    // DatabaseResetCommand,
+    DatabaseResetCommand,
     // MakeResourceCommand,
     MakeModelCommand,
     MakeRepoCommand,
@@ -49,8 +49,8 @@ import { MakeSeedCommand } from './MakeSeedCommand';
     MakeMiddlewareCommand,
     MakeRequestCommand,
     MakeMigrationCommand,
-    MakeSeedCommand
-    // UpdateTargetsCommand
+    MakeSeedCommand,
+    UpdateTargetsCommand
 ].forEach((Command) =>
     commander
         .command(Command.command)
