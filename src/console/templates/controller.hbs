@@ -1,10 +1,9 @@
 import { inject, named } from 'inversify';
-import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response, Request } from 'inversify-express-utils';
+import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response } from 'inversify-express-utils';
 import { my } from 'my-express';
 import { {{name.capitalize}}Service } from '../{{deepness}}services/{{name.capitalize}}Service';
 import { Types } from '../../{{deepness}}constants/Types';
-import { Service, Middleware } from '../../{{deepness}}constants/Targets';
-import { ioc } from '../../{{deepness}}core/IoC';
+import { Service } from '../../{{deepness}}constants/Targets';
 
 
 @Controller('/{{name.camelCase}}')
