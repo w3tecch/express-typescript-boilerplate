@@ -21,7 +21,7 @@ import '../config/Logger';
 import * as commander from 'commander';
 
 import { DatabaseResetCommand } from './DatabaseResetCommand';
-// import { MakeResourceCommand } from './MakeResourceCommand';
+import { MakeResourceCommand } from './MakeResourceCommand';
 import { MakeModelCommand } from './MakeModelCommand';
 import { MakeRepoCommand } from './MakeRepoCommand';
 import { MakeServiceCommand } from './MakeServiceCommand';
@@ -39,7 +39,7 @@ import { MakeSeedCommand } from './MakeSeedCommand';
  */
 [
     DatabaseResetCommand,
-    // MakeResourceCommand,
+    MakeResourceCommand,
     MakeModelCommand,
     MakeRepoCommand,
     MakeServiceCommand,

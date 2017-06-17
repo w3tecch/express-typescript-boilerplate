@@ -9,6 +9,7 @@ import { AbstractMakeCommand } from './AbstractMakeCommand';
 import { MakeMigrationCommand } from './MakeMigrationCommand';
 import { askProperties } from './lib/utils';
 
+
 export class MakeModelCommand extends AbstractMakeCommand {
 
     static command = 'make:model';
@@ -36,20 +37,19 @@ export class MakeModelCommand extends AbstractMakeCommand {
     }
 
     public async write(): Promise<void> {
-        await super.write();
         if (this.context.hasMigration) {
             await this.makeMigrationCommand.write();
         }
+        await super.write();
     }
 
     private async askMetaData(context: any): Promise<any> {
-        this.context.properties = [];
         const prompt = inquirer.createPromptModule();
         const prompts = await prompt([
             {
                 type: 'input',
                 name: 'tableName',
-                message: 'Add the database table:',
+                message: 'Enter the table-name:',
                 filter: (value: any) => _.snakeCase(value),
                 validate: (value: any) => !!value
             }, {
@@ -60,14 +60,14 @@ export class MakeModelCommand extends AbstractMakeCommand {
             }, {
                 type: 'confirm',
                 name: 'hasMigration',
-                message: 'Has a migration file?',
+                message: 'Add migration?',
                 default: true
             }, {
                 type: 'confirm',
                 name: 'hasProperties',
                 message: 'Do you want to add some properties?',
                 default: true,
-                when: () => this.context.properties.length === 0
+                when: () => !this.context.properties
             }
         ]);
         return _.assign(context, prompts);

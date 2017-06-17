@@ -150,7 +150,6 @@ export const askProperties = async (name: string): Promise<any[]> => {
             script: types[1],
             database: types[0]
         };
-        console.log(types);
         return p;
     });
     console.log('');
