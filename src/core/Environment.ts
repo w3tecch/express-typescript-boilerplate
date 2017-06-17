@@ -5,6 +5,7 @@
  * Helps us to simplify 'process.env' and also provide
  * the content of the package.json.
  */
+import * as packageInfo from '../../package.json';
 
 export class Environment {
 
@@ -29,7 +30,7 @@ export class Environment {
     }
 
     static getPkg(): any {
-        return require('../../package.json');
+        return packageInfo;
     }
 
 }
