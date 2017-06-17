@@ -16,7 +16,7 @@ export class UserAuthenticatedListener {
         this.log = new Logger('api:listeners:UserAuthenticatedListener');
     }
 
-    public async run(user: any): Promise<void> {
+    public run(user: any): void {
         this.log.info('Receive event UserAuthenticatedListener', user);
     }
 
