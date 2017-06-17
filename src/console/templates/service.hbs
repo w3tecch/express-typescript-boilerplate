@@ -1,18 +1,23 @@
+{{#if isResourceTemplate}}
 import * as Bookshelf from 'bookshelf';
+{{/if}}
 import { inject, named } from 'inversify';
 import { Core } from '../../{{deepness}}core/Targets';
-import { Repository } from '../../{{deepness}}constants/Targets';
 import { Types } from '../../{{deepness}}constants/Types';
 import { Log } from '../../{{deepness}}core/log';
+{{#if isResourceTemplate}}
+import { Repository } from '../../{{deepness}}constants/Targets';
 import { NotFoundException } from '../{{deepness}}exceptions/NotFoundException';
 import { {{name.capitalize}}Repository } from '../{{deepness}}repositories/{{name.capitalize}}Repository';
 import { {{name.capitalize}} } from '../{{deepness}}models/{{name.capitalize}}';
+{{/if}}
 
 
 export class {{name.capitalize}}Service {
 
     public log: Log;
 
+    {{#if isResourceTemplate}}
     constructor(
         @inject(Types.Repository) @named(Repository.{{name.capitalize}}Repository) public {{name.camelCase}}Repo: {{name.capitalize}}Repository,
         @inject(Types.Core) @named(Core.Log) public Logger: typeof Log
@@ -61,5 +66,12 @@ export class {{name.capitalize}}Service {
     public async destroy(id: number): Promise<void> {
         await this.{{name.camelCase}}Repo.destroy(id);
     }
+    {{else}}
+    constructor(
+        @inject(Types.Core) @named(Core.Log) public Logger: typeof Log
+    ) {
+        this.log = new Logger('api:services:{{name.capitalize}}Service');
+    }
+    {{/if}}
 
 }

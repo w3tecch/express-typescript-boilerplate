@@ -1,3 +1,4 @@
+{{#if isResourceTemplate}}
 import * as Bookshelf from 'bookshelf';
 import { inject, named } from 'inversify';
 import { Types } from '../../{{deepness}}constants/Types';
@@ -5,10 +6,14 @@ import { Model } from '../../{{deepness}}constants/Targets';
 import { {{name.capitalize}} } from '../{{deepness}}models/{{name.capitalize}}';
 import { DatabaseException } from '../{{deepness}}exceptions/DatabaseException';
 import { NotFoundException } from '../{{deepness}}exceptions/NotFoundException';
+{{else}}
+// import { Knex } from '../../config/Database';
+{{/if}}
 
 
 export class {{name.capitalize}}Repository {
 
+    {{#if isResourceTemplate}}
     constructor(
         @inject(Types.Model) @named(Model.{{name.capitalize}}) public {{name.capitalize}}Model: typeof {{name.capitalize}}
     ) { }
@@ -57,6 +62,6 @@ export class {{name.capitalize}}Repository {
         } catch (error) {
             throw new DatabaseException('Could not delete the {{name.camelCase}}!', error);
         }
-    }
+    }{{/if}}
 
 }

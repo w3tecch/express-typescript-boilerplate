@@ -30,6 +30,7 @@ export class MakeResourceCommand extends AbstractMakeCommand {
         this.context = await askFileName(this.context, this.type, this.suffix);
         this.context.properties = await askProperties(this.context.name);
         this.context.hasProperties = true;
+        this.context.isResourceTemplate = true;
 
         // Get commands
         this.makeModelCommand = new MakeModelCommand(this.context);
