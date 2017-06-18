@@ -31,7 +31,7 @@ export class UserUpdateRequest extends RequestBody {
      * We override the validate method so we can skip the missing
      * properties.
      */
-    public async validate(): Promise<void> {
+    public validate(): Promise<void> {
         return super.validate(true);
     }
 

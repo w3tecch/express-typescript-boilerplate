@@ -26,7 +26,7 @@ import { UserCreatedListener } from '../listeners/UserCreatedListener';
 
 export class UserService {
 
-    public log: Log;
+    private log: Log;
 
     constructor(
         @inject(Types.Repository) @named(Repository.UserRepository) public userRepo: UserRepository,
@@ -39,7 +39,7 @@ export class UserService {
     /**
      * This returns all user database objects
      */
-    public async findAll(): Promise<Bookshelf.Collection<User>> {
+    public findAll(): Promise<Bookshelf.Collection<User>> {
         return this.userRepo.findAll();
     }
 
@@ -115,8 +115,8 @@ export class UserService {
      * @param {number} id of the user
      * @returns {Promise<void>}
      */
-    public async destroy(id: number): Promise<void> {
-        await this.userRepo.destroy(id);
+    public destroy(id: number): Promise<void> {
+        return this.userRepo.destroy(id);
     }
 
 }
