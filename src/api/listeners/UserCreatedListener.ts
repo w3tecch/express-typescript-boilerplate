@@ -18,7 +18,7 @@ export class UserCreatedListener {
         this.log = new Logger('api:listeners:UserCreatedListener');
     }
 
-    public async run(user: any): Promise<void> {
+    public run(user: any): void {
         log.info('Receive event UserCreated', user);
     }
 

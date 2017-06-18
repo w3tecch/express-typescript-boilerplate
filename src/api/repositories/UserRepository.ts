@@ -64,7 +64,7 @@ export class UserRepository {
         const user = this.UserModel.forge<User>(data);
         try {
             const createdUser = await user.save();
-            return await this.UserModel.fetchById(createdUser.id);
+            return this.UserModel.fetchById(createdUser.id);
         } catch (error) {
             throw new DatabaseException('Could not create the user!', error);
         }
@@ -82,7 +82,7 @@ export class UserRepository {
         const user = this.UserModel.forge<User>({ id: id });
         try {
             const updatedUser = await user.save(data, { patch: true });
-            return await this.UserModel.fetchById(updatedUser.id);
+            return this.UserModel.fetchById(updatedUser.id);
 
         } catch (error) {
             throw new DatabaseException('Could not update the user!', error);

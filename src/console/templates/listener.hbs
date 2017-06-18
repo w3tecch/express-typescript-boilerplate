@@ -16,7 +16,7 @@ export class {{name.capitalize}}Listener {
         this.log = new Logger('api:listeners:{{name.capitalize}}Listener');
     }
 
-    public async run(data: any): Promise<void> {
+    public run(data: any): Promise<void> {
         this.log.info('Receive event {{name.capitalize}}Listener', data);
     }
 

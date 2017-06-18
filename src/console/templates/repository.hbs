@@ -31,7 +31,7 @@ export class {{name.capitalize}}Repository {
         const {{name.camelCase}} = this.{{name.capitalize}}Model.forge<{{name.capitalize}}>(data);
         try {
             const {{name.camelCase}}Created = await {{name.camelCase}}.save();
-            return await this.{{name.capitalize}}Model.fetchById({{name.camelCase}}Created.id);
+            return this.{{name.capitalize}}Model.fetchById({{name.camelCase}}Created.id);
         } catch (error) {
             throw new DatabaseException('Could not create the {{name.camelCase}}!', error);
         }
@@ -41,8 +41,7 @@ export class {{name.capitalize}}Repository {
         const {{name.camelCase}} = this.{{name.capitalize}}Model.forge<{{name.capitalize}}>({ id: id });
         try {
             const {{name.camelCase}}Updated = await {{name.camelCase}}.save(data, { patch: true });
-            return await this.{{name.capitalize}}Model.fetchById({{name.camelCase}}Updated.id);
-
+            return this.{{name.capitalize}}Model.fetchById({{name.camelCase}}Updated.id);
         } catch (error) {
             throw new DatabaseException('Could not update the {{name.camelCase}}!', error);
         }
