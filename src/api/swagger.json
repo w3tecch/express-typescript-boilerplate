@@ -47,7 +47,7 @@
                 }
             }
         },
-        "/user": {
+        "/users": {
             "get": {
                 "tags": [
                     "User"
@@ -127,7 +127,7 @@
                 }
             }
         },
-        "/user/{id}": {
+        "/users/{id}": {
             "get": {
                 "tags": [
                     "User"
