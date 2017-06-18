@@ -165,7 +165,11 @@ class IoC {
     private getClassOfFileExport(name: string, fileExport: any): any {
         const fileParts = name.split('.');
         let fileClass = fileExport;
-        fileParts.forEach((part) => fileClass = fileClass[part]);
+        fileParts.forEach((part) => {
+            if (fileClass.hasOwnProperty(part)) {
+                fileClass = fileClass[part];
+            }
+        });
         return fileClass;
     }
 

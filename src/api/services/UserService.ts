@@ -20,7 +20,7 @@ import { UserCreateRequest } from '../requests/UserCreateRequest';
 import { UserUpdateRequest } from '../requests/UserUpdateRequest';
 import { UserRepository } from '../repositories/UserRepository';
 import { User } from '../models/User';
-import { UserCreatedListener } from '../listeners/UserCreatedListener';
+import { UserCreatedListener } from '../listeners/user/UserCreatedListener';
 
 
 export class UserService {

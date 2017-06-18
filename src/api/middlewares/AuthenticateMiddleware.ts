@@ -5,7 +5,7 @@ import { Log } from '../../core/log';
 import { Types } from '../../constants/Types';
 import { Core } from '../../core/Targets';
 import { events } from '../../core/api/events';
-import { UserAuthenticatedListener } from '../listeners/UserAuthenticatedListener';
+import { UserAuthenticatedListener } from '../listeners/user/UserAuthenticatedListener';
 
 
 export class AuthenticateMiddleware {

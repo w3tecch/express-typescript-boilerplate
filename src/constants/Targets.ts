@@ -26,8 +26,10 @@ export const Middleware = {
 };
 
 export const Listener = {
-    UserAuthenticatedListener: 'UserAuthenticatedListener',
-    UserCreatedListener: 'UserCreatedListener'
+    user: {
+        UserAuthenticatedListener: 'UserAuthenticatedListener',
+        UserCreatedListener: 'UserCreatedListener'
+    }
 };
 
 export const Controller = {
