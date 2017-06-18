@@ -120,7 +120,7 @@ class IoC {
     }
 
     private bindFiles(path: string, target: any, callback: (name: any, value: any) => void): Promise<void> {
-        return new Promise<void>((resolve, reject) => {
+        return new Promise<void>((resolve) => {
             this.getFiles(path, (files: string[]) => {
                 files.forEach((file: any) => {
                     let fileExport, fileClass, fileTarget;

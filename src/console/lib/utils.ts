@@ -107,7 +107,7 @@ export const askProperties = async (name: string): Promise<any[]> => {
 
     let askAgain = true;
     const fieldPrompt = inquirer.createPromptModule();
-    const properties = [];
+    const properties: any[] = [];
     while (askAgain) {
         const property = await fieldPrompt([
             {
