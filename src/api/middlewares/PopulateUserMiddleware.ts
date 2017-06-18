@@ -1,5 +1,5 @@
 import { inject, named } from 'inversify';
-import { my } from 'my-express';
+import { myExpress } from 'my-express';
 import { Log } from '../../core/log';
 import { UserService } from '../services/UserService';
 import { Types } from '../../constants/Types';
@@ -19,7 +19,7 @@ export class PopulateUserMiddleware {
     }
 
 
-    public use = (req: my.Request, res: my.Response, next: my.NextFunction): void => {
+    public use = (req: myExpress.Request, res: myExpress.Response, next: myExpress.NextFunction): void => {
         // Check if the authenticate middleware was successful
         if (!req.tokeninfo || !req.tokeninfo.user_id) {
             return res.failed(400, 'Missing token information!');

@@ -1,6 +1,6 @@
 import { inject, named } from 'inversify';
 import * as Request from 'request';
-import { my } from 'my-express';
+import { myExpress } from 'my-express';
 import { Log } from '../../core/log';
 import { Types } from '../../constants/Types';
 import { Core } from '../../core/Targets';
@@ -20,7 +20,7 @@ export class AuthenticateMiddleware {
     }
 
 
-    public use = (req: my.Request, res: my.Response, next: my.NextFunction): void => {
+    public use = (req: myExpress.Request, res: myExpress.Response, next: myExpress.NextFunction): void => {
         const token = this.getToken(req);
 
         if (token === null) {
@@ -59,7 +59,7 @@ export class AuthenticateMiddleware {
         });
     }
 
-    private getToken(req: my.Request): string | null {
+    private getToken(req: myExpress.Request): string | null {
         const authorization = req.headers.authorization;
 
         // Retrieve the token form the Authorization header

@@ -8,16 +8,16 @@
  */
 
 import * as express from 'express';
-import { my } from 'my-express';
+import { myExpress } from 'my-express';
 
 
-export const extendExpressResponse = (req: my.Request, res: my.Response, next: express.NextFunction) => {
+export const extendExpressResponse = (req: myExpress.Request, res: myExpress.Response, next: express.NextFunction) => {
 
     /**
      * 200 - OK
      * This is used for successful responses and a json body
      */
-    res.ok = <T>(data: T, options: my.ResponseOptions = {}) => {
+    res.ok = <T>(data: T, options: myExpress.ResponseOptions = {}) => {
         res.status(200);
         return res.json(bodySuccessful(data, options));
     };
@@ -26,7 +26,7 @@ export const extendExpressResponse = (req: my.Request, res: my.Response, next: e
      * 201 - Created
      * This is used for created resources
      */
-    res.created = <T>(data: T, options: my.ResponseOptions = {}) => {
+    res.created = <T>(data: T, options: myExpress.ResponseOptions = {}) => {
         res.status(201);
         return res.json(bodySuccessful(data, options));
     };
@@ -35,7 +35,7 @@ export const extendExpressResponse = (req: my.Request, res: my.Response, next: e
      * 200 - Found
      * Like the ok function
      */
-    res.found = <T>(data: T, options: my.ResponseOptions = {}) => {
+    res.found = <T>(data: T, options: myExpress.ResponseOptions = {}) => {
         return res.ok(data, options);
     };
 
@@ -43,7 +43,7 @@ export const extendExpressResponse = (req: my.Request, res: my.Response, next: e
      * 200 - Updated
      * Like the ok function
      */
-    res.updated = <T>(data: T, options: my.ResponseOptions = {}) => {
+    res.updated = <T>(data: T, options: myExpress.ResponseOptions = {}) => {
         return res.ok(data, options);
     };
 
@@ -51,7 +51,7 @@ export const extendExpressResponse = (req: my.Request, res: my.Response, next: e
      * 200 - Destroyed
      * This is the response after a resource has been removed
      */
-    res.destroyed = (options: my.ResponseOptions = {}) => {
+    res.destroyed = (options: myExpress.ResponseOptions = {}) => {
         res.status(200);
         return res.json(bodySuccessful(null));
     };
@@ -72,7 +72,7 @@ export const extendExpressResponse = (req: my.Request, res: my.Response, next: e
 /**
  * This body parser is used to show successful responses to the client
  */
-export function bodySuccessful<T>(data: T, options: my.ResponseOptions = {}): any {
+export function bodySuccessful<T>(data: T, options: myExpress.ResponseOptions = {}): any {
     return {
         success: true,
         ...message(options.message),
@@ -100,7 +100,7 @@ function message(value?: string): any {
     return;
 }
 
-function links(values?: my.ResponseLinks[]): any {
+function links(values?: myExpress.ResponseLinks[]): any {
     if (values) {
         return { links: values };
     }

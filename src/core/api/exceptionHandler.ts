@@ -6,12 +6,12 @@
  * send them directly to the client or otherwise it calls the next middleware.
  */
 
-import { my } from 'my-express';
+import { myExpress } from 'my-express';
 import { Environment } from '../Environment';
 import { Exception, isException } from '../api/Exception';
 
 
-export const exceptionHandler = (error: Exception | Error, req: my.Request, res: my.Response, next: my.NextFunction) => {
+export const exceptionHandler = (error: Exception | Error, req: myExpress.Request, res: myExpress.Response, next: myExpress.NextFunction) => {
     if (error instanceof Exception || error[isException]) {
         res.failed(error['code'], error.message, error['body'] || null);
         next();

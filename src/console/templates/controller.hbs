@@ -1,7 +1,7 @@
 {{#if isResourceTemplate}}
 import { inject, named } from 'inversify';
 import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response } from 'inversify-express-utils';
-import { my } from 'my-express';
+import { myExpress } from 'my-express';
 import { Types } from '../../{{deepness}}constants/Types';
 import { Service, Middleware } from '../../{{deepness}}constants/Targets';
 import { ioc } from '../../{{deepness}}core/IoC';
@@ -27,31 +27,31 @@ export class {{name.capitalize}}Controller {
     constructor( @inject(Types.Service) @named(Service.{{name.capitalize}}Service) private {{name.camelCase}}Service: {{name.capitalize}}Service) { }
 
     @Get('/')
-    public async findAll( @Response() res: my.Response): Promise<any> {
+    public async findAll( @Response() res: myExpress.Response): Promise<any> {
         const {{name.camelCase}}s = await this.{{name.camelCase}}Service.findAll();
         return res.found({{name.camelCase}}s.toJSON());
     }
 
     @Post('/')
-    public async create( @Response() res: my.Response, @RequestBody() body: any): Promise<any> {
+    public async create( @Response() res: myExpress.Response, @RequestBody() body: any): Promise<any> {
         const {{name.camelCase}} = await this.{{name.camelCase}}Service.create(body);
         return res.created({{name.camelCase}}.toJSON());
     }
 
     @Get('/:id')
-    public async findOne( @Response() res: my.Response, @RequestParam('id') id: string): Promise<any> {
+    public async findOne( @Response() res: myExpress.Response, @RequestParam('id') id: string): Promise<any> {
         const {{name.camelCase}} = await this.{{name.camelCase}}Service.findOne(parseInt(id, 10));
         return res.found({{name.camelCase}}.toJSON());
     }
 
     @Put('/:id')
-    public async update( @Response() res: my.Response, @RequestParam('id') id: string, @RequestBody() body: any): Promise<any> {
+    public async update( @Response() res: myExpress.Response, @RequestParam('id') id: string, @RequestBody() body: any): Promise<any> {
         const {{name.camelCase}} = await this.{{name.camelCase}}Service.update(parseInt(id, 10), body);
         return res.updated({{name.camelCase}}.toJSON());
     }
 
     @Delete('/:id')
-    public async destroy( @Response() res: my.Response, @RequestParam('id') id: string): Promise<any> {
+    public async destroy( @Response() res: myExpress.Response, @RequestParam('id') id: string): Promise<any> {
         await this.{{name.camelCase}}Service.destroy(parseInt(id, 10));
         return res.destroyed();
     }{{/if}}
