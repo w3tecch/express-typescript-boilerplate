@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as _ from 'lodash';
 import * as path from 'path';
 import * as inquirer from 'inquirer';
+import * as pluralize from 'pluralize';
 import { UpdateTargetsCommand } from '../UpdateTargetsCommand';
 
 
@@ -10,6 +11,8 @@ export const parseName = (name: string, suffix: string) => ({
     snakeCase: _.snakeCase(removeSufix(suffix, name)),
     capitalize: _.upperFirst(_.camelCase(removeSufix(suffix, name))),
     lowerCase: _.lowerCase(removeSufix(suffix, name)),
+    kebabCase: _.kebabCase(removeSufix(suffix, name)),
+    pluralize: pluralize(_.kebabCase(removeSufix(suffix, name))),
     normal: name
 });
 

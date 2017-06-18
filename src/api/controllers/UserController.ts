@@ -21,7 +21,7 @@ const authenticate = ioc.Container.getNamed<AuthenticateMiddleware>(Types.Middle
 const populateUser = ioc.Container.getNamed<PopulateUserMiddleware>(Types.Middleware, Middleware.PopulateUserMiddleware);
 
 
-@Controller('/user', authenticate.use)
+@Controller('/users', authenticate.use)
 export class UserController {
 
     constructor( @inject(Types.Service) @named(Service.UserService) private userService: UserService) { }

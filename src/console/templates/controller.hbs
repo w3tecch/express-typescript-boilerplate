@@ -20,7 +20,7 @@ import { AuthenticateMiddleware } from '../{{deepness}}middlewares/AuthenticateM
 const authenticate = ioc.Container.getNamed<AuthenticateMiddleware>(Types.Middleware, Middleware.AuthenticateMiddleware);
 
 
-@Controller('/{{name.camelCase}}', authenticate.use)
+@Controller('/{{name.pluralize}}', authenticate.use)
 export class {{name.capitalize}}Controller {
 
     {{#if isResourceTemplate}}
