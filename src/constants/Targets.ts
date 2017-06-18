@@ -9,17 +9,14 @@
  */
 
 export const Model = {
-    Pet: 'Pet',
     User: 'User'
 };
 
 export const Repository = {
-    PetRepository: 'PetRepository',
     UserRepository: 'UserRepository'
 };
 
 export const Service = {
-    PetService: 'PetService',
     UserService: 'UserService'
 };
 
@@ -34,9 +31,5 @@ export const Listener = {
 };
 
 export const Controller = {
-    auth: {
-        AuthController: 'AuthController'
-    },
-    PetController: 'PetController',
     UserController: 'UserController'
 };
