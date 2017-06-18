@@ -3,13 +3,24 @@ import { inject, named } from 'inversify';
 import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response } from 'inversify-express-utils';
 import { my } from 'my-express';
 import { Types } from '../../{{deepness}}constants/Types';
-import { Service } from '../../{{deepness}}constants/Targets';
+import { Service, Middleware } from '../../{{deepness}}constants/Targets';
+import { ioc } from '../../{{deepness}}core/IoC';
+import { AuthenticateMiddleware } from '../{{deepness}}middlewares/AuthenticateMiddleware';
 import { {{name.capitalize}}Service } from '../{{deepness}}services/{{name.capitalize}}Service';
 {{else}}
 import { Controller } from 'inversify-express-utils';
+import { ioc } from '../../{{deepness}}core/IoC';
+import { Types } from '../../{{deepness}}constants/Types';
+import { Middleware } from '../../{{deepness}}constants/Targets';
+import { AuthenticateMiddleware } from '../{{deepness}}middlewares/AuthenticateMiddleware';
+
 {{/if}}
 
-@Controller('/{{name.camelCase}}')
+// Get middlewares
+const authenticate = ioc.Container.getNamed<AuthenticateMiddleware>(Types.Middleware, Middleware.AuthenticateMiddleware);
+
+
+@Controller('/{{name.camelCase}}', authenticate.use)
 export class {{name.capitalize}}Controller {
 
     {{#if isResourceTemplate}}
