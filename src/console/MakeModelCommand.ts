@@ -7,7 +7,8 @@ import * as _ from 'lodash';
 import * as inquirer from 'inquirer';
 import { AbstractMakeCommand } from './AbstractMakeCommand';
 import { MakeMigrationCommand } from './MakeMigrationCommand';
-import { askProperties } from './lib/utils';
+import { askProperties, buildFilePath, existsFile } from './lib/utils';
+import { writeTemplate } from './lib/template';
 
 
 export class MakeModelCommand extends AbstractMakeCommand {
@@ -37,10 +38,18 @@ export class MakeModelCommand extends AbstractMakeCommand {
     }
 
     public async write(): Promise<void> {
+        // Create migration file
         if (this.context.hasMigration) {
             await this.makeMigrationCommand.write();
         }
+
+        // Create model
         await super.write();
+
+        // Create interface for this resource object
+        const filePath = buildFilePath('types/resources', this.context.name.camelCase, '.d.ts');
+        await existsFile(filePath, true);
+        await writeTemplate('resource.hbs', filePath, this.context);
     }
 
     private async askMetaData(context: any): Promise<any> {

@@ -27,7 +27,8 @@ export const filterInput = (suffix: string, prefix = '') => (value: string) => {
     return (vs.join('/')) + prefix + suffix;
 };
 
-export const buildFilePath = (targetPath: string, fileName: string) => path.join(__dirname, `/../../${targetPath}`, `${fileName}.ts`);
+export const buildFilePath = (targetPath: string, fileName: string, extension = '.ts') =>
+    path.join(__dirname, `/../../${targetPath}`, `${fileName}${extension}`);
 
 export const inputIsRequired = (value: any) => !!value;
 

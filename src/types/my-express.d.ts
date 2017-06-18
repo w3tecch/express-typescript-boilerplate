@@ -10,7 +10,7 @@ declare module 'my-express' {
 
     import * as expressLib from 'express';
     import * as auth0 from 'auth0';
-    import * as dto from 'dto';
+    import * as resources from 'resources';
 
     namespace myExpress {
 
@@ -22,7 +22,7 @@ declare module 'my-express' {
 
         interface Request extends expressLib.Request {
             tokeninfo: auth0.User;
-            user: dto.User;
+            user: resources.User;
         }
 
         interface Response extends expressLib.Response {

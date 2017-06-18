@@ -1,4 +1,4 @@
-declare module 'dto' {
+declare module 'resources' {
 
     interface User {
         id: string;
