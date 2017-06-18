@@ -8,26 +8,18 @@
 import * as _ from 'lodash';
 import * as glob from 'glob';
 import * as handlebars from 'handlebars';
+import { AbstractCommand } from './AbstractCommand';
 import { writeTemplate } from './lib/template';
 import { existsFile } from './lib/utils';
 
 
-export class UpdateTargetsCommand {
+export class UpdateTargetsCommand extends AbstractCommand {
 
     static command = 'update:targets';
     static description = 'Generate new controller';
-    static template = 'targets.hbs';
-    static targetFile = 'Targets.ts';
 
-    static async action(): Promise<void> {
-        try {
-            const command = new UpdateTargetsCommand();
-            await command.run();
-            process.exit(0);
-        } catch (e) {
-            process.exit(1);
-        }
-    }
+    public template = 'targets.hbs';
+    public targetFile = 'Targets.ts';
 
     public async run(): Promise<void> {
         const files = await this.getFiles();
@@ -45,9 +37,9 @@ export class UpdateTargetsCommand {
             return json.replace(/\"([^(\")"]+)\":/g, '$1:').replace(/"/g, '\'');
         });
 
-        const path = __dirname.replace('console', 'constants') + `/${UpdateTargetsCommand.targetFile}`;
+        const path = __dirname.replace('console', 'constants') + `/${this.targetFile}`;
         await existsFile(path, true);
-        await writeTemplate(UpdateTargetsCommand.template, path, context);
+        await writeTemplate(this.template, path, context);
 
     }
 

@@ -21,6 +21,7 @@ import '../config/Logger';
 import * as commander from 'commander';
 
 import { DatabaseResetCommand } from './DatabaseResetCommand';
+import { MakeResourceCommand } from './MakeResourceCommand';
 import { MakeModelCommand } from './MakeModelCommand';
 import { MakeRepoCommand } from './MakeRepoCommand';
 import { MakeServiceCommand } from './MakeServiceCommand';
@@ -38,6 +39,7 @@ import { MakeSeedCommand } from './MakeSeedCommand';
  */
 [
     DatabaseResetCommand,
+    MakeResourceCommand,
     MakeModelCommand,
     MakeRepoCommand,
     MakeServiceCommand,
@@ -53,7 +55,7 @@ import { MakeSeedCommand } from './MakeSeedCommand';
     commander
         .command(Command.command)
         .description(Command.description)
-        .action(() => Command.action()));
+        .action(() => Command.action(new Command())));
 
 
 commander.parse(process.argv);

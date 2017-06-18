@@ -2,11 +2,19 @@ import { IsNotEmpty } from 'class-validator';
 import { RequestBody } from '../../{{deepness}}core/api/RequestBody';
 
 
-export class {{name.capitalize}} extends RequestBody {
+export class {{name.capitalize}}Request extends RequestBody {
+    {{#if hasProperties}}
+    {{#each properties}}
+
+    @IsNotEmpty()
+    {{name.camelCase}}: {{type.script}};
+    {{/each}}
+    {{else}}
 
     // TODO Define your props here and add your needed validator annotations
     @IsNotEmpty()
-    prop: string;
+    propName: string;
+    {{/if}}
 
 }
 
