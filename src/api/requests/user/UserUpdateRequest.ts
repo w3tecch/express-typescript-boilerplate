@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty } from 'class-validator';
-import { RequestBody } from '../../core/api/RequestBody';
+import { RequestBody } from '../../../core/api/RequestBody';
 
 /**
  * This class is used for update request. Create a new instance
