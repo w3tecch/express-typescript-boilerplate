@@ -12,7 +12,11 @@ import { Types } from './constants/Types';
 
 import * as request from 'request';
 
-
+/**
+ * Here you can bind all your third-party libraries like
+ * request, lodash and so on. Those will be bound before
+ * everything else.
+ */
 ioc.configureLib((container: Container) => {
 
     decorate(injectable(), request);
@@ -25,9 +29,12 @@ ioc.configureLib((container: Container) => {
     return container;
 });
 
-
+/**
+ * Bind custom classes here. This will be bound at the end
+ */
 ioc.configure((container: Container) => {
 
+    // Add your custom class here
 
     return container;
 });
