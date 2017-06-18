@@ -1,15 +1,29 @@
+{{#if isResourceTemplate}}
 import { inject, named } from 'inversify';
-import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response, Request } from 'inversify-express-utils';
+import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response } from 'inversify-express-utils';
 import { my } from 'my-express';
-import { {{name.capitalize}}Service } from '../{{deepness}}services/{{name.capitalize}}Service';
 import { Types } from '../../{{deepness}}constants/Types';
 import { Service, Middleware } from '../../{{deepness}}constants/Targets';
 import { ioc } from '../../{{deepness}}core/IoC';
+import { AuthenticateMiddleware } from '../{{deepness}}middlewares/AuthenticateMiddleware';
+import { {{name.capitalize}}Service } from '../{{deepness}}services/{{name.capitalize}}Service';
+{{else}}
+import { Controller } from 'inversify-express-utils';
+import { ioc } from '../../{{deepness}}core/IoC';
+import { Types } from '../../{{deepness}}constants/Types';
+import { Middleware } from '../../{{deepness}}constants/Targets';
+import { AuthenticateMiddleware } from '../{{deepness}}middlewares/AuthenticateMiddleware';
+
+{{/if}}
+
+// Get middlewares
+const authenticate = ioc.Container.getNamed<AuthenticateMiddleware>(Types.Middleware, Middleware.AuthenticateMiddleware);
 
 
-@Controller('/{{name.camelCase}}')
+@Controller('/{{name.camelCase}}', authenticate.use)
 export class {{name.capitalize}}Controller {
 
+    {{#if isResourceTemplate}}
     constructor( @inject(Types.Service) @named(Service.{{name.capitalize}}Service) private {{name.camelCase}}Service: {{name.capitalize}}Service) { }
 
     @Get('/')
@@ -40,6 +54,6 @@ export class {{name.capitalize}}Controller {
     public async destroy( @Response() res: my.Response, @RequestParam('id') id: string): Promise<any> {
         await this.{{name.camelCase}}Service.destroy(parseInt(id, 10));
         return res.destroyed();
-    }
+    }{{/if}}
 
 }

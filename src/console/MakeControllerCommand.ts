@@ -3,37 +3,17 @@
  * -------------------------------------
  *
  */
-import { writeTemplate } from './lib/template';
-import { askFileName, buildFilePath, existsFile, parseName } from './lib/utils';
+import { AbstractMakeCommand } from './AbstractMakeCommand';
 
 
-export class MakeControllerCommand {
+export class MakeControllerCommand extends AbstractMakeCommand {
 
     static command = 'make:controller';
     static description = 'Generate new controller';
-    static type = 'Controller';
-    static suffix = 'Controller';
-    static template = 'controller.hbs';
-    static target = 'api/controllers';
 
-    static async action(): Promise<void> {
-        try {
-            const command = new MakeControllerCommand();
-            await command.run();
-        } catch (e) {
-            process.exit(1);
-        }
-    }
-
-    public async run(): Promise<void> {
-        const context = await askFileName(MakeControllerCommand.type, MakeControllerCommand.suffix);
-        const filePath = buildFilePath(MakeControllerCommand.target, context.name);
-        await existsFile(filePath, true);
-        await writeTemplate(MakeControllerCommand.template, filePath, {
-            name: parseName(context.name, MakeControllerCommand.suffix),
-            deepness: context.deepness
-        });
-        process.exit(0);
-    }
+    public type = 'Controller';
+    public suffix = 'Controller';
+    public template = 'controller.hbs';
+    public target = 'api/controllers';
 
 }

@@ -5,7 +5,6 @@ import * as handlebars from 'handlebars';
 
 
 export const loadTemplate = async (file: string, stop: boolean = false): Promise<any> => {
-    console.log('');
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, `../templates/${file}`), { encoding: 'utf-8' }, (err: any, content: any) => {
             if (err) {

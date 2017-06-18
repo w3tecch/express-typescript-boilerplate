@@ -21,6 +21,7 @@ import '../config/Logger';
 import * as commander from 'commander';
 
 import { DatabaseResetCommand } from './DatabaseResetCommand';
+import { MakeResourceCommand } from './MakeResourceCommand';
 import { MakeModelCommand } from './MakeModelCommand';
 import { MakeRepoCommand } from './MakeRepoCommand';
 import { MakeServiceCommand } from './MakeServiceCommand';
@@ -30,12 +31,15 @@ import { MakeListenerCommand } from './MakeListenerCommand';
 import { MakeMiddlewareCommand } from './MakeMiddlewareCommand';
 import { MakeRequestCommand } from './MakeRequestCommand';
 import { UpdateTargetsCommand } from './UpdateTargetsCommand';
+import { MakeMigrationCommand } from './MakeMigrationCommand';
+import { MakeSeedCommand } from './MakeSeedCommand';
 
 /**
  * Add your new commands here
  */
 [
     DatabaseResetCommand,
+    MakeResourceCommand,
     MakeModelCommand,
     MakeRepoCommand,
     MakeServiceCommand,
@@ -44,12 +48,14 @@ import { UpdateTargetsCommand } from './UpdateTargetsCommand';
     MakeListenerCommand,
     MakeMiddlewareCommand,
     MakeRequestCommand,
+    MakeMigrationCommand,
+    MakeSeedCommand,
     UpdateTargetsCommand
 ].forEach((Command) =>
     commander
         .command(Command.command)
         .description(Command.description)
-        .action(() => Command.action()));
+        .action(() => Command.action(new Command())));
 
 
 commander.parse(process.argv);

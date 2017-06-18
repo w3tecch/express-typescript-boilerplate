@@ -24,7 +24,8 @@ describe('User', () => {
     let auth;
     let createdId;
     beforeAll(async () => {
-        await DatabaseResetCommand.run();
+        const command = new DatabaseResetCommand();
+        await command.run();
         await createAdminUser();
         token = getToken();
         auth = {

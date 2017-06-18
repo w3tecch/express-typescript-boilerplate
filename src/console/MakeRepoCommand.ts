@@ -3,39 +3,17 @@
  * -------------------------------------
  *
  */
-import { writeTemplate } from './lib/template';
-import { askFileName, buildFilePath, existsFile, parseName } from './lib/utils';
+import { AbstractMakeCommand } from './AbstractMakeCommand';
 
 
-export class MakeRepoCommand {
+export class MakeRepoCommand extends AbstractMakeCommand {
 
     static command = 'make:repo';
     static description = 'Generate new repository';
-    static type = 'Repository';
-    static suffix = 'Repository';
-    static template = 'repository.hbs';
-    static target = 'api/repositories';
 
-    static async action(): Promise<void> {
-        try {
-            const command = new MakeRepoCommand();
-            await command.run();
-            process.exit(0);
-        } catch (e) {
-            process.exit(1);
-        }
-    }
-
-    public async run(): Promise<void> {
-        const context = await askFileName(MakeRepoCommand.type, MakeRepoCommand.suffix);
-        const filePath = buildFilePath(MakeRepoCommand.target, context.name);
-        await existsFile(filePath, true);
-        await writeTemplate(MakeRepoCommand.template, filePath, {
-            name: parseName(context.name, MakeRepoCommand.suffix),
-            deepness: context.deepness
-        });
-        process.exit(0);
-    }
+    public type = 'Repository';
+    public suffix = 'Repository';
+    public template = 'repository.hbs';
+    public target = 'api/repositories';
 
 }
-

@@ -75,9 +75,10 @@ All script are defined in the package.json file, but the most important ones are
 ### Generating Commands
 All the templates for the commands are located in `src/console/templates`.
 
-* `npm run console make:controller <file>` - Generates a controller with the CRUD routes.
-* `npm run console make:service <file>` - Generates a service with the CRUD logic.
-* `npm run console make:repo <file>` - Generates a repository with the CRUD operations.
+* `npm run console make:resource <file>` - Generates a controller, service, requests, repo, model and a migration with CRUD operations.
+* `npm run console make:controller <file>` - Generates a controller.
+* `npm run console make:service <file>` - Generates a service.
+* `npm run console make:repo <file>` - Generates a repository.
 * `npm run console make:model <file>` - Generates a model with the props and configurations.
 * `npm run console make:middleware <file>` - Generates a basic middleware.
 * `npm run console make:request <file>` - Generates a basic request.
