@@ -5,7 +5,6 @@
  * This service is here to validate and call the repository layer for
  * database actions. Furthermore you should throw events here if
  * necessary.
- *
  */
 
 import * as Bookshelf from 'bookshelf';

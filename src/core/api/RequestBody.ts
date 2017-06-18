@@ -40,35 +40,4 @@ export class RequestBody {
         return;
     }
 
-    // TODO check if needed
-    // /**
-    //  * Returns a new body object
-    //  */
-    // public toJSON(): any {
-    //     const json = {};
-    //     const keys = Object.keys(this);
-    //     keys.forEach((key) => {
-    //         if (this[key] !== undefined) {
-    //             json[key] = this[key];
-    //         }
-    //     });
-    //     return json;
-    // }
-
-    // /**
-    //  * Sets the values direct into the body object
-    //  */
-    // protected set(key: string, value: any): void {
-    //     this[key] = value;
-    // }
-
-    // /**
-    //  * Updates the property only if the the value is given
-    //  */
-    // protected update(key: string, value: any): void {
-    //     if (value !== undefined) {
-    //         this[key] = value;
-    //     }
-    // }
-
 }

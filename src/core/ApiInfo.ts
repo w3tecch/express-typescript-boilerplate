@@ -17,11 +17,14 @@ export class ApiInfo {
                     const links = {
                         links: {}
                     };
+                    const appUrl = Environment.get<string>('APP_URL_PREFIX');
                     if (Environment.get<string>('SWAGGER_ENABLED').toLowerCase() === 'true') {
-                        links.links['swagger'] = `${this.app.get('host')}:${this.app.get('port')}${process.env.APP_URL_PREFIX}${process.env.SWAGGER_ROUTE}`;
+                        links.links['swagger'] =
+                            `${this.app.get('host')}:${this.app.get('port')}${path.join(appUrl, Environment.get<string>('SWAGGER_ROUTE'))}`;
                     }
                     if (Environment.get<string>('MONITOR_ENABLED').toLowerCase() === 'true') {
-                        links.links['monitor'] = `${this.app.get('host')}:${this.app.get('port')}${process.env.APP_URL_PREFIX}${process.env.MONITOR_ROUTE}`;
+                        links.links['monitor'] =
+                            `${this.app.get('host')}:${this.app.get('port')}${path.join(appUrl, Environment.get<string>('MONITOR_ROUTE'))}`;
                     }
                     return res.json({
                         name: pkg.name,

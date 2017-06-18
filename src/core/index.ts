@@ -9,7 +9,8 @@
  */
 
 // It also loads the .env file into the 'process.env' variable.
-require('dotenv').config();
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 // Helps to add metadata to classes with annotations
 import 'reflect-metadata';

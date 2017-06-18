@@ -7,6 +7,7 @@
  */
 import * as packageInfo from '../../package.json';
 
+
 export class Environment {
 
     static getNodeEnv(): string {

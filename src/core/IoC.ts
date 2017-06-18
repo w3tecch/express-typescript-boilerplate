@@ -7,6 +7,7 @@
  */
 
 import * as glob from 'glob';
+import * as path from 'path';
 import { Container, decorate, injectable } from 'inversify';
 import { Types } from '../constants/Types';
 import { Core } from './Targets';
@@ -164,25 +165,21 @@ class IoC {
     private getClassOfFileExport(name: string, fileExport: any): any {
         const fileParts = name.split('.');
         let fileClass = fileExport;
-        fileParts.forEach((part) => {
-            fileClass = fileClass[part];
-        });
+        fileParts.forEach((part) => fileClass = fileClass[part]);
         return fileClass;
     }
 
     private getTargetOfFile(name: string, target: any): any {
         const fileParts = name.split('.');
         let fileTarget = target;
-        fileParts.forEach((part) => {
-            fileTarget = fileTarget[part];
-        });
+        fileParts.forEach((part) => fileTarget = fileTarget[part]);
         return fileTarget;
     }
 
     private getBasePath(): string {
         const baseFolder = __dirname.indexOf('/src/') >= 0 ? '/src/' : '/dist/';
         const baseRoot = __dirname.substring(0, __dirname.indexOf(baseFolder));
-        return `${baseRoot}${baseFolder}api`;
+        return path.join(baseRoot, baseFolder, 'api');
     }
 
     private getFiles(path: string, done: (files: any[]) => void): void {
