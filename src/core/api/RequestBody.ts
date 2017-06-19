@@ -10,6 +10,7 @@
  * validate method in your extended request class.
  */
 
+import 'reflect-metadata';
 import { validate } from 'class-validator';
 import { ValidationException } from '../../api/exceptions/ValidationException';
 

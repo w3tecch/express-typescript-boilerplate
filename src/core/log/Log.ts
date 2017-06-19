@@ -81,8 +81,19 @@ export class Log {
         return Log.Log;
     }
 
+    private static parsePathToScope(path: string): string {
+        if (path.indexOf('/') >= 0) {
+            path = path.replace(process.cwd(), '');
+            path = path.replace('/src/', '');
+            path = path.replace('.ts', '');
+            path = path.replace('.js', '');
+            path = path.replace('/', ':');
+        }
+        return path;
+    }
+
     constructor(scope?: string) {
-        this.scope = (scope) ? scope : Log.DEFAULT_SCOPE;
+        this.scope = Log.parsePathToScope((scope) ? scope : Log.DEFAULT_SCOPE);
     }
 
     public getAdapter(): LogAdapter {

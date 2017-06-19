@@ -5,7 +5,7 @@
  */
 import * as _ from 'lodash';
 import * as inquirer from 'inquirer';
-import { AbstractMakeCommand } from './AbstractMakeCommand';
+import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
 import { MakeMigrationCommand } from './MakeMigrationCommand';
 import { askProperties, buildFilePath, existsFile } from './lib/utils';
 import { writeTemplate } from './lib/template';

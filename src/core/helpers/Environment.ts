@@ -5,7 +5,7 @@
  * Helps us to simplify 'process.env' and also provide
  * the content of the package.json.
  */
-import * as packageInfo from '../../package.json';
+import * as packageInfo from '../../../package.json';
 
 
 export class Environment {
@@ -26,12 +26,12 @@ export class Environment {
         return this.getNodeEnv() === 'production';
     }
 
-    static get<T>(key: string): T {
-        return process.env[key];
-    }
-
     static getPkg(): any {
         return packageInfo;
+    }
+
+    static isTruthy(bool: string): boolean {
+        return bool.toLowerCase() === 'true';
     }
 
 }

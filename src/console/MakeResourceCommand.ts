@@ -4,7 +4,7 @@
  *
  */
 import { askFileName, askProperties } from './lib/utils';
-import { AbstractMakeCommand } from './AbstractMakeCommand';
+import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
 import { MakeModelCommand } from './MakeModelCommand';
 import { MakeRepoCommand } from './MakeRepoCommand';
 import { MakeServiceCommand } from './MakeServiceCommand';

@@ -14,22 +14,21 @@ import { Core } from './Targets';
 import { Controller, Model, Service, Repository, Middleware, Listener } from '../constants/Targets';
 import { events, EventEmitter } from './api/events';
 import { Log } from './log';
+import { IocConfig } from '../config/IocConfig';
 
-const log = new Log('core:IoC');
 
-
-class IoC {
+export class IoC {
 
     public container: Container;
     public libConfiguration: (container: Container) => Container;
     public customConfiguration: (container: Container) => Container;
 
+    private log: Log = new Log('core:App');
+
     constructor() {
         this.container = new Container();
-    }
-
-    public get Container(): Container {
-        return this.container;
+        const config = new IocConfig();
+        config.configure(this);
     }
 
     public configure(configuration: (container: Container) => Container): void {
@@ -43,7 +42,9 @@ class IoC {
     public async bindModules(): Promise<void> {
         this.bindCore();
 
-        this.container = this.libConfiguration(this.container);
+        if (this.libConfiguration) {
+            this.container = this.libConfiguration(this.container);
+        }
 
         await this.bindModels();
         await this.bindRepositories();
@@ -53,7 +54,9 @@ class IoC {
         await this.bindMiddlewares();
         await this.bindControllers();
 
-        this.container = this.customConfiguration(this.container);
+        if (this.customConfiguration) {
+            this.container = this.customConfiguration(this.container);
+        }
     }
 
     private bindCore(): void {
@@ -107,7 +110,7 @@ class IoC {
                 .to(value)
                 .whenTargetNamed(name);
 
-            const listener = ioc.Container.getNamed<any>(Types.Listener, name);
+            const listener = this.container.getNamed<any>(Types.Listener, name);
             events.on(value.Event, (...args) => listener.run(...args));
         });
     }
@@ -129,11 +132,11 @@ class IoC {
                     try {
                         fileExport = require(`${file.path}`);
                     } catch (e) {
-                        log.warn(e.message);
+                        this.log.warn(e.message);
                         return;
                     }
                     if (fileExport === undefined) {
-                        log.warn(`Could not find the file ${file.name}!`);
+                        this.log.warn(`Could not find the file ${file.name}!`);
                         return;
                     }
                     if (isRecursive) {
@@ -146,12 +149,12 @@ class IoC {
                     }
 
                     if (fileClass === undefined) {
-                        log.warn(`Name of the file '${file.name}' does not match to the class name!`);
+                        this.log.warn(`Name of the file '${file.name}' does not match to the class name!`);
                         return;
                     }
 
                     if (fileTarget === undefined) {
-                        log.warn(`Please define your '${file.name}' class is in the target constants.`);
+                        this.log.warn(`Please define your '${file.name}' class is in the target constants.`);
                         return;
                     }
 
@@ -193,7 +196,7 @@ class IoC {
         }
         glob(this.getBasePath() + path, (err: any, files: string[]) => {
             if (err) {
-                log.warn(`Could not read the folder ${path}!`);
+                this.log.warn(`Could not read the folder ${path}!`);
                 return;
             }
             done(files.map((p: string) => this.parseFilePath(p)));
@@ -215,5 +218,3 @@ class IoC {
     }
 
 }
-
-export const ioc = new IoC();

@@ -3,7 +3,7 @@
  * -------------------------------------
  *
  */
-import { AbstractMakeCommand } from './AbstractMakeCommand';
+import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
 
 
 export class MakeRepoCommand extends AbstractMakeCommand {

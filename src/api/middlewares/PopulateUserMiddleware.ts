@@ -18,7 +18,6 @@ export class PopulateUserMiddleware {
         this.log = new Logger('api:middleware:PopulateUserMiddleware');
     }
 
-
     public use = (req: myExpress.Request, res: myExpress.Response, next: myExpress.NextFunction): void => {
         // Check if the authenticate middleware was successful
         if (!req.tokeninfo || !req.tokeninfo.user_id) {

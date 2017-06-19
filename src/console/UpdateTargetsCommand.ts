@@ -8,7 +8,7 @@
 import * as _ from 'lodash';
 import * as glob from 'glob';
 import * as handlebars from 'handlebars';
-import { AbstractCommand } from './AbstractCommand';
+import { AbstractCommand } from './lib/AbstractCommand';
 import { writeTemplate } from './lib/template';
 import { existsFile } from './lib/utils';
 

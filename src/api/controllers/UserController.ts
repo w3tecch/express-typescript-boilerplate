@@ -11,17 +11,17 @@ import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response
 import { myExpress } from 'my-express';
 import { UserService } from '../services/UserService';
 import { Types } from '../../constants/Types';
-import { Service, Middleware } from '../../constants/Targets';
-import { AuthenticateMiddleware } from '../middlewares/AuthenticateMiddleware';
-import { PopulateUserMiddleware } from '../middlewares/PopulateUserMiddleware';
-import { ioc } from '../../core/IoC';
+import { Service } from '../../constants/Targets';
+// import { AuthenticateMiddleware } from '../middlewares/AuthenticateMiddleware';
+// import { PopulateUserMiddleware } from '../middlewares/PopulateUserMiddleware';
+// import { ioc } from '../../core/IoC';
 
 // Get middlewares
-const authenticate = ioc.Container.getNamed<AuthenticateMiddleware>(Types.Middleware, Middleware.AuthenticateMiddleware);
-const populateUser = ioc.Container.getNamed<PopulateUserMiddleware>(Types.Middleware, Middleware.PopulateUserMiddleware);
+// const authenticate = ioc.Container.getNamed<AuthenticateMiddleware>(Types.Middleware, Middleware.AuthenticateMiddleware);
+// const populateUser = ioc.Container.getNamed<PopulateUserMiddleware>(Types.Middleware, Middleware.PopulateUserMiddleware);
 
-
-@Controller('/users', authenticate.use)
+// authenticate.use
+@Controller('/users')
 export class UserController {
 
     constructor( @inject(Types.Service) @named(Service.UserService) private userService: UserService) { }
@@ -38,7 +38,8 @@ export class UserController {
         return res.created(user.toJSON());
     }
 
-    @Get('/me', populateUser.use)
+    // populateUser.use
+    @Get('/me')
     public async findMe( @Request() req: myExpress.Request, @Response() res: myExpress.Response): Promise<any> {
         return res.found(req.user);
     }

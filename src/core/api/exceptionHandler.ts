@@ -7,7 +7,7 @@
  */
 
 import { myExpress } from 'my-express';
-import { Environment } from '../Environment';
+import { Environment } from '../helpers/Environment';
 import { Exception, isException } from '../api/Exception';
 
 

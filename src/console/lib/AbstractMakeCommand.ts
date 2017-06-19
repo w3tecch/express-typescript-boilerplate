@@ -4,8 +4,8 @@
  *
  */
 import * as _ from 'lodash';
-import { writeTemplate } from './lib/template';
-import { askFileName, buildFilePath, existsFile, parseName, updateTargets } from './lib/utils';
+import { writeTemplate } from './template';
+import { askFileName, buildFilePath, existsFile, parseName, updateTargets } from './utils';
 
 export interface MakeCommand {
     context: any;

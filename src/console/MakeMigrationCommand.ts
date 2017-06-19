@@ -5,7 +5,7 @@
  */
 import * as _ from 'lodash';
 import * as inquirer from 'inquirer';
-import { AbstractMakeCommand } from './AbstractMakeCommand';
+import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
 import { inputIsRequired } from './lib/utils';
 
 

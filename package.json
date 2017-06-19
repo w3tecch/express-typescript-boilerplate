@@ -2,7 +2,7 @@
   "name": "express-typescript-boilerplate",
   "version": "1.7.0",
   "description": "A delightful way to building a RESTful API with NodeJs & TypeScript",
-  "main": "src/index.ts",
+  "main": "src/app.ts",
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/.bin/jest ./test/unit",
     "test:pretty": "NODE_ENV=test ./node_modules/.bin/jest ./test/unit --verbose",
@@ -24,7 +24,7 @@
     "console:dev": "./node_modules/.bin/ts-node ./src/console/commander.ts",
     "console:help": "./node_modules/.bin/ts-node --fast ./src/console/commander.ts --help",
     "serve": "./node_modules/.bin/nodemon --watch 'src/**/*.ts' --watch 'src/**/*.json' --watch '.env'",
-    "start": "node dist/index.js"
+    "start": "node dist/app.js"
   },
   "repository": "git+ssh://git@github.com/w3tec/express-typescript-boilerplate.git",
   "engines": {
@@ -57,6 +57,7 @@
     "@types/bluebird": "^3.5.4",
     "@types/body-parser": "^1.16.3",
     "@types/bookshelf": "^0.9.1",
+    "@types/chalk": "^0.4.31",
     "@types/commander": "^2.9.0",
     "@types/cors": "^2.8.1",
     "@types/debug": "0.0.29",
@@ -82,6 +83,7 @@
     "body-parser": "^1.17.2",
     "bookshelf": "^0.10.3",
     "bookshelf-camelcase": "^1.1.4",
+    "chalk": "^1.1.3",
     "class-validator": "^0.7.0",
     "commander": "^2.9.0",
     "compression": "^1.6.2",
@@ -92,6 +94,7 @@
     "express": "^4.15.3",
     "express-status-monitor": "^0.1.9",
     "faker": "^4.1.0",
+    "figlet": "^1.2.0",
     "glob": "^7.1.2",
     "handlebars": "^4.0.10",
     "helmet": "^3.6.1",

@@ -8,6 +8,7 @@
  * the given validation classes.
  */
 
+import 'reflect-metadata';
 import { RequestBody } from './RequestBody';
 
 

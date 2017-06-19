@@ -8,13 +8,33 @@
 
 import * as http from 'http';
 import * as express from 'express';
-import { Log } from './log';
-import { Environment } from './Environment';
+import { Log } from '../log';
+import { Environment } from '../helpers/Environment';
 
 const log = new Log('core:Server');
 
 
 export class Server {
+
+    /**
+     * Normalize port for the express application
+     *
+     * @static
+     * @param {string} port
+     * @returns {(number | string | boolean)}
+     *
+     * @memberof Server
+     */
+    static normalizePort(port: string): number | string | boolean {
+        const parsedPort = parseInt(port, 10);
+        if (isNaN(parsedPort)) { // named pipe
+            return port;
+        }
+        if (parsedPort >= 0) { // port number
+            return parsedPort;
+        }
+        return false;
+    }
 
     /**
      * Listen to the given http server
@@ -50,13 +70,13 @@ export class Server {
         log.debug(`Environment  : ${Environment.getNodeEnv()}`);
         log.debug(`Version      : ${Environment.getPkg().version}`);
         log.debug(``);
-        if (Environment.get<string>('API_INFO_ENABLED').toLowerCase() === 'true') {
+        if (Environment.isTruthy(process.env.API_INFO_ENABLED)) {
             log.debug(`API Info     : ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}${process.env.API_INFO_ROUTE}`);
         }
-        if (Environment.get<string>('SWAGGER_ENABLED').toLowerCase() === 'true') {
+        if (Environment.isTruthy(process.env.SWAGGER_ENABLED)) {
             log.debug(`Swagger      : ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}${process.env.SWAGGER_ROUTE}`);
         }
-        if (Environment.get<string>('MONITOR_ENABLED').toLowerCase() === 'true') {
+        if (Environment.isTruthy(process.env.MONITOR_ENABLED)) {
             log.debug(`Monitor      : ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}${process.env.MONITOR_ROUTE}`);
         }
         log.debug('-------------------------------------------------------');
@@ -83,7 +103,7 @@ export class Server {
                 process.exit(1);
                 break;
             case 'EADDRINUSE':
-                log.error(`Port is already in use`);
+                log.error(`Port is already in use or blocked by the os`);
                 process.exit(1);
                 break;
             default:

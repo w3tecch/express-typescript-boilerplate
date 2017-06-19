@@ -19,7 +19,6 @@ export class AuthenticateMiddleware {
         this.log = new Logger('api:middleware:AuthenticateMiddleware');
     }
 
-
     public use = (req: myExpress.Request, res: myExpress.Response, next: myExpress.NextFunction): void => {
         const token = this.getToken(req);
 

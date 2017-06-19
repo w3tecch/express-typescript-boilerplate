@@ -22,6 +22,10 @@
     "@types/knex" "*"
     "@types/lodash" "*"
 
+"@types/chalk@^0.4.31":
+  version "0.4.31"
+  resolved "https://registry.yarnpkg.com/@types/chalk/-/chalk-0.4.31.tgz#a31d74241a6b1edbb973cf36d97a2896834a51f9"
+
 "@types/commander@^2.9.0":
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/@types/commander/-/commander-2.9.0.tgz#dd07af1fc35d76833e0da26ea67a2be088b5fafc"
@@ -1455,6 +1459,10 @@ fb-watchman@^2.0.0:
   resolved "https://registry.yarnpkg.com/fb-watchman/-/fb-watchman-2.0.0.tgz#54e9abf7dfa2f26cd9b1636c588c1afc05de5d58"
   dependencies:
     bser "^2.0.0"
+
+figlet@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/figlet/-/figlet-1.2.0.tgz#6c46537378fab649146b5a6143dda019b430b410"
 
 figures@^2.0.0:
   version "2.0.0"

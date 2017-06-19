@@ -1,7 +1,7 @@
 import { Log } from '../core/log';
 
 import * as Knex from 'knex';
-import { AbstractCommand } from './AbstractCommand';
+import { AbstractCommand } from './lib/AbstractCommand';
 const options = require('../../knexfile.ts');
 const log = new Log('app:console:DatabaseResetCommand');
 
