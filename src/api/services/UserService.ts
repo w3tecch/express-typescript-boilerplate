@@ -12,7 +12,7 @@ import { inject, named } from 'inversify';
 import { Core } from '../../core/Targets';
 import { Repository } from '../../constants/Targets';
 import { Types } from '../../constants/Types';
-import { Log } from '../../core/log';
+import { Log } from '../../core/Log';
 import { EventEmitter } from '../../core/api/events';
 import { Validate, Request } from '../../core/api/Validate';
 import { NotFoundException } from '../exceptions/NotFoundException';

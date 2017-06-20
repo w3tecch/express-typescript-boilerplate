@@ -14,7 +14,7 @@ import { Types } from '../constants/Types';
 import { Core } from './Targets';
 import { Controller, Model, Service, Repository, Middleware, Listener as ListenerTarget } from '../constants/Targets';
 import { events, EventEmitter } from './api/events';
-import { Log } from './log';
+import { Log } from './Log';
 import { IocConfig } from '../config/IocConfig';
 
 

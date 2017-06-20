@@ -5,7 +5,7 @@
  * Define all log adapters for this application and chose one.
  */
 
-import { Log } from '../core/log';
+import { Log } from '../core/Log';
 import { App, Configurable } from '../core/App';
 
 

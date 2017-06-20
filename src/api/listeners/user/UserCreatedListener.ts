@@ -2,7 +2,7 @@ import { inject, named } from 'inversify';
 import { Listener } from 'interfaces';
 import { Types } from '../../../constants/Types';
 import { Core } from '../../../core/Targets';
-import { Log } from '../../../core/log/';
+import { Log } from '../../../core/Log';
 
 const log = new Log('api:listeners:UserCreated');
 

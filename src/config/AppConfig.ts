@@ -14,7 +14,7 @@ import * as express from 'express';
 import * as favicon from 'serve-favicon';
 import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
-import { Log } from '../core/log';
+import { Log } from '../core/Log';
 import { App, Configurable } from '../core/App';
 
 

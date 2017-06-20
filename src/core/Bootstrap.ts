@@ -2,7 +2,7 @@ import * as http from 'http';
 import * as express from 'express';
 import { InversifyExpressServer } from 'inversify-express-utils';
 import { Server } from './helpers/Server';
-import { Log } from './log';
+import { Log } from './Log';
 import { ApiInfo } from './ApiInfo';
 import { ApiMonitor } from './ApiMonitor';
 import { exceptionHandler } from './api/exceptionHandler';

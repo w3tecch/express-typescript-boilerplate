@@ -2,7 +2,7 @@ import { inject, named } from 'inversify';
 import * as Request from 'request';
 import { myExpress } from 'my-express';
 import { Middleware } from 'interfaces';
-import { Log } from '../../core/log';
+import { Log } from '../../core/Log';
 import { Types } from '../../constants/Types';
 import { Core } from '../../core/Targets';
 import { events } from '../../core/api/events';

@@ -11,7 +11,7 @@
  */
 
 import * as Debug from 'debug';
-import { LogAdapter } from './Log';
+import { LogAdapter } from 'interfaces';
 
 
 export class DebugAdapter implements LogAdapter {

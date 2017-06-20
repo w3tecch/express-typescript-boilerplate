@@ -9,8 +9,8 @@
  */
 
 import * as winston from 'winston';
-import { Environment } from '../helpers/Environment';
-import { LogAdapter } from './Log';
+import { LogAdapter } from 'interfaces';
+import { Environment } from '../../core/helpers/Environment';
 
 
 export class WinstonAdapter implements LogAdapter {

@@ -4,7 +4,7 @@ import * as express from 'express';
 import * as dotenv from 'dotenv';
 import { Container } from 'inversify';
 import { InversifyExpressServer } from 'inversify-express-utils';
-import { Log } from './log';
+import { Log } from './Log';
 import { LoggerConfig } from '../config/LoggerConfig';
 import { Bootstrap } from './Bootstrap';
 import { IoC } from './IoC';

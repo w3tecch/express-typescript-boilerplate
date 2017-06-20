@@ -1,7 +1,7 @@
 import { inject, named } from 'inversify';
 import { myExpress } from 'my-express';
 import { Middleware } from 'interfaces';
-import { Log } from '../../core/log';
+import { Log } from '../../core/Log';
 import { UserService } from '../services/UserService';
 import { Types } from '../../constants/Types';
 import { Core } from '../../core/Targets';

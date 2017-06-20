@@ -14,4 +14,12 @@ declare module 'interfaces' {
     interface Configurable {
         configure<T>(instance: T): void;
     }
+
+    interface LogAdapter {
+        debug(message: string, ...args: any[]): void;
+        info(message: string, ...args: any[]): void;
+        warn(message: string, ...args: any[]): void;
+        error(message: string, ...args: any[]): void;
+    }
+
 }

@@ -1,4 +1,4 @@
-import { Log } from '../core/log';
+import { Log } from '../core/Log';
 
 import * as Knex from 'knex';
 import { AbstractCommand } from './lib/AbstractCommand';

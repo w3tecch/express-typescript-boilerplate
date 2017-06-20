@@ -8,7 +8,7 @@
 
 import * as http from 'http';
 import * as express from 'express';
-import { Log } from '../log';
+import { Log } from '../Log';
 import { Environment } from '../helpers/Environment';
 
 const log = new Log('core:Server');
