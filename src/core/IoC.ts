@@ -9,9 +9,10 @@
 import * as glob from 'glob';
 import * as path from 'path';
 import { Container, decorate, injectable } from 'inversify';
+import { Listener } from 'interfaces';
 import { Types } from '../constants/Types';
 import { Core } from './Targets';
-import { Controller, Model, Service, Repository, Middleware, Listener } from '../constants/Targets';
+import { Controller, Model, Service, Repository, Middleware, Listener as ListenerTarget } from '../constants/Targets';
 import { events, EventEmitter } from './api/events';
 import { Log } from './log';
 import { IocConfig } from '../config/IocConfig';
@@ -103,15 +104,15 @@ export class IoC {
     }
 
     private bindListeners(): Promise<void> {
-        return this.bindFiles('/listeners/**/*Listener.ts', Listener, (name: any, value: any) => {
+        return this.bindFiles('/listeners/**/*Listener.ts', ListenerTarget, (name: any, value: any) => {
             decorate(injectable(), value);
             this.container
                 .bind<any>(Types.Listener)
                 .to(value)
                 .whenTargetNamed(name);
 
-            const listener = this.container.getNamed<any>(Types.Listener, name);
-            events.on(value.Event, (...args) => listener.run(...args));
+            const listener: Listener = this.container.getNamed<any>(Types.Listener, name);
+            events.on(value.Event, (...args) => listener.act(...args));
         });
     }
 

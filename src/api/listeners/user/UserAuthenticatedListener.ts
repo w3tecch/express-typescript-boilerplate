@@ -1,10 +1,11 @@
 import { inject, named } from 'inversify';
+import { Listener } from 'interfaces';
 import { Types } from '../../../constants/Types';
 import { Core } from '../../../core/Targets';
 import { Log } from '../../../core/log/';
 
 
-export class UserAuthenticatedListener {
+export class UserAuthenticatedListener implements Listener {
 
     static Event = Symbol('UserAuthenticatedListener');
 
@@ -16,7 +17,7 @@ export class UserAuthenticatedListener {
         this.log = new Logger('api:listeners:UserAuthenticatedListener');
     }
 
-    public run(user: any): void {
+    public act(user: any): void {
         this.log.info('Receive event UserAuthenticatedListener', user);
     }
 

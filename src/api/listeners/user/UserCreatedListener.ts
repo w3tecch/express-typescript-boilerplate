@@ -1,4 +1,5 @@
 import { inject, named } from 'inversify';
+import { Listener } from 'interfaces';
 import { Types } from '../../../constants/Types';
 import { Core } from '../../../core/Targets';
 import { Log } from '../../../core/log/';
@@ -6,7 +7,7 @@ import { Log } from '../../../core/log/';
 const log = new Log('api:listeners:UserCreated');
 
 
-export class UserCreatedListener {
+export class UserCreatedListener implements Listener {
 
     static Event = Symbol('UserCreated');
 
@@ -18,7 +19,7 @@ export class UserCreatedListener {
         this.log = new Logger('api:listeners:UserCreatedListener');
     }
 
-    public run(user: any): void {
+    public act(user: any): void {
         log.info('Receive event UserCreated', user);
     }
 
