@@ -15,13 +15,12 @@
  * are in the 'container.ts' file.
  */
 
-// Helps to add metadata to classes with annotations
 import 'reflect-metadata';
-
-// Defines the main dependencies and returns the
-// bootstrap instance to get the server started.
-import { app } from './core/index';
+import { App } from './core/App';
 import { CustomConfig } from './config/CustomConfig';
+
+export const app = new App();
+
 
 // Here you can add more custom configurations
 app.configure(new CustomConfig());

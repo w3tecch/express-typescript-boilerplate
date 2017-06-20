@@ -11,7 +11,7 @@ import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response
 import { myExpress } from 'my-express';
 import { Middleware } from 'interfaces';
 import { UserService } from '../services/UserService';
-import { app } from '../../core';
+import { app } from '../../app';
 
 import { Types } from '../../constants/Types';
 import { Service, Middleware as m } from '../../constants/Targets';
