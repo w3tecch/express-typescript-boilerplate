@@ -1,5 +1,6 @@
 import { inject, named } from 'inversify';
 import { myExpress } from 'my-express';
+import { Middleware } from 'interfaces';
 import { Log } from '../../core/log';
 import { UserService } from '../services/UserService';
 import { Types } from '../../constants/Types';
@@ -7,7 +8,7 @@ import { Core } from '../../core/Targets';
 import { Service } from '../../constants/Targets';
 
 
-export class PopulateUserMiddleware {
+export class PopulateUserMiddleware implements Middleware {
 
     public log: Log;
 

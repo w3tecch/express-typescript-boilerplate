@@ -1,6 +1,7 @@
 import { inject, named } from 'inversify';
 import * as Request from 'request';
 import { myExpress } from 'my-express';
+import { Middleware } from 'interfaces';
 import { Log } from '../../core/log';
 import { Types } from '../../constants/Types';
 import { Core } from '../../core/Targets';
@@ -8,7 +9,7 @@ import { events } from '../../core/api/events';
 import { UserAuthenticatedListener } from '../listeners/user/UserAuthenticatedListener';
 
 
-export class AuthenticateMiddleware {
+export class AuthenticateMiddleware implements Middleware {
 
     public log: Log;
 

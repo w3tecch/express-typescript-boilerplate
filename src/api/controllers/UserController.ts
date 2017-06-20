@@ -9,16 +9,16 @@
 import { inject, named } from 'inversify';
 import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response, Request } from 'inversify-express-utils';
 import { myExpress } from 'my-express';
+import { Middleware } from 'interfaces';
 import { UserService } from '../services/UserService';
-import { Types } from '../../constants/Types';
-import { Service, Middleware } from '../../constants/Targets';
-import { PopulateUserMiddleware } from '../middlewares/PopulateUserMiddleware';
-import { AuthenticateMiddleware } from '../middlewares/AuthenticateMiddleware';
 import { app } from '../../core';
 
+import { Types } from '../../constants/Types';
+import { Service, Middleware as m } from '../../constants/Targets';
+
 // Get middlewares
-const populateUser = app.IoC.getNamed<PopulateUserMiddleware>(Types.Middleware, Middleware.PopulateUserMiddleware);
-const authenticate = app.IoC.getNamed<AuthenticateMiddleware>(Types.Middleware, Middleware.AuthenticateMiddleware);
+const populateUser = app.IoC.getNamed<Middleware>(Types.Middleware, m.PopulateUserMiddleware);
+const authenticate = app.IoC.getNamed<Middleware>(Types.Middleware, m.AuthenticateMiddleware);
 
 
 @Controller('/users', authenticate.use)
