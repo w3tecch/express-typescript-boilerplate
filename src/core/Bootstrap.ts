@@ -46,23 +46,17 @@ export class Bootstrap {
         }, app);
         inversifyExpressServer.setConfig((a) => a.use(extendExpressResponse));
         inversifyExpressServer.setErrorConfig((a) => a.use(exceptionHandler));
+        return inversifyExpressServer;
+    }
+
+    public bindInversifyExpressServer(app: express.Application, inversifyExpressServer: InversifyExpressServer): express.Application {
         try {
             app = inversifyExpressServer.build();
         } catch (e) {
             this.log.error(e.message);
             process.exit(1);
         }
-        return inversifyExpressServer;
+        return app;
     }
-
-    // public bindInversifyExpressServer(app: express.Application, inversifyExpressServer: InversifyExpressServer): express.Application {
-    //     try {
-    //         app = inversifyExpressServer.build();
-    //     } catch (e) {
-    //         this.log.error(e.message);
-    //         process.exit(1);
-    //     }
-    //     return app;
-    // }
 
 }

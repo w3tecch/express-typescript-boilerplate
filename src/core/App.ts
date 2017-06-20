@@ -56,7 +56,7 @@ export class App {
         this.configurations.push(configurations);
     }
 
-    public bootstrap(): void {
+    public async bootstrap(): Promise<void> {
         this.log.info('Configuring app...');
         // Add express monitor app
         this.bootstrapApp.setupMonitor(this.express);
@@ -67,15 +67,13 @@ export class App {
         this.configurations.forEach((c) => c.configure(this));
         // Setup the ioc of inversify
         this.log.info('Binding IoC modules...');
-        this.ioc.bindModules(() => {
-            this.log.info('Setting up IoC...');
-            this.inversifyExpressServer = this.bootstrapApp.setupInversifyExpressServer(this.express, this.ioc);
-            // this.express = this.bootstrapApp.bindInversifyExpressServer(this.express, this.inversifyExpressServer);
-            this.bootstrapApp.setupCoreTools(this.express);
-            this.log.info('Starting app...');
-            this.bootstrapApp.startServer(this.express);
-        });
+        await this.ioc.bindModules();
+        this.log.info('Setting up IoC...');
+        this.inversifyExpressServer = this.bootstrapApp.setupInversifyExpressServer(this.express, this.ioc);
+        this.express = this.bootstrapApp.bindInversifyExpressServer(this.express, this.inversifyExpressServer);
+        this.bootstrapApp.setupCoreTools(this.express);
+        this.log.info('Starting app...');
+        this.bootstrapApp.startServer(this.express);
     }
-
 
 }
