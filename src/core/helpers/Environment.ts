@@ -31,7 +31,11 @@ export class Environment {
     }
 
     static isTruthy(bool: string): boolean {
-        return bool.toLowerCase() === 'true';
+        try {
+            return bool.toLowerCase() === 'true';
+        } catch (e) {
+            return false;
+        }
     }
 
 }

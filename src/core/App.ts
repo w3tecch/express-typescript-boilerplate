@@ -22,9 +22,10 @@ export class App {
     private inversifyExpressServer: InversifyExpressServer;
     private ioc: IoC = new IoC();
     private log: Log = new Log(__filename);
-    private bootstrap = new Bootstrap();
+    private bootstrapApp = new Bootstrap();
+    private configurations: Configurable[] = [];
 
-    constructor(public configurations: Configurable[]) {
+    constructor() {
         // It also loads the .env file into the 'process.env' variable.
         dotenv.config();
         // Configure the logger, because we need it already.
@@ -32,7 +33,7 @@ export class App {
         loggerConfig.configure();
         // Create express app
         this.log.info('Defining app...');
-        this.bootstrap.defineExpressApp(this.express);
+        this.bootstrapApp.defineExpressApp(this.express);
     }
 
     get IoC(): Container {
@@ -47,10 +48,18 @@ export class App {
         return this.server;
     }
 
-    public main(): void {
+    public Log(scope: string): Log {
+        return new Log(scope || __filename);
+    }
+
+    public configure(configurations: Configurable): void {
+        this.configurations.push(configurations);
+    }
+
+    public bootstrap(): void {
         this.log.info('Configuring app...');
         // Add express monitor app
-        this.bootstrap.setupMonitor(this.express);
+        this.bootstrapApp.setupMonitor(this.express);
         // Configure the app config for all the middlewares
         const appConfig = new AppConfig();
         appConfig.configure(this);
@@ -58,13 +67,13 @@ export class App {
         this.configurations.forEach((c) => c.configure(this));
         // Setup the ioc of inversify
         this.log.info('Binding IoC modules...');
-        this.ioc.bindModules().then(() => {
+        this.ioc.bindModules(() => {
             this.log.info('Setting up IoC...');
-            this.inversifyExpressServer = this.bootstrap.setupInversifyExpressServer(this.express, this.ioc);
-            this.express = this.bootstrap.bindInversifyExpressServer(this.express, this.inversifyExpressServer);
-            this.bootstrap.setupCoreTools(this.express);
+            this.inversifyExpressServer = this.bootstrapApp.setupInversifyExpressServer(this.express, this.ioc);
+            // this.express = this.bootstrapApp.bindInversifyExpressServer(this.express, this.inversifyExpressServer);
+            this.bootstrapApp.setupCoreTools(this.express);
             this.log.info('Starting app...');
-            this.bootstrap.startServer(this.express);
+            this.bootstrapApp.startServer(this.express);
         });
     }
 

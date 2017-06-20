@@ -39,7 +39,7 @@ export class IoC {
         this.libConfiguration = configuration;
     }
 
-    public async bindModules(): Promise<void> {
+    public async bindModules(done: () => void): Promise<void> {
         this.bindCore();
 
         if (this.libConfiguration) {
@@ -57,6 +57,7 @@ export class IoC {
         if (this.customConfiguration) {
             this.container = this.customConfiguration(this.container);
         }
+        done();
     }
 
     private bindCore(): void {

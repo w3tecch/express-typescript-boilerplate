@@ -20,15 +20,11 @@ import 'reflect-metadata';
 
 // Defines the main dependencies and returns the
 // bootstrap instance to get the server started.
-import { App } from './core/App';
+import { app } from './core/index';
 import { CustomConfig } from './config/CustomConfig';
 
-export const app = new App([
-
-    // Here you can add more custom configurations
-    new CustomConfig()
-
-]);
+// Here you can add more custom configurations
+app.configure(new CustomConfig());
 
 // Launch the server with all his awesome features.
-app.main();
+app.bootstrap();
