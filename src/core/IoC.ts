@@ -14,7 +14,7 @@ import { Types } from '../constants/Types';
 import { Core } from './Targets';
 import { Controller, Model, Service, Repository, Middleware, Listener as ListenerTarget } from '../constants/Targets';
 import { events, EventEmitter } from './api/events';
-import { Log } from './Log';
+import { Logger } from './Logger';
 import { IocConfig } from '../config/IocConfig';
 
 
@@ -24,7 +24,7 @@ export class IoC {
     public libConfiguration: (container: Container) => Container;
     public customConfiguration: (container: Container) => Container;
 
-    private log: Log = new Log('core:App');
+    private log: Logger = new Logger(__filename);
 
     constructor() {
         this.container = new Container();
@@ -61,7 +61,7 @@ export class IoC {
     }
 
     private bindCore(): void {
-        this.container.bind<typeof Log>(Types.Core).toConstantValue(Log).whenTargetNamed(Core.Log);
+        this.container.bind<typeof Logger>(Types.Core).toConstantValue(Logger).whenTargetNamed(Core.Logger);
         this.container.bind<EventEmitter>(Types.Core).toConstantValue(events).whenTargetNamed(Core.Events);
     }
 

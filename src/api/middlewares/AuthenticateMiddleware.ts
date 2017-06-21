@@ -2,7 +2,7 @@ import { inject, named } from 'inversify';
 import * as Request from 'request';
 import { myExpress } from 'my-express';
 import { Middleware } from 'interfaces';
-import { Log } from '../../core/Log';
+import { Logger as LoggerType } from '../../core/Logger';
 import { Types } from '../../constants/Types';
 import { Core } from '../../core/Targets';
 import { events } from '../../core/api/events';
@@ -11,13 +11,13 @@ import { UserAuthenticatedListener } from '../listeners/user/UserAuthenticatedLi
 
 export class AuthenticateMiddleware implements Middleware {
 
-    public log: Log;
+    public log: LoggerType;
 
     constructor(
-        @inject(Types.Core) @named(Core.Log) Logger: typeof Log,
+        @inject(Types.Core) @named(Core.Logger) Logger: typeof LoggerType,
         @inject(Types.Lib) @named('request') private request: typeof Request
     ) {
-        this.log = new Logger('api:middleware:AuthenticateMiddleware');
+        this.log = new Logger(__filename);
     }
 
     public use = (req: myExpress.Request, res: myExpress.Response, next: myExpress.NextFunction): void => {

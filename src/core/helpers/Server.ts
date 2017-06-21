@@ -8,10 +8,10 @@
 
 import * as http from 'http';
 import * as express from 'express';
-import { Log } from '../Log';
+import { Logger } from '../Logger';
 import { Environment } from '../helpers/Environment';
 
-const log = new Log('core:Server');
+const log = new Logger(__filename);
 
 
 export class Server {

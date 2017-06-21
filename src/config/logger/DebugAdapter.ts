@@ -11,10 +11,10 @@
  */
 
 import * as Debug from 'debug';
-import { LogAdapter } from 'interfaces';
+import { LoggerAdapter } from 'interfaces';
 
 
-export class DebugAdapter implements LogAdapter {
+export class DebugAdapter implements LoggerAdapter {
 
     private logger: Debug.IDebugger;
 

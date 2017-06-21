@@ -8,5 +8,5 @@
 
 export const Core = {
     Events: 'Events',
-    Log: 'Log'
+    Logger: 'Logger'
 };

@@ -14,7 +14,7 @@ import * as express from 'express';
 import * as favicon from 'serve-favicon';
 import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
-import { Log } from '../core/Log';
+import { Logger } from '../core/Logger';
 import { App, Configurable } from '../core/App';
 
 
@@ -51,7 +51,7 @@ export class AppConfig implements Configurable {
             // HTTP request logger middleware for node.js
             .use(morgan('dev', {
                 stream: {
-                    write: Log.info
+                    write: new Logger().info
                 }
             }));
     }

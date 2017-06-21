@@ -2,7 +2,7 @@ import * as http from 'http';
 import * as express from 'express';
 import { InversifyExpressServer } from 'inversify-express-utils';
 import { Server } from './helpers/Server';
-import { Log } from './Log';
+import { Logger } from './Logger';
 import { ApiInfo } from './ApiInfo';
 import { ApiMonitor } from './ApiMonitor';
 import { exceptionHandler } from './api/exceptionHandler';
@@ -13,7 +13,7 @@ import { IoC } from './IoC';
 
 export class Bootstrap {
 
-    public log: Log = new Log('core:Bootstrap');
+    public log: Logger = new Logger(__filename);
 
     public defineExpressApp(app: express.Application): express.Application {
         app.set('host', process.env.APP_HOST);

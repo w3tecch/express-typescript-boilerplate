@@ -4,7 +4,7 @@ import * as Bookshelf from 'bookshelf';
 import { inject, named } from 'inversify';
 import { Core } from '../../{{deepness}}core/Targets';
 import { Types } from '../../{{deepness}}constants/Types';
-import { Log } from '../../{{deepness}}core/Log';
+import { Logger as LoggerType } from '../../{{deepness}}core/Logger';
 {{#if isResourceTemplate}}
 import { Validate, Request } from '../../{{deepness}}core/api/Validate';
 import { Repository } from '../../{{deepness}}constants/Targets';
@@ -18,14 +18,14 @@ import { {{name.capitalize}}UpdateRequest } from '../{{deepness}}requests/{{name
 
 export class {{name.capitalize}}Service {
 
-    public log: Log;
+    public log: LoggerType;
 
     {{#if isResourceTemplate}}
     constructor(
         @inject(Types.Repository) @named(Repository.{{name.capitalize}}Repository) public {{name.camelCase}}Repo: {{name.capitalize}}Repository,
-        @inject(Types.Core) @named(Core.Log) public Logger: typeof Log
+        @inject(Types.Core) @named(Core.Logger) public Logger: typeof LoggerType
     ) {
-        this.log = new Logger('api:services:{{name.capitalize}}Service');
+        this.log = new Logger(__filename);
     }
 
     public async findAll(): Promise<Bookshelf.Collection<{{name.capitalize}}>> {
@@ -73,9 +73,9 @@ export class {{name.capitalize}}Service {
     }
     {{else}}
     constructor(
-        @inject(Types.Core) @named(Core.Log) public Logger: typeof Log
+        @inject(Types.Core) @named(Core.Logger) public Logger: typeof Log
     ) {
-        this.log = new Logger('api:services:{{name.capitalize}}Service');
+        this.log = new Logger(__filename);
     }
     {{/if}}
 

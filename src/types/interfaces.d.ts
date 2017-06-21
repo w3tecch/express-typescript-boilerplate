@@ -15,11 +15,15 @@ declare module 'interfaces' {
         configure<T>(instance: T): void;
     }
 
-    interface LogAdapter {
+    interface LoggerAdapter {
         debug(message: string, ...args: any[]): void;
         info(message: string, ...args: any[]): void;
         warn(message: string, ...args: any[]): void;
         error(message: string, ...args: any[]): void;
+    }
+
+    interface LoggerAdapterConstructor {
+        new (scope: string): LoggerAdapter;
     }
 
 }

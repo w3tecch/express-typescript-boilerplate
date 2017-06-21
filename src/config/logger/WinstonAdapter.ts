@@ -9,11 +9,11 @@
  */
 
 import * as winston from 'winston';
-import { LogAdapter } from 'interfaces';
+import { LoggerAdapter } from 'interfaces';
 import { Environment } from '../../core/helpers/Environment';
 
 
-export class WinstonAdapter implements LogAdapter {
+export class WinstonAdapter implements LoggerAdapter {
 
     private logger: winston.LoggerInstance;
 

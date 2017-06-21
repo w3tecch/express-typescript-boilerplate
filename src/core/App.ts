@@ -4,7 +4,7 @@ import * as express from 'express';
 import * as dotenv from 'dotenv';
 import { Container } from 'inversify';
 import { InversifyExpressServer } from 'inversify-express-utils';
-import { Log } from './Log';
+import { Logger } from './Logger';
 import { LoggerConfig } from '../config/LoggerConfig';
 import { Bootstrap } from './Bootstrap';
 import { IoC } from './IoC';
@@ -21,7 +21,7 @@ export class App {
     private server: http.Server;
     private inversifyExpressServer: InversifyExpressServer;
     private ioc: IoC = new IoC();
-    private log: Log = new Log(__filename);
+    private log: Logger = new Logger(__filename);
     private bootstrapApp = new Bootstrap();
     private configurations: Configurable[] = [];
 
@@ -48,8 +48,8 @@ export class App {
         return this.server;
     }
 
-    public Log(scope: string): Log {
-        return new Log(scope || __filename);
+    public Logger(scope: string): Logger {
+        return new Logger(scope || __filename);
     }
 
     public configure(configurations: Configurable): void {

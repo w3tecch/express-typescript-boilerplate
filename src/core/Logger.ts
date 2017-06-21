@@ -9,31 +9,27 @@
  * this in the start up process in the core/index.ts file.
  */
 
-import { LogAdapter } from 'interfaces';
+import { LoggerAdapter, LoggerAdapterConstructor } from 'interfaces';
 
 
-export interface LogAdapterConstructor {
-    new (scope: string): LogAdapter;
-}
-
-export class Log {
+export class Logger {
 
     public static DEFAULT_SCOPE = 'app';
 
-    private static Adapter: LogAdapterConstructor;
-    private static Adapters: Map<string, LogAdapterConstructor> = new Map();
+    private static Adapter: LoggerAdapterConstructor;
+    private static Adapters: Map<string, LoggerAdapterConstructor> = new Map();
 
     private scope: string;
-    private adapter: LogAdapter;
+    private adapter: LoggerAdapter;
 
-    public static addAdapter(key: string, adapter: LogAdapterConstructor): void {
-        Log.Adapters.set(key, adapter);
+    public static addAdapter(key: string, adapter: LoggerAdapterConstructor): void {
+        Logger.Adapters.set(key, adapter);
     }
 
     public static setAdapter(key: string): void {
-        const adapter = Log.Adapters.get(key);
+        const adapter = Logger.Adapters.get(key);
         if (adapter !== undefined) {
-            Log.Adapter = adapter;
+            Logger.Adapter = adapter;
         } else {
             console.log(`No log adapter with key ${key} was found!`);
         }
@@ -45,16 +41,16 @@ export class Log {
             path = path.replace('/src/', '');
             path = path.replace('.ts', '');
             path = path.replace('.js', '');
-            path = path.replace('/', ':');
+            path = path.replace(/\//g, ':');
         }
         return path;
     }
 
     constructor(scope?: string) {
-        this.scope = Log.parsePathToScope((scope) ? scope : Log.DEFAULT_SCOPE);
+        this.scope = Logger.parsePathToScope((scope) ? scope : Logger.DEFAULT_SCOPE);
     }
 
-    public getAdapter(): LogAdapter {
+    public getAdapter(): LoggerAdapter {
         return this.adapter;
     }
 
@@ -81,8 +77,8 @@ export class Log {
 
     private lazyLoadAdapter(): void {
         if (!this.adapter) {
-            if (Log.Adapter) {
-                this.adapter = new Log.Adapter(this.scope);
+            if (Logger.Adapter) {
+                this.adapter = new Logger.Adapter(this.scope);
             } else {
                 console.log('Please add a log adapter in the LoggerConfig!');
             }
