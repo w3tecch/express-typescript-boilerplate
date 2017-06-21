@@ -14,8 +14,6 @@ import { Environment } from './helpers/Environment';
 
 export class Server {
 
-    public httpServer: http.Server;
-
     private log = new Logger(__filename);
 
     /**
@@ -37,9 +35,7 @@ export class Server {
         return false;
     }
 
-    constructor(httpServer: http.Server) {
-        this.httpServer = httpServer;
-    }
+    constructor(public httpServer: http.Server) { }
 
     /**
      * Listen to the given http server
