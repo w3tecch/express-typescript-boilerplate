@@ -5,8 +5,7 @@
 
 import * as Bookshelf from 'bookshelf';
 import { inject, named } from 'inversify';
-import { Types } from '../../constants/Types';
-import { Model } from '../../constants/Targets';
+import { Types, Targets } from '../../constants';
 import { User } from '../models/User';
 import { DatabaseException } from '../exceptions/DatabaseException';
 import { NotFoundException } from '../exceptions/NotFoundException';
@@ -15,7 +14,7 @@ import { NotFoundException } from '../exceptions/NotFoundException';
 export class UserRepository {
 
     constructor(
-        @inject(Types.Model) @named(Model.User) public UserModel: typeof User
+        @inject(Types.Model) @named(Targets.Model.User) public UserModel: typeof User
     ) { }
 
     /**

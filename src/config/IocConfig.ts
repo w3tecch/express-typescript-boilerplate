@@ -8,7 +8,7 @@
 
 import { Container, decorate, injectable } from 'inversify';
 import { IoC } from '../core/IoC';
-import { Types } from '../constants/Types';
+import { Types } from '../constants';
 
 import * as request from 'request';
 

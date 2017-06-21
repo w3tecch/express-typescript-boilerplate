@@ -9,9 +9,7 @@
 
 import * as Bookshelf from 'bookshelf';
 import { inject, named } from 'inversify';
-import { Core } from '../../core/Targets';
-import { Repository } from '../../constants/Targets';
-import { Types } from '../../constants/Types';
+import { Types, Core, Targets } from '../../constants';
 import { Logger as LoggerType } from '../../core/Logger';
 import { EventEmitter } from '../../core/api/events';
 import { Validate, Request } from '../../core/api/Validate';
@@ -28,7 +26,7 @@ export class UserService {
     private log: LoggerType;
 
     constructor(
-        @inject(Types.Repository) @named(Repository.UserRepository) public userRepo: UserRepository,
+        @inject(Types.Repository) @named(Targets.Repository.UserRepository) public userRepo: UserRepository,
         @inject(Types.Core) @named(Core.Logger) public Logger: typeof LoggerType,
         @inject(Types.Core) @named(Core.Events) public events: EventEmitter
     ) {

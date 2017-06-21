@@ -1,7 +1,6 @@
 import { inject, named } from 'inversify';
 import { Listener } from 'interfaces';
-import { Types } from '../../../constants/Types';
-import { Core } from '../../../core/Targets';
+import { Types, Core } from '../../../constants';
 import { Logger as LoggerType } from '../../../core/Logger';
 
 

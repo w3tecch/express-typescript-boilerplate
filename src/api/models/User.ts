@@ -4,7 +4,7 @@
  */
 
 import { Bookshelf } from '../../config/Database';
-import { Tables } from '../../constants/Tables';
+import { Tables } from '../../constants';
 
 
 export class User extends Bookshelf.Model<User> {

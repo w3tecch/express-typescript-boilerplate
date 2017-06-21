@@ -33,7 +33,10 @@ export class UpdateTargetsCommand extends AbstractCommand {
         });
 
         handlebars.registerHelper('object', (c) => {
-            const json = JSON.stringify(c, null, 4) || '{}';
+            let json = JSON.stringify(c, null, 4) || '{}';
+            let jsonLines = json.split('\n');
+            jsonLines = jsonLines.map(line => `    ${line}`);
+            json = jsonLines.join('\n');
             return json.replace(/\"([^(\")"]+)\":/g, '$1:').replace(/"/g, '\'');
         });
 

@@ -3,8 +3,7 @@ import * as Request from 'request';
 import { myExpress } from 'my-express';
 import { Middleware } from 'interfaces';
 import { Logger as LoggerType } from '../../core/Logger';
-import { Types } from '../../constants/Types';
-import { Core } from '../../core/Targets';
+import { Types, Core } from '../../constants';
 import { events } from '../../core/api/events';
 import { UserAuthenticatedListener } from '../listeners/user/UserAuthenticatedListener';
 

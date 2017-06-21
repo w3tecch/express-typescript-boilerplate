@@ -10,9 +10,7 @@ import * as glob from 'glob';
 import * as path from 'path';
 import { Container, decorate, injectable } from 'inversify';
 import { Listener } from 'interfaces';
-import { Types } from '../constants/Types';
-import { Core } from './Targets';
-import { Controller, Model, Service, Repository, Middleware, Listener as ListenerTarget } from '../constants/Targets';
+import { Types, Core, Targets } from '../constants';
 import { events, EventEmitter } from './api/events';
 import { Logger } from './Logger';
 import { IocConfig } from '../config/IocConfig';
@@ -66,7 +64,7 @@ export class IoC {
     }
 
     private bindModels(): Promise<void> {
-        return this.bindFiles('/models/**/*.ts', Model, (name: any, value: any) => {
+        return this.bindFiles('/models/**/*.ts', Targets.Model, (name: any, value: any) => {
             decorate(injectable(), value);
             this.container
                 .bind<any>(Types.Model)
@@ -78,33 +76,33 @@ export class IoC {
     private bindRepositories(): Promise<void> {
         return this.bindFiles(
             '/repositories/**/*Repository.ts',
-            Repository,
+            Targets.Repository,
             (name: any, value: any) => this.bindFile(Types.Repository, name, value));
     }
 
     private bindServices(): Promise<void> {
         return this.bindFiles(
             '/services/**/*Service.ts',
-            Service,
+            Targets.Service,
             (name: any, value: any) => this.bindFile(Types.Service, name, value));
     }
 
     private bindMiddlewares(): Promise<void> {
         return this.bindFiles(
             '/middlewares/**/*Middleware.ts',
-            Middleware,
+            Targets.Middleware,
             (name: any, value: any) => this.bindFile(Types.Middleware, name, value));
     }
 
     private bindControllers(): Promise<void> {
         return this.bindFiles(
             '/controllers/**/*Controller.ts',
-            Controller,
+            Targets.Controller,
             (name: any, value: any) => this.bindFile(Types.Controller, name, value));
     }
 
     private bindListeners(): Promise<void> {
-        return this.bindFiles('/listeners/**/*Listener.ts', ListenerTarget, (name: any, value: any) => {
+        return this.bindFiles('/listeners/**/*Listener.ts', Targets.Listener, (name: any, value: any) => {
             decorate(injectable(), value);
             this.container
                 .bind<any>(Types.Listener)

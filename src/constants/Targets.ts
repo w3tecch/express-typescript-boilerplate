@@ -8,30 +8,27 @@
  * This file is generated with the task `$ npm run console update:targets`.
  */
 
-export const Model = {
-    User: 'User'
-};
-
-export const Repository = {
-    UserRepository: 'UserRepository'
-};
-
-export const Service = {
-    UserService: 'UserService'
-};
-
-export const Middleware = {
-    AuthenticateMiddleware: 'AuthenticateMiddleware',
-    PopulateUserMiddleware: 'PopulateUserMiddleware'
-};
-
-export const Listener = {
-    user: {
-        UserAuthenticatedListener: 'UserAuthenticatedListener',
-        UserCreatedListener: 'UserCreatedListener'
+export const Targets = {
+    Model:     {
+        User: 'User'
+    },
+    Repository:     {
+        UserRepository: 'UserRepository'
+    },
+    Service:     {
+        UserService: 'UserService'
+    },
+    Middleware:     {
+        AuthenticateMiddleware: 'AuthenticateMiddleware',
+        PopulateUserMiddleware: 'PopulateUserMiddleware'
+    },
+    Listener:     {
+        user: {
+            UserAuthenticatedListener: 'UserAuthenticatedListener',
+            UserCreatedListener: 'UserCreatedListener'
+        }
+    },
+    Controller:     {
+        UserController: 'UserController'
     }
-};
-
-export const Controller = {
-    UserController: 'UserController'
 };
