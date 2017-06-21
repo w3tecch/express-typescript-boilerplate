@@ -13,19 +13,19 @@ import { RequestBody } from '../../../core/api/RequestBody';
 export class UserUpdateRequest extends RequestBody {
 
     @IsNotEmpty()
-    firstName: string;
+    public firstName: string;
 
     @IsNotEmpty()
-    lastName: string;
+    public lastName: string;
 
     @IsEmail()
-    email: string;
+    public email: string;
 
     @IsNotEmpty()
-    picture: string;
+    public picture: string;
 
     @IsNotEmpty()
-    auth0UserId: string;
+    public auth0UserId: string;
 
     /**
      * We override the validate method so we can skip the missing
