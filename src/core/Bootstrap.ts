@@ -1,7 +1,7 @@
 import * as http from 'http';
 import * as express from 'express';
 import { InversifyExpressServer } from 'inversify-express-utils';
-import { Server } from './helpers/Server';
+import { Server } from './Server';
 import { Logger } from './Logger';
 import { ApiInfo } from './ApiInfo';
 import { ApiMonitor } from './ApiMonitor';
@@ -35,9 +35,7 @@ export class Bootstrap {
     }
 
     public startServer(app: express.Application): http.Server {
-        const server = app.listen(app.get('port'));
-        Server.use(server, app);
-        return server;
+        return app.listen(app.get('port'));
     }
 
     public setupInversifyExpressServer(app: express.Application, ioc: IoC): InversifyExpressServer {

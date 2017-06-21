@@ -1,5 +1,3 @@
-
-import * as http from 'http';
 import * as express from 'express';
 import * as dotenv from 'dotenv';
 import { Container } from 'inversify';
@@ -7,6 +5,7 @@ import { InversifyExpressServer } from 'inversify-express-utils';
 import { Logger } from './Logger';
 import { LoggerConfig } from '../config/LoggerConfig';
 import { Bootstrap } from './Bootstrap';
+import { Server } from './Server';
 import { IoC } from './IoC';
 import { AppConfig } from '../config/AppConfig';
 
@@ -18,7 +17,7 @@ export interface Configurable {
 export class App {
 
     private express: express.Application = express();
-    private server: http.Server;
+    private server: Server;
     private inversifyExpressServer: InversifyExpressServer;
     private ioc: IoC = new IoC();
     private log: Logger = new Logger(__filename);
@@ -44,7 +43,7 @@ export class App {
         return this.express;
     }
 
-    get Server(): http.Server {
+    get Server(): Server {
         return this.server;
     }
 
@@ -73,7 +72,8 @@ export class App {
         this.express = this.bootstrapApp.bindInversifyExpressServer(this.express, this.inversifyExpressServer);
         this.bootstrapApp.setupCoreTools(this.express);
         this.log.info('Starting app...');
-        this.bootstrapApp.startServer(this.express);
+        this.server = new Server(this.bootstrapApp.startServer(this.express));
+        this.server.use(this.express);
     }
 
 }
