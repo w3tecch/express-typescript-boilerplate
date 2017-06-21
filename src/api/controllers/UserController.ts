@@ -8,7 +8,6 @@
 
 import { inject, named } from 'inversify';
 import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response, Request } from 'inversify-express-utils';
-import { myExpress } from 'my-express';
 import { Middleware } from 'interfaces';
 import { app } from '../../app';
 import { Types, Targets } from '../../constants';

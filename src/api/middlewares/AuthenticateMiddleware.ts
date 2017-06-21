@@ -1,6 +1,5 @@
 import { inject, named } from 'inversify';
 import * as Request from 'request';
-import { myExpress } from 'my-express';
 import { Middleware } from 'interfaces';
 import { Logger as LoggerType } from '../../core/Logger';
 import { Types, Core } from '../../constants';

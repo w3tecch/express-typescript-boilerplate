@@ -1,6 +1,5 @@
 import * as express from 'express';
 import * as path from 'path';
-import { myExpress } from 'my-express';
 import { Environment } from './helpers/Environment';
 
 

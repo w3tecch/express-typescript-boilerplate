@@ -1,5 +1,4 @@
 import { inject, named } from 'inversify';
-import { myExpress } from 'my-express';
 import { Middleware } from 'interfaces';
 import { Logger as LoggerType } from '../../core/Logger';
 import { UserService } from '../services/UserService';

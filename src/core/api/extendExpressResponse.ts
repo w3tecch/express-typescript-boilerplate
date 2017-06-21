@@ -8,7 +8,6 @@
  */
 
 import * as express from 'express';
-import { myExpress } from 'my-express';
 
 
 export const extendExpressResponse = (req: myExpress.Request, res: myExpress.Response, next: express.NextFunction) => {
