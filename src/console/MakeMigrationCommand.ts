@@ -35,7 +35,7 @@ export class MakeMigrationCommand extends AbstractMakeCommand {
                     validate: inputIsRequired
                 }
             ]);
-            this.context = Object.assign(this.context || {}, prompts);
+            this.context = { ...(this.context || {}), ...prompts };
             this.context.name = `${this.getTimestamp()}_${prompts.name}`;
         }
 
