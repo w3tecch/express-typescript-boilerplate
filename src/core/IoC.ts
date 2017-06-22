@@ -9,7 +9,6 @@
 import * as glob from 'glob';
 import * as path from 'path';
 import { Container, decorate, injectable } from 'inversify';
-import { Listener } from 'interfaces';
 import { Types, Core, Targets } from '../constants';
 import { events, EventEmitter } from './api/events';
 import { Logger } from './Logger';
@@ -109,7 +108,7 @@ export class IoC {
                 .to(value)
                 .whenTargetNamed(name);
 
-            const listener: Listener = this.container.getNamed<any>(Types.Listener, name);
+            const listener: interfaces.Listener = this.container.getNamed<any>(Types.Listener, name);
             events.on(value.Event, (...args) => listener.act(...args));
         });
     }

@@ -9,20 +9,17 @@
  * this in the start up process in the core/index.ts file.
  */
 
-import { LoggerAdapter, LoggerAdapterConstructor } from 'interfaces';
-
-
 export class Logger {
 
     public static DEFAULT_SCOPE = 'app';
 
-    private static Adapter: LoggerAdapterConstructor;
-    private static Adapters: Map<string, LoggerAdapterConstructor> = new Map();
+    private static Adapter: interfaces.LoggerAdapterConstructor;
+    private static Adapters: Map<string, interfaces.LoggerAdapterConstructor> = new Map();
 
     private scope: string;
-    private adapter: LoggerAdapter;
+    private adapter: interfaces.LoggerAdapter;
 
-    public static addAdapter(key: string, adapter: LoggerAdapterConstructor): void {
+    public static addAdapter(key: string, adapter: interfaces.LoggerAdapterConstructor): void {
         Logger.Adapters.set(key, adapter);
     }
 
@@ -50,7 +47,7 @@ export class Logger {
         this.scope = Logger.parsePathToScope((scope) ? scope : Logger.DEFAULT_SCOPE);
     }
 
-    public getAdapter(): LoggerAdapter {
+    public getAdapter(): interfaces.LoggerAdapter {
         return this.adapter;
     }
 

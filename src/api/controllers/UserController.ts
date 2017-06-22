@@ -8,14 +8,13 @@
 
 import { inject, named } from 'inversify';
 import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response, Request } from 'inversify-express-utils';
-import { Middleware } from 'interfaces';
 import { app } from '../../app';
 import { Types, Targets } from '../../constants';
 import { UserService } from '../services/UserService';
 
 // Get middlewares
-const populateUser = app.IoC.getNamed<Middleware>(Types.Middleware, Targets.Middleware.PopulateUserMiddleware);
-const authenticate = app.IoC.getNamed<Middleware>(Types.Middleware, Targets.Middleware.AuthenticateMiddleware);
+const populateUser = app.IoC.getNamed<interfaces.Middleware>(Types.Middleware, Targets.Middleware.PopulateUserMiddleware);
+const authenticate = app.IoC.getNamed<interfaces.Middleware>(Types.Middleware, Targets.Middleware.AuthenticateMiddleware);
 
 
 @Controller('/users', authenticate.use)

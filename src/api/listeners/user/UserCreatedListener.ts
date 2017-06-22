@@ -1,10 +1,9 @@
 import { inject, named } from 'inversify';
-import { Listener } from 'interfaces';
 import { Types, Core } from '../../../constants';
 import { Logger as LoggerType } from '../../../core/Logger';
 
 
-export class UserCreatedListener implements Listener {
+export class UserCreatedListener implements interfaces.Listener {
 
     static Event = Symbol('UserCreated');
 

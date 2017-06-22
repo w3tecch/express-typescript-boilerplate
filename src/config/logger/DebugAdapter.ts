@@ -11,10 +11,9 @@
  */
 
 import * as Debug from 'debug';
-import { LoggerAdapter } from 'interfaces';
 
 
-export class DebugAdapter implements LoggerAdapter {
+export class DebugAdapter implements interfaces.LoggerAdapter {
 
     private logger: Debug.IDebugger;
 

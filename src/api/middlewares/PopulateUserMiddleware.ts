@@ -1,11 +1,10 @@
 import { inject, named } from 'inversify';
-import { Middleware } from 'interfaces';
 import { Logger as LoggerType } from '../../core/Logger';
 import { UserService } from '../services/UserService';
 import { Types, Core, Targets } from '../../constants';
 
 
-export class PopulateUserMiddleware implements Middleware {
+export class PopulateUserMiddleware implements interfaces.Middleware {
 
     public log: LoggerType;
 

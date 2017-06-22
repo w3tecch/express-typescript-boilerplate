@@ -1,13 +1,12 @@
 import { inject, named } from 'inversify';
 import * as Request from 'request';
-import { Middleware } from 'interfaces';
 import { Logger as LoggerType } from '../../core/Logger';
 import { Types, Core } from '../../constants';
 import { events } from '../../core/api/events';
 import { UserAuthenticatedListener } from '../listeners/user/UserAuthenticatedListener';
 
 
-export class AuthenticateMiddleware implements Middleware {
+export class AuthenticateMiddleware implements interfaces.Middleware {
 
     public log: LoggerType;
 

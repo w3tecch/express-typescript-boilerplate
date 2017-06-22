@@ -1,4 +1,4 @@
-declare module 'interfaces' {
+declare namespace interfaces {
 
     interface Middleware {
         use(req: myExpress.Request, res: myExpress.Response, next: myExpress.NextFunction): void;
@@ -25,3 +25,6 @@ declare module 'interfaces' {
     }
 
 }
+
+export as namespace interfaces;
+export = interfaces;
