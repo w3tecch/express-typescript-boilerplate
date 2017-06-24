@@ -21,7 +21,7 @@ describe('RequestBody', () => {
         });
         test('Should pass if no validators are defined', async () => {
             class TestBody extends RequestBody {
-                @IsNotEmpty() value: string;
+                @IsNotEmpty() public value: string;
             }
             const r = new TestBody();
             try {

@@ -4,7 +4,9 @@ import { Exception } from '../../../../src/core/api/Exception';
 
 describe('exceptionHandler', () => {
 
-    let req, res, next;
+    let req;
+    let res;
+    let next;
     beforeEach(() => {
         req = {};
         res = {
