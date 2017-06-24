@@ -11,12 +11,10 @@ export interface Command {
 
 export class AbstractCommand {
 
-    static command = 'make:command';
-    static description = 'description';
+    public static command = 'make:command';
+    public static description = 'description';
 
-    public context: any;
-
-    static async action(command: Command): Promise<void> {
+    public static async action(command: Command): Promise<void> {
         try {
             await command.run();
             process.exit(0);
@@ -24,6 +22,8 @@ export class AbstractCommand {
             process.exit(1);
         }
     }
+
+    public context: any;
 
     constructor(context?: any) {
         this.context = _.cloneDeep(context);

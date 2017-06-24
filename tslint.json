@@ -1,41 +1,41 @@
 {
+    "extends": "tslint:recommended",
     "rules": {
-        "align": [
-            true,
-            "parameters"
-        ],
-        "class-name": true,
-        "comment-format": [
-            true,
-            "check-space"
-        ],
-        "one-line": [
-            true,
-            "check-open-brace",
-            "check-whitespace"
-        ],
-        "no-var-keyword": true,
-        "jsdoc-format": true,
-        "curly": true,
-        "eofline": true,
-        "forin": true,
-        "indent": [
-            true,
-            "spaces"
-        ],
-        "label-position": true,
         "max-line-length": [
             true,
             160
         ],
+        "no-consecutive-blank-lines": false,
+        "quotemark": [true, "single", "avoid-escape"],
+        "interface-name": false,
+        "no-empty-interface": false,
+        "no-namespace": false,
+        "ordered-imports": false,
+        "object-literal-sort-keys": false,
+        "arrow-parens": false,
+        "no-string-literal": false,
         "member-ordering": [
             true,
-            "public-before-private",
-            "static-before-instance",
-            "variables-before-functions"
+            {
+                "order": [
+                    "public-static-field",
+                    "public-static-method",
+                    "protected-static-field",
+                    "protected-static-method",
+                    "private-static-field",
+                    "private-static-method",
+                    "public-instance-field",
+                    "protected-instance-field",
+                    "private-instance-field",
+                    "public-constructor",
+                    "protected-constructor",
+                    "private-constructor",
+                    "public-instance-method",
+                    "protected-instance-method",
+                    "private-instance-method"
+                ]
+            }
         ],
-        "no-arg": true,
-        "no-bitwise": true,
         "no-console": [
             true,
             "debug",
@@ -44,76 +44,12 @@
             "timeEnd",
             "trace"
         ],
-        "no-construct": true,
-        "no-debugger": true,
-        "no-duplicate-variable": true,
-        "no-empty": false,
-        "no-eval": true,
-        "no-inferrable-types": [
-            true,
-            "ignore-params"
-        ],
-        "no-shadowed-variable": true,
-        "no-string-literal": false,
+        "no-inferrable-types": [true, "ignore-params"],
         "no-switch-case-fall-through": true,
-        "no-unused-expression": false,
-        "quotemark": [
-            true,
-            "single",
-            "avoid-escape"
-        ],
-        "radix": true,
-        "semicolon": [
-            true,
-            "always",
-            "ignore-bound-class-methods"
-        ],
-        "triple-equals": [
-            true,
-            "allow-null-check"
-        ],
-        "typedef": [
-            true,
-            "call-signature",
-            "parameter"
-        ],
-        "variable-name": false,
-        "trailing-comma": [
-            true,
-            {
-                "multiline": "never",
-                "singleline": "never"
-            }
-        ],
-        "whitespace": [
-            true,
-            "check-branch",
-            "check-decl",
-            "check-operator",
-            "check-module",
-            "check-separator",
-            "check-type"
-        ],
-        "typedef-whitespace": [
-            true,
-            {
-                "call-signature": "nospace",
-                "index-signature": "nospace",
-                "parameter": "nospace",
-                "property-declaration": "nospace",
-                "variable-declaration": "nospace"
-            },
-            {
-                "call-signature": "onespace",
-                "index-signature": "onespace",
-                "parameter": "onespace",
-                "property-declaration": "onespace",
-                "variable-declaration": "onespace"
-            }
-        ],
-        "no-internal-module": true,
-        "no-trailing-whitespace": true,
-        "no-null-keyword": false,
-        "prefer-const": true
+        "typedef": [true, "call-signature", "parameter"],
+        "trailing-comma": [true, {
+            "multiline": "never",
+            "singleline": "never"
+        }]
     }
 }

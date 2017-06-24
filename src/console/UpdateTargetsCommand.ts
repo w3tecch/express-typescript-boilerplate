@@ -15,8 +15,8 @@ import { existsFile } from './lib/utils';
 
 export class UpdateTargetsCommand extends AbstractCommand {
 
-    static command = 'update:targets';
-    static description = 'Generate new controller';
+    public static command = 'update:targets';
+    public static description = 'Generate new controller';
 
     public template = 'targets.hbs';
     public targetFile = 'Targets.ts';
@@ -67,7 +67,7 @@ export class UpdateTargetsCommand extends AbstractCommand {
         const key = fs[0];
         fs.splice(0, 1);
         return {
-            key: key,
+            key,
             path: fs.join('/')
         };
     }

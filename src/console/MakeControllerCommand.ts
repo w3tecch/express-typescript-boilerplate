@@ -8,8 +8,8 @@ import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
 
 export class MakeControllerCommand extends AbstractMakeCommand {
 
-    static command = 'make:controller';
-    static description = 'Generate new controller';
+    public static command = 'make:controller';
+    public static description = 'Generate new controller';
 
     public type = 'Controller';
     public suffix = 'Controller';

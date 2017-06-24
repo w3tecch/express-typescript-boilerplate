@@ -21,5 +21,5 @@ export const Knex = (): knex => knex({
     }
 });
 
-export const Bookshelf: bookshelf = bookshelf(<any>Knex());
+export const Bookshelf: bookshelf = bookshelf(Knex() as any);
 Bookshelf.plugin(['bookshelf-camelcase']);

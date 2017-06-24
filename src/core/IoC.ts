@@ -125,7 +125,9 @@ export class IoC {
         return new Promise<void>((resolve) => {
             this.getFiles(path, (files: string[]) => {
                 files.forEach((file: any) => {
-                    let fileExport, fileClass, fileTarget;
+                    let fileExport;
+                    let fileClass;
+                    let fileTarget;
                     const isRecursive = file.name.indexOf('.') > 0;
                     try {
                         fileExport = require(`${file.path}`);
@@ -207,11 +209,11 @@ export class IoC {
         const file = filePath.substr(dir.length + 1);
         const name = file.replace('/', '.').substring(0, file.length - 3);
         return {
-            path: path,
-            filePath: filePath,
-            dir: dir,
-            file: file,
-            name: name
+            path,
+            filePath,
+            dir,
+            file,
+            name
         };
     }
 

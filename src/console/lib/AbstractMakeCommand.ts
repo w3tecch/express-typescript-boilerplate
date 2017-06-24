@@ -21,18 +21,10 @@ export interface MakeCommand {
 
 export class AbstractMakeCommand {
 
-    static command = 'make:command';
-    static description = 'description';
+    public static command = 'make:command';
+    public static description = 'description';
 
-    public context: any;
-    public type = 'Type';
-    public suffix = 'Suffix';
-    public prefix = '';
-    public template = 'template.hbs';
-    public target = 'api/target/path';
-    public updateTargets = true;
-
-    static async action(command: MakeCommand): Promise<void> {
+    public static async action(command: MakeCommand): Promise<void> {
         try {
             await command.run();
             await command.write();
@@ -44,6 +36,14 @@ export class AbstractMakeCommand {
             process.exit(1);
         }
     }
+
+    public context: any;
+    public type = 'Type';
+    public suffix = 'Suffix';
+    public prefix = '';
+    public template = 'template.hbs';
+    public target = 'api/target/path';
+    public updateTargets = true;
 
     constructor(context?: any) {
         this.context = _.cloneDeep(context);

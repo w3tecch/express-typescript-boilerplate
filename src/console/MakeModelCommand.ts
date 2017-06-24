@@ -13,8 +13,8 @@ import { writeTemplate } from './lib/template';
 
 export class MakeModelCommand extends AbstractMakeCommand {
 
-    static command = 'make:model';
-    static description = 'Generate new model';
+    public static command = 'make:model';
+    public static description = 'Generate new model';
 
     public type = 'Model';
     public suffix = '';

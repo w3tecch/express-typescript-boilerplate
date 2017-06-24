@@ -11,16 +11,16 @@ import { ModelFactory } from './ModelFactory';
 
 export class Factory {
 
-    private static instance: Factory;
-
-    private blueprints: { [key: string]: BluePrint };
-
     public static getInstance(): Factory {
         if (!Factory.instance) {
             Factory.instance = new Factory(faker);
         }
         return Factory.instance;
     }
+
+    private static instance: Factory;
+
+    private blueprints: { [key: string]: BluePrint };
 
     constructor(private faker: Faker.FakerStatic) {
         this.blueprints = {};

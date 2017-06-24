@@ -10,7 +10,7 @@ import { Tables } from '../../constants';
 export class User extends Bookshelf.Model<User> {
 
     public static async fetchById(id: number): Promise<User> {
-        return User.where<User>({ id: id }).fetch();
+        return User.where<User>({ id }).fetch();
     }
 
     public static async fetchByUserId(userId: string): Promise<User> {

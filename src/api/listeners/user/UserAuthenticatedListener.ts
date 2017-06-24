@@ -5,7 +5,7 @@ import { Logger as LoggerType } from '../../../core/Logger';
 
 export class UserAuthenticatedListener implements interfaces.Listener {
 
-    static Event = Symbol('UserAuthenticatedListener');
+    public static Event = Symbol('UserAuthenticatedListener');
 
     public log: LoggerType;
 

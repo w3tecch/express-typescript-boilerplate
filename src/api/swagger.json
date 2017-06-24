@@ -6,7 +6,7 @@
         "description": "",
         "version": ""
     },
-    "basePath": "/api/v1",
+    "basePath": "/api",
     "consumes": [
         "application/json"
     ],

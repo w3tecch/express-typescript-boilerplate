@@ -76,7 +76,7 @@ export function bodySuccessful<T>(data: T, options: myExpress.ResponseOptions = 
         success: true,
         ...message(options.message),
         ...links(options.links),
-        data: data
+        data
     };
 }
 
@@ -86,8 +86,8 @@ export function bodySuccessful<T>(data: T, options: myExpress.ResponseOptions = 
 export function bodyFailed(message: string, error?: any): any {
     return {
         success: false,
-        message: message,
-        ...{ error: error }
+        message,
+        ...{ error }
     };
 }
 

@@ -2,7 +2,8 @@ import { Logger } from '../core/Logger';
 
 import * as Knex from 'knex';
 import { AbstractCommand } from './lib/AbstractCommand';
-const options = require('../../knexfile.ts');
+import * as options from '../../knexfile.ts';
+
 const log = new Logger(__filename);
 
 
@@ -15,8 +16,8 @@ const log = new Logger(__filename);
  */
 export class DatabaseResetCommand extends AbstractCommand {
 
-    static command = 'db:reset';
-    static description = 'Reverse all current migrations and migrate to latest.';
+    public static command = 'db:reset';
+    public static description = 'Reverse all current migrations and migrate to latest.';
 
     public async run(): Promise<void> {
         const knex = Knex(options);

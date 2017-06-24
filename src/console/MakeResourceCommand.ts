@@ -14,8 +14,8 @@ import { MakeRequestCommand } from './MakeRequestCommand';
 
 export class MakeResourceCommand extends AbstractMakeCommand {
 
-    static command = 'make:resource';
-    static description = 'Generate a new resource';
+    public static command = 'make:resource';
+    public static description = 'Generate a new resource';
 
     public type = 'Resource';
     public suffix = '';

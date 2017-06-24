@@ -11,8 +11,8 @@ import { inputIsRequired } from './lib/utils';
 
 export class MakeMigrationCommand extends AbstractMakeCommand {
 
-    static command = 'make:migration';
-    static description = 'Generate new migration';
+    public static command = 'make:migration';
+    public static description = 'Generate new migration';
 
     public target = 'database/migrations';
     public type = 'Migration';

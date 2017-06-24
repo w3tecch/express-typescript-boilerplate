@@ -10,27 +10,27 @@ import * as packageInfo from '../../../package.json';
 
 export class Environment {
 
-    static getNodeEnv(): string {
+    public static getNodeEnv(): string {
         return process.env.NODE_ENV || 'development';
     }
 
-    static isTest(): boolean {
+    public static isTest(): boolean {
         return this.getNodeEnv() === 'test';
     }
 
-    static isDevelopment(): boolean {
+    public static isDevelopment(): boolean {
         return this.getNodeEnv() === 'development';
     }
 
-    static isProduction(): boolean {
+    public static isProduction(): boolean {
         return this.getNodeEnv() === 'production';
     }
 
-    static getPkg(): any {
+    public static getPkg(): any {
         return packageInfo;
     }
 
-    static isTruthy(bool: string): boolean {
+    public static isTruthy(bool: string): boolean {
         try {
             return bool.toLowerCase() === 'true';
         } catch (e) {

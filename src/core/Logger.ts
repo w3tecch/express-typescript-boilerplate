@@ -13,12 +13,6 @@ export class Logger {
 
     public static DEFAULT_SCOPE = 'app';
 
-    private static Adapter: interfaces.LoggerAdapterConstructor;
-    private static Adapters: Map<string, interfaces.LoggerAdapterConstructor> = new Map();
-
-    private scope: string;
-    private adapter: interfaces.LoggerAdapter;
-
     public static addAdapter(key: string, adapter: interfaces.LoggerAdapterConstructor): void {
         Logger.Adapters.set(key, adapter);
     }
@@ -32,6 +26,9 @@ export class Logger {
         }
     }
 
+    private static Adapter: interfaces.LoggerAdapterConstructor;
+    private static Adapters: Map<string, interfaces.LoggerAdapterConstructor> = new Map();
+
     private static parsePathToScope(path: string): string {
         if (path.indexOf('/') >= 0) {
             path = path.replace(process.cwd(), '');
@@ -42,6 +39,9 @@ export class Logger {
         }
         return path;
     }
+
+    private scope: string;
+    private adapter: interfaces.LoggerAdapter;
 
     constructor(scope?: string) {
         this.scope = Logger.parsePathToScope((scope) ? scope : Logger.DEFAULT_SCOPE);
@@ -69,7 +69,9 @@ export class Logger {
 
     private log(level: string, message: string, args: any[]): void {
         this.lazyLoadAdapter();
-        this.adapter && this.adapter[level](message, args);
+        if (this.adapter) {
+            this.adapter[level](message, args);
+        }
     }
 
     private lazyLoadAdapter(): void {

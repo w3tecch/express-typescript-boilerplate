@@ -8,8 +8,8 @@ import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
 
 export class MakeRequestCommand extends AbstractMakeCommand {
 
-    static command = 'make:request';
-    static description = 'Generate new request';
+    public static command = 'make:request';
+    public static description = 'Generate new request';
 
     public type = 'Request';
     public suffix = 'Request';

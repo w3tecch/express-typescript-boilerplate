@@ -78,7 +78,7 @@ export class UserRepository {
      * @returns {Promise<User>}
      */
     public async update(id: number, data: any): Promise<User> {
-        const user = this.UserModel.forge<User>({ id: id });
+        const user = this.UserModel.forge<User>({ id });
         try {
             const updatedUser = await user.save(data, { patch: true });
             return this.UserModel.fetchById(updatedUser.id);
@@ -97,7 +97,7 @@ export class UserRepository {
      * @returns {Promise<void>}
      */
     public async destroy(id: number): Promise<void> {
-        let user = this.UserModel.forge<User>({ id: id });
+        let user = this.UserModel.forge<User>({ id });
         try {
             user = await user.fetch({ require: true });
         } catch (error) {

@@ -17,8 +17,6 @@ import { ApiInfo } from './ApiInfo';
 
 export class Server {
 
-    private log = new Logger(__filename);
-
     /**
      * Normalize port for the express application
      *
@@ -27,7 +25,7 @@ export class Server {
      *
      * @memberof Server
      */
-    static normalizePort(port: string): number | string | boolean {
+    public static normalizePort(port: string): number | string | boolean {
         const parsedPort = parseInt(port, 10);
         if (isNaN(parsedPort)) { // named pipe
             return port;
@@ -37,6 +35,8 @@ export class Server {
         }
         return false;
     }
+
+    private log = new Logger(__filename);
 
     constructor(public httpServer: http.Server) { }
 
