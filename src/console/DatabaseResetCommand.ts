@@ -2,7 +2,7 @@ import { Logger } from '../core/Logger';
 
 import * as Knex from 'knex';
 import { AbstractCommand } from './lib/AbstractCommand';
-import * as options from '../../knexfile.ts';
+import * as options from './../../knexfile';
 
 const log = new Logger(__filename);
 
