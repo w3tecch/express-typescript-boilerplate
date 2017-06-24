@@ -10,6 +10,9 @@ import * as http from 'http';
 import * as express from 'express';
 import { Logger } from './Logger';
 import { Environment } from './helpers/Environment';
+import { SwaggerUI } from './SwaggerUI';
+import { ApiMonitor } from './ApiMonitor';
+import { ApiInfo } from './ApiInfo';
 
 
 export class Server {
@@ -70,13 +73,13 @@ export class Server {
         this.log.debug(`Version      : ${Environment.getPkg().version}`);
         this.log.debug(``);
         if (Environment.isTruthy(process.env.API_INFO_ENABLED)) {
-            this.log.debug(`API Info     : ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}${process.env.API_INFO_ROUTE}`);
+            this.log.debug(`API Info     : ${app.get('host')}:${app.get('port')}${ApiInfo.getRoute()}`);
         }
         if (Environment.isTruthy(process.env.SWAGGER_ENABLED)) {
-            this.log.debug(`Swagger      : ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}${process.env.SWAGGER_ROUTE}`);
+            this.log.debug(`Swagger      : ${app.get('host')}:${app.get('port')}${SwaggerUI.getRoute()}`);
         }
         if (Environment.isTruthy(process.env.MONITOR_ENABLED)) {
-            this.log.debug(`Monitor      : ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}${process.env.MONITOR_ROUTE}`);
+            this.log.debug(`Monitor      : ${app.get('host')}:${app.get('port')}${ApiMonitor.getRoute()}`);
         }
         this.log.debug('-------------------------------------------------------');
         this.log.debug('');

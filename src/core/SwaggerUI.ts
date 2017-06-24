@@ -5,6 +5,11 @@ import { Environment } from './helpers/Environment';
 
 
 export class SwaggerUI {
+
+    public static getRoute(): string {
+        return path.join(process.env.APP_URL_PREFIX, process.env.SWAGGER_ROUTE);
+    }
+
     public setup(app: express.Application): void {
         if (Environment.isTruthy(process.env.SWAGGER_ENABLED)) {
             const baseFolder = __dirname.indexOf('/src/') >= 0 ? '/src/' : '/dist/';
@@ -20,8 +25,7 @@ export class SwaggerUI {
             };
 
             // Initialize swagger-jsdoc -> returns validated swagger spec in json format
-            const route = path.join(process.env.APP_URL_PREFIX, process.env.SWAGGER_ROUTE);
-            app.use(route, swaggerUi.serve, swaggerUi.setup(swaggerFile));
+            app.use(SwaggerUI.getRoute(), swaggerUi.serve, swaggerUi.setup(swaggerFile));
         }
     }
 }
