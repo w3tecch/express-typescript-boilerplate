@@ -17,9 +17,11 @@ import * as compression from 'compression';
 import { Logger } from '../core/Logger';
 import { App, Configurable } from '../core/App';
 
-
 export class AppConfig implements Configurable {
     public configure(app: App): void {
+
+        const logger = new Logger();
+
         app.Express
             // Enabling the cors headers
             .options('*', cors())
@@ -51,7 +53,7 @@ export class AppConfig implements Configurable {
             // HTTP request logger middleware for node.js
             .use(morgan('dev', {
                 stream: {
-                    write: new Logger().info
+                    write: logger.info.bind(logger)
                 }
             }));
     }
