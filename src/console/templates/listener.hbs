@@ -1,12 +1,11 @@
 import { inject, named } from 'inversify';
-import { Types } from '../../{{deepness}}constants/Types';
-import { Core } from '../../{{deepness}}core/Targets';
+import { Types, Core } from '../../{{deepness}}constants';
 import { Logger as LoggerType } from '../../{{deepness}}core/Logger';
 
 
-export class {{name.capitalize}}Listener {
+export class {{name.capitalize}}Listener implements interfaces.Listener {
 
-    static Event = Symbol('{{name.normal}}Listener');
+    public static Event = Symbol('{{name.normal}}Listener');
 
     public log: LoggerType;
 
@@ -16,8 +15,8 @@ export class {{name.capitalize}}Listener {
         this.log = new Logger(__filename);
     }
 
-    public run(data: any): Promise<void> {
-        this.log.info('Receive event {{name.capitalize}}Listener', data);
+    public act(user: any): void {
+        this.log.info('Receive event {{name.capitalize}}Listener', user);
     }
 
 }

@@ -1,11 +1,9 @@
 import { inject, named } from 'inversify';
-import { myExpress } from 'my-express';
 import { Logger as LoggerType } from '../../{{deepness}}core/Logger';
-import { Types } from '../../{{deepness}}constants/Types';
-import { Core } from '../../{{deepness}}core/Targets';
+import { Types, Core } from '../../{{deepness}}constants';
 
 
-export class {{name.capitalize}}Middleware {
+export class {{name.capitalize}}Middleware implements interfaces.Middleware {
 
     public log: LoggerType;
 
