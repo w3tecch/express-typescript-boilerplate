@@ -1,8 +1,7 @@
 {{#if isResourceTemplate}}
 import * as Bookshelf from 'bookshelf';
 import { inject, named } from 'inversify';
-import { Types } from '../../{{deepness}}constants/Types';
-import { Model } from '../../{{deepness}}constants/Targets';
+import { Types, Targets } from '../../{{deepness}}constants';
 import { {{name.capitalize}} } from '../{{deepness}}models/{{name.capitalize}}';
 import { DatabaseException } from '../{{deepness}}exceptions/DatabaseException';
 import { NotFoundException } from '../{{deepness}}exceptions/NotFoundException';
@@ -15,7 +14,7 @@ export class {{name.capitalize}}Repository {
 
     {{#if isResourceTemplate}}
     constructor(
-        @inject(Types.Model) @named(Model.{{name.capitalize}}) public {{name.capitalize}}Model: typeof {{name.capitalize}}
+        @inject(Types.Model) @named(Targets.Model.{{name.capitalize}}) public {{name.capitalize}}Model: typeof {{name.capitalize}}
     ) { }
 
     public async findAll(): Promise<Bookshelf.Collection<{{name.capitalize}}>> {
