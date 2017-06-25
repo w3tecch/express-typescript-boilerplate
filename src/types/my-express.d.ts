@@ -7,7 +7,6 @@
  */
 
 import * as expressLib from 'express';
-import * as auth0 from 'auth0';
 import * as resources from 'resources';
 
 declare namespace myExpress {
