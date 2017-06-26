@@ -77,7 +77,7 @@ export class UserService {
      * @param {*} data is the json body of the request
      * @returns {Promise<User>}
      */
-    @Validate
+    @Validate()
     public async create( @Request(UserCreateRequest) data: any): Promise<User> {
         // If the request body was valid we will create the user
         const user = await this.userRepo.create(data);
@@ -93,7 +93,7 @@ export class UserService {
      * @param {*} newUser is the json body of the request
      * @returns {Promise<User>}
      */
-    @Validate
+    @Validate()
     public async update(id: number, @Request(UserUpdateRequest) newUser: any): Promise<User> {
         // Find or fail
         const user = await this.findOne(id);

@@ -40,7 +40,7 @@ export const Request = (request: typeof RequestBody) => (target: object, propert
  * @param propertyName
  * @param descriptor
  */
-export const Validate = (target: any, propertyName: string, descriptor: TypedPropertyDescriptor<() => void>): any => {
+export const Validate = () => (target: any, propertyName: string, descriptor: TypedPropertyDescriptor<any>): any => {
     const method = descriptor.value;
     descriptor.value = async function(...args: any[]): Promise<any> {
         const requestParameters: RequestParameter[] = Reflect.getOwnMetadata(requestMetadataKey, target, propertyName);

@@ -39,14 +39,14 @@ export class {{name.capitalize}}Service {
         return {{name.camelCase}};
     }
 
-    @Validate
+    @Validate()
     public async create( @Request({{name.capitalize}}CreateRequest) body: any): Promise<{{name.capitalize}}> {
         // If the request body was valid we will create the {{name.camelCase}}
         const {{name.camelCase}} = await this.{{name.camelCase}}Repo.create(body);
         return {{name.camelCase}};
     }
 
-    @Validate
+    @Validate()
     public async update(id: number, @Request({{name.capitalize}}UpdateRequest) body: any): Promise<{{name.capitalize}}> {
         // Find or fail
         const {{name.camelCase}} = await this.findOne(id);
