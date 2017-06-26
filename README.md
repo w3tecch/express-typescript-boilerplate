@@ -26,12 +26,13 @@ A delightful way to building a RESTful API with NodeJs & TypeScript.
 ### Installing
 * `fork` this repo
 * `clone` your fork
-* `yarn install` to install all dependencies and typings
-* `cp .env.example .env` to copy the example .env file.
-* Create new database. You will find the name in the .env file.
-* `npm run db:migrate` to create the schema
-* `npm run db:seed` to insert some test data
-* `npm run serve` to start the dev server in another tab
+* `cp .env.example .env` to copy the example .env file and enter your database connection
+* Run `npm run setup` or enter the following commands manually:
+    * `yarn install` to install all dependencies and typings.
+    * Create new database. You will find the name in the .env file.
+    * `npm run db:migrate` to create the schema.
+    * `npm run db:seed` to insert some test data.
+* `npm run serve` to start the application.
 
 ### Running the app
 After you have installed all dependencies you can run the app.
@@ -106,7 +107,7 @@ created file!!**
 Just set a breakpoint and hit `F5` in your Visual Studio Code.
 
 ## API Routes
-The route prefix is `/api/v1` by default, but you can change this in the .env file.
+The route prefix is `/api` by default, but you can change this in the .env file.
 
 | Route       | Description |
 | ----------- | ----------- |
