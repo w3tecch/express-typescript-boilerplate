@@ -1,7 +1,29 @@
 # Express Typescript Boilerplate
 [![Dependency Status](https://david-dm.org/w3tecch/express-typescript-boilerplate/status.svg?style=flat)](https://david-dm.org/w3tecch/express-typescript-boilerplate) [![Build Status](https://travis-ci.org/w3tecch/express-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-typescript-boilerplate)
 
-A delightful way to building a RESTful API with NodeJs & TypeScript.
+> A delightful way to building a RESTful API with NodeJs & TypeScript.
+
+> An Node.js RESTful API boilerplate featuring
+[Express](https://expressjs.com/),
+[Inversify](http://inversify.io/),
+[Winston](https://github.com/winstonjs/winston),
+[TypeScript](https://www.typescriptlang.org/),
+[TsLint](http://palantir.github.io/tslint/),
+[@types](https://www.npmjs.com/~types),
+[Jest](https://facebook.github.io/jest/),
+[Swagger](http://swagger.io/),
+[validatejs](https://validatejs.org/),
+[knex](http://knexjs.org/) and
+[bookshelf](http://bookshelfjs.org/)
+by [w3tech](https://github.com/w3tecch)
+
+## Why
+Our main goal with this project is, that we have a feature complete server application.
+So you can focus more on main product and not spending hours for a project configuration.
+
+Just try it out and give us some feedback or whishes for new features.
+
+## Features
 - **Beautiful Syntax** thanks to the awesome annotations from [Inversify Express Utils](https://github.com/inversify/inversify-express-utils).
 - **Easy API Testing** with included black-box testing.
 - **Dependency Injection** done with the nice framework from [Inversify](http://inversify.io/).
