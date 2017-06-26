@@ -101,7 +101,7 @@ Our IoC automatically looks through the `controllers`, `listeners` , `middleware
 `repositories` and `models` folders for files to bind to our IoC - Container, so you have nothing to do.
 
 **However it is very important to keep the naming right, because otherwise our IoC will not find your
-created file!!**
+created files!!**
 
 ## Using the debugger in VS Code
 Just set a breakpoint and hit `F5` in your Visual Studio Code.
@@ -161,7 +161,7 @@ The route prefix is `/api` by default, but you can change this in the .env file.
 * [Inversify Express Utils](https://github.com/inversify/inversify-express-utils)
 * [class-validator](https://github.com/pleerock/class-validator)
 * [Jest](http://facebook.github.io/jest/)
-* [Auth0 API Documentation](https://auth0.com/docs/api/management/v2#!/Users/get_users)
+* [Auth0 API Documentation](https://auth0.com/docs/api/management/v2)
 * [swagger Documentation](http://swagger.io/)
 
 ## License
