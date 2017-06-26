@@ -18,10 +18,10 @@
 by [w3tech](https://github.com/w3tecch)
 
 ## Why
-Our main goal with this project is, that we have a feature complete server application.
-So you can focus more on main product and not spending hours for a project configuration.
+Our main goal with this project is a feature complete server application.
+We like you to be focused on your business and not spending hours in project configuration.
 
-Just try it out and give us some feedback or whishes for new features.
+Try it!! We are happy to hear your feedback or any kind of new features.
 
 ## Features
 - **Beautiful Syntax** thanks to the awesome annotations from [Inversify Express Utils](https://github.com/inversify/inversify-express-utils).
@@ -30,9 +30,10 @@ Just try it out and give us some feedback or whishes for new features.
 - **Fast Database Building** with simple migration and seeding from [Knex](http://knexjs.org/).
 - **Simplified Database Query** with the ORM of [Knex](http://knexjs.org/) called [Bookshelf](http://bookshelfjs.org/).
 - **Clear Structure** with controllers, services, repositories, models, middlewares...
-- **Easy Exception Handling** with our own simple classes. You will see.
+- **Easy Exception Handling** with our own simple and easy to adopt logic. You will love it.
 - **Easy Data Seeding** with our own factories.
-- **Custom Commands** are also available in our setup and really easy to use.
+- **Custom Commands** are also available in our setup and really easy to use or even extend.
+- **Scaffolding Commands** will speed up your development tremendously as you should focus on business code and not scaffolding.
 - **Smart Validation** thanks to [class-validator](https://github.com/pleerock/class-validator) with some nice annotations.
 - **API Documentation** thanks to [swagger](http://swagger.io/).
 - **API Monitoring** thanks to [express-status-monitor](https://github.com/RafalWilinski/express-status-monitor).
@@ -49,9 +50,9 @@ Just try it out and give us some feedback or whishes for new features.
 * `fork` this repo
 * `clone` your fork
 * `cp .env.example .env` to copy the example .env file and enter your database connection
+* Create a new database. You will find the name in the .env file.
 * Run `npm run setup` or enter the following commands manually:
     * `yarn install` to install all dependencies and typings.
-    * Create new database. You will find the name in the .env file.
     * `npm run db:migrate` to create the schema.
     * `npm run db:seed` to insert some test data.
 * `npm run serve` to start the application.
@@ -72,18 +73,16 @@ All script are defined in the package.json file, but the most important ones are
 * There is also a vscode task for this called `lint`.
 
 ### Tests
-* Run the unit tests using `npm test`.
+* Run the unit tests using `npm test` (There is also a vscode task for this called `test`).
 * Run the black-box tests using `npm run test:black-box` and don't forget to start your application and your [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server).
-* There is also a vscode task for this called `test`.
 
 ### Running in dev mode
 * Run `npm run serve` to start nodemon with ts-node, to serve the app.
 * The server address will be displayed to you as `http://0.0.0.0:3000`
 
 ### Building the project and run it
-* Run `npm run build` to generated all JavaScript files from the TypeScript sources. After this step you can deploy the app to any server.
-* There is also a vscode task for this called `build`.
-* To start the builded app use `npm start`.
+* Run `npm run build` to generated all JavaScript files from the TypeScript sources. After this step you can deploy the app contained in `dist` to any server (There is also a vscode task for this called `build`).
+* To start the builded app located in `dist` use `npm start`.
 
 ### Database
 * Run `npm run db:migrate` to migrate schema changes to the database
@@ -95,7 +94,7 @@ All script are defined in the package.json file, but the most important ones are
 * To run your own created command enter `npm run console <command-name>`.
 * This list all your created commands `npm run console:help`.
 
-### Generating Commands
+### Scaffolding Commands
 All the templates for the commands are located in `src/console/templates`.
 
 * `npm run console make:resource <file>` - Generates a controller, service, requests, repo, model and a migration with CRUD operations.
@@ -120,7 +119,7 @@ $ npm run console make:model user
 
 ## IoC
 Our IoC automatically looks through the `controllers`, `listeners` , `middlewares`, `services`,
-`repositories` and `models` folders for files to bind to our IoC - Container, so you have nothing to do.
+`repositories` and `models` folders in `src/api/` for files to bound automatically into the IoC - Container, so you have nothing to do.
 
 **However it is very important to keep the naming right, because otherwise our IoC will not find your
 created files!!**
@@ -133,8 +132,8 @@ The route prefix is `/api` by default, but you can change this in the .env file.
 
 | Route       | Description |
 | ----------- | ----------- |
-| **/info**   | Shows us the name, description and the version of the package.json |
-| **/docs**   | This is the Swagger UI with our API documentation |
+| **/api/info**   | Shows us the name, description and the version of the package.json |
+| **/api/docs**   | This is the Swagger UI with our API documentation |
 | **/status** | Shows a small monitor page for the server |
 
 ## Project Structure
@@ -172,9 +171,9 @@ The route prefix is `/api` by default, but you can change this in the .env file.
 * [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter) - A starter template for TypeScript and Node with a detailed README describing how to use the two together.
 * [express-graphql-typescript-boilerplate](https://github.com/w3tecch/express-graphql-typescript-boilerplate) - A starter kit for building amazing GraphQL API's with TypeScript and express by @w3tecch
 * [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
-* [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server)
+* [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server) - Useful for black-box testing or faking an oAuth server
 
-## Documentations
+## Documentations of our main dependencies
 * [Express](https://expressjs.com/)
 * [Knex](http://knexjs.org/)
 * [Bookshelf](http://bookshelfjs.org/)
@@ -190,4 +189,4 @@ The route prefix is `/api` by default, but you can change this in the .env file.
  [MIT](/LICENSE)
 
 ---
-Made with ♥ by Gery Hirschfeld ([@GeryHirschfeld1](https://twitter.com/GeryHirschfeld1)) and [contributors](https://github.com/w3tecch/express-typescript-boilerplate/graphs/contributors)
+Made with ♥ by w3tech ([w3tech](https://github.com/w3tecch)), Gery Hirschfeld ([@GeryHirschfeld1](https://twitter.com/GeryHirschfeld1)) and [contributors](https://github.com/w3tecch/express-typescript-boilerplate/graphs/contributors)
