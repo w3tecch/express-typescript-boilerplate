@@ -9,10 +9,8 @@
 
 import * as Bookshelf from 'bookshelf';
 import { inject, named } from 'inversify';
-import { Core } from '../../core/Targets';
-import { Repository } from '../../constants/Targets';
-import { Types } from '../../constants/Types';
-import { Log } from '../../core/log';
+import { Types, Core, Targets } from '../../constants';
+import { Logger as LoggerType } from '../../core/Logger';
 import { EventEmitter } from '../../core/api/events';
 import { Validate, Request } from '../../core/api/Validate';
 import { NotFoundException } from '../exceptions/NotFoundException';
@@ -25,14 +23,14 @@ import { UserCreatedListener } from '../listeners/user/UserCreatedListener';
 
 export class UserService {
 
-    private log: Log;
+    private log: LoggerType;
 
     constructor(
-        @inject(Types.Repository) @named(Repository.UserRepository) public userRepo: UserRepository,
-        @inject(Types.Core) @named(Core.Log) public Logger: typeof Log,
+        @inject(Types.Repository) @named(Targets.Repository.UserRepository) public userRepo: UserRepository,
+        @inject(Types.Core) @named(Core.Logger) public Logger: typeof LoggerType,
         @inject(Types.Core) @named(Core.Events) public events: EventEmitter
     ) {
-        this.log = new Logger('api:services:UserService');
+        this.log = new Logger(__filename);
     }
 
     /**
@@ -79,7 +77,7 @@ export class UserService {
      * @param {*} data is the json body of the request
      * @returns {Promise<User>}
      */
-    @Validate
+    @Validate()
     public async create( @Request(UserCreateRequest) data: any): Promise<User> {
         // If the request body was valid we will create the user
         const user = await this.userRepo.create(data);
@@ -95,7 +93,7 @@ export class UserService {
      * @param {*} newUser is the json body of the request
      * @returns {Promise<User>}
      */
-    @Validate
+    @Validate()
     public async update(id: number, @Request(UserUpdateRequest) newUser: any): Promise<User> {
         // Find or fail
         const user = await this.findOne(id);

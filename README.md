@@ -1,7 +1,29 @@
 # Express Typescript Boilerplate
 [![Dependency Status](https://david-dm.org/w3tecch/express-typescript-boilerplate/status.svg?style=flat)](https://david-dm.org/w3tecch/express-typescript-boilerplate) [![Build Status](https://travis-ci.org/w3tecch/express-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-typescript-boilerplate)
 
-A delightful way to building a RESTful API with NodeJs & TypeScript.
+> A delightful way to building a RESTful API with NodeJs & TypeScript.
+
+> An Node.js RESTful API boilerplate featuring
+[Express](https://expressjs.com/),
+[Inversify](http://inversify.io/),
+[Winston](https://github.com/winstonjs/winston),
+[TypeScript](https://www.typescriptlang.org/),
+[TsLint](http://palantir.github.io/tslint/),
+[@types](https://www.npmjs.com/~types),
+[Jest](https://facebook.github.io/jest/),
+[Swagger](http://swagger.io/),
+[validatejs](https://validatejs.org/),
+[knex](http://knexjs.org/) and
+[bookshelf](http://bookshelfjs.org/)
+by [w3tech](https://github.com/w3tecch)
+
+## Why
+Our main goal with this project is, that we have a feature complete server application.
+So you can focus more on main product and not spending hours for a project configuration.
+
+Just try it out and give us some feedback or whishes for new features.
+
+## Features
 - **Beautiful Syntax** thanks to the awesome annotations from [Inversify Express Utils](https://github.com/inversify/inversify-express-utils).
 - **Easy API Testing** with included black-box testing.
 - **Dependency Injection** done with the nice framework from [Inversify](http://inversify.io/).
@@ -26,12 +48,13 @@ A delightful way to building a RESTful API with NodeJs & TypeScript.
 ### Installing
 * `fork` this repo
 * `clone` your fork
-* `yarn install` to install all dependencies and typings
-* `cp .env.example .env` to copy the example .env file.
-* Create new database. You will find the name in the .env file.
-* `npm run db:migrate` to create the schema
-* `npm run db:seed` to insert some test data
-* `npm run serve` to start the dev server in another tab
+* `cp .env.example .env` to copy the example .env file and enter your database connection
+* Run `npm run setup` or enter the following commands manually:
+    * `yarn install` to install all dependencies and typings.
+    * Create new database. You will find the name in the .env file.
+    * `npm run db:migrate` to create the schema.
+    * `npm run db:seed` to insert some test data.
+* `npm run serve` to start the application.
 
 ### Running the app
 After you have installed all dependencies you can run the app.
@@ -100,13 +123,13 @@ Our IoC automatically looks through the `controllers`, `listeners` , `middleware
 `repositories` and `models` folders for files to bind to our IoC - Container, so you have nothing to do.
 
 **However it is very important to keep the naming right, because otherwise our IoC will not find your
-created file!!**
+created files!!**
 
 ## Using the debugger in VS Code
 Just set a breakpoint and hit `F5` in your Visual Studio Code.
 
 ## API Routes
-The route prefix is `/api/v1` by default, but you can change this in the .env file.
+The route prefix is `/api` by default, but you can change this in the .env file.
 
 | Route       | Description |
 | ----------- | ----------- |
@@ -160,7 +183,7 @@ The route prefix is `/api/v1` by default, but you can change this in the .env fi
 * [Inversify Express Utils](https://github.com/inversify/inversify-express-utils)
 * [class-validator](https://github.com/pleerock/class-validator)
 * [Jest](http://facebook.github.io/jest/)
-* [Auth0 API Documentation](https://auth0.com/docs/api/management/v2#!/Users/get_users)
+* [Auth0 API Documentation](https://auth0.com/docs/api/management/v2)
 * [swagger Documentation](http://swagger.io/)
 
 ## License

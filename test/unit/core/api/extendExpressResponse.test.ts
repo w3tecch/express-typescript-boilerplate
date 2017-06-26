@@ -3,7 +3,9 @@ import { extendExpressResponse } from '../../../../src/core/api/extendExpressRes
 
 describe('extendExpressResponse', () => {
 
-    let req, res, next;
+    let req;
+    let res;
+    let next;
     beforeEach(() => {
         req = {};
         res = {

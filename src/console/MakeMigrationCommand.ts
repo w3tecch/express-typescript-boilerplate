@@ -5,14 +5,14 @@
  */
 import * as _ from 'lodash';
 import * as inquirer from 'inquirer';
-import { AbstractMakeCommand } from './AbstractMakeCommand';
+import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
 import { inputIsRequired } from './lib/utils';
 
 
 export class MakeMigrationCommand extends AbstractMakeCommand {
 
-    static command = 'make:migration';
-    static description = 'Generate new migration';
+    public static command = 'make:migration';
+    public static description = 'Generate new migration';
 
     public target = 'database/migrations';
     public type = 'Migration';
@@ -35,7 +35,7 @@ export class MakeMigrationCommand extends AbstractMakeCommand {
                     validate: inputIsRequired
                 }
             ]);
-            this.context = Object.assign(this.context || {}, prompts);
+            this.context = { ...(this.context || {}), ...prompts };
             this.context.name = `${this.getTimestamp()}_${prompts.name}`;
         }
 

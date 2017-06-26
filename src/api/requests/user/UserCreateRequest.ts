@@ -13,17 +13,17 @@ import { RequestBody } from '../../../core/api/RequestBody';
 export class UserCreateRequest extends RequestBody {
 
     @IsNotEmpty()
-    firstName: string;
+    public firstName: string;
 
     @IsNotEmpty()
-    lastName: string;
+    public lastName: string;
 
     @IsNotEmpty()
     @IsEmail()
-    email: string;
+    public email: string;
 
-    picture: string;
-    auth0UserId: string;
+    public picture: string;
+    public auth0UserId: string;
 
 }
 

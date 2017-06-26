@@ -1,22 +1,21 @@
 import { inject, named } from 'inversify';
-import { Types } from '../../../constants/Types';
-import { Core } from '../../../core/Targets';
-import { Log } from '../../../core/log/';
+import { Types, Core } from '../../../constants';
+import { Logger as LoggerType } from '../../../core/Logger';
 
 
-export class UserAuthenticatedListener {
+export class UserAuthenticatedListener implements interfaces.Listener {
 
-    static Event = Symbol('UserAuthenticatedListener');
+    public static Event = Symbol('UserAuthenticatedListener');
 
-    public log: Log;
+    public log: LoggerType;
 
     constructor(
-        @inject(Types.Core) @named(Core.Log) Logger: typeof Log
+        @inject(Types.Core) @named(Core.Logger) Logger: typeof LoggerType
     ) {
-        this.log = new Logger('api:listeners:UserAuthenticatedListener');
+        this.log = new Logger(__filename);
     }
 
-    public run(user: any): void {
+    public act(user: any): void {
         this.log.info('Receive event UserAuthenticatedListener', user);
     }
 

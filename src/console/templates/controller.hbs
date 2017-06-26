@@ -1,30 +1,24 @@
 {{#if isResourceTemplate}}
 import { inject, named } from 'inversify';
 import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response } from 'inversify-express-utils';
-import { myExpress } from 'my-express';
-import { Types } from '../../{{deepness}}constants/Types';
-import { Service, Middleware } from '../../{{deepness}}constants/Targets';
-import { ioc } from '../../{{deepness}}core/IoC';
-import { AuthenticateMiddleware } from '../{{deepness}}middlewares/AuthenticateMiddleware';
+import { Types, Targets } from '../../{{deepness}}constants';
+import { app } from '../../{{deepness}}app';
 import { {{name.capitalize}}Service } from '../{{deepness}}services/{{name.capitalize}}Service';
 {{else}}
 import { Controller } from 'inversify-express-utils';
-import { ioc } from '../../{{deepness}}core/IoC';
-import { Types } from '../../{{deepness}}constants/Types';
-import { Middleware } from '../../{{deepness}}constants/Targets';
-import { AuthenticateMiddleware } from '../{{deepness}}middlewares/AuthenticateMiddleware';
-
+import { app } from '../../{{deepness}}app';
+import { Types, Targets } from '../../{{deepness}}constants';
 {{/if}}
 
 // Get middlewares
-const authenticate = ioc.Container.getNamed<AuthenticateMiddleware>(Types.Middleware, Middleware.AuthenticateMiddleware);
+const authenticate = app.Container.getNamed<interfaces.Middleware>(Types.Middleware, Targets.Middleware.AuthenticateMiddleware);
 
 
 @Controller('/{{name.pluralize}}', authenticate.use)
 export class {{name.capitalize}}Controller {
 
     {{#if isResourceTemplate}}
-    constructor( @inject(Types.Service) @named(Service.{{name.capitalize}}Service) private {{name.camelCase}}Service: {{name.capitalize}}Service) { }
+    constructor( @inject(Types.Service) @named(Targets.Service.{{name.capitalize}}Service) private {{name.camelCase}}Service: {{name.capitalize}}Service) { }
 
     @Get('/')
     public async findAll( @Response() res: myExpress.Response): Promise<any> {

@@ -9,53 +9,49 @@
  * environment. For example to import users.
  */
 
-// It also loads the .env file into the 'process.env' variable.
-require('dotenv').config();
-
-// Helps to add metadata to classes with annotations
 import 'reflect-metadata';
+import * as glob from 'glob';
+import * as path from 'path';
+import * as commander from 'commander';
+import * as figlet from 'figlet';
+import * as chalk from 'chalk';
+
+// It also loads the .env file into the 'process.env' variable.
+import { config } from 'dotenv';
+config();
 
 // Configures the logger
-import '../config/Logger';
+import { LoggerConfig } from '../config/LoggerConfig';
+new LoggerConfig().configure();
 
-import * as commander from 'commander';
+figlet('console', (error: any, data: any) => {
+    console.log(chalk.blue(data));
+    console.log(chalk.green('➜ ') + chalk.bold(process.argv[2]));
+    console.log();
 
-import { DatabaseResetCommand } from './DatabaseResetCommand';
-import { MakeResourceCommand } from './MakeResourceCommand';
-import { MakeModelCommand } from './MakeModelCommand';
-import { MakeRepoCommand } from './MakeRepoCommand';
-import { MakeServiceCommand } from './MakeServiceCommand';
-import { MakeControllerCommand } from './MakeControllerCommand';
-import { MakeExceptionCommand } from './MakeExceptionCommand';
-import { MakeListenerCommand } from './MakeListenerCommand';
-import { MakeMiddlewareCommand } from './MakeMiddlewareCommand';
-import { MakeRequestCommand } from './MakeRequestCommand';
-import { UpdateTargetsCommand } from './UpdateTargetsCommand';
-import { MakeMigrationCommand } from './MakeMigrationCommand';
-import { MakeSeedCommand } from './MakeSeedCommand';
+    // Find all command files
+    glob(path.join(__dirname, '**/*Command.ts'), (err: any, matches: string[]) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        const files = matches
+            .filter(m => m.indexOf('/lib') < 0)
+            .map(m => ({
+                path: m,
+                name: m.replace(__dirname, '').replace('.ts', '').substring(1)
+            }));
 
-/**
- * Add your new commands here
- */
-[
-    DatabaseResetCommand,
-    MakeResourceCommand,
-    MakeModelCommand,
-    MakeRepoCommand,
-    MakeServiceCommand,
-    MakeControllerCommand,
-    MakeExceptionCommand,
-    MakeListenerCommand,
-    MakeMiddlewareCommand,
-    MakeRequestCommand,
-    MakeMigrationCommand,
-    MakeSeedCommand,
-    UpdateTargetsCommand
-].forEach((Command) =>
-    commander
-        .command(Command.command)
-        .description(Command.description)
-        .action(() => Command.action(new Command())));
+        const commands = files.map(f => require(f.path)[f.name]);
 
+        commands.forEach((c) => {
+            commander
+                .command(c.command)
+                .description(c.description)
+                .action(() => c.action(new c()));
+        });
 
-commander.parse(process.argv);
+        commander.parse(process.argv);
+
+    });
+});

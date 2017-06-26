@@ -8,23 +8,19 @@
 
 import { inject, named } from 'inversify';
 import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response, Request } from 'inversify-express-utils';
-import { myExpress } from 'my-express';
+import { app } from '../../app';
+import { Types, Targets } from '../../constants';
 import { UserService } from '../services/UserService';
-import { Types } from '../../constants/Types';
-import { Service, Middleware } from '../../constants/Targets';
-import { AuthenticateMiddleware } from '../middlewares/AuthenticateMiddleware';
-import { PopulateUserMiddleware } from '../middlewares/PopulateUserMiddleware';
-import { ioc } from '../../core/IoC';
 
 // Get middlewares
-const authenticate = ioc.Container.getNamed<AuthenticateMiddleware>(Types.Middleware, Middleware.AuthenticateMiddleware);
-const populateUser = ioc.Container.getNamed<PopulateUserMiddleware>(Types.Middleware, Middleware.PopulateUserMiddleware);
+const populateUser = app.IoC.getNamed<interfaces.Middleware>(Types.Middleware, Targets.Middleware.PopulateUserMiddleware);
+const authenticate = app.IoC.getNamed<interfaces.Middleware>(Types.Middleware, Targets.Middleware.AuthenticateMiddleware);
 
 
 @Controller('/users', authenticate.use)
 export class UserController {
 
-    constructor( @inject(Types.Service) @named(Service.UserService) private userService: UserService) { }
+    constructor( @inject(Types.Service) @named(Targets.Service.UserService) private userService: UserService) { }
 
     @Get('/')
     public async findAll( @Response() res: myExpress.Response): Promise<any> {

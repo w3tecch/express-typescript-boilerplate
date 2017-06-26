@@ -1,24 +1,21 @@
 import { inject, named } from 'inversify';
 import * as Request from 'request';
-import { myExpress } from 'my-express';
-import { Log } from '../../core/log';
-import { Types } from '../../constants/Types';
-import { Core } from '../../core/Targets';
+import { Logger as LoggerType } from '../../core/Logger';
+import { Types, Core } from '../../constants';
 import { events } from '../../core/api/events';
 import { UserAuthenticatedListener } from '../listeners/user/UserAuthenticatedListener';
 
 
-export class AuthenticateMiddleware {
+export class AuthenticateMiddleware implements interfaces.Middleware {
 
-    public log: Log;
+    public log: LoggerType;
 
     constructor(
-        @inject(Types.Core) @named(Core.Log) Logger: typeof Log,
+        @inject(Types.Core) @named(Core.Logger) Logger: typeof LoggerType,
         @inject(Types.Lib) @named('request') private request: typeof Request
     ) {
-        this.log = new Logger('api:middleware:AuthenticateMiddleware');
+        this.log = new Logger(__filename);
     }
-
 
     public use = (req: myExpress.Request, res: myExpress.Response, next: myExpress.NextFunction): void => {
         const token = this.getToken(req);

@@ -6,7 +6,7 @@
         "description": "",
         "version": ""
     },
-    "basePath": "/api/v1",
+    "basePath": "/api",
     "consumes": [
         "application/json"
     ],
@@ -25,17 +25,17 @@
     },
     "tags": [
         {
-            "name": "Root"
+            "name": "Info"
         },
         {
             "name": "User"
         }
     ],
     "paths": {
-        "/": {
+        "/info": {
             "get": {
                 "tags": [
-                    "Root"
+                    "Info"
                 ],
                 "summary": "Show API information",
                 "description": "This is a public route",

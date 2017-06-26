@@ -5,7 +5,7 @@
  */
 import * as _ from 'lodash';
 import * as inquirer from 'inquirer';
-import { AbstractMakeCommand } from './AbstractMakeCommand';
+import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
 import { MakeMigrationCommand } from './MakeMigrationCommand';
 import { askProperties, buildFilePath, existsFile } from './lib/utils';
 import { writeTemplate } from './lib/template';
@@ -13,8 +13,8 @@ import { writeTemplate } from './lib/template';
 
 export class MakeModelCommand extends AbstractMakeCommand {
 
-    static command = 'make:model';
-    static description = 'Generate new model';
+    public static command = 'make:model';
+    public static description = 'Generate new model';
 
     public type = 'Model';
     public suffix = '';
@@ -25,7 +25,7 @@ export class MakeModelCommand extends AbstractMakeCommand {
     public async run(): Promise<void> {
         await super.run();
         const metaData = await this.askMetaData(this.context);
-        this.context = Object.assign(this.context || {}, metaData);
+        this.context = { ...(this.context || {}), ...metaData };
 
         if (this.context.hasProperties && !this.context.properties) {
             this.context.properties = await askProperties(this.context);

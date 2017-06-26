@@ -3,13 +3,13 @@
  * -------------------------------------
  *
  */
-import { AbstractMakeCommand } from './AbstractMakeCommand';
+import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
 
 
 export class MakeRepoCommand extends AbstractMakeCommand {
 
-    static command = 'make:repo';
-    static description = 'Generate new repository';
+    public static command = 'make:repo';
+    public static description = 'Generate new repository';
 
     public type = 'Repository';
     public suffix = 'Repository';

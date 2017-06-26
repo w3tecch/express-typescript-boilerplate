@@ -6,8 +6,7 @@
  * send them directly to the client or otherwise it calls the next middleware.
  */
 
-import { myExpress } from 'my-express';
-import { Environment } from '../Environment';
+import { Environment } from '../helpers/Environment';
 import { Exception, isException } from '../api/Exception';
 
 

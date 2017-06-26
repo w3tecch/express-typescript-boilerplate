@@ -1,18 +1,19 @@
-import * as path from 'path';
 import * as express from 'express';
 import * as monitor from 'express-status-monitor';
-import { Environment } from './Environment';
+import * as path from 'path';
+import { Environment } from './helpers/Environment';
 
 
 export class ApiMonitor {
 
-    constructor(public app: express.Application) { }
-
-    public setup(): void {
-        if (Environment.get<string>('MONITOR_ENABLED').toLowerCase() === 'true') {
-            this.app.use(monitor());
-            this.app.get(path.join(Environment.get<string>('APP_URL_PREFIX'), Environment.get<string>('MONITOR_ROUTE')), monitor().pageRoute);
-        }
+    public static getRoute(): string {
+        return path.join(process.env.MONITOR_ROUTE);
     }
 
+    public setup(app: express.Application): void {
+        if (Environment.isTruthy(process.env.MONITOR_ENABLED)) {
+            app.use(monitor());
+            app.get(ApiMonitor.getRoute(), monitor().pageRoute);
+        }
+    }
 }

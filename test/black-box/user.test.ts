@@ -29,13 +29,13 @@ describe('User', () => {
         await createAdminUser();
         token = getToken();
         auth = {
-            token: token
+            token
         };
     });
 
-    test('POST      /v1/user        Should create a new user', async () => {
-        const res = await api('POST', '/api/v1/user', {
-            token: token,
+    test('POST      /users        Should create a new user', async () => {
+        const res = await api('POST', '/api/users', {
+            token,
             body: testUser
         });
         res.expectJson();
@@ -44,17 +44,17 @@ describe('User', () => {
         createdId = res.getData()['id'];
     });
 
-    test('POST      /v1/user        Should fail because we want to create a empty user', async () => {
-        const res = await api('POST', '/api/v1/user', {
-            token: token,
+    test('POST      /users        Should fail because we want to create a empty user', async () => {
+        const res = await api('POST', '/api/users', {
+            token,
             body: {}
         });
         res.expectJson();
         res.expectStatusCode(400);
     });
 
-    test('GET       /v1/user        Should list of users with our new create one', async () => {
-        const res = await api('GET', '/api/v1/user', auth);
+    test('GET       /users        Should list of users with our new create one', async () => {
+        const res = await api('GET', '/api/users', auth);
         res.expectJson();
         res.expectStatusCode(200);
         res.expectData(userKeys);
@@ -67,8 +67,8 @@ describe('User', () => {
         expect(user.email).toBe(testUser.email);
     });
 
-    test('GET       /v1/user/:id    Should return one user', async () => {
-        const res = await api('GET', `/api/v1/user/${createdId}`, auth);
+    test('GET       /users/:id    Should return one user', async () => {
+        const res = await api('GET', `/api/users/${createdId}`, auth);
         res.expectJson();
         res.expectStatusCode(200);
         res.expectData(userKeys);
@@ -79,9 +79,9 @@ describe('User', () => {
         expect(user.email).toBe(testUser.email);
     });
 
-    test('PUT       /v1/user/:id    Should update the user', async () => {
-        const res = await api('PUT', `/api/v1/user/${createdId}`, {
-            token: token,
+    test('PUT       /users/:id    Should update the user', async () => {
+        const res = await api('PUT', `/api/users/${createdId}`, {
+            token,
             body: testUserUpdated
         });
         res.expectJson();
@@ -94,9 +94,9 @@ describe('User', () => {
         expect(user.email).toBe(testUserUpdated.email);
     });
 
-    test('PUT       /v1/user/:id    Should fail because we want to update the user with a invalid email', async () => {
-        const res = await api('PUT', `/api/v1/user/${createdId}`, {
-            token: token,
+    test('PUT       /users/:id    Should fail because we want to update the user with a invalid email', async () => {
+        const res = await api('PUT', `/api/users/${createdId}`, {
+            token,
             body: {
                 email: 'abc'
             }
@@ -105,28 +105,28 @@ describe('User', () => {
         res.expectStatusCode(400);
     });
 
-    test('DELETE    /v1/user/:id    Should delete the user', async () => {
-        const res = await api('DELETE', `/api/v1/user/${createdId}`, auth);
+    test('DELETE    /users/:id    Should delete the user', async () => {
+        const res = await api('DELETE', `/api/users/${createdId}`, auth);
         res.expectStatusCode(200);
     });
 
     /**
      * 404 - NotFound Testing
      */
-    test('GET       /v1/user/:id    Should return with a 404, because we just deleted the user', async () => {
-        const res = await api('GET', `/api/v1/user/${createdId}`, auth);
+    test('GET       /users/:id    Should return with a 404, because we just deleted the user', async () => {
+        const res = await api('GET', `/api/users/${createdId}`, auth);
         res.expectJson();
         res.expectStatusCode(404);
     });
 
-    test('DELETE    /v1/user/:id    Should return with a 404, because we just deleted the user', async () => {
-        const res = await api('DELETE', `/api/v1/user/${createdId}`, auth);
+    test('DELETE    /users/:id    Should return with a 404, because we just deleted the user', async () => {
+        const res = await api('DELETE', `/api/users/${createdId}`, auth);
         res.expectJson();
         res.expectStatusCode(404);
     });
 
-    test('PUT       /v1/user/:id    Should return with a 404, because we just deleted the user', async () => {
-        const res = await api('PUT', `/api/v1/user/${createdId}`, auth);
+    test('PUT       /users/:id    Should return with a 404, because we just deleted the user', async () => {
+        const res = await api('PUT', `/api/users/${createdId}`, auth);
         res.expectJson();
         res.expectStatusCode(404);
     });

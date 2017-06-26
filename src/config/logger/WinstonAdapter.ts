@@ -9,11 +9,10 @@
  */
 
 import * as winston from 'winston';
-import { Environment } from '../Environment';
-import { LogAdapter } from './Log';
+import { Environment } from '../../core/helpers/Environment';
 
 
-export class WinstonAdapter implements LogAdapter {
+export class WinstonAdapter implements interfaces.LoggerAdapter {
 
     private logger: winston.LoggerInstance;
 
@@ -21,7 +20,7 @@ export class WinstonAdapter implements LogAdapter {
         this.logger = new winston.Logger({
             transports: [
                 new winston.transports.Console({
-                    level: Environment.get<string>('LOG_LEVEL'),
+                    level: process.env.LOG_LEVEL,
                     timestamp: Environment.isProduction(),
                     handleExceptions: Environment.isProduction(),
                     json: Environment.isProduction(),

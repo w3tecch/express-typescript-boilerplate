@@ -3,13 +3,13 @@
  * -------------------------------------
  *
  */
-import { AbstractMakeCommand } from './AbstractMakeCommand';
+import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
 
 
 export class MakeServiceCommand extends AbstractMakeCommand {
 
-    static command = 'make:service';
-    static description = 'Generate new service';
+    public static command = 'make:service';
+    public static description = 'Generate new service';
 
     public type = 'Service';
     public suffix = 'Service';

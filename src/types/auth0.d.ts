@@ -5,7 +5,7 @@
  * Type definitions for the auth0 responses.
  */
 
-declare module 'auth0' {
+declare namespace auth0 {
 
     interface User {
         user_id: string;
@@ -36,3 +36,6 @@ declare module 'auth0' {
     }
 
 }
+
+export as namespace auth0;
+export = auth0;

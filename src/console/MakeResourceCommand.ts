@@ -4,7 +4,7 @@
  *
  */
 import { askFileName, askProperties } from './lib/utils';
-import { AbstractMakeCommand } from './AbstractMakeCommand';
+import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
 import { MakeModelCommand } from './MakeModelCommand';
 import { MakeRepoCommand } from './MakeRepoCommand';
 import { MakeServiceCommand } from './MakeServiceCommand';
@@ -14,8 +14,8 @@ import { MakeRequestCommand } from './MakeRequestCommand';
 
 export class MakeResourceCommand extends AbstractMakeCommand {
 
-    static command = 'make:resource';
-    static description = 'Generate a new resource';
+    public static command = 'make:resource';
+    public static description = 'Generate a new resource';
 
     public type = 'Resource';
     public suffix = '';

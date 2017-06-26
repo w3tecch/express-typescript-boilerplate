@@ -1,7 +1,7 @@
-import { Log } from '../../../src/core/log';
+import { Logger } from '../../../src/core/Logger';
 
 
-export class LogMock extends Log {
+export class LogMock extends Logger {
 
     public debugMock = jest.fn();
     public infoMock = jest.fn();

@@ -6,15 +6,15 @@ export class ApiResponeTest {
     constructor(private error: any, private res: any) {
     }
 
-    getBody<T>(): T {
+    public getBody<T>(): T {
         return this.res['body'];
     }
 
-    getData<T>(): T {
+    public getData<T>(): T {
         return this.getBody()['data'];
     }
 
-    getHeaders<T>(): T {
+    public getHeaders<T>(): T {
         if (this.res) {
             return this.res['headers'];
         } else {
@@ -22,7 +22,7 @@ export class ApiResponeTest {
         }
     }
 
-    expectStatusCode(code: number): ApiResponeTest {
+    public expectStatusCode(code: number): ApiResponeTest {
         if (this.res) {
             expect(this.res['statusCode']).toBe(code);
         } else {
@@ -31,12 +31,12 @@ export class ApiResponeTest {
         return this;
     }
 
-    expectJson(): ApiResponeTest {
+    public expectJson(): ApiResponeTest {
         expect(this.getHeaders()['content-type']).toContain('json');
         return this;
     }
 
-    expectData(keys: string[]): ApiResponeTest {
+    public expectData(keys: string[]): ApiResponeTest {
         const a = keys.sort();
         const d = _.isArray(this.getData()) ? this.getData()[0] : this.getData();
         const b = Object.keys(d).sort();
@@ -45,11 +45,11 @@ export class ApiResponeTest {
         return this;
     }
 
-    printResponse(): void {
+    public printResponse(): void {
         console.log(this.res);
     }
 
-    printError(): void {
+    public printError(): void {
         console.log(this.error);
     }
 

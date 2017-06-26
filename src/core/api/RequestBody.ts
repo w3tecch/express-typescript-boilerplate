@@ -10,6 +10,7 @@
  * validate method in your extended request class.
  */
 
+import 'reflect-metadata';
 import { validate } from 'class-validator';
 import { ValidationException } from '../../api/exceptions/ValidationException';
 
@@ -33,7 +34,7 @@ export class RequestBody {
      * Validates the body on the basis of the validator-annotations
      */
     public async validate(skipMissingProperties: boolean = false): Promise<void> {
-        const errors = await validate(this, { skipMissingProperties: skipMissingProperties });
+        const errors = await validate(this, { skipMissingProperties });
         if (errors && errors.length > 0) {
             throw new ValidationException('Request body is not valid', errors);
         }

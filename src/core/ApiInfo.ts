@@ -1,30 +1,32 @@
 import * as express from 'express';
 import * as path from 'path';
-import { myExpress } from 'my-express';
-import { Environment } from './Environment';
+import { Environment } from './helpers/Environment';
+import { SwaggerUI } from './SwaggerUI';
+import { ApiMonitor } from './ApiMonitor';
 
 
 export class ApiInfo {
 
-    constructor(public app: express.Application) { }
+    public static getRoute(): string {
+        return path.join(process.env.APP_URL_PREFIX, process.env.API_INFO_ROUTE);
+    }
 
-    public setup(): void {
-        if (Environment.get<string>('API_INFO_ENABLED').toLowerCase() === 'true') {
-            this.app.get(
-                path.join(Environment.get<string>('APP_URL_PREFIX'), Environment.get<string>('API_INFO_ROUTE')),
+    public setup(app: express.Application): void {
+        if (Environment.isTruthy(process.env.API_INFO_ENABLED)) {
+            app.get(
+                ApiInfo.getRoute(),
                 (req: myExpress.Request, res: myExpress.Response) => {
                     const pkg = Environment.getPkg();
                     const links = {
                         links: {}
                     };
-                    const appUrl = Environment.get<string>('APP_URL_PREFIX');
-                    if (Environment.get<string>('SWAGGER_ENABLED').toLowerCase() === 'true') {
+                    if (Environment.isTruthy(process.env.SWAGGER_ENABLED)) {
                         links.links['swagger'] =
-                            `${this.app.get('host')}:${this.app.get('port')}${path.join(appUrl, Environment.get<string>('SWAGGER_ROUTE'))}`;
+                            `${app.get('host')}:${app.get('port')}${SwaggerUI.getRoute()}`;
                     }
-                    if (Environment.get<string>('MONITOR_ENABLED').toLowerCase() === 'true') {
+                    if (Environment.isTruthy(process.env.MONITOR_ENABLED)) {
                         links.links['monitor'] =
-                            `${this.app.get('host')}:${this.app.get('port')}${path.join(appUrl, Environment.get<string>('MONITOR_ROUTE'))}`;
+                            `${app.get('host')}:${app.get('port')}${ApiMonitor.getRoute()}`;
                     }
                     return res.json({
                         name: pkg.name,
@@ -35,5 +37,4 @@ export class ApiInfo {
                 });
         }
     }
-
 }

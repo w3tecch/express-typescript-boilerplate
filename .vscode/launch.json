@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceRoot}/dist/index.js",
+            "program": "${workspaceRoot}/dist/app.js",
             "smartStep": true,
             "outFiles": [
                 "../dist/**/*.js"

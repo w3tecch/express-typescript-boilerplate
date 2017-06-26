@@ -8,15 +8,15 @@
 import * as _ from 'lodash';
 import * as glob from 'glob';
 import * as handlebars from 'handlebars';
-import { AbstractCommand } from './AbstractCommand';
+import { AbstractCommand } from './lib/AbstractCommand';
 import { writeTemplate } from './lib/template';
 import { existsFile } from './lib/utils';
 
 
 export class UpdateTargetsCommand extends AbstractCommand {
 
-    static command = 'update:targets';
-    static description = 'Generate new controller';
+    public static command = 'update:targets';
+    public static description = 'Generate new controller';
 
     public template = 'targets.hbs';
     public targetFile = 'Targets.ts';
@@ -33,7 +33,10 @@ export class UpdateTargetsCommand extends AbstractCommand {
         });
 
         handlebars.registerHelper('object', (c) => {
-            const json = JSON.stringify(c, null, 4) || '{}';
+            let json = JSON.stringify(c, null, 4) || '{}';
+            let jsonLines = json.split('\n');
+            jsonLines = jsonLines.map(line => `    ${line}`);
+            json = jsonLines.join('\n');
             return json.replace(/\"([^(\")"]+)\":/g, '$1:').replace(/"/g, '\'');
         });
 
@@ -64,7 +67,7 @@ export class UpdateTargetsCommand extends AbstractCommand {
         const key = fs[0];
         fs.splice(0, 1);
         return {
-            key: key,
+            key,
             path: fs.join('/')
         };
     }

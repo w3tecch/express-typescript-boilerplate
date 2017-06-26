@@ -10,17 +10,16 @@
 
 import * as knex from 'knex';
 import * as bookshelf from 'bookshelf';
-import { Environment } from '../core/Environment';
 
 
 export const Knex = (): knex => knex({
-    client: Environment.get<string>('DB_CLIENT'),
-    connection: Environment.get<string>('DB_CONNECTION'),
+    client: process.env.DB_CLIENT,
+    connection: process.env.DB_CONNECTION,
     pool: {
-        min: Environment.get<number>('DB_POOL_MIN'),
-        max: Environment.get<number>('DB_POOL_MAX')
+        min: parseInt(process.env.DB_POOL_MIN, 10),
+        max: parseInt(process.env.DB_POOL_MAX, 10)
     }
 });
 
-export const Bookshelf: bookshelf = bookshelf(<any>Knex());
+export const Bookshelf: bookshelf = bookshelf(Knex() as any);
 Bookshelf.plugin(['bookshelf-camelcase']);

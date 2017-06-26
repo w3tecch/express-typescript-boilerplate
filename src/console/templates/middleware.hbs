@@ -1,18 +1,16 @@
 import { inject, named } from 'inversify';
-import { myExpress } from 'my-express';
-import { Log } from '../../{{deepness}}core/log';
-import { Types } from '../../{{deepness}}constants/Types';
-import { Core } from '../../{{deepness}}core/Targets';
+import { Logger as LoggerType } from '../../{{deepness}}core/Logger';
+import { Types, Core } from '../../{{deepness}}constants';
 
 
-export class {{name.capitalize}}Middleware {
+export class {{name.capitalize}}Middleware implements interfaces.Middleware {
 
-    public log: Log;
+    public log: LoggerType;
 
     constructor(
-        @inject(Types.Core) @named(Core.Log) Logger: typeof Log
+        @inject(Types.Core) @named(Core.Logger) Logger: typeof LoggerType
     ) {
-        this.log = new Logger('api:middleware:{{name.capitalize}}Middleware');
+        this.log = new Logger(__filename);
     }
 
 

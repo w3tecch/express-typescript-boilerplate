@@ -30,3 +30,4 @@ dist/
 src/**/*.js
 test/**/*.js
 coverage/
+!test/preprocessor.js

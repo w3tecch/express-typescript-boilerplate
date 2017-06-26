@@ -2,12 +2,10 @@
 import * as Bookshelf from 'bookshelf';
 {{/if}}
 import { inject, named } from 'inversify';
-import { Core } from '../../{{deepness}}core/Targets';
-import { Types } from '../../{{deepness}}constants/Types';
-import { Log } from '../../{{deepness}}core/log';
+import { Types, Core, Targets } from '../../{{deepness}}constants';
+import { Logger as LoggerType } from '../../{{deepness}}core/Logger';
 {{#if isResourceTemplate}}
 import { Validate, Request } from '../../{{deepness}}core/api/Validate';
-import { Repository } from '../../{{deepness}}constants/Targets';
 import { NotFoundException } from '../{{deepness}}exceptions/NotFoundException';
 import { {{name.capitalize}}Repository } from '../{{deepness}}repositories/{{name.capitalize}}Repository';
 import { {{name.capitalize}} } from '../{{deepness}}models/{{name.capitalize}}';
@@ -18,14 +16,14 @@ import { {{name.capitalize}}UpdateRequest } from '../{{deepness}}requests/{{name
 
 export class {{name.capitalize}}Service {
 
-    public log: Log;
+    public log: LoggerType;
 
     {{#if isResourceTemplate}}
     constructor(
-        @inject(Types.Repository) @named(Repository.{{name.capitalize}}Repository) public {{name.camelCase}}Repo: {{name.capitalize}}Repository,
-        @inject(Types.Core) @named(Core.Log) public Logger: typeof Log
+        @inject(Types.Repository) @named(Targets.Repository.{{name.capitalize}}Repository) public {{name.camelCase}}Repo: {{name.capitalize}}Repository,
+        @inject(Types.Core) @named(Core.Logger) public Logger: typeof LoggerType
     ) {
-        this.log = new Logger('api:services:{{name.capitalize}}Service');
+        this.log = new Logger(__filename);
     }
 
     public async findAll(): Promise<Bookshelf.Collection<{{name.capitalize}}>> {
@@ -41,14 +39,14 @@ export class {{name.capitalize}}Service {
         return {{name.camelCase}};
     }
 
-    @Validate
+    @Validate()
     public async create( @Request({{name.capitalize}}CreateRequest) body: any): Promise<{{name.capitalize}}> {
         // If the request body was valid we will create the {{name.camelCase}}
         const {{name.camelCase}} = await this.{{name.camelCase}}Repo.create(body);
         return {{name.camelCase}};
     }
 
-    @Validate
+    @Validate()
     public async update(id: number, @Request({{name.capitalize}}UpdateRequest) body: any): Promise<{{name.capitalize}}> {
         // Find or fail
         const {{name.camelCase}} = await this.findOne(id);
@@ -73,9 +71,9 @@ export class {{name.capitalize}}Service {
     }
     {{else}}
     constructor(
-        @inject(Types.Core) @named(Core.Log) public Logger: typeof Log
+        @inject(Types.Core) @named(Core.Logger) public Logger: typeof Log
     ) {
-        this.log = new Logger('api:services:{{name.capitalize}}Service');
+        this.log = new Logger(__filename);
     }
     {{/if}}
 

@@ -1,23 +1,19 @@
 import { inject, named } from 'inversify';
-import { myExpress } from 'my-express';
-import { Log } from '../../core/log';
+import { Logger as LoggerType } from '../../core/Logger';
 import { UserService } from '../services/UserService';
-import { Types } from '../../constants/Types';
-import { Core } from '../../core/Targets';
-import { Service } from '../../constants/Targets';
+import { Types, Core, Targets } from '../../constants';
 
 
-export class PopulateUserMiddleware {
+export class PopulateUserMiddleware implements interfaces.Middleware {
 
-    public log: Log;
+    public log: LoggerType;
 
     constructor(
-        @inject(Types.Core) @named(Core.Log) Logger: typeof Log,
-        @inject(Types.Service) @named(Service.UserService) private userService: UserService
+        @inject(Types.Core) @named(Core.Logger) Logger: typeof LoggerType,
+        @inject(Types.Service) @named(Targets.Service.UserService) private userService: UserService
     ) {
-        this.log = new Logger('api:middleware:PopulateUserMiddleware');
+        this.log = new Logger(__filename);
     }
-
 
     public use = (req: myExpress.Request, res: myExpress.Response, next: myExpress.NextFunction): void => {
         // Check if the authenticate middleware was successful

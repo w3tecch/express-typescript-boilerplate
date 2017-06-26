@@ -3,13 +3,13 @@
  * -------------------------------------
  *
  */
-import { AbstractMakeCommand } from './AbstractMakeCommand';
+import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
 
 
 export class MakeExceptionCommand extends AbstractMakeCommand {
 
-    static command = 'make:exception';
-    static description = 'Generate new exception';
+    public static command = 'make:exception';
+    public static description = 'Generate new exception';
 
     public type = 'Exception';
     public suffix = 'Exception';
