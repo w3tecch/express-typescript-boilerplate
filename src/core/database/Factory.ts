@@ -26,11 +26,11 @@ export class Factory {
         this.blueprints = {};
     }
 
-    public define(ModelStatic: typeof bookshelf.Model, callback: (faker: Faker.FakerStatic, args: any[]) => any): void {
+    public define(ModelStatic: any, callback: (faker: Faker.FakerStatic, args: any[]) => any): void {
         this.blueprints[this.getNameOfModel(ModelStatic)] = new BluePrint(ModelStatic, callback);
     }
 
-    public get(ModelStatic: typeof bookshelf.Model, ...args: any[]): ModelFactory {
+    public get(ModelStatic: any, ...args: any[]): ModelFactory {
         return new ModelFactory(
             this.faker,
             this.blueprints[this.getNameOfModel(ModelStatic)],

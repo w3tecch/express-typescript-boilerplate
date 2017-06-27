@@ -8,10 +8,10 @@
             "type": "node",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceRoot}/dist/app.js",
+            "program": "${workspaceRoot}/src/app.js",
             "smartStep": true,
             "outFiles": [
-                "../dist/**/*.js"
+                "../src/**/*.js"
             ],
             "protocol": "inspector",
             "preLaunchTask": "build",

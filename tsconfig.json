@@ -2,8 +2,8 @@
     "compilerOptions": {
         "target": "es6",
         "module": "commonjs",
+        "pretty": true,
         "sourceMap": true,
-        "outDir": "dist",
         "importHelpers": true,
         "strict": true,
         "noImplicitAny": false,
@@ -15,16 +15,16 @@
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
         "moduleResolution": "node",
-        "baseUrl": "./",
+        "baseUrl": ".",
         "paths": {
             "*": [
-                "./node_modules/*",
-                "./src/types/*"
+                "node_modules/*",
+                "src/types/*"
             ]
         },
         "rootDirs": [],
         "typeRoots": [
-            "./src/types"
+            "src/types"
         ],
         "types": [],
         "allowSyntheticDefaultImports": true,
@@ -32,6 +32,9 @@
         "emitDecoratorMetadata": true
     },
     "include": [
-        "./src/**/*"
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules/*"
     ]
 }
