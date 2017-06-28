@@ -33,6 +33,7 @@ export class Logger {
         if (path.indexOf('/') >= 0) {
             path = path.replace(process.cwd(), '');
             path = path.replace('/src/', '');
+            path = path.replace('/dist/', '');
             path = path.replace('.ts', '');
             path = path.replace('.js', '');
             path = path.replace(/\//g, ':');
