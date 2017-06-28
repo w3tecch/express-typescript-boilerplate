@@ -4,6 +4,7 @@
         "module": "commonjs",
         "pretty": true,
         "sourceMap": true,
+        "outDir": "dist",
         "importHelpers": true,
         "strict": true,
         "noImplicitAny": false,
@@ -33,8 +34,5 @@
     },
     "include": [
         "src/**/*"
-    ],
-    "exclude": [
-        "node_modules/*"
     ]
 }
