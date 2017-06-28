@@ -81,7 +81,7 @@ All script are defined in the package.json file, but the most important ones are
 * The server address will be displayed to you as `http://0.0.0.0:3000`
 
 ### Building the project and run it
-* Run `npm run build` to generated all JavaScript files from the TypeScript sources. After this step you can deploy the app contained in `dist` to any server (There is also a vscode task for this called `build`).
+* Run `npm run build` to generated all JavaScript files from the TypeScript sources (There is also a vscode task for this called `build`).
 * To start the builded app located in `dist` use `npm start`.
 
 ### Database
