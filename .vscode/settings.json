@@ -1,9 +1,4 @@
 {
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "cSpell.enabled": true,
-    "files.exclude": {
-        "src/**/*.js": true,
-        "src/**/*.js.map": true,
-        "test/**/*.js": true
-    }
+    "cSpell.enabled": true
 }
