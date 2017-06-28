@@ -1,4 +1,4 @@
-import { Environment } from '../../../src/core/Environment';
+import { Environment } from '../../../src/core/helpers/Environment';
 
 
 describe('Environment', () => {

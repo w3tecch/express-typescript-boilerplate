@@ -5,8 +5,7 @@
 
 import * as Bookshelf from 'bookshelf';
 import { inject, named } from 'inversify';
-import { Types } from '../../constants/Types';
-import { Model } from '../../constants/Targets';
+import { Types, Targets } from '../../constants';
 import { User } from '../models/User';
 import { DatabaseException } from '../exceptions/DatabaseException';
 import { NotFoundException } from '../exceptions/NotFoundException';
@@ -15,7 +14,7 @@ import { NotFoundException } from '../exceptions/NotFoundException';
 export class UserRepository {
 
     constructor(
-        @inject(Types.Model) @named(Model.User) public UserModel: typeof User
+        @inject(Types.Model) @named(Targets.Model.User) public UserModel: typeof User
     ) { }
 
     /**
@@ -27,8 +26,7 @@ export class UserRepository {
      * @memberof UserRepository
      */
     public async findAll(): Promise<Bookshelf.Collection<User>> {
-        const users = await this.UserModel.fetchAll();
-        return <Bookshelf.Collection<User>>users;
+        return this.UserModel.fetchAll<User>();
     }
 
     /**
@@ -65,7 +63,7 @@ export class UserRepository {
         const user = this.UserModel.forge<User>(data);
         try {
             const createdUser = await user.save();
-            return await this.UserModel.fetchById(createdUser.id);
+            return this.UserModel.fetchById(createdUser.id);
         } catch (error) {
             throw new DatabaseException('Could not create the user!', error);
         }
@@ -80,10 +78,10 @@ export class UserRepository {
      * @returns {Promise<User>}
      */
     public async update(id: number, data: any): Promise<User> {
-        const user = this.UserModel.forge<User>({ id: id });
+        const user = this.UserModel.forge<User>({ id });
         try {
             const updatedUser = await user.save(data, { patch: true });
-            return await this.UserModel.fetchById(updatedUser.id);
+            return this.UserModel.fetchById(updatedUser.id);
 
         } catch (error) {
             throw new DatabaseException('Could not update the user!', error);
@@ -99,7 +97,7 @@ export class UserRepository {
      * @returns {Promise<void>}
      */
     public async destroy(id: number): Promise<void> {
-        let user = this.UserModel.forge<User>({ id: id });
+        let user = this.UserModel.forge<User>({ id });
         try {
             user = await user.fetch({ require: true });
         } catch (error) {

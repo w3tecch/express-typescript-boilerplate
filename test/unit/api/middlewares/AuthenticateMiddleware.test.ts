@@ -3,7 +3,11 @@ import { LogMock } from '../../lib/LogMock';
 
 describe('AuthenticateMiddleware', () => {
 
-    let authenticate, request, res, req, next;
+    let authenticate;
+    let request;
+    let res;
+    let req;
+    let next;
     beforeEach(() => {
         process.env.AUTH0_HOST = 'test';
         request = jest.fn();

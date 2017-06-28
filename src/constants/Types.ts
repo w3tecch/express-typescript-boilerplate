@@ -8,8 +8,8 @@
 
 import { TYPE } from 'inversify-express-utils';
 
-
-const myType = {
+export const Types = {
+    ...TYPE,
     Lib: Symbol('Lib'),
     Core: Symbol('Core'),
     Model: Symbol('Model'),
@@ -18,5 +18,3 @@ const myType = {
     Repository: Symbol('Repository'),
     Middleware: Symbol('Middleware')
 };
-
-export const Types = Object.assign(TYPE, myType);

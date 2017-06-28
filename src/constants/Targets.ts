@@ -4,42 +4,31 @@
  *
  * This is for our IOC so have a unique key/target for
  * our controllers, services and repositories
+ *
+ * This file is generated with the task `$ npm run console update:targets`.
  */
 
-export const Lib = {
-    Request: 'Request'
-};
-
-export const Core = {
-    Events: 'Events',
-    Log: 'Log'
-};
-
-export const Model = {
-    User: 'User'
-};
-
-export const Repository = {
-    UserRepository: 'UserRepository'
-};
-
-export const Service = {
-    UserService: 'UserService'
-};
-
-export const Middleware = {
-    AuthenticateMiddleware: 'AuthenticateMiddleware',
-    PopulateUserMiddleware: 'PopulateUserMiddleware'
-};
-
-export const Listener = {
-    UserAuthenticatedListener: 'UserAuthenticatedListener',
-    UserCreatedListener: 'UserCreatedListener'
-};
-
-export const Controller = {
-    UserController: 'UserController',
-    auth: {
-        AuthController: 'auth.AuthController'
+export const Targets = {
+    Model:     {
+        User: 'User'
+    },
+    Repository:     {
+        UserRepository: 'UserRepository'
+    },
+    Service:     {
+        UserService: 'UserService'
+    },
+    Middleware:     {
+        AuthenticateMiddleware: 'AuthenticateMiddleware',
+        PopulateUserMiddleware: 'PopulateUserMiddleware'
+    },
+    Listener:     {
+        user: {
+            UserAuthenticatedListener: 'UserAuthenticatedListener',
+            UserCreatedListener: 'UserCreatedListener'
+        }
+    },
+    Controller:     {
+        UserController: 'UserController'
     }
 };

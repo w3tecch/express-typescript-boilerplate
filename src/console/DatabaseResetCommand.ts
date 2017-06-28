@@ -1,9 +1,10 @@
-import '../core';
-import { Log } from '../core/log';
+import { Logger } from '../core/Logger';
 
 import * as Knex from 'knex';
-const options = require('../../knexfile.ts');
-const log = new Log('app:console:DatabaseResetCommand');
+import { AbstractCommand } from './lib/AbstractCommand';
+import * as options from './../../knexfile';
+
+const log = new Logger(__filename);
 
 
 /**
@@ -13,22 +14,13 @@ const log = new Log('app:console:DatabaseResetCommand');
  * @export
  * @class DatabaseResetCommand
  */
-export class DatabaseResetCommand {
+export class DatabaseResetCommand extends AbstractCommand {
 
-    static command = 'db:reset';
-    static description = 'Reverse all current migrations and migrate to latest.';
+    public static command = 'db:reset';
+    public static description = 'Reverse all current migrations and migrate to latest.';
 
-    static async action(): Promise<void> {
-        try {
-            await DatabaseResetCommand.run();
-            process.exit(0);
-        } catch (e) {
-            process.exit(1);
-        }
-    }
-
-    static async run(): Promise<void> {
-        const knex = Knex(options);
+    public async run(): Promise<void> {
+        const knex = Knex(options as Knex.Config);
 
         const migrate: any = knex.migrate;
 

@@ -1,33 +1,40 @@
 import * as express from 'express';
-import { my } from 'my-express';
-import { Environment } from './Environment';
+import * as path from 'path';
+import { Environment } from './helpers/Environment';
+import { SwaggerUI } from './SwaggerUI';
+import { ApiMonitor } from './ApiMonitor';
 
 
 export class ApiInfo {
 
-    constructor(public app: express.Application) { }
-
-    public setup(): void {
-        if (Environment.get<string>('API_INFO_ENABLED') === 'true') {
-            this.app.get(Environment.get<string>('APP_URL_PREFIX') + Environment.get<string>('API_INFO_ROUTE'), (req: my.Request, res: my.Response) => {
-                const pkg = Environment.getPkg();
-                const links = {
-                    links: {}
-                };
-                if (Environment.get<string>('SWAGGER_ENABLED') === 'true') {
-                    links.links['swagger'] = `${this.app.get('host')}:${this.app.get('port')}${process.env.APP_URL_PREFIX}${process.env.SWAGGER_ROUTE}`;
-                }
-                if (Environment.get<string>('MONITOR_ENABLED') === 'true') {
-                    links.links['monitor'] = `${this.app.get('host')}:${this.app.get('port')}${process.env.APP_URL_PREFIX}${process.env.MONITOR_ROUTE}`;
-                }
-                return res.json({
-                    name: pkg.name,
-                    version: pkg.version,
-                    description: pkg.description,
-                    ...links
-                });
-            });
-        }
+    public static getRoute(): string {
+        return path.join(process.env.APP_URL_PREFIX, process.env.API_INFO_ROUTE);
     }
 
+    public setup(app: express.Application): void {
+        if (Environment.isTruthy(process.env.API_INFO_ENABLED)) {
+            app.get(
+                ApiInfo.getRoute(),
+                (req: myExpress.Request, res: myExpress.Response) => {
+                    const pkg = Environment.getPkg();
+                    const links = {
+                        links: {}
+                    };
+                    if (Environment.isTruthy(process.env.SWAGGER_ENABLED)) {
+                        links.links['swagger'] =
+                            `${app.get('host')}:${app.get('port')}${SwaggerUI.getRoute()}`;
+                    }
+                    if (Environment.isTruthy(process.env.MONITOR_ENABLED)) {
+                        links.links['monitor'] =
+                            `${app.get('host')}:${app.get('port')}${ApiMonitor.getRoute()}`;
+                    }
+                    return res.json({
+                        name: pkg.name,
+                        version: pkg.version,
+                        description: pkg.description,
+                        ...links
+                    });
+                });
+        }
+    }
 }

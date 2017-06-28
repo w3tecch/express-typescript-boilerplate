@@ -1,26 +1,23 @@
 import { inject, named } from 'inversify';
 import * as Request from 'request';
-import { my } from 'my-express';
-import { Log } from '../../core/log';
-import { Types } from '../../constants/Types';
-import { Lib, Core } from '../../constants/Targets';
+import { Logger as LoggerType } from '../../core/Logger';
+import { Types, Core } from '../../constants';
 import { events } from '../../core/api/events';
-import { UserAuthenticatedListener } from '../listeners/UserAuthenticatedListener';
+import { UserAuthenticatedListener } from '../listeners/user/UserAuthenticatedListener';
 
 
-export class AuthenticateMiddleware {
+export class AuthenticateMiddleware implements interfaces.Middleware {
 
-    public log: Log;
+    public log: LoggerType;
 
     constructor(
-        @inject(Types.Core) @named(Core.Log) Logger: typeof Log,
-        @inject(Types.Lib) @named(Lib.Request) private request: typeof Request
+        @inject(Types.Core) @named(Core.Logger) Logger: typeof LoggerType,
+        @inject(Types.Lib) @named('request') private request: typeof Request
     ) {
-        this.log = new Logger('api:middleware:AuthenticateMiddleware');
+        this.log = new Logger(__filename);
     }
 
-
-    public use = (req: my.Request, res: my.Response, next: my.NextFunction): void => {
+    public use = (req: myExpress.Request, res: myExpress.Response, next: myExpress.NextFunction): void => {
         const token = this.getToken(req);
 
         if (token === null) {
@@ -59,7 +56,7 @@ export class AuthenticateMiddleware {
         });
     }
 
-    private getToken(req: my.Request): string | null {
+    private getToken(req: myExpress.Request): string | null {
         const authorization = req.headers.authorization;
 
         // Retrieve the token form the Authorization header

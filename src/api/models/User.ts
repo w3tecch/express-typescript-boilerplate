@@ -4,17 +4,17 @@
  */
 
 import { Bookshelf } from '../../config/Database';
-import { Tables } from '../../constants/Tables';
+import { Tables } from '../../constants';
 
 
 export class User extends Bookshelf.Model<User> {
 
     public static async fetchById(id: number): Promise<User> {
-        return await User.where<User>({ id: id }).fetch();
+        return User.where<User>({ id }).fetch();
     }
 
     public static async fetchByUserId(userId: string): Promise<User> {
-        return await User.where<User>({ auth_0_user_id: userId }).fetch();
+        return User.where<User>({ auth_0_user_id: userId }).fetch();
     }
 
     /**

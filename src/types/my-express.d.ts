@@ -6,43 +6,41 @@
  * we can add new values and functions to those objects.
  */
 
-declare module 'my-express' {
+import * as expressLib from 'express';
+import * as resources from 'resources';
 
-    import * as express from 'express';
-    import * as auth0 from 'auth0';
-    import * as dto from 'dto';
+declare namespace myExpress {
 
-    namespace my {
-
-        interface Application extends express.Application {
-        }
-
-        interface NextFunction extends express.NextFunction {
-        }
-
-        interface Request extends express.Request {
-            tokeninfo: auth0.User;
-            user: dto.User;
-        }
-
-        interface Response extends express.Response {
-            ok<T>(data: T, options?: ResponseOptions): void;
-            created<T>(data: T, options?: ResponseOptions): void;
-            found<T>(data: T, options?: ResponseOptions): void;
-            updated<T>(data: T, options?: ResponseOptions): void;
-            destroyed<T>(options?: ResponseOptions): void;
-            failed<T>(status: number, message: string, error?: any): void;
-        }
-
-        interface ResponseOptions {
-            message?: string;
-            links?: ResponseLinks[];
-        }
-
-        interface ResponseLinks {
-            name: string;
-            url: string;
-        }
+    interface Application extends expressLib.Application {
     }
 
+    interface NextFunction extends expressLib.NextFunction {
+    }
+
+    interface Request extends expressLib.Request {
+        tokeninfo: auth0.User;
+        user: resources.User;
+    }
+
+    interface Response extends expressLib.Response {
+        ok<T>(data: T, options?: ResponseOptions): void;
+        created<T>(data: T, options?: ResponseOptions): void;
+        found<T>(data: T, options?: ResponseOptions): void;
+        updated<T>(data: T, options?: ResponseOptions): void;
+        destroyed<T>(options?: ResponseOptions): void;
+        failed<T>(status: number, message: string, error?: any): void;
+    }
+
+    interface ResponseOptions {
+        message?: string;
+        links?: ResponseLinks[];
+    }
+
+    interface ResponseLinks {
+        name: string;
+        url: string;
+    }
 }
+
+export as namespace myExpress;
+export = myExpress;

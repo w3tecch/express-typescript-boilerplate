@@ -4,7 +4,11 @@ import { LogMock } from '../../lib/LogMock';
 
 describe('PopulateUserMiddleware', () => {
 
-    let populateUser, userService, res, req, next;
+    let populateUser;
+    let userService;
+    let res;
+    let req;
+    let next;
     beforeEach(() => {
         process.env.AUTH0_HOST = 'test';
         populateUser = new PopulateUserMiddleware(LogMock, userService);

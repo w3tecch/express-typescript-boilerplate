@@ -9,6 +9,9 @@
 import { Factory } from '../../core/database/Factory';
 import { User } from '../../api/models/User';
 
+export * from '../../core/database/Factory';
+
+
 const factory = Factory.getInstance();
 
 /**
@@ -27,6 +30,3 @@ factory.define(User, (faker: Faker.FakerStatic) => {
         picture: faker.internet.avatar()
     };
 });
-
-
-export * from '../../core/database/Factory';

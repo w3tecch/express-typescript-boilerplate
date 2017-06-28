@@ -7,28 +7,26 @@
  */
 
 import * as glob from 'glob';
+import * as path from 'path';
 import { Container, decorate, injectable } from 'inversify';
-import { Types } from '../constants/Types';
-import { Core, Controller, Model, Service, Repository, Middleware, Listener } from '../constants/Targets';
-
+import { Types, Core, Targets } from '../constants';
 import { events, EventEmitter } from './api/events';
-import { Log } from './log';
+import { Logger } from './Logger';
+import { IocConfig } from '../config/IocConfig';
 
-const log = new Log('core:IoC');
 
-
-class IoC {
+export class IoC {
 
     public container: Container;
     public libConfiguration: (container: Container) => Container;
     public customConfiguration: (container: Container) => Container;
 
+    private log: Logger = new Logger(__filename);
+
     constructor() {
         this.container = new Container();
-    }
-
-    public get Container(): Container {
-        return this.container;
+        const config = new IocConfig();
+        config.configure(this);
     }
 
     public configure(configuration: (container: Container) => Container): void {
@@ -42,7 +40,9 @@ class IoC {
     public async bindModules(): Promise<void> {
         this.bindCore();
 
-        this.container = this.libConfiguration(this.container);
+        if (this.libConfiguration) {
+            this.container = this.libConfiguration(this.container);
+        }
 
         await this.bindModels();
         await this.bindRepositories();
@@ -52,16 +52,18 @@ class IoC {
         await this.bindMiddlewares();
         await this.bindControllers();
 
-        this.container = this.customConfiguration(this.container);
+        if (this.customConfiguration) {
+            this.container = this.customConfiguration(this.container);
+        }
     }
 
     private bindCore(): void {
-        this.container.bind<typeof Log>(Types.Core).toConstantValue(Log).whenTargetNamed(Core.Log);
+        this.container.bind<typeof Logger>(Types.Core).toConstantValue(Logger).whenTargetNamed(Core.Logger);
         this.container.bind<EventEmitter>(Types.Core).toConstantValue(events).whenTargetNamed(Core.Events);
     }
 
     private bindModels(): Promise<void> {
-        return this.bindFiles('/models/**/*.ts', Model, (name: any, value: any) => {
+        return this.bindFiles('/models/**/*.ts', Targets.Model, (name: any, value: any) => {
             decorate(injectable(), value);
             this.container
                 .bind<any>(Types.Model)
@@ -73,41 +75,41 @@ class IoC {
     private bindRepositories(): Promise<void> {
         return this.bindFiles(
             '/repositories/**/*Repository.ts',
-            Repository,
+            Targets.Repository,
             (name: any, value: any) => this.bindFile(Types.Repository, name, value));
     }
 
     private bindServices(): Promise<void> {
         return this.bindFiles(
             '/services/**/*Service.ts',
-            Service,
+            Targets.Service,
             (name: any, value: any) => this.bindFile(Types.Service, name, value));
     }
 
     private bindMiddlewares(): Promise<void> {
         return this.bindFiles(
             '/middlewares/**/*Middleware.ts',
-            Middleware,
+            Targets.Middleware,
             (name: any, value: any) => this.bindFile(Types.Middleware, name, value));
     }
 
     private bindControllers(): Promise<void> {
         return this.bindFiles(
             '/controllers/**/*Controller.ts',
-            Controller,
+            Targets.Controller,
             (name: any, value: any) => this.bindFile(Types.Controller, name, value));
     }
 
     private bindListeners(): Promise<void> {
-        return this.bindFiles('/listeners/**/*Listener.ts', Listener, (name: any, value: any) => {
+        return this.bindFiles('/listeners/**/*Listener.ts', Targets.Listener, (name: any, value: any) => {
             decorate(injectable(), value);
             this.container
                 .bind<any>(Types.Listener)
                 .to(value)
                 .whenTargetNamed(name);
 
-            const listener = ioc.Container.getNamed<any>(Types.Listener, name);
-            events.on(value.Event, (...args) => listener.run(...args));
+            const listener: interfaces.Listener = this.container.getNamed<any>(Types.Listener, name);
+            events.on(value.Event, (...args) => listener.act(...args));
         });
     }
 
@@ -120,19 +122,21 @@ class IoC {
     }
 
     private bindFiles(path: string, target: any, callback: (name: any, value: any) => void): Promise<void> {
-        return new Promise<void>((resolve, reject) => {
+        return new Promise<void>((resolve) => {
             this.getFiles(path, (files: string[]) => {
                 files.forEach((file: any) => {
-                    let fileExport, fileClass, fileTarget;
+                    let fileExport;
+                    let fileClass;
+                    let fileTarget;
                     const isRecursive = file.name.indexOf('.') > 0;
                     try {
                         fileExport = require(`${file.path}`);
                     } catch (e) {
-                        log.warn(e.message);
+                        this.log.warn(e.message);
                         return;
                     }
                     if (fileExport === undefined) {
-                        log.warn(`Could not find the file ${file.name}!`);
+                        this.log.warn(`Could not find the file ${file.name}!`);
                         return;
                     }
                     if (isRecursive) {
@@ -145,12 +149,12 @@ class IoC {
                     }
 
                     if (fileClass === undefined) {
-                        log.warn(`Name of the file '${file.name}' does not match to the class name!`);
+                        this.log.warn(`Name of the file '${file.name}' does not match to the class name!`);
                         return;
                     }
 
                     if (fileTarget === undefined) {
-                        log.warn(`Please define your '${file.name}' class is in the target constants.`);
+                        this.log.warn(`Please define your '${file.name}' class is in the target constants.`);
                         return;
                     }
 
@@ -165,7 +169,9 @@ class IoC {
         const fileParts = name.split('.');
         let fileClass = fileExport;
         fileParts.forEach((part) => {
-            fileClass = fileClass[part];
+            if (fileClass.hasOwnProperty(part)) {
+                fileClass = fileClass[part];
+            }
         });
         return fileClass;
     }
@@ -173,16 +179,14 @@ class IoC {
     private getTargetOfFile(name: string, target: any): any {
         const fileParts = name.split('.');
         let fileTarget = target;
-        fileParts.forEach((part) => {
-            fileTarget = fileTarget[part];
-        });
+        fileParts.forEach((part) => fileTarget = fileTarget[part]);
         return fileTarget;
     }
 
     private getBasePath(): string {
         const baseFolder = __dirname.indexOf('/src/') >= 0 ? '/src/' : '/dist/';
         const baseRoot = __dirname.substring(0, __dirname.indexOf(baseFolder));
-        return `${baseRoot}${baseFolder}api`;
+        return path.join(baseRoot, baseFolder, 'api');
     }
 
     private getFiles(path: string, done: (files: any[]) => void): void {
@@ -192,7 +196,7 @@ class IoC {
         }
         glob(this.getBasePath() + path, (err: any, files: string[]) => {
             if (err) {
-                log.warn(`Could not read the folder ${path}!`);
+                this.log.warn(`Could not read the folder ${path}!`);
                 return;
             }
             done(files.map((p: string) => this.parseFilePath(p)));
@@ -205,14 +209,12 @@ class IoC {
         const file = filePath.substr(dir.length + 1);
         const name = file.replace('/', '.').substring(0, file.length - 3);
         return {
-            path: path,
-            filePath: filePath,
-            dir: dir,
-            file: file,
-            name: name
+            path,
+            filePath,
+            dir,
+            file,
+            name
         };
     }
 
 }
-
-export const ioc = new IoC();
