@@ -4,7 +4,6 @@
         "ts": "ts-node"
     },
     "events": {
-        "start": "tslint -c ./tslint.json -t stylish 'src/**/*.ts'",
-        "restart": "osascript -e 'display notification \"restarting server\" with title \"node.js application\"'"
+        "start": "tslint -c ./tslint.json -t stylish 'src/**/*.ts'"
     }
 }

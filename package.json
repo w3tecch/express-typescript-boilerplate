@@ -27,7 +27,7 @@
     "console:dev": "npm run ts-node -- ./src/console/commander.ts",
     "console:help": "npm run ts-node:fast -- ./src/console/commander.ts --help",
     "setup": "npm run banner setup && yarn install && npm run db:migrate && npm run db:seed",
-    "serve": "npm run banner serve && \"./node_modules/.bin/nodemon\" --watch 'src/**/*.ts' --watch 'src/**/*.json' --watch '.env'",
+    "serve": "npm run banner serve && \"./node_modules/.bin/nodemon\" --watch src --watch .env",
     "clean": "npm run banner clean && npm run clean:dist",
     "test": "npm run banner test && cross-env NODE_ENV=test \"./node_modules/.bin/jest\" ./test/unit",
     "build": "npm run banner build && npm run lint && npm run clean:dist && npm run transpile && npm run copy:assets",
