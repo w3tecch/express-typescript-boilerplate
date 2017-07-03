@@ -11,7 +11,7 @@
     "test:pretty": "npm run test -- --verbose",
     "test:coverage": "npm run test -- --coverage",
     "pretest:black-box": "./node_modules/.bin/tslint -c ./tslint.json -t stylish './test/black-box/**/*.ts'",
-    "test:black-box": "npm run banner test && NODE_ENV=test ./node_modules/.bin/jest ./test/black-box -i",
+    "test:black-box": "npm run banner test && cross-env NODE_ENV=test ./node_modules/.bin/jest ./test/black-box -i",
     "test:black-box:pretty": "npm run test:black-box -- --verbose",
     "lint": "./node_modules/.bin/tslint -c ./tslint.json -p tsconfig.json 'src/**/*.ts' --format stylish",
     "transpile": "./node_modules/.bin/tsc",
@@ -27,9 +27,9 @@
     "console:dev": "npm run ts-node -- ./src/console/commander.ts",
     "console:help": "npm run ts-node:fast -- ./src/console/commander.ts --help",
     "setup": "npm run banner setup && yarn install && npm run db:migrate && npm run db:seed",
-    "serve": "npm run banner serve && ./node_modules/.bin/nodemon --watch 'src/**/*.ts' --watch 'src/**/*.json' --watch '.env'",
+    "serve": "npm run banner serve && \"./node_modules/.bin/nodemon\" --watch 'src/**/*.ts' --watch 'src/**/*.json' --watch '.env'",
     "clean": "npm run banner clean && npm run clean:dist",
-    "test": "npm run banner test && NODE_ENV=test ./node_modules/.bin/jest ./test/unit",
+    "test": "npm run banner test && cross-env NODE_ENV=test \"./node_modules/.bin/jest\" ./test/unit",
     "build": "npm run banner build && npm run lint && npm run clean:dist && npm run transpile && npm run copy:assets",
     "start": "node dist/app.js"
   },
@@ -146,5 +146,8 @@
     "testEnvironment": "node",
     "setupTestFrameworkScriptFile": "./test/unit/lib/setup.ts"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "cross-env": "^5.0.1"
+  }
 }
