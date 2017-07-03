@@ -1,10 +1,10 @@
 {
     "delay": "0",
     "execMap": {
-        "ts": "./node_modules/.bin/ts-node"
+        "ts": "ts-node"
     },
     "events": {
-        "start": "./node_modules/.bin/tslint -c ./tslint.json -t stylish 'src/**/*.ts'",
+        "start": "tslint -c ./tslint.json -t stylish 'src/**/*.ts'",
         "restart": "osascript -e 'display notification \"restarting server\" with title \"node.js application\"'"
     }
 }
