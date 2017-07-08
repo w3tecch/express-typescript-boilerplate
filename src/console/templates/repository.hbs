@@ -12,8 +12,7 @@ import { NotFoundException } from '../{{deepness}}exceptions/NotFoundException';
 
 export class {{name.capitalize}}Repository {
 
-    {{#if isResourceTemplate}}
-    constructor(
+    {{#if isResourceTemplate}}constructor(
         @inject(Types.Model) @named(Targets.Model.{{name.capitalize}}) public {{name.capitalize}}Model: typeof {{name.capitalize}}
     ) { }
 

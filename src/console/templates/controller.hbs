@@ -17,8 +17,7 @@ const authenticate = app.IoC.getNamed<interfaces.Middleware>(Types.Middleware, T
 @Controller('/{{name.pluralize}}', authenticate.use)
 export class {{name.capitalize}}Controller {
 
-    {{#if isResourceTemplate}}
-    constructor( @inject(Types.Service) @named(Targets.Service.{{name.capitalize}}Service) private {{name.camelCase}}Service: {{name.capitalize}}Service) { }
+    {{#if isResourceTemplate}}constructor( @inject(Types.Service) @named(Targets.Service.{{name.capitalize}}Service) private {{name.camelCase}}Service: {{name.capitalize}}Service) { }
 
     @Get('/')
     public async findAll( @Response() res: myExpress.Response): Promise<any> {
@@ -49,5 +48,5 @@ export class {{name.capitalize}}Controller {
         await this.{{name.camelCase}}Service.destroy(parseInt(id, 10));
         return res.destroyed();
     }{{/if}}
-
+    // Implement your routes here
 }

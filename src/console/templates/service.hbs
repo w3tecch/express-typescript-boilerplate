@@ -2,7 +2,7 @@
 import * as Bookshelf from 'bookshelf';
 {{/if}}
 import { inject, named } from 'inversify';
-import { Types, Core, Targets } from '../../{{deepness}}constants';
+import { Types, Core } from '../../{{deepness}}constants';
 import { Logger as LoggerType } from '../../{{deepness}}core/Logger';
 {{#if isResourceTemplate}}
 import { Validate, Request } from '../../{{deepness}}core/api/Validate';
@@ -18,8 +18,7 @@ export class {{name.capitalize}}Service {
 
     public log: LoggerType;
 
-    {{#if isResourceTemplate}}
-    constructor(
+    {{#if isResourceTemplate}}constructor(
         @inject(Types.Repository) @named(Targets.Repository.{{name.capitalize}}Repository) public {{name.camelCase}}Repo: {{name.capitalize}}Repository,
         @inject(Types.Core) @named(Core.Logger) public Logger: typeof LoggerType
     ) {
@@ -71,7 +70,7 @@ export class {{name.capitalize}}Service {
     }
     {{else}}
     constructor(
-        @inject(Types.Core) @named(Core.Logger) public Logger: typeof Log
+        @inject(Types.Core) @named(Core.Logger) public Logger: typeof LoggerType
     ) {
         this.log = new Logger(__filename);
     }
