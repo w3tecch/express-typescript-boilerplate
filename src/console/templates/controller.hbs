@@ -11,7 +11,7 @@ import { Types, Targets } from '../../{{deepness}}constants';
 {{/if}}
 
 // Get middlewares
-const authenticate = app.Container.getNamed<interfaces.Middleware>(Types.Middleware, Targets.Middleware.AuthenticateMiddleware);
+const authenticate = app.IoC.getNamed<interfaces.Middleware>(Types.Middleware, Targets.Middleware.AuthenticateMiddleware);
 
 
 @Controller('/{{name.pluralize}}', authenticate.use)
