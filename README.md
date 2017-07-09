@@ -54,7 +54,7 @@ Install a MySQL database.
 
 > If you work with a mac, we recommend to use homebrew for the installation
 
-#### Step 2: Create new Project
+### Step 2: Create new Project
 Fork or download this project. Configure your package.json for your new project.
 
 Then copy the example .env file and enter your database connection.
@@ -68,7 +68,7 @@ npm run setup
 
 > This installs all dependencies with yarn. After that it migrates the database and seeds some test data into it.
 
-#### Step 3: Serve your App
+### Step 3: Serve your App
 Go to the project dir and start your app
 ```
 npm run serve
@@ -77,7 +77,7 @@ npm run serve
 > This starts a local server using `nodemon`, which will watch for any file changes and will restart the sever according to these changes.
 > The server address will be displayed to you as `http://0.0.0.0:3000`.
 
-#### Step 4: Create a new Resource
+### Step 4: Create a new Resource
 Go to the project dir and hit this command
 ```
 npm run console make:resource
@@ -89,7 +89,7 @@ Apply the same information like you see below in the screenshot.
 
 > Now you have created a complete new endpoint in your api for the resource pets
 
-#### Step 5: Create a Seeder
+### Step 5: Create a Seeder
 TODO
 
 ## Scripts / Tasks
