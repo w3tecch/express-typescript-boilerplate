@@ -40,27 +40,57 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **Integrated Testing Tool** thanks to [Wallaby.js](https://wallabyjs.com/)
 
 ## Getting Started
-### Prerequisites
-* Install [Node.js](http://nodejs.org)
-    * on OSX use [homebrew](http://brew.sh) `brew install node`
-    * on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
-* Install yarn globally `npm install yarn -g`
+### Step 1:  Set up the Development Environment
+You need to set up your development environment before you can do anything.
 
-### Installing
-* `fork` this repo
-* `clone` your fork
-* `cp .env.example .env` to copy the example .env file and enter your database connection
-* Create a new database. You will find the name in the .env file.
-* Run `npm run setup` or enter the following commands manually:
-    * `yarn install` to install all dependencies and typings.
-    * `npm run db:migrate` to create the schema.
-    * `npm run db:seed` to insert some test data.
-* `npm run serve` to start the application.
+Install [Node.js and NPM](https://nodejs.org/en/download/)
+* on OSX use [homebrew](http://brew.sh) `brew install node`
+* on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
 
-### Running the app
-After you have installed all dependencies you can run the app.
-Enter `npm run serve` to start a local server using `nodemon`, which will watch for any file changes and will restart the sever according to these changes.
-The server address will be displayed to you as `http://0.0.0.0:3000`.
+Install yarn globally
+```npm install yarn -g```
+
+Install a MySQL database.
+
+> If you work with a mac, we recommend to use homebrew for the installation
+
+#### Step 2: Create new Project
+Fork or download this project. Configure your package.json for your new project.
+
+Then copy the example .env file and enter your database connection.
+
+Create a new database. You will find the name in the .env file.
+
+Then setup your application environment.
+```
+npm run setup
+```
+
+> This installs all dependencies with yarn. After that it migrates the database and seeds some test data into it.
+
+#### Step 3: Serve your App
+Go to the project dir and start your app
+```
+npm run serve
+```
+
+> This starts a local server using `nodemon`, which will watch for any file changes and will restart the sever according to these changes.
+> The server address will be displayed to you as `http://0.0.0.0:3000`.
+
+#### Step 4: Create a new Resource
+Go to the project dir and hit this command
+```
+npm run console make:resource
+```
+
+Apply the same information like you see below in the screenshot.
+
+![console](console.png)
+
+> Now you have created a complete new endpoint in your api for the resource pets
+
+#### Step 5: Create a Seeder
+TODO
 
 ## Scripts / Tasks
 All script are defined in the package.json file, but the most important ones are listed here.
