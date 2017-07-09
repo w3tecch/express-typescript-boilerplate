@@ -13,7 +13,6 @@ export class {{name.capitalize}}Middleware implements interfaces.Middleware {
         this.log = new Logger(__filename);
     }
 
-
     public use = (req: myExpress.Request, res: myExpress.Response, next: myExpress.NextFunction): void => {
         // TODO add your middleware logic here
         next();
