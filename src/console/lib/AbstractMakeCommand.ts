@@ -44,6 +44,7 @@ export class AbstractMakeCommand {
     public template = 'template.hbs';
     public target = 'api/target/path';
     public updateTargets = true;
+    public isTest = false;
 
     constructor(context?: any) {
         this.context = _.cloneDeep(context);
@@ -54,8 +55,8 @@ export class AbstractMakeCommand {
     }
 
     public async write(): Promise<void> {
-        const filePath = buildFilePath(this.target, this.context.name);
-        await existsFile(filePath, true);
+        const filePath = buildFilePath(this.target, this.context.name, this.isTest);
+        await existsFile(filePath, true, this.isTest);
         this.context.name = parseName(this.context.name, this.suffix);
         await writeTemplate(this.template, filePath, this.context);
     }

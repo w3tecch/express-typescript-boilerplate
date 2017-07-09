@@ -47,7 +47,7 @@ export class MakeModelCommand extends AbstractMakeCommand {
         await super.write();
 
         // Create interface for this resource object
-        const filePath = buildFilePath('types/resources', this.context.name.camelCase, '.d.ts');
+        const filePath = buildFilePath('types/resources', this.context.name.camelCase, false, '.d.ts');
         await existsFile(filePath, true);
         await writeTemplate('resource.hbs', filePath, this.context);
     }

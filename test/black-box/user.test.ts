@@ -3,7 +3,7 @@ import { DatabaseResetCommand } from '../../src/console/DatabaseResetCommand';
 import { createAdminUser, getToken } from './lib/auth';
 
 
-describe('User', () => {
+describe('/users', () => {
 
     const userKeys = ['id', 'firstName', 'lastName', 'email', 'picture', 'auth0UserId', 'updatedAt', 'createdAt'];
 

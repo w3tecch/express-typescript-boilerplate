@@ -27,8 +27,13 @@ export const filterInput = (suffix: string, prefix = '') => (value: string) => {
     return (vs.join('/')) + prefix + suffix;
 };
 
-export const buildFilePath = (targetPath: string, fileName: string, extension = '.ts') =>
-    path.join(__dirname, `/../../${targetPath}`, `${fileName}${extension}`);
+export const buildFilePath = (targetPath: string, fileName: string, isTest = false, extension = '.ts') => {
+    if (isTest) {
+        return path.join(__dirname, `/../../../test/${targetPath}`, `${fileName}.test${extension}`);
+    } else {
+        return path.join(__dirname, `/../../${targetPath}`, `${fileName}${extension}`);
+    }
+};
 
 export const inputIsRequired = (value: any) => !!value;
 
@@ -53,18 +58,21 @@ export const askFileName = async (context: any, name: string, suffix: string, pr
     return context;
 };
 
-export const existsFile = async (path: string, stop: boolean = false) => {
+export const existsFile = async (path: string, stop: boolean = false, isTest = false) => {
     const prompt = inquirer.createPromptModule();
     return new Promise((resolve, reject) => {
         fs.exists(path, async (exists) => {
 
             if (exists) {
-                const fileName = path.split('/src/')[1];
+                let fileName = path.split('/src/')[1];
+                if (isTest) {
+                    fileName = path.split('/test/')[1];
+                }
                 const answer = await prompt([
                     {
                         type: 'confirm',
                         name: 'override',
-                        message: `Override "src/${fileName}"?`,
+                        message: `Override "${isTest ? 'test' : 'src'}/${fileName}"?`,
                         default: true
                     }
                 ]);
