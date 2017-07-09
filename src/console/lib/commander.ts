@@ -21,14 +21,14 @@ import { config } from 'dotenv';
 config();
 
 // Configures the logger
-import { LoggerConfig } from '../config/LoggerConfig';
+import { LoggerConfig } from '../../config/LoggerConfig';
 new LoggerConfig().configure();
 
 figlet('console', (error: any, data: any) => {
     console.log(chalk.blue(data));
 
     // Find all command files
-    glob(path.join(__dirname, '**/*Command.ts'), (err: any, matches: string[]) => {
+    glob(path.join(__dirname, '../**/*Command.ts'), (err: any, matches: string[]) => {
         if (err) {
             console.log(err);
             return;
@@ -38,7 +38,7 @@ figlet('console', (error: any, data: any) => {
             .filter(m => m.indexOf('/lib') < 0)
             .map(m => ({
                 path: m,
-                name: m.replace(__dirname, '').replace('.ts', '').substring(1)
+                name: m.replace(__dirname.replace('/lib', ''), '').replace('.ts', '').substring(1)
             }));
 
         const commands = files.map(f => require(f.path)[f.name]);
