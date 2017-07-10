@@ -3,8 +3,8 @@
  * -------------------------------------
  *
  */
+import * as _ from 'lodash';
 import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
-
 
 export class MakeSeedCommand extends AbstractMakeCommand {
 
@@ -16,5 +16,11 @@ export class MakeSeedCommand extends AbstractMakeCommand {
     public suffix = '';
     public template = 'seed.hbs';
     public updateTargets = false;
+
+    public parseName(suffix: string = '', prefix: string = ''): (name: string) => string {
+        return (name: string) => {
+            return _.snakeCase(name);
+        };
+    }
 
 }
