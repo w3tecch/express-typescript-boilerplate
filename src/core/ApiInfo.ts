@@ -1,5 +1,4 @@
 import * as express from 'express';
-import * as path from 'path';
 import { Environment } from './helpers/Environment';
 import { SwaggerUI } from './SwaggerUI';
 import { ApiMonitor } from './ApiMonitor';
@@ -8,7 +7,7 @@ import { ApiMonitor } from './ApiMonitor';
 export class ApiInfo {
 
     public static getRoute(): string {
-        return path.join(process.env.APP_URL_PREFIX, process.env.API_INFO_ROUTE);
+        return process.env.APP_URL_PREFIX + process.env.API_INFO_ROUTE;
     }
 
     public setup(app: express.Application): void {

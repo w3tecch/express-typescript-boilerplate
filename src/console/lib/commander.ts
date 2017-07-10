@@ -15,6 +15,7 @@ import * as path from 'path';
 import * as commander from 'commander';
 import * as figlet from 'figlet';
 import * as chalk from 'chalk';
+import { isWindows } from './../../core/helpers/Path';
 
 // It also loads the .env file into the 'process.env' variable.
 import { config } from 'dotenv';
@@ -35,10 +36,10 @@ figlet('console', (error: any, data: any) => {
         }
 
         const files = matches
-            .filter(m => m.indexOf('/lib') < 0)
+            .filter(m => m.search(/\/lib/g) <= 0)
             .map(m => ({
                 path: m,
-                name: m.replace(__dirname.replace('/lib', ''), '').replace('.ts', '').substring(1)
+                name: m.replace((isWindows() ? __dirname.replace(/\\/g, '/') : __dirname).replace('/lib', ''), '').replace('.ts', '').substring(1)
             }));
 
         const commands = files.map(f => require(f.path)[f.name]);

@@ -4,34 +4,34 @@
   "description": "A delightful way to building a RESTful API with NodeJs & TypeScript",
   "main": "src/app.ts",
   "scripts": {
-    "banner": "npm run ts-node:fast -- ./src/console/lib/banner.ts",
-    "ts-node": "./node_modules/.bin/ts-node",
-    "ts-node:fast": "./node_modules/.bin/ts-node -F",
+    "setup": "yarn install && npm run banner setup && npm run db:migrate && npm run db:seed",
+    "serve": "npm run banner serve && \"./node_modules/.bin/nodemon\" --watch src --watch .env",
+    "build": "npm run banner build && npm run lint && npm run clean:dist && npm run transpile && npm run copy:assets",
+    "start": "node dist/app.js",
     "pretest": "./node_modules/.bin/tslint -c ./tslint.json -t stylish './test/unit/**/*.ts'",
+    "test": "npm run banner test && cross-env NODE_ENV=test \"./node_modules/.bin/jest\" --testPathPattern=unit",
     "test:pretty": "npm run test -- --verbose",
     "test:coverage": "npm run test -- --coverage",
     "pretest:black-box": "./node_modules/.bin/tslint -c ./tslint.json -t stylish './test/black-box/**/*.ts'",
-    "test:black-box": "npm run banner test && NODE_ENV=test ./node_modules/.bin/jest ./test/black-box -i",
+    "test:black-box": "npm run banner test && cross-env NODE_ENV=test \"./node_modules/.bin/jest\" --testPathPattern=black-box -i",
     "test:black-box:pretty": "npm run test:black-box -- --verbose",
-    "lint": "./node_modules/.bin/tslint -c ./tslint.json -p tsconfig.json 'src/**/*.ts' --format stylish",
-    "transpile": "./node_modules/.bin/tsc",
-    "clean:dist": "./node_modules/.bin/trash './dist'",
-    "copy:assets": "npm run copy:swagger && npm run copy:public",
-    "copy:swagger": "./node_modules/.bin/copyup ./src/api/swagger.json ./dist",
-    "copy:public": "./node_modules/.bin/copyup ./src/public/* ./dist",
-    "db:migrate": "npm run banner migrate && npm run ts-node:fast -- ./node_modules/.bin/knex migrate:latest",
-    "db:migrate:rollback": "npm run banner rollback && npm run ts-node:fast -- ./node_modules/.bin/knex migrate:rollback",
-    "db:seed": "npm run banner seed && npm run ts-node:fast -- ./node_modules/.bin/knex seed:run",
+    "db:migrate": "npm run banner migrate && \"./node_modules/.bin/knex\" migrate:latest",
+    "db:migrate:rollback": "npm run banner rollback && \"./node_modules/.bin/knex\" migrate:rollback",
+    "db:seed": "npm run banner seed && \"./node_modules/.bin/knex\" seed:run",
     "db:reset": "npm run console db:reset",
     "console": "npm run ts-node:fast -- ./src/console/lib/commander.ts",
     "console:dev": "npm run ts-node -- ./src/console/lib/commander.ts",
     "console:help": "npm run ts-node:fast -- ./src/console/lib/commander.ts --help",
-    "setup": "npm run banner setup && yarn install && npm run db:migrate && npm run db:seed",
-    "serve": "npm run banner serve && ./node_modules/.bin/nodemon --watch 'src/**/*.ts' --watch 'src/**/*.json' --watch '.env'",
+    "lint": "./node_modules/.bin/tslint -c ./tslint.json -p tsconfig.json 'src/**/*.ts' --format stylish",
+    "transpile": "./node_modules/.bin/tsc",
     "clean": "npm run banner clean && npm run clean:dist",
-    "test": "npm run banner test && NODE_ENV=test ./node_modules/.bin/jest ./test/unit",
-    "build": "npm run banner build && npm run lint && npm run clean:dist && npm run transpile && npm run copy:assets",
-    "start": "node dist/app.js"
+    "clean:dist": "./node_modules/.bin/trash './dist'",
+    "copy:assets": "npm run copy:swagger && npm run copy:public",
+    "copy:swagger": "./node_modules/.bin/copyup ./src/api/swagger.json ./dist",
+    "copy:public": "./node_modules/.bin/copyup ./src/public/* ./dist",
+    "banner": "npm run ts-node:fast -- ./src/console/lib/banner.ts",
+    "ts-node": "./node_modules/.bin/ts-node",
+    "ts-node:fast": "./node_modules/.bin/ts-node -F"
   },
   "repository": "git+ssh://git@github.com/w3tec/express-typescript-boilerplate.git",
   "engines": {
@@ -146,5 +146,8 @@
     "testEnvironment": "node",
     "setupTestFrameworkScriptFile": "./test/unit/lib/setup.ts"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "cross-env": "^5.0.1"
+  }
 }
