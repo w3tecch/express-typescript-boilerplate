@@ -33,7 +33,7 @@ export class MakeResourceCommand extends AbstractMakeCommand {
     public makeApiTestCommand: MakeApiTestCommand;
 
     public async run(): Promise<void> {
-        this.context = await askFileName(this.context, this.type, this.suffix, this.prefix);
+        this.context = await this.askFileName(this.context, this.type, this.suffix, this.prefix);
         this.context.properties = await askProperties(this.context.name);
         this.context.hasProperties = true;
         this.context.isResourceTemplate = true;
