@@ -1,7 +1,7 @@
 import * as Knex from 'knex';
 
-import { User } from '../../api/models/User';
 import { Factory } from '../factories';
+import { User } from '../../api/models/User';
 
 
 exports.seed = async (db: Knex) => {

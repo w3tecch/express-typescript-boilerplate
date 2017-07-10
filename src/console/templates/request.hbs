@@ -7,7 +7,7 @@ export class {{name.capitalize}}Request extends RequestBody {
     {{#each properties}}
 
     @IsNotEmpty()
-    {{name.camelCase}}: {{type.script}};
+    public {{name.camelCase}}: {{type.script}};
     {{/each}}
     {{else}}
 

@@ -4,8 +4,11 @@
  *
  */
 import * as _ from 'lodash';
+import * as path from 'path';
+import * as inquirer from 'inquirer';
+
 import { writeTemplate } from './template';
-import { askFileName, buildFilePath, existsFile, parseName, updateTargets } from './utils';
+import { existsFile, parseName, updateTargets, inputIsRequired } from './utils';
 
 export interface MakeCommand {
     context: any;
@@ -44,20 +47,56 @@ export class AbstractMakeCommand {
     public template = 'template.hbs';
     public target = 'api/target/path';
     public updateTargets = true;
+    public isTest = false;
 
     constructor(context?: any) {
         this.context = _.cloneDeep(context);
     }
 
     public async run(): Promise<void> {
-        this.context = await askFileName(this.context, this.type, this.suffix, this.prefix);
+        this.context = await this.askFileName(this.context, this.type, this.suffix, this.prefix);
     }
 
     public async write(): Promise<void> {
-        const filePath = buildFilePath(this.target, this.context.name);
-        await existsFile(filePath, true);
+        const filePath = this.buildFilePath(this.target, this.context.name, this.isTest);
+        await existsFile(filePath, true, this.isTest);
         this.context.name = parseName(this.context.name, this.suffix);
         await writeTemplate(this.template, filePath, this.context);
+    }
+
+    public buildFilePath = (targetPath: string, fileName: string, isTest = false, extension = '.ts') => {
+        return path.join(__dirname, `/../../${targetPath}`, `${fileName}${extension}`);
+    }
+
+    public parseName(suffix: string = '', prefix: string = ''): (name: string) => string {
+        return (name: string) => {
+            let ns = name.split('/');
+            ns = ns.map((v) => _.camelCase(v));
+            ns[ns.length - 1] = _.capitalize(ns[ns.length - 1]);
+            return (ns.join('/')) + prefix + suffix;
+        };
+    }
+
+    public async askFileName(context: any, name: string, suffix: string, prefix: string): Promise<any> {
+        const nameParser = this.parseName(suffix, prefix);
+        if (context === undefined || context.name === undefined) {
+            const prompt = inquirer.createPromptModule();
+            context = await prompt([
+                {
+                    type: 'input',
+                    name: 'name',
+                    message: `Enter the name of the ${name}:`,
+                    filter: nameParser,
+                    validate: inputIsRequired
+                }
+            ]);
+            const amount = context.name.split('/').length - 1;
+            context.deepness = '';
+            _.times(amount, () => context.deepness += '../');
+        } else {
+            context.name = nameParser(context.name);
+        }
+        return context;
     }
 
 }

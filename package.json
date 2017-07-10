@@ -1,6 +1,6 @@
 {
   "name": "express-typescript-boilerplate",
-  "version": "2.0.0-beta",
+  "version": "2.0.0-beta.1",
   "description": "A delightful way to building a RESTful API with NodeJs & TypeScript",
   "main": "src/app.ts",
   "scripts": {
@@ -19,9 +19,9 @@
     "db:migrate:rollback": "npm run banner rollback && \"./node_modules/.bin/knex\" migrate:rollback",
     "db:seed": "npm run banner seed && \"./node_modules/.bin/knex\" seed:run",
     "db:reset": "npm run console db:reset",
-    "console": "npm run ts-node:fast -- ./src/console/commander.ts",
-    "console:dev": "npm run ts-node -- ./src/console/commander.ts",
-    "console:help": "npm run ts-node:fast -- ./src/console/commander.ts --help",
+    "console": "npm run ts-node:fast -- ./src/console/lib/commander.ts",
+    "console:dev": "npm run ts-node -- ./src/console/lib/commander.ts",
+    "console:help": "npm run ts-node:fast -- ./src/console/lib/commander.ts --help",
     "lint": "./node_modules/.bin/tslint -c ./tslint.json -p tsconfig.json 'src/**/*.ts' --format stylish",
     "transpile": "./node_modules/.bin/tsc",
     "clean": "npm run banner clean && npm run clean:dist",

@@ -12,14 +12,13 @@ import { NotFoundException } from '../{{deepness}}exceptions/NotFoundException';
 
 export class {{name.capitalize}}Repository {
 
-    {{#if isResourceTemplate}}
-    constructor(
+    {{#if isResourceTemplate}}constructor(
         @inject(Types.Model) @named(Targets.Model.{{name.capitalize}}) public {{name.capitalize}}Model: typeof {{name.capitalize}}
     ) { }
 
     public async findAll(): Promise<Bookshelf.Collection<{{name.capitalize}}>> {
         const list = await this.{{name.capitalize}}Model.fetchAll();
-        return <Bookshelf.Collection<{{name.capitalize}}>>list;
+        return list as Bookshelf.Collection<{{name.capitalize}}>;
     }
 
     public async findOne(id: number): Promise<{{name.capitalize}}> {
@@ -37,7 +36,7 @@ export class {{name.capitalize}}Repository {
     }
 
     public async update(id: number, data: any): Promise<{{name.capitalize}}> {
-        const {{name.camelCase}} = this.{{name.capitalize}}Model.forge<{{name.capitalize}}>({ id: id });
+        const {{name.camelCase}} = this.{{name.capitalize}}Model.forge<{{name.capitalize}}>({ id });
         try {
             const {{name.camelCase}}Updated = await {{name.camelCase}}.save(data, { patch: true });
             return this.{{name.capitalize}}Model.fetchById({{name.camelCase}}Updated.id);
@@ -47,7 +46,7 @@ export class {{name.capitalize}}Repository {
     }
 
     public async destroy(id: number): Promise<void> {
-        let {{name.camelCase}} = this.{{name.capitalize}}Model.forge<{{name.capitalize}}>({ id: id });
+        let {{name.camelCase}} = this.{{name.capitalize}}Model.forge<{{name.capitalize}}>({ id });
         try {
             {{name.camelCase}} = await {{name.camelCase}}.fetch({ require: true });
         } catch (error) {
