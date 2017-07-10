@@ -21,6 +21,9 @@ export const removeSufix = (suffix: string, value: string) => {
 };
 
 export const filterInput = (suffix: string, prefix = '') => (value: string) => {
+    if (value.indexOf('/') < 0) {
+        return value;
+    }
     let vs = value.split('/');
     vs = vs.map((v) => _.camelCase(v));
     vs[vs.length - 1] = _.capitalize(vs[vs.length - 1]);
@@ -36,27 +39,6 @@ export const buildFilePath = (targetPath: string, fileName: string, isTest = fal
 };
 
 export const inputIsRequired = (value: any) => !!value;
-
-export const askFileName = async (context: any, name: string, suffix: string, prefix: string) => {
-    if (context === undefined || context.name === undefined) {
-        const prompt = inquirer.createPromptModule();
-        context = await prompt([
-            {
-                type: 'input',
-                name: 'name',
-                message: `Enter the name of the ${name}:`,
-                filter: filterInput(suffix, prefix),
-                validate: inputIsRequired
-            }
-        ]);
-        const amount = context.name.split('/').length - 1;
-        context.deepness = '';
-        _.times(amount, () => context.deepness += '../');
-    } else {
-        context.name = filterInput(suffix, prefix)(context.name);
-    }
-    return context;
-};
 
 export const existsFile = async (path: string, stop: boolean = false, isTest = false) => {
     const prompt = inquirer.createPromptModule();
