@@ -87,10 +87,53 @@ Apply the same information like you see below in the screenshot.
 
 ![console](console.png)
 
-> Now you have created a complete new endpoint in your api for the resource pets
+> Now you have created a complete new endpoint in your api for the resource pets.
+
+We have to add the relationship between users an pets. Open the created migration file and replace the user property with these lines.
+```
+table.integer('user_id').unsigned();
+table.foreign('user_id').references('id').inTable('users').onDelete('cascade');
+```
+
+Next we have to add this relationship also in the pets model.
+```
+public user(): User {
+    return this.belongsTo(User);
+}
+```
+
+> The relationship between the users and pets are set and ready. So you can migrate your database with `npm run db:migrate`
 
 ### Step 5: Create a Seeder
-TODO
+To generate some useful test data we need a smart factory for the pets. So open the ./src/database/factories/index.ts and add this code.
+```
+/**
+ * PET - Factory
+ */
+factory.define(Pet, (faker: Faker.FakerStatic, args: any[]) => {
+    const type = args[0];
+    return {
+        name: faker.name.firstName(),
+        type: type || 'dog',
+        userId: factory.get(User).returning('id')
+    };
+});
+```
+
+> So you have a pet factory to create sample data, but we need a seeder to run this awesome factory.
+
+Run this command in your terminal and call the new seeder "create pets".
+```
+npm run console make:seed
+```
+
+Open the file and place this code into it.
+```
+await factory.get(Pet)
+    .create(10);
+```
+
+> Now we can seed some nice cats into the database with `npm run db:seed`.
 
 ## Scripts / Tasks
 All script are defined in the package.json file, but the most important ones are listed here.
