@@ -48,28 +48,30 @@ Install [Node.js and NPM](https://nodejs.org/en/download/)
 * on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
 
 Install yarn globally
-```npm install yarn -g```
+```
+npm install yarn -g
+```
 
 Install a MySQL database.
 
-> If you work with a mac, we recommend to use homebrew for the installation
+> If you work with a mac, we recommend to use homebrew for the installation.
 
 ### Step 2: Create new Project
 Fork or download this project. Configure your package.json for your new project.
 
-Then copy the example .env file and enter your database connection.
+Then copy the `example.env` file and rename it to `.env`. In this file you have to add your database connection information.
 
-Create a new database. You will find the name in the .env file.
+Create a new database with the name you have in your `.env`-file.
 
 Then setup your application environment.
 ```
 npm run setup
 ```
 
-> This installs all dependencies with yarn. After that it migrates the database and seeds some test data into it.
+> This installs all dependencies with yarn. After that it migrates the database and seeds some test data into it. So after that your development environment is ready to use.
 
 ### Step 3: Serve your App
-Go to the project dir and start your app
+Go to the project dir and start your app with this npm script.
 ```
 npm run serve
 ```
@@ -78,18 +80,18 @@ npm run serve
 > The server address will be displayed to you as `http://0.0.0.0:3000`.
 
 ### Step 4: Create a new Resource
-Go to the project dir and hit this command
+Go to the project dir and hit this command in your terminal.
 ```
 npm run console make:resource
 ```
 
-Apply the same information like you see below in the screenshot.
+Apply the same information like you see in the screenshot below.
 
 ![console](console.png)
 
-> Now you have created a complete new endpoint in your api for the resource pets.
+> With that you just have created a complete new endpoint in your api for the resource pets.
 
-We have to add the relationship between users an pets. Open the created migration file and replace the user property with these lines.
+Normally a pet belogns to a user, so we have to add the relationship between users an pets. Open the created migration file and replace the user property with these lines.
 ```
 table.integer('user_id').unsigned();
 table.foreign('user_id').references('id').inTable('users').onDelete('cascade');
@@ -105,7 +107,7 @@ public user(): User {
 > The relationship between the users and pets are set and ready. So you can migrate your database with `npm run db:migrate`
 
 ### Step 5: Create a Seeder
-To generate some useful test data we need a smart factory for the pets. So open the ./src/database/factories/index.ts and add this code.
+To seed some cute pets we need a smart factory. So open the ./src/database/factories/index.ts and add this code.
 ```
 /**
  * PET - Factory
@@ -120,9 +122,9 @@ factory.define(Pet, (faker: Faker.FakerStatic, args: any[]) => {
 });
 ```
 
-> So you have a pet factory to create sample data, but we need a seeder to run this awesome factory.
+> This factory helps us to create a fake pet to seed to the database.
 
-Run this command in your terminal and call the new seeder "create pets".
+Run this command in your terminal and call the new seeder `create pets`.
 ```
 npm run console make:seed
 ```
@@ -134,6 +136,8 @@ await factory.get(Pet)
 ```
 
 > Now we can seed some nice cats into the database with `npm run db:seed`.
+
+> That was easy! Now its your turn to make something great out of it.
 
 ## Scripts / Tasks
 All script are defined in the package.json file, but the most important ones are listed here.
