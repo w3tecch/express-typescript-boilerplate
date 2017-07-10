@@ -15,7 +15,7 @@ import * as path from 'path';
 import * as commander from 'commander';
 import * as figlet from 'figlet';
 import * as chalk from 'chalk';
-import { isWindows } from './../core/helpers/Path';
+import { isWindows } from './../../core/helpers/Path';
 
 // It also loads the .env file into the 'process.env' variable.
 import { config } from 'dotenv';
