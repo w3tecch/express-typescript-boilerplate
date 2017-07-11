@@ -1,4 +1,4 @@
-import { getFolderwrapping, isWindows } from './helpers/Path';
+import { getFolderWrapping, isWindows } from './helpers/Path';
 
 /**
  * core.log.Log
@@ -35,8 +35,8 @@ export class Logger {
         const pathDelimiter = isWindows() ? '\\' : '/';
         if (path.indexOf(pathDelimiter) >= 0) {
             path = path.replace(process.cwd(), '');
-            path = path.replace(getFolderwrapping('src'), '');
-            path = path.replace(getFolderwrapping('dist'), '');
+            path = path.replace(getFolderWrapping('src'), '');
+            path = path.replace(getFolderWrapping('dist'), '');
             path = path.replace('.ts', '');
             path = path.replace('.js', '');
             path = path.replace(/\//g, ':');

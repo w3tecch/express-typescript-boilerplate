@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as path from 'path';
 import * as swaggerUi from 'swagger-ui-express';
 import { Environment } from './helpers/Environment';
-import { getFolderwrapping } from './helpers/Path';
+import { getFolderWrapping } from './helpers/Path';
 
 
 export class SwaggerUI {
@@ -13,7 +13,7 @@ export class SwaggerUI {
 
     public setup(app: express.Application): void {
         if (Environment.isTruthy(process.env.SWAGGER_ENABLED)) {
-            const baseFolder = __dirname.indexOf(getFolderwrapping('src')) >= 0 ? getFolderwrapping('src') : getFolderwrapping('dist');
+            const baseFolder = __dirname.indexOf(getFolderWrapping('src')) >= 0 ? getFolderWrapping('src') : getFolderWrapping('dist');
             const basePath = __dirname.substring(0, __dirname.indexOf(baseFolder));
             const swaggerFile = require(path.join(basePath, process.env.SWAGGER_FILE));
             const packageJson = require(path.join(basePath, 'package.json'));

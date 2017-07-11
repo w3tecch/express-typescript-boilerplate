@@ -78,7 +78,6 @@
     "@types/jsonwebtoken": "^7.2.1",
     "@types/knex": "0.0.52",
     "@types/lodash": "^4.14.67",
-    "@types/mkdirp": "^0.3.29",
     "@types/morgan": "^1.7.32",
     "@types/pluralize": "^0.0.27",
     "@types/reflect-metadata": "0.0.5",
@@ -106,11 +105,9 @@
     "inquirer": "^3.1.1",
     "inversify": "^4.1.1",
     "inversify-express-utils": "^3.5.1",
-    "jest": "^20.0.3",
     "jsonwebtoken": "^7.4.1",
     "knex": "^0.12.0",
     "lodash": "^4.17.4",
-    "mkdirp": "^0.5.1",
     "morgan": "^1.7.0",
     "mysql": "^2.13.0",
     "nodemon": "^1.11.0",
@@ -119,16 +116,12 @@
     "reflect-metadata": "^0.1.10",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
-    "require-dir": "^0.3.2",
-    "rimraf": "^2.6.1",
-    "run-sequence": "^1.2.2",
     "serve-favicon": "^2.4.3",
     "swagger-jsdoc": "^1.9.5",
     "swagger-ui-express": "^2.0.0",
     "trash-cli": "^1.4.0",
-    "ts-jest": "^20.0.6",
-    "ts-node": "^3.1.0",
-    "tslint": "^5.4.3",
+    "ts-node": "^3.2.0",
+    "tslint": "^5.5.0",
     "typescript": "^2.4.1",
     "winston": "^2.3.1"
   },
@@ -148,6 +141,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "cross-env": "^5.0.1"
+    "cross-env": "^5.0.1",
+    "jest": "^20.0.3",
+    "ts-jest": "^20.0.7"
   }
 }
