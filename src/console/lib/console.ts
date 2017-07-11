@@ -46,14 +46,16 @@ figlet('console', (error: any, data: any) => {
         const keys = commands.map(c => c.command);
         const key = process.argv[2];
 
-        if (keys.indexOf(key) < 0) {
+        if (keys.indexOf(key) < 0 && key !== '--help') {
             console.log(chalk.red('➜ ') + chalk.bold(`Command ${key} was not found!`));
             console.log();
             return;
         }
 
-        console.log(chalk.green('➜ ') + chalk.bold(key));
-        console.log();
+        if (key !== '--help') {
+            console.log(chalk.green('➜ ') + chalk.bold(key));
+            console.log();
+        }
 
         commands.forEach((c) => {
             commander

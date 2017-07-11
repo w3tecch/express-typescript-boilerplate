@@ -3,7 +3,7 @@
  * -------------------------------------
  *
  */
-import { askFileName, askProperties } from './lib/utils';
+import { askProperties } from './lib/utils';
 import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
 import { MakeModelCommand } from './MakeModelCommand';
 import { MakeRepoCommand } from './MakeRepoCommand';
