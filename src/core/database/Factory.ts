@@ -3,7 +3,7 @@
  * ------------------------------------------------
  */
 
-import * as faker from 'faker';
+import * as Faker from 'faker';
 import * as bookshelf from 'bookshelf';
 import { BluePrint } from './BluePrint';
 import { ModelFactory } from './ModelFactory';
@@ -13,7 +13,7 @@ export class Factory {
 
     public static getInstance(): Factory {
         if (!Factory.instance) {
-            Factory.instance = new Factory(faker);
+            Factory.instance = new Factory(Faker);
         }
         return Factory.instance;
     }

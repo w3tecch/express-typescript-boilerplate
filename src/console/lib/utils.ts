@@ -40,15 +40,15 @@ export const buildFilePath = (targetPath: string, fileName: string, isTest = fal
 
 export const inputIsRequired = (value: any) => !!value;
 
-export const existsFile = async (path: string, stop: boolean = false, isTest = false) => {
+export const existsFile = async (filePath: string, stop: boolean = false, isTest = false) => {
     const prompt = inquirer.createPromptModule();
     return new Promise((resolve, reject) => {
-        fs.exists(path, async (exists) => {
+        fs.exists(filePath, async (exists) => {
 
             if (exists) {
-                let fileName = path.split('/src/')[1];
+                let fileName = filePath.split('/src/')[1];
                 if (isTest) {
-                    fileName = path.split('/test/')[1];
+                    fileName = filePath.split('/test/')[1];
                 }
                 const answer = await prompt([
                     {
