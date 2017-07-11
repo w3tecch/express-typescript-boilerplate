@@ -65,7 +65,11 @@ export class AbstractMakeCommand {
     }
 
     public buildFilePath = (targetPath: string, fileName: string, isTest = false, extension = '.ts') => {
-        return path.join(__dirname, `/../../${targetPath}`, `${fileName}${extension}`);
+        if (isTest) {
+            return path.join(__dirname, `/../../../test${targetPath}`, `${fileName}${extension}`);
+        } else {
+            return path.join(__dirname, `/../../${targetPath}`, `${fileName}${extension}`);
+        }
     }
 
     public parseName(suffix: string = '', prefix: string = ''): (name: string) => string {
