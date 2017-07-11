@@ -64,10 +64,10 @@ export class Server {
      * @memberof Server
      */
     public onStartUp(app: express.Application): void {
-        this.log.info(``);
-        this.log.info(`Aloha, your app is ready on ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}`);
-        this.log.info(`To shut it down, press <CTRL> + C at any time.`);
-        this.log.info(``);
+        this.log.debug(``);
+        this.log.debug(`Aloha, your app is ready on ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}`);
+        this.log.debug(`To shut it down, press <CTRL> + C at any time.`);
+        this.log.debug(``);
         this.log.debug('-------------------------------------------------------');
         this.log.debug(`Environment  : ${Environment.getNodeEnv()}`);
         this.log.debug(`Version      : ${Environment.getPkg().version}`);
