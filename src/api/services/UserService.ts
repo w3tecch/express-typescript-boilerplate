@@ -12,7 +12,7 @@ import { inject, named } from 'inversify';
 import { Types, Core, Targets } from '../../constants';
 import { Logger as LoggerType } from '../../core/Logger';
 import { EventEmitter } from '../../core/api/events';
-import { Validate, Request } from '../../core/api/Validate';
+import { validate, request } from '../../core/api/Validate';
 import { NotFoundException } from '../exceptions/NotFoundException';
 import { UserCreateRequest } from '../requests/user/UserCreateRequest';
 import { UserUpdateRequest } from '../requests/user/UserUpdateRequest';
@@ -77,8 +77,8 @@ export class UserService {
      * @param {*} data is the json body of the request
      * @returns {Promise<User>}
      */
-    @Validate()
-    public async create( @Request(UserCreateRequest) data: any): Promise<User> {
+    @validate()
+    public async create( @request(UserCreateRequest) data: any): Promise<User> {
         // If the request body was valid we will create the user
         const user = await this.userRepo.create(data);
         this.events.emit(UserCreatedListener.Event, user.toJSON());
@@ -93,8 +93,8 @@ export class UserService {
      * @param {*} newUser is the json body of the request
      * @returns {Promise<User>}
      */
-    @Validate()
-    public async update(id: number, @Request(UserUpdateRequest) newUser: any): Promise<User> {
+    @validate()
+    public async update(id: number, @request(UserUpdateRequest) newUser: any): Promise<User> {
         // Find or fail
         const user = await this.findOne(id);
         // Set new values
