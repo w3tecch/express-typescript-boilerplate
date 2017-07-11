@@ -7,7 +7,7 @@
  */
 
 import { inject, named } from 'inversify';
-import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response, Request } from 'inversify-express-utils';
+import { controller, httpGet, httpPost, httpPut, httpDelete, response, request, requestBody, requestParam } from 'inversify-express-utils';
 import { app } from '../../app';
 import { Types, Targets } from '../../constants';
 import { UserService } from '../services/UserService';
@@ -17,42 +17,42 @@ const populateUser = app.IoC.getNamed<interfaces.Middleware>(Types.Middleware, T
 const authenticate = app.IoC.getNamed<interfaces.Middleware>(Types.Middleware, Targets.Middleware.AuthenticateMiddleware);
 
 
-@Controller('/users', authenticate.use)
+@controller('/users', authenticate.use)
 export class UserController {
 
     constructor( @inject(Types.Service) @named(Targets.Service.UserService) private userService: UserService) { }
 
-    @Get('/')
-    public async findAll( @Response() res: myExpress.Response): Promise<any> {
+    @httpGet('/')
+    public async findAll( @response() res: myExpress.Response): Promise<any> {
         const users = await this.userService.findAll();
         return res.found(users.toJSON());
     }
 
-    @Post('/')
-    public async create( @Response() res: myExpress.Response, @RequestBody() body: any): Promise<any> {
+    @httpPost('/')
+    public async create( @response() res: myExpress.Response, @requestBody() body: any): Promise<any> {
         const user = await this.userService.create(body);
         return res.created(user.toJSON());
     }
 
-    @Get('/me', populateUser.use)
-    public async findMe( @Request() req: myExpress.Request, @Response() res: myExpress.Response): Promise<any> {
+    @httpGet('/me', populateUser.use)
+    public async findMe( @request() req: myExpress.Request, @response() res: myExpress.Response): Promise<any> {
         return res.found(req.user);
     }
 
-    @Get('/:id')
-    public async findOne( @Response() res: myExpress.Response, @RequestParam('id') id: string): Promise<any> {
+    @httpGet('/:id')
+    public async findOne( @response() res: myExpress.Response, @requestParam('id') id: string): Promise<any> {
         const user = await this.userService.findOne(parseInt(id, 10));
         return res.found(user.toJSON());
     }
 
-    @Put('/:id')
-    public async update( @Response() res: myExpress.Response, @RequestParam('id') id: string, @RequestBody() body: any): Promise<any> {
+    @httpPut('/:id')
+    public async update( @response() res: myExpress.Response, @requestParam('id') id: string, @requestBody() body: any): Promise<any> {
         const user = await this.userService.update(parseInt(id, 10), body);
         return res.updated(user.toJSON());
     }
 
-    @Delete('/:id')
-    public async destroy( @Response() res: myExpress.Response, @RequestParam('id') id: string): Promise<any> {
+    @httpDelete('/:id')
+    public async destroy( @response() res: myExpress.Response, @requestParam('id') id: string): Promise<any> {
         await this.userService.destroy(parseInt(id, 10));
         return res.destroyed();
     }

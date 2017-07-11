@@ -2,7 +2,7 @@ import { Logger } from '../core/Logger';
 
 import * as Knex from 'knex';
 import { AbstractCommand } from './lib/AbstractCommand';
-import * as options from './../../knexfile';
+import { DatabaseConfig } from '../config/Database';
 
 const log = new Logger(__filename);
 
@@ -20,7 +20,7 @@ export class DatabaseResetCommand extends AbstractCommand {
     public static description = 'Reverse all current migrations and migrate to latest.';
 
     public async run(): Promise<void> {
-        const knex = Knex(options as Knex.Config);
+        const knex = Knex(DatabaseConfig as Knex.Config);
 
         const migrate: any = knex.migrate;
 

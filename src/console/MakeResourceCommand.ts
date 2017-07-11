@@ -3,13 +3,14 @@
  * -------------------------------------
  *
  */
-import { askFileName, askProperties } from './lib/utils';
+import { askProperties } from './lib/utils';
 import { AbstractMakeCommand } from './lib/AbstractMakeCommand';
 import { MakeModelCommand } from './MakeModelCommand';
 import { MakeRepoCommand } from './MakeRepoCommand';
 import { MakeServiceCommand } from './MakeServiceCommand';
 import { MakeControllerCommand } from './MakeControllerCommand';
 import { MakeRequestCommand } from './MakeRequestCommand';
+import { MakeApiTestCommand } from './MakeApiTestCommand';
 
 
 export class MakeResourceCommand extends AbstractMakeCommand {
@@ -29,9 +30,10 @@ export class MakeResourceCommand extends AbstractMakeCommand {
     public makeControllerCommand: AbstractMakeCommand;
     public makeCreateRequestCommand: MakeRequestCommand;
     public makeUpdateRequestCommand: MakeRequestCommand;
+    public makeApiTestCommand: MakeApiTestCommand;
 
     public async run(): Promise<void> {
-        this.context = await askFileName(this.context, this.type, this.suffix, this.prefix);
+        this.context = await this.askFileName(this.context, this.type, this.suffix, this.prefix);
         this.context.properties = await askProperties(this.context.name);
         this.context.hasProperties = true;
         this.context.isResourceTemplate = true;
@@ -43,6 +45,7 @@ export class MakeResourceCommand extends AbstractMakeCommand {
         this.makeControllerCommand = new MakeControllerCommand(this.context);
         this.makeCreateRequestCommand = new MakeRequestCommand(this.context, 'Create');
         this.makeUpdateRequestCommand = new MakeRequestCommand(this.context, 'Update');
+        this.makeApiTestCommand = new MakeApiTestCommand(this.context);
 
         // Ask all meta-data
         await this.makeModelCommand.run();
@@ -51,6 +54,7 @@ export class MakeResourceCommand extends AbstractMakeCommand {
         await this.makeControllerCommand.run();
         await this.makeCreateRequestCommand.run();
         await this.makeUpdateRequestCommand.run();
+        await this.makeApiTestCommand.run();
     }
 
     public async write(): Promise<void> {
@@ -60,6 +64,7 @@ export class MakeResourceCommand extends AbstractMakeCommand {
         await this.makeControllerCommand.write();
         await this.makeCreateRequestCommand.write();
         await this.makeUpdateRequestCommand.write();
+        await this.makeApiTestCommand.write();
     }
 
 }

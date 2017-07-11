@@ -1,53 +1,52 @@
 {{#if isResourceTemplate}}
 import { inject, named } from 'inversify';
-import { Controller, Get, Post, Put, Delete, RequestParam, RequestBody, Response } from 'inversify-express-utils';
+import { controller, httpGet, httpPost, httpPut, httpDelete, response, request, requestBody, requestParam } from 'inversify-express-utils';
 import { Types, Targets } from '../../{{deepness}}constants';
 import { app } from '../../{{deepness}}app';
 import { {{name.capitalize}}Service } from '../{{deepness}}services/{{name.capitalize}}Service';
 {{else}}
-import { Controller } from 'inversify-express-utils';
+import { controller } from 'inversify-express-utils';
 import { app } from '../../{{deepness}}app';
 import { Types, Targets } from '../../{{deepness}}constants';
 {{/if}}
 
 // Get middlewares
-const authenticate = app.Container.getNamed<interfaces.Middleware>(Types.Middleware, Targets.Middleware.AuthenticateMiddleware);
+const authenticate = app.IoC.getNamed<interfaces.Middleware>(Types.Middleware, Targets.Middleware.AuthenticateMiddleware);
 
 
-@Controller('/{{name.pluralize}}', authenticate.use)
+@controller('/{{name.pluralize}}', authenticate.use)
 export class {{name.capitalize}}Controller {
 
-    {{#if isResourceTemplate}}
-    constructor( @inject(Types.Service) @named(Targets.Service.{{name.capitalize}}Service) private {{name.camelCase}}Service: {{name.capitalize}}Service) { }
+    {{#if isResourceTemplate}}constructor( @inject(Types.Service) @named(Targets.Service.{{name.capitalize}}Service) private {{name.camelCase}}Service: {{name.capitalize}}Service) { }
 
-    @Get('/')
-    public async findAll( @Response() res: myExpress.Response): Promise<any> {
+    @httpGet('/')
+    public async findAll( @response() res: myExpress.Response): Promise<any> {
         const {{name.camelCase}}s = await this.{{name.camelCase}}Service.findAll();
         return res.found({{name.camelCase}}s.toJSON());
     }
 
-    @Post('/')
-    public async create( @Response() res: myExpress.Response, @RequestBody() body: any): Promise<any> {
+    @httpPost('/')
+    public async create( @response() res: myExpress.Response, @requestBody() body: any): Promise<any> {
         const {{name.camelCase}} = await this.{{name.camelCase}}Service.create(body);
         return res.created({{name.camelCase}}.toJSON());
     }
 
-    @Get('/:id')
-    public async findOne( @Response() res: myExpress.Response, @RequestParam('id') id: string): Promise<any> {
+    @httpGet('/:id')
+    public async findOne( @response() res: myExpress.Response, @requestParam('id') id: string): Promise<any> {
         const {{name.camelCase}} = await this.{{name.camelCase}}Service.findOne(parseInt(id, 10));
         return res.found({{name.camelCase}}.toJSON());
     }
 
-    @Put('/:id')
-    public async update( @Response() res: myExpress.Response, @RequestParam('id') id: string, @RequestBody() body: any): Promise<any> {
+    @httpPut('/:id')
+    public async update( @response() res: myExpress.Response, @requestParam('id') id: string, @requestBody() body: any): Promise<any> {
         const {{name.camelCase}} = await this.{{name.camelCase}}Service.update(parseInt(id, 10), body);
         return res.updated({{name.camelCase}}.toJSON());
     }
 
-    @Delete('/:id')
-    public async destroy( @Response() res: myExpress.Response, @RequestParam('id') id: string): Promise<any> {
+    @httpDelete('/:id')
+    public async destroy( @response() res: myExpress.Response, @requestParam('id') id: string): Promise<any> {
         await this.{{name.camelCase}}Service.destroy(parseInt(id, 10));
         return res.destroyed();
     }{{/if}}
-
+    // Implement your routes here
 }

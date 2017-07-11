@@ -24,10 +24,10 @@ interface RequestParameter {
  *
  * @param request
  */
-export const Request = (request: typeof RequestBody) => (target: object, propertyKey: string | symbol, parameterIndex: number): any => {
+export const request = (requestBody: typeof RequestBody) => (target: object, propertyKey: string | symbol, parameterIndex: number): any => {
     const existingRequestParameters: RequestParameter[] = Reflect.getOwnMetadata(requestMetadataKey, target, propertyKey) || [];
     existingRequestParameters.push({
-        request,
+        request: requestBody,
         index: parameterIndex
     });
     Reflect.defineMetadata(requestMetadataKey, existingRequestParameters, target, propertyKey);
@@ -40,14 +40,14 @@ export const Request = (request: typeof RequestBody) => (target: object, propert
  * @param propertyName
  * @param descriptor
  */
-export const Validate = () => (target: any, propertyName: string, descriptor: TypedPropertyDescriptor<any>): any => {
+export const validate = () => (target: any, propertyName: string, descriptor: TypedPropertyDescriptor<any>): any => {
     const method = descriptor.value;
     descriptor.value = async function(...args: any[]): Promise<any> {
         const requestParameters: RequestParameter[] = Reflect.getOwnMetadata(requestMetadataKey, target, propertyName);
         if (requestParameters.length > 0) {
             for (const requestParameter of requestParameters) {
-                const request = new requestParameter.request(args[requestParameter.index]);
-                await request.validate();
+                const requestBody = new requestParameter.request(args[requestParameter.index]);
+                await requestBody.validate();
             }
         }
         return method && method.apply(this, args);

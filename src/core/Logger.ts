@@ -1,3 +1,5 @@
+import { getFolderWrapping, isWindows } from './helpers/Path';
+
 /**
  * core.log.Log
  * ------------------------------------------------
@@ -30,10 +32,11 @@ export class Logger {
     private static Adapters: Map<string, interfaces.LoggerAdapterConstructor> = new Map();
 
     private static parsePathToScope(path: string): string {
-        if (path.indexOf('/') >= 0) {
+        const pathDelimiter = isWindows() ? '\\' : '/';
+        if (path.indexOf(pathDelimiter) >= 0) {
             path = path.replace(process.cwd(), '');
-            path = path.replace('/src/', '');
-            path = path.replace('/dist/', '');
+            path = path.replace(getFolderWrapping('src'), '');
+            path = path.replace(getFolderWrapping('dist'), '');
             path = path.replace('.ts', '');
             path = path.replace('.js', '');
             path = path.replace(/\//g, ':');

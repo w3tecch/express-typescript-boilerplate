@@ -74,6 +74,7 @@ export class App {
         this.log.info('Starting app...');
         this.server = new Server(this.bootstrapApp.startServer(this.express));
         this.server.use(this.express);
+        this.log.info('App is ready!');
     }
 
 }

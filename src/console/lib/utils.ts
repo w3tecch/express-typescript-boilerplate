@@ -21,50 +21,40 @@ export const removeSufix = (suffix: string, value: string) => {
 };
 
 export const filterInput = (suffix: string, prefix = '') => (value: string) => {
+    if (value.indexOf('/') < 0) {
+        return value;
+    }
     let vs = value.split('/');
     vs = vs.map((v) => _.camelCase(v));
     vs[vs.length - 1] = _.capitalize(vs[vs.length - 1]);
     return (vs.join('/')) + prefix + suffix;
 };
 
-export const buildFilePath = (targetPath: string, fileName: string, extension = '.ts') =>
-    path.join(__dirname, `/../../${targetPath}`, `${fileName}${extension}`);
+export const buildFilePath = (targetPath: string, fileName: string, isTest = false, extension = '.ts') => {
+    if (isTest) {
+        return path.join(__dirname, `/../../../test/${targetPath}`, `${fileName}.test${extension}`);
+    } else {
+        return path.join(__dirname, `/../../${targetPath}`, `${fileName}${extension}`);
+    }
+};
 
 export const inputIsRequired = (value: any) => !!value;
 
-export const askFileName = async (context: any, name: string, suffix: string, prefix: string) => {
-    if (context === undefined || context.name === undefined) {
-        const prompt = inquirer.createPromptModule();
-        context = await prompt([
-            {
-                type: 'input',
-                name: 'name',
-                message: `Enter the name of the ${name}:`,
-                filter: filterInput(suffix, prefix),
-                validate: inputIsRequired
-            }
-        ]);
-        const amount = context.name.split('/').length - 1;
-        context.deepness = '';
-        _.times(amount, () => context.deepness += '../');
-    } else {
-        context.name = filterInput(suffix, prefix)(context.name);
-    }
-    return context;
-};
-
-export const existsFile = async (path: string, stop: boolean = false) => {
+export const existsFile = async (filePath: string, stop: boolean = false, isTest = false) => {
     const prompt = inquirer.createPromptModule();
     return new Promise((resolve, reject) => {
-        fs.exists(path, async (exists) => {
+        fs.exists(filePath, async (exists) => {
 
             if (exists) {
-                const fileName = path.split('/src/')[1];
+                let fileName = filePath.split('/src/')[1];
+                if (isTest) {
+                    fileName = filePath.split('/test/')[1];
+                }
                 const answer = await prompt([
                     {
                         type: 'confirm',
                         name: 'override',
-                        message: `Override "src/${fileName}"?`,
+                        message: `Override "${isTest ? 'test' : 'src'}/${fileName}"?`,
                         default: true
                     }
                 ]);

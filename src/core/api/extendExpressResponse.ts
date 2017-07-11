@@ -74,8 +74,8 @@ export const extendExpressResponse = (req: myExpress.Request, res: myExpress.Res
 export function bodySuccessful<T>(data: T, options: myExpress.ResponseOptions = {}): any {
     return {
         success: true,
-        ...message(options.message),
-        ...links(options.links),
+        ...prepareMessage(options.message),
+        ...prepareLinks(options.links),
         data
     };
 }
@@ -92,14 +92,14 @@ export function bodyFailed(message: string, error?: any): any {
 }
 
 ///////////////////////////////////////////////////////
-function message(value?: string): any {
+function prepareMessage(value?: string): any {
     if (value) {
         return { message: value };
     }
     return;
 }
 
-function links(values?: myExpress.ResponseLinks[]): any {
+function prepareLinks(values?: myExpress.ResponseLinks[]): any {
     if (values) {
         return { links: values };
     }
