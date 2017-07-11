@@ -10,15 +10,12 @@
 
 export const Targets = {
     Model:     {
-        Pet: 'Pet',
         User: 'User'
     },
     Repository:     {
-        PetRepository: 'PetRepository',
         UserRepository: 'UserRepository'
     },
     Service:     {
-        PetService: 'PetService',
         UserService: 'UserService'
     },
     Middleware:     {
@@ -32,7 +29,6 @@ export const Targets = {
         }
     },
     Controller:     {
-        PetController: 'PetController',
         UserController: 'UserController'
     }
 };
