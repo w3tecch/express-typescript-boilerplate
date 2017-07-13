@@ -76,7 +76,7 @@ export class AbstractMakeCommand {
         return (name: string) => {
             let ns = name.split('/');
             ns = ns.map((v) => _.camelCase(v));
-            ns[ns.length - 1] = _.capitalize(ns[ns.length - 1]);
+            ns[ns.length - 1] = _.upperFirst(ns[ns.length - 1]);
             return (ns.join('/')) + prefix + suffix;
         };
     }
