@@ -1,6 +1,6 @@
 {{#if isResourceTemplate}}
 import { inject, named } from 'inversify';
-import { controller, httpGet, httpPost, httpPut, httpDelete, response, request, requestBody, requestParam } from 'inversify-express-utils';
+import { controller, httpGet, httpPost, httpPut, httpDelete, response, requestBody, requestParam } from 'inversify-express-utils';
 import { Types, Targets } from '../../{{deepness}}constants';
 import { app } from '../../{{deepness}}app';
 import { {{name.capitalize}}Service } from '../{{deepness}}services/{{name.capitalize}}Service';
