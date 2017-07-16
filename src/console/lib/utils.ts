@@ -46,15 +46,15 @@ export const existsFile = async (filePath: string, stop: boolean = false, isTest
         fs.exists(filePath, async (exists) => {
 
             if (exists) {
-                let fileName = filePath.split('/src/')[1];
+                let fileName = filePath.split(path.normalize('/src/'))[1];
                 if (isTest) {
-                    fileName = filePath.split('/test/')[1];
+                    fileName = filePath.split(path.normalize('/test/'))[1];
                 }
                 const answer = await prompt([
                     {
                         type: 'confirm',
                         name: 'override',
-                        message: `Override "${isTest ? 'test' : 'src'}/${fileName}"?`,
+                        message: `Override "${path.join(isTest ? 'test' : 'src', fileName)}"?`,
                         default: true
                     }
                 ]);
