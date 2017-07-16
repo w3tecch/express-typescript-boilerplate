@@ -38,7 +38,7 @@ export class Logger {
             filepath = filepath.replace(`${path.sep}dist${path.sep}`, '');
             filepath = filepath.replace('.ts', '');
             filepath = filepath.replace('.js', '');
-            filepath = filepath.replace(/\//g, ':');
+            filepath = filepath.replace(path.sep, ':');
         }
         return filepath;
     }
