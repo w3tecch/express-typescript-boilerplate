@@ -38,7 +38,7 @@ figlet('console', (error: any, data: any) => {
             .filter(m => m.search(/\/lib/g) <= 0)
             .map(m => ({
                 path: m,
-                name: m.replace(path.normalize(__dirname).replace('/lib', ''), '').replace('.ts', '').substring(1)
+                name: m.replace(__dirname.split(path.sep).join('/').replace('/lib', ''), '').replace('.ts', '').substring(1)
             }));
 
         const commands = files.map(f => require(f.path)[f.name]);
