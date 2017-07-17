@@ -18,4 +18,11 @@ export class {{name.capitalize}} extends Bookshelf.Model<{{name.capitalize}}> {
     public set {{name.capitalize}}(value: {{type.script}}) { this.set('{{name.camelCase}}', value); }
     {{/each}}
 
+    {{#if hasTimestamps}}
+    public get UpdatedAt(): Date { return this.get('updatedAt'); }
+    public set UpdatedAt(value: Date) { this.set('updatedAt', value); }
+
+    public get CreatedAt(): Date { return this.get('createdAt'); }
+    public set CreatedAt(value: Date) { this.set('createdAt', value); }
+    {{/if}}
 }
