@@ -1,9 +1,14 @@
 declare module 'resources' {
 
     interface {{name.capitalize}} {
+        id: int;
         {{#each properties}}
         {{name.camelCase}}: {{type.script}};
         {{/each}}
+        {{#if hasTimestamps}}
+        createdAt: Date;
+        updatedAt: Date;
+        {{/if}}
     }
 
 }
