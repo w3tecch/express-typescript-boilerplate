@@ -59,7 +59,7 @@ Install a MySQL database.
 ### Step 2: Create new Project
 Fork or download this project. Configure your package.json for your new project.
 
-Then copy the `example.env` file and rename it to `.env`. In this file you have to add your database connection information.
+Then copy the `.env.example` file and rename it to `.env`. In this file you have to add your database connection information.
 
 Create a new database with the name you have in your `.env`-file.
 
