@@ -17,7 +17,7 @@ export class Bootstrap {
 
     public defineExpressApp(app: express.Application): express.Application {
         app.set('host', process.env.APP_HOST);
-        app.set('port', Server.normalizePort(process.env.PORT || process.env.APP_PORT || 3000));
+        app.set('port', Server.normalizePort(process.env.PORT || process.env.APP_PORT || '3000'));
         return app;
     }
 
