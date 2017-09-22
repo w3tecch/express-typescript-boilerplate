@@ -13,7 +13,6 @@ import { Types, Core, Targets } from '../constants';
 import { events, EventEmitter } from './api/events';
 import { Logger } from './Logger';
 import { IocConfig } from '../config/IocConfig';
-import { getFolderWrapping } from './helpers/Path';
 
 
 export class IoC {
@@ -185,13 +184,13 @@ export class IoC {
     }
 
     private getBasePath(): string {
-        const baseFolder = __dirname.indexOf(getFolderWrapping('src')) >= 0 ? getFolderWrapping('src') : getFolderWrapping('dist');
+        const baseFolder = __dirname.indexOf(`${path.sep}src${path.sep}`) >= 0 ? `${path.sep}src${path.sep}` : `${path.sep}dist${path.sep}`;
         const baseRoot = __dirname.substring(0, __dirname.indexOf(baseFolder));
         return path.join(baseRoot, baseFolder, 'api');
     }
 
     private getFiles(filePath: string, done: (files: any[]) => void): void {
-        const isTypeScript = __dirname.indexOf(getFolderWrapping('src')) >= 0;
+        const isTypeScript = __dirname.indexOf(`${path.sep}src${path.sep}`) >= 0;
         if (!isTypeScript) {
             filePath = filePath.replace('.ts', '.js');
         }

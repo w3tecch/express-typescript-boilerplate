@@ -8,7 +8,7 @@ import { Types, Core } from '../../{{deepness}}constants';
 {{/unless}}
 {{#if isResourceTemplate}}
 import { Types, Core, Targets } from '../../{{deepness}}constants';
-import { Validate, Request } from '../../{{deepness}}core/api/Validate';
+import { validate, request } from '../../{{deepness}}core/api/Validate';
 import { NotFoundException } from '../{{deepness}}exceptions/NotFoundException';
 import { {{name.capitalize}}Repository } from '../{{deepness}}repositories/{{name.capitalize}}Repository';
 import { {{name.capitalize}} } from '../{{deepness}}models/{{name.capitalize}}';
@@ -41,15 +41,15 @@ export class {{name.capitalize}}Service {
         return {{name.camelCase}};
     }
 
-    @Validate()
-    public async create( @Request({{name.capitalize}}CreateRequest) body: any): Promise<{{name.capitalize}}> {
+    @validate()
+    public async create( @request({{name.capitalize}}CreateRequest) body: any): Promise<{{name.capitalize}}> {
         // If the request body was valid we will create the {{name.camelCase}}
         const {{name.camelCase}} = await this.{{name.camelCase}}Repo.create(body);
         return {{name.camelCase}};
     }
 
-    @Validate()
-    public async update(id: number, @Request({{name.capitalize}}UpdateRequest) body: any): Promise<{{name.capitalize}}> {
+    @validate()
+    public async update(id: number, @request({{name.capitalize}}UpdateRequest) body: any): Promise<{{name.capitalize}}> {
         // Find or fail
         const {{name.camelCase}} = await this.findOne(id);
 
