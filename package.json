@@ -34,9 +34,6 @@
     "ts-node:fast": "./node_modules/.bin/ts-node -F"
   },
   "repository": "git+ssh://git@github.com/w3tec/express-typescript-boilerplate.git",
-  "engines": {
-    "node": "^7.7.3"
-  },
   "keywords": [
     "NodeJS",
     "TypeScript",
