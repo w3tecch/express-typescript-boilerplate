@@ -71,7 +71,7 @@ module.exports = {
                         'nps banner.test',
                         'nps test.e2e.pretest',
                         runInNewWindow(series('nps build', 'nps start')),
-                        'nps test.e2e.run',
+                        'nps test.e2e.run'
                     )
                 },
                 pretest: {
@@ -163,7 +163,7 @@ module.exports = {
             dbReset: banner('db.reset'),
             seed: banner('seed'),
             clean: banner('clean')
-        },
+        }
     }
 };
 
