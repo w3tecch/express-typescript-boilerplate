@@ -27,7 +27,7 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 
 ## Features
 - **Beautiful Syntax** thanks to the awesome annotations from [Inversify Express Utils](https://github.com/inversify/inversify-express-utils).
-- **Easy API Testing** with included black-box testing.
+- **Easy API Testing** with included e2e testing.
 - **Dependency Injection** done with the nice framework from [Inversify](http://inversify.io/).
 - **Fast Database Building** with simple migration and seeding from [Knex](http://knexjs.org/).
 - **Simplified Database Query** with the ORM of [Knex](http://knexjs.org/) called [Bookshelf](http://bookshelfjs.org/).
@@ -67,7 +67,7 @@ Create a new database with the name you have in your `.env`-file.
 
 Then setup your application environment.
 ```
-npm run setup
+nps setup
 ```
 
 > This installs all dependencies with yarn. After that it migrates the database and seeds some test data into it. So after that your development environment is ready to use.
@@ -75,7 +75,7 @@ npm run setup
 ### Step 3: Serve your App
 Go to the project dir and start your app with this npm script.
 ```
-npm run serve
+nps serve
 ```
 
 > This starts a local server using `nodemon`, which will watch for any file changes and will restart the sever according to these changes.
@@ -148,26 +148,26 @@ All script are defined in the package.json file, but the most important ones are
 * Install all dependencies with `yarn install`
 
 ### Linting
-* Run code quality analysis using `npm run lint`. This runs tslint.
+* Run code quality analysis using `nps lint`. This runs tslint.
 * There is also a vscode task for this called `lint`.
 
 ### Tests
 * Run the unit tests using `npm test` (There is also a vscode task for this called `test`).
-* Run the black-box tests using `npm run test:black-box` and don't forget to start your application and your [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server).
+* Run the e2e tests using `nps test:e2e` and don't forget to start your application and your [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server).
 
 ### Running in dev mode
-* Run `npm run serve` to start nodemon with ts-node, to serve the app.
+* Run `nps serve` to start nodemon with ts-node, to serve the app.
 * The server address will be displayed to you as `http://0.0.0.0:3000`
 
 ### Building the project and run it
-* Run `npm run build` to generated all JavaScript files from the TypeScript sources (There is also a vscode task for this called `build`).
+* Run `nps build` to generated all JavaScript files from the TypeScript sources (There is also a vscode task for this called `build`).
 * To start the builded app located in `dist` use `npm start`.
 
 ### Database
-* Run `npm run db:migrate` to migrate schema changes to the database
-* Run `npm run db:migrate:rollback` to rollback one migration
-* Run `npm run db:seed` to seed sample data into the database
-* Run `npm run db:reset` to rollback all migrations and migrate any migration again
+* Run `nps db:migrate` to migrate schema changes to the database
+* Run `nps db:migrate:rollback` to rollback one migration
+* Run `nps db:seed` to seed sample data into the database
+* Run `nps db:reset` to rollback all migrations and migrate any migration again
 
 ### Console
 * To run your own created command enter `npm run console <command-name>`.
@@ -241,7 +241,7 @@ The route prefix is `/api` by default, but you can change this in the .env file.
 | **src/public/**               | Static assets (fonts, css, js, img). |
 | **src/types/** *.d.ts         | Custom type definitions and files that aren't on DefinitelyTyped |
 | **test**                      | Tests |
-| **test/black-box/** *.test.ts | Black-Box tests (like e2e) |
+| **test/e2e/** *.test.ts       | End-2-End tests (like e2e) |
 | **test/unit/** *.test.ts      | Unit tests |
 | .env.example                  | Environment configurations |
 | knexfile.ts                   | This file is used for the migrations and seed task of knex |
@@ -250,7 +250,7 @@ The route prefix is `/api` by default, but you can change this in the .env file.
 * [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter) - A starter template for TypeScript and Node with a detailed README describing how to use the two together.
 * [express-graphql-typescript-boilerplate](https://github.com/w3tecch/express-graphql-typescript-boilerplate) - A starter kit for building amazing GraphQL API's with TypeScript and express by @w3tecch
 * [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
-* [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server) - Useful for black-box testing or faking an oAuth server
+* [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server) - Useful for e2e testing or faking an oAuth server
 
 ## Documentations of our main dependencies
 * [Express](https://expressjs.com/)

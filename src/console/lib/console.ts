@@ -14,7 +14,7 @@ import * as glob from 'glob';
 import * as path from 'path';
 import * as commander from 'commander';
 import * as figlet from 'figlet';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 
 // It also loads the .env file into the 'process.env' variable.
 import { config } from 'dotenv';
