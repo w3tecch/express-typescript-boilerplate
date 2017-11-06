@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node dist/app.js",
     "test": "nps test",
+    "ts-node": "./node_modules/.bin/ts-node",
+    "ts-node:fast": "./node_modules/.bin/ts-node -F",
     "console": "npm run ts-node:fast -- ./src/console/lib/console.ts",
     "console:dev": "npm run ts-node -- ./src/console/lib/console.ts",
     "console:help": "npm run ts-node:fast -- ./src/console/lib/console.ts --help"
