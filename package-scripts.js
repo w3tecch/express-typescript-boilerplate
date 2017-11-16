@@ -161,7 +161,7 @@ module.exports = {
             migrate: banner('db.migrate'),
             rollback: banner('db.migrate.rollback'),
             dbReset: banner('db.reset'),
-            seed: banner('seed'),
+            seed: banner('db.seed'),
             clean: banner('clean')
         }
     }
