@@ -64,6 +64,15 @@ export const extendExpressResponse = (req: myExpress.Request, res: myExpress.Res
         return res.json(bodyFailed(message, error));
     };
 
+    /**
+     * 503 - Service Unavailable
+     * This is used when a service is unavailable
+     */
+    res.unavailable = () => {
+        res.status(503);
+        return res.json(bodyFailed('Service unavailable'));
+    };
+
     next();
 };
 
