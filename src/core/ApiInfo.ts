@@ -2,7 +2,7 @@ import * as express from 'express';
 import { Environment } from './helpers/Environment';
 import { SwaggerUI } from './SwaggerUI';
 import { ApiMonitor } from './ApiMonitor';
-import { BasicAuthenticate } from './BasicAuthenticate';
+// import { BasicAuthenticate } from './BasicAuthenticate';
 
 
 export class ApiInfo {
@@ -15,8 +15,6 @@ export class ApiInfo {
         if (Environment.isTruthy(process.env.API_INFO_ENABLED)) {
             application.get(
                 ApiInfo.getRoute(),
-                // @ts-ignore: False type definitions from express
-                BasicAuthenticate(),
                 // @ts-ignore: False type definitions from express
                 (req: myExpress.Request, res: myExpress.Response) => {
                     const pkg = Environment.getPkg();
