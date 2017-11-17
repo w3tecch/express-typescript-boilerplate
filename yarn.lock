@@ -681,6 +681,10 @@ base64url@2.0.0, base64url@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/base64url/-/base64url-2.0.0.tgz#eac16e03ea1438eff9423d69baa36262ed1f70bb"
 
+basic-auth@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/basic-auth/-/basic-auth-1.1.0.tgz#45221ee429f7ee1e5035be3f51533f1cdfd29884"
+
 basic-auth@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/basic-auth/-/basic-auth-2.0.0.tgz#015db3f353e02e56377755f962742e8981e7bbba"
@@ -1568,6 +1572,12 @@ expect@^21.2.1:
     jest-matcher-utils "^21.2.1"
     jest-message-util "^21.2.1"
     jest-regex-util "^21.2.0"
+
+express-basic-auth@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/express-basic-auth/-/express-basic-auth-1.1.3.tgz#18924c02fef18d9efe58e22847ee31e240749f33"
+  dependencies:
+    basic-auth "^1.1.0"
 
 express-status-monitor@^1.0.1:
   version "1.0.1"

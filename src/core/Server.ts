@@ -65,7 +65,7 @@ export class Server {
      */
     public onStartUp(app: express.Application): void {
         this.log.debug(``);
-        this.log.debug(`Aloha, your app is ready on ${app.get('host')}:${app.get('port')}${process.env.APP_URL_PREFIX}`);
+        this.log.debug(`Aloha, your app is ready on ${app.get('host')}${process.env.APP_URL_PREFIX}`);
         this.log.debug(`To shut it down, press <CTRL> + C at any time.`);
         this.log.debug(``);
         this.log.debug('-------------------------------------------------------');
@@ -73,13 +73,13 @@ export class Server {
         this.log.debug(`Version      : ${Environment.getPkg().version}`);
         this.log.debug(``);
         if (Environment.isTruthy(process.env.API_INFO_ENABLED)) {
-            this.log.debug(`API Info     : ${app.get('host')}:${app.get('port')}${ApiInfo.getRoute()}`);
+            this.log.debug(`API Info     : ${app.get('host')}${ApiInfo.getRoute()}`);
         }
         if (Environment.isTruthy(process.env.SWAGGER_ENABLED)) {
-            this.log.debug(`Swagger      : ${app.get('host')}:${app.get('port')}${SwaggerUI.getRoute()}`);
+            this.log.debug(`Swagger      : ${app.get('host')}${SwaggerUI.getRoute()}`);
         }
         if (Environment.isTruthy(process.env.MONITOR_ENABLED)) {
-            this.log.debug(`Monitor      : ${app.get('host')}:${app.get('port')}${ApiMonitor.getRoute()}`);
+            this.log.debug(`Monitor      : ${app.get('host')}${ApiMonitor.getRoute()}`);
         }
         this.log.debug('-------------------------------------------------------');
         this.log.debug('');
