@@ -2,7 +2,6 @@ import * as express from 'express';
 import { Environment } from './helpers/Environment';
 import { SwaggerUI } from './SwaggerUI';
 import { ApiMonitor } from './ApiMonitor';
-// import { BasicAuthenticate } from './BasicAuthenticate';
 
 
 export class ApiInfo {
