@@ -5,6 +5,7 @@
             true,
             160
         ],
+        "no-unnecessary-initializer": false,
         "no-consecutive-blank-lines": false,
         "quotemark": [true, "single", "avoid-escape"],
         "interface-name": false,

@@ -9,6 +9,7 @@
  * To add express modules go to the 'config/AppConfig.ts' file. All the IOC registrations
  * are in the 'config/IocConfig.ts' file.
  */
+import 'reflect-metadata';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
