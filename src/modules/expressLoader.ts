@@ -2,11 +2,14 @@ import { Container } from 'typedi';
 import { useContainer as ormUseContainer } from 'typeorm';
 import { useContainer as routingUseContainer, createExpressServer } from 'routing-controllers';
 import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework';
+import { env } from '../core/env';
 
 
 export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
-    // base directory. we use it because file in "required" in another module
-    const baseDir = __dirname;
+    /**
+     * Base directory. we use it because file in "required" in another module
+     */
+    const baseDir = __dirname.replace('modules', '');
 
     /**
      * Setup routing-controllers to use typedi container.
@@ -20,16 +23,17 @@ export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSett
      */
     const app = createExpressServer({
         cors: true,
+        routePrefix: env.app.routePrefix,
         /**
          * We can add options about how routing-controllers should configure itself.
          * Here we specify what controllers should be registered in our express server.
          */
-        controllers: [baseDir + '**/api/controllers/*{.js,.ts}'],
-        middlewares: [baseDir + '**/api/middlewares/*{.js,.ts}']
+        controllers: [baseDir + '/api/controllers/*{.js,.ts}'],
+        middlewares: [baseDir + '/api/middlewares/*{.js,.ts}']
 
     });
 
-    // run application to listen on given port
+    // TODO: run application to listen on given port
     app.listen(3000);
 
     // here we can set the data for other loaders

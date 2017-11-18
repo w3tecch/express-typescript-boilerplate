@@ -3,6 +3,7 @@ import { Service, Inject } from 'typedi';
 import { UserRepository } from '../repositories/UserRepository';
 import { User } from '../models/User';
 
+
 @Service()
 @JsonController()
 export class UserController {
@@ -12,6 +13,7 @@ export class UserController {
 
     @Get('/users')
     public async all(): Promise<User[]> {
+        console.log(this.userRepository);
         return await this.userRepository.find();
     }
 

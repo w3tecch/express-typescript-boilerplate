@@ -7,7 +7,7 @@ export const env = {
         name: getOsEnv('APP_NAME'),
         host: getOsEnv('APP_HOST'),
         port: toNumber(getOsEnv('APP_PORT')),
-        urlPrefix: getOsEnv('APP_URL_PREFIX')
+        routePrefix: getOsEnv('APP_ROUTE_PREFIX')
     },
     log: {
         level: getOsEnv('LOG_LEVEL'),
