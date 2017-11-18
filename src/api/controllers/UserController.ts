@@ -1,6 +1,7 @@
-import { JsonController, Get, Post as HttpPost, Param, Delete, Body } from 'routing-controllers';
-import { Service, Inject } from 'typedi';
+import { JsonController, Get, Post, Param, Delete, Body } from 'routing-controllers';
+import { Service } from 'typedi';
 import { UserRepository } from '../repositories/UserRepository';
+import { OrmRepository } from 'typeorm-typedi-extensions';
 import { User } from '../models/User';
 
 
@@ -8,12 +9,11 @@ import { User } from '../models/User';
 @JsonController()
 export class UserController {
 
-    @Inject()
+    @OrmRepository()
     private userRepository: UserRepository;
 
     @Get('/users')
     public async all(): Promise<User[]> {
-        console.log(this.userRepository);
         return await this.userRepository.find();
     }
 
@@ -22,7 +22,7 @@ export class UserController {
         return await this.userRepository.findOne({ id });
     }
 
-    @HttpPost('/users')
+    @Post('/users')
     public async post( @Body() user: User): Promise<User> {
         return await this.userRepository.save(user);
     }

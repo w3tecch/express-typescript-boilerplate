@@ -29,7 +29,8 @@ export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSett
          * Here we specify what controllers should be registered in our express server.
          */
         controllers: [baseDir + '/api/controllers/*{.js,.ts}'],
-        middlewares: [baseDir + '/api/middlewares/*{.js,.ts}']
+        middlewares: [baseDir + '/api/middlewares/*{.js,.ts}'],
+        interceptors: [baseDir + '/api/interceptors/*{.js,.ts}']
 
     });
 
