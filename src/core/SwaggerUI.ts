@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as path from 'path';
 import * as swaggerUi from 'swagger-ui-express';
 import { Environment } from './helpers/Environment';
-import { BasicAuthenticate } from './BasicAuthenticate';
+import { BasicAuthentication } from './BasicAuthentication';
 
 
 export class SwaggerUI {
@@ -26,7 +26,7 @@ export class SwaggerUI {
             };
 
             // Initialize swagger-jsdoc -> returns validated swagger spec in json format
-            app.use(SwaggerUI.getRoute(), BasicAuthenticate(), swaggerUi.serve, swaggerUi.setup(swaggerFile));
+            app.use(SwaggerUI.getRoute(), BasicAuthentication(), swaggerUi.serve, swaggerUi.setup(swaggerFile));
         }
     }
 }

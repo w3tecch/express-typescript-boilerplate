@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as monitor from 'express-status-monitor';
 import { Environment } from './helpers/Environment';
-import { BasicAuthenticate } from './BasicAuthenticate';
+import { BasicAuthentication } from './BasicAuthentication';
 
 
 export class ApiMonitor {
@@ -13,7 +13,7 @@ export class ApiMonitor {
     public setup(app: express.Application): void {
         if (Environment.isTruthy(process.env.MONITOR_ENABLED)) {
             app.use(monitor());
-            app.get(ApiMonitor.getRoute(), BasicAuthenticate(), monitor().pageRoute);
+            app.get(ApiMonitor.getRoute(), BasicAuthentication(), monitor().pageRoute);
         }
     }
 }
