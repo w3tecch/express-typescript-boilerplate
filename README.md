@@ -186,6 +186,7 @@ All the templates for the commands are located in `src/console/templates`.
 * `npm run console make:request <file>` - Generates a basic request.
 * `npm run console make:listener <file>` - Generates a basic listener.
 * `npm run console make:exception <file>` - Generates a basic exception.
+* `npm run console make:validator <file>` - Generates a custom validator.
 * `npm run console update:targets <file>` - Reads all the API files and generate a new `constants/Targets.ts` file out of it.
 
 **Example**
