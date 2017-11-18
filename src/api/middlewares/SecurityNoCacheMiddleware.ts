@@ -1,0 +1,14 @@
+
+import * as express from 'express';
+import * as helmet from 'helmet';
+import { ExpressMiddlewareInterface, Middleware } from 'routing-controllers';
+
+
+@Middleware({ type: 'before' })
+export class SecurityMiddleware implements ExpressMiddlewareInterface {
+
+    public use(req: any, res: any, next: express.NextFunction): any {
+        return helmet.noCache()(req, res, next);
+    }
+
+}

@@ -24,8 +24,8 @@ import { typeormLoader } from './modules/typeormLoader';
 
 bootstrapMicroframework({
     loaders: [
-        expressLoader,
         winstonLoader,
+        expressLoader,
         typeormLoader
         // here we can setup other databases, any other lib we want to setup in our application
     ]

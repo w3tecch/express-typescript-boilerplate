@@ -6,12 +6,13 @@ export const env = {
     app: {
         name: getOsEnv('APP_NAME'),
         host: getOsEnv('APP_HOST'),
-        port: normalizePort(getOsEnv('PORT') || getOsEnv('APP_PORT') || '3000'),
+        port: normalizePort(process.env.PORT || '3000'),
         routePrefix: getOsEnv('APP_ROUTE_PREFIX')
     },
     log: {
         level: getOsEnv('LOG_LEVEL'),
-        json: toBool(getOsEnv('LOG_JSON'))
+        json: toBool(getOsEnv('LOG_JSON')),
+        output: getOsEnv('LOG_OUTPUT')
     },
     db: {
         type: getOsEnv('DB_TYPE'),
