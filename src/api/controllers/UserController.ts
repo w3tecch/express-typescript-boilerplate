@@ -1,5 +1,5 @@
 import { JsonController, Get, Post as HttpPost, Param, Delete, Body } from 'routing-controllers';
-import { Service } from 'typedi';
+import { Service, Inject } from 'typedi';
 import { UserRepository } from '../repositories/UserRepository';
 import { User } from '../models/User';
 
@@ -7,27 +7,27 @@ import { User } from '../models/User';
 @JsonController()
 export class UserController {
 
-    constructor(private userRepository: UserRepository) {
-    }
+    @Inject()
+    private userRepository: UserRepository;
 
     @Get('/users')
-    public all(): Promise<User[]> {
-        return this.userRepository.findAll();
+    public async all(): Promise<User[]> {
+        return await this.userRepository.find();
     }
 
     @Get('/users/:id')
-    public one( @Param('id') id: number): User | undefined {
-        return this.userRepository.findOne(id);
+    public async one( @Param('id') id: string): Promise<User | undefined> {
+        return await this.userRepository.findOne({ id });
     }
 
     @HttpPost('/users')
-    public post( @Body() user: User): User {
-        return this.userRepository.save(user);
+    public async post( @Body() user: User): Promise<User> {
+        return await this.userRepository.save(user);
     }
 
     @Delete('/users/:id')
-    public delete( @Param('id') id: number): User | undefined {
-        return this.userRepository.remove(id);
+    public async delete( @Param('id') id: string): Promise<void> {
+        return await this.userRepository.removeById(id);
     }
 
 }

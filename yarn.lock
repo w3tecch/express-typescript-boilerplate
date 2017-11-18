@@ -4335,6 +4335,10 @@ typedi@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/typedi/-/typedi-0.5.2.tgz#e1f67409bf0d19be86f072ff88ae30db15f61b74"
 
+typeorm-typedi-extensions@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/typeorm-typedi-extensions/-/typeorm-typedi-extensions-0.1.1.tgz#e99a66dcf501fbd5837cf2f7a3dc75e13de89734"
+
 typeorm@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.1.3.tgz#b8ae44bc7fbebbedde1350bd3bb72fc4c99833a1"
