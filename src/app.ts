@@ -21,6 +21,7 @@ import { typeormLoader } from './loaders/typeormLoader';
 import { swaggerLoader } from './loaders/swaggerLoader';
 import { monitorLoader } from './loaders/monitorLoader';
 import { homeLoader } from './loaders/homeLoader';
+import { publicLoader } from './loaders/publicLoader';
 
 
 bootstrapMicroframework({
@@ -30,7 +31,8 @@ bootstrapMicroframework({
         typeormLoader,
         swaggerLoader,
         monitorLoader,
-        homeLoader
+        homeLoader,
+        publicLoader
         // here we can setup other databases, any other lib we want to setup in our application
     ]
 })
