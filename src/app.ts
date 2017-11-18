@@ -6,8 +6,6 @@
  * The basic layer of this app is express. For further information visit
  * the 'README.md' file.
  *
- * To add express modules go to the 'config/AppConfig.ts' file. All the IOC registrations
- * are in the 'config/IocConfig.ts' file.
  */
 import 'reflect-metadata';
 import * as dotenv from 'dotenv';
@@ -17,12 +15,12 @@ import { Log } from './core/Log';
 const log = new Log(__filename);
 
 import { bootstrapMicroframework } from 'microframework';
-import { expressLoader } from './modules/expressLoader';
-import { winstonLoader } from './modules/winstonLoader';
-import { typeormLoader } from './modules/typeormLoader';
-import { swaggerLoader } from './modules/swaggerLoader';
-import { monitorLoader } from './modules/monitorLoader';
-import { homeLoader } from './modules/homeLoader';
+import { expressLoader } from './loaders/expressLoader';
+import { winstonLoader } from './loaders/winstonLoader';
+import { typeormLoader } from './loaders/typeormLoader';
+import { swaggerLoader } from './loaders/swaggerLoader';
+import { monitorLoader } from './loaders/monitorLoader';
+import { homeLoader } from './loaders/homeLoader';
 
 
 bootstrapMicroframework({
