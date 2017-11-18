@@ -4,6 +4,8 @@ import { useContainer as ormUseContainer } from 'typeorm';
 import { useContainer as routingUseContainer, createExpressServer } from 'routing-controllers';
 import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework';
 import { env } from '../core/env';
+import { authorizationChecker } from '../auth/authorizationChecker';
+import { currentUserChecker } from '../auth/currentUserChecker';
 
 
 export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
@@ -27,8 +29,13 @@ export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSett
          */
         controllers: [path.join(__dirname, '..', 'api/controllers/*{.js,.ts}')],
         middlewares: [path.join(__dirname, '..', 'api/middlewares/*{.js,.ts}')],
-        interceptors: [path.join(__dirname, '..', 'api/interceptors/*{.js,.ts}')]
+        interceptors: [path.join(__dirname, '..', 'api/interceptors/*{.js,.ts}')],
 
+        /**
+         * Authorization features
+         */
+        authorizationChecker,
+        currentUserChecker
     });
 
     // Run application to listen on given port

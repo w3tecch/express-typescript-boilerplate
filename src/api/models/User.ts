@@ -16,4 +16,8 @@ export class User extends BaseEntity {
     @Column({ name: 'last_name' })
     public lastName: string;
 
+    @IsNotEmpty()
+    @Column()
+    public email: string;
+
 }

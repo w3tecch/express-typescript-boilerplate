@@ -18,6 +18,9 @@ export const env = {
         json: toBool(getOsEnv('LOG_JSON')),
         output: getOsEnv('LOG_OUTPUT')
     },
+    auth: {
+        route: getOsEnv('AUTH_ROUTE')
+    },
     db: {
         type: getOsEnv('DB_TYPE'),
         host: getOsEnv('DB_HOST'),
