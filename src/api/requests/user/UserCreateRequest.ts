@@ -1,5 +1,6 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty, Validate } from 'class-validator';
 import { RequestBody } from '../../../core/api/RequestBody';
+import { EndsWithValidator } from '../../Validators/EndsWithValidator';
 
 /**
  * This class is used for create request. Create a new instance
@@ -20,6 +21,7 @@ export class UserCreateRequest extends RequestBody {
 
     @IsNotEmpty()
     @IsEmail()
+    @Validate(EndsWithValidator, ['@gmail.com', '@w3tec.ch'])
     public email: string;
 
     public picture: string;
