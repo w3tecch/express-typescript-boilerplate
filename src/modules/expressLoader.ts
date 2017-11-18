@@ -27,7 +27,7 @@ export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSett
          */
         controllers: [path.join(__dirname, '..', 'api/controllers/*{.js,.ts}')],
         middlewares: [path.join(__dirname, '..', 'api/middlewares/*{.js,.ts}')],
-        interceptors: [path.join(__dirname, '..', 'api/controllers/*{.js,.ts}')]
+        interceptors: [path.join(__dirname, '..', 'api/interceptors/*{.js,.ts}')]
 
     });
 

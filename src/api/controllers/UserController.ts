@@ -1,35 +1,40 @@
-import { JsonController, Get, Post, Param, Delete, Body } from 'routing-controllers';
-import { Service } from 'typedi';
-import { UserRepository } from '../repositories/UserRepository';
-import { OrmRepository } from 'typeorm-typedi-extensions';
+import { JsonController, Get, Post, Put, Param, Delete, Body, OnUndefined } from 'routing-controllers';
+import { Inject } from 'typedi';
+import { UserService } from '../services/UserService';
 import { User } from '../models/User';
+import { UserNotFoundError } from '../errors/UserNotFoundError';
 
 
-@Service()
-@JsonController()
+@JsonController('/users')
 export class UserController {
 
-    @OrmRepository()
-    private userRepository: UserRepository;
+    @Inject()
+    private userService: UserService;
 
-    @Get('/users')
-    public async all(): Promise<User[]> {
-        return await this.userRepository.find();
+    @Get()
+    public find(): Promise<User[]> {
+        return this.userService.find();
     }
 
-    @Get('/users/:id')
-    public async one( @Param('id') id: string): Promise<User | undefined> {
-        return await this.userRepository.findOne({ id });
+    @Get('/:id')
+    @OnUndefined(UserNotFoundError)
+    public one( @Param('id') id: string): Promise<User | undefined> {
+        return this.userService.findOne(id);
     }
 
-    @Post('/users')
-    public async post( @Body() user: User): Promise<User> {
-        return await this.userRepository.save(user);
+    @Post()
+    public create( @Body() user: User): Promise<User> {
+        return this.userService.create(user);
     }
 
-    @Delete('/users/:id')
-    public async delete( @Param('id') id: string): Promise<void> {
-        return await this.userRepository.removeById(id);
+    @Put('/:id')
+    public update( @Param('id') id: string, @Body() user: User): Promise<User> {
+        return this.userService.update(id, user);
+    }
+
+    @Delete('/:id')
+    public delete( @Param('id') id: string): Promise<void> {
+        return this.userService.delete(id);
     }
 
 }
