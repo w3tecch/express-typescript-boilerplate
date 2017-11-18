@@ -35,6 +35,7 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **Easy Exception Handling** with our own simple and easy to adopt logic. You will love it.
 - **Easy Data Seeding** with our own factories.
 - **Custom Commands** are also available in our setup and really easy to use or even extend.
+- **Custom Validators** to validate your request even better and stricter. [custom-validation-classes](https://github.com/pleerock/class-validator#custom-validation-classes)
 - **Scaffolding Commands** will speed up your development tremendously as you should focus on business code and not scaffolding.
 - **Smart Validation** thanks to [class-validator](https://github.com/pleerock/class-validator) with some nice annotations.
 - **API Documentation** thanks to [swagger](http://swagger.io/).
@@ -152,7 +153,7 @@ All script are defined in the package.json file, but the most important ones are
 * There is also a vscode task for this called `lint`.
 
 ### Tests
-* Run the unit tests using `npm test` (There is also a vscode task for this called `test`).
+* Run the unit tests using `nps test` (There is also a vscode task for this called `test`).
 * Run the e2e tests using `nps test:e2e` and don't forget to start your application and your [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server).
 
 ### Running in dev mode
@@ -230,6 +231,7 @@ The route prefix is `/api` by default, but you can change this in the .env file.
 | **src/api/repositories/**     | Repository / DB layer |
 | **src/api/requests/**         | Request bodys with validations |
 | **src/api/services/**         | Service layer |
+| **src/api/validators/**       | Custom validators, which can be used in the request classes |
 | **src/api/** swagger.json     | Swagger documentation |
 | **src/console/**              | Command line scripts |
 | **src/config/**               | Configurations like database or logger |
