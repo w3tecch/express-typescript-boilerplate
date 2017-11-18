@@ -125,7 +125,7 @@ module.exports = {
         },
         /**
          * This our scaffold api
-         * @example > nps "console update:targets"
+         * @example > nps "console make:controller"
          */
         console: {
             default: {

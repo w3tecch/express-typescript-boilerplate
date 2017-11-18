@@ -11,14 +11,6 @@
  */
 
 import 'reflect-metadata';
-import { App } from './core/App';
-import { CustomHeaderConfig } from './config/CustomHeaderConfig';
-
-export const app = new App();
 
 
-// Here you can add more custom configurations
-app.configure(new CustomHeaderConfig());
-
-// Launch the server with all his awesome features.
-app.bootstrap();
+console.log('adsf');
