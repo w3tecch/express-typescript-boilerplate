@@ -9,9 +9,9 @@ export const env = {
         name: getOsEnv('APP_NAME'),
         version: pkg.version,
         description: pkg.description,
-        host: getOsEnv('APP_HOST'),
-        port: normalizePort(process.env.PORT || '3000'),
-        routePrefix: getOsEnv('APP_ROUTE_PREFIX')
+        route: getOsEnv('APP_ROUTE'),
+        routePrefix: getOsEnv('APP_ROUTE_PREFIX'),
+        port: normalizePort(process.env.PORT || '3000')
     },
     log: {
         level: getOsEnv('LOG_LEVEL'),
