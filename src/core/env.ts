@@ -6,7 +6,7 @@ export const env = {
     app: {
         name: getOsEnv('APP_NAME'),
         host: getOsEnv('APP_HOST'),
-        port: toNumber(getOsEnv('APP_PORT')),
+        port: normalizePort(getOsEnv('PORT') || getOsEnv('APP_PORT') || '3000'),
         routePrefix: getOsEnv('APP_ROUTE_PREFIX')
     },
     log: {
@@ -35,4 +35,15 @@ function toNumber(value: string): number {
 
 function toBool(value: string): boolean {
     return value === 'true';
+}
+
+function normalizePort(port: string): number | string | boolean {
+    const parsedPort = parseInt(port, 10);
+    if (isNaN(parsedPort)) { // named pipe
+        return port;
+    }
+    if (parsedPort >= 0) { // port number
+        return parsedPort;
+    }
+    return false;
 }

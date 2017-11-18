@@ -35,7 +35,7 @@ export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSett
     });
 
     // TODO: run application to listen on given port
-    app.listen(3000);
+    app.listen(env.app.port);
 
     // here we can set the data for other loaders
     if (settings) {
