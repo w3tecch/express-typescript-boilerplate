@@ -1,3 +1,5 @@
+const pkg = require('../../package.json');
+
 /**
  * Environment variables
  */
@@ -5,6 +7,8 @@ export const env = {
     node: process.env.NODE_ENV || 'development',
     app: {
         name: getOsEnv('APP_NAME'),
+        version: pkg.version,
+        description: pkg.description,
         host: getOsEnv('APP_HOST'),
         port: normalizePort(process.env.PORT || '3000'),
         routePrefix: getOsEnv('APP_ROUTE_PREFIX')
@@ -23,6 +27,13 @@ export const env = {
         database: getOsEnv('DB_DATABASE'),
         synchronize: toBool(getOsEnv('DB_SYNCHRONIZE')),
         logging: toBool(getOsEnv('DB_LOGGING'))
+    },
+    swagger: {
+        enabled: toBool(getOsEnv('SWAGGER_ENABLED')),
+        route: getOsEnv('SWAGGER_ROUTE'),
+        file: getOsEnv('SWAGGER_FILE'),
+        username: getOsEnv('SWAGGER_USERNAME'),
+        password: getOsEnv('SWAGGER_PASSWORD')
     }
 };
 
