@@ -2,6 +2,7 @@
  * Environment variables
  */
 export const env = {
+    node: process.env.NODE_ENV || 'development',
     app: {
         name: getOsEnv('APP_NAME'),
         host: getOsEnv('APP_HOST'),
@@ -9,7 +10,8 @@ export const env = {
         urlPrefix: getOsEnv('APP_URL_PREFIX')
     },
     log: {
-        level: getOsEnv('LOG_LEVEL')
+        level: getOsEnv('LOG_LEVEL'),
+        json: toBool(getOsEnv('LOG_JSON'))
     },
     db: {
         type: getOsEnv('DB_TYPE'),

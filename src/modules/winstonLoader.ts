@@ -1,23 +1,18 @@
 import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework';
 import * as winston from 'winston';
+import { env } from '../core/env';
 
 
 export const winstonLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
     winston.configure({
         transports: [
             new winston.transports.Console({
-                level: process.env.LOG_LEVEL,
-                timestamp: true,
+                level: env.log.level,
                 handleExceptions: true,
-                json: true,
-                colorize: true
+                json: env.log.json,
+                timestamp: env.node !== 'development',
+                colorize: env.node === 'development'
             })
         ]
     });
-
-
-    // btw we can retrieve express app instance here to make some winston-specific manipulations on it
-    // if (settings) {
-    //     const expressApp = settings.getData('express_app');
-    // }
 };

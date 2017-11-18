@@ -12,18 +12,16 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
+import { Log } from './core/Log';
+const log = new Log(__filename);
+
 import { bootstrapMicroframework } from 'microframework';
 import { expressLoader } from './modules/expressLoader';
 import { winstonLoader } from './modules/winstonLoader';
 import { typeormLoader } from './modules/typeormLoader';
-import { env } from './env';
 
 
 bootstrapMicroframework({
-    config: {
-        logo: env.app.name,
-        showBootstrapTime: true
-    },
     loaders: [
         expressLoader,
         winstonLoader,
@@ -31,5 +29,5 @@ bootstrapMicroframework({
         // here we can setup other databases, any other lib we want to setup in our application
     ]
 })
-    .then(() => console.log('Application is up and running.'))
-    .catch(error => console.log('Application is crashed: ' + error));
+    .then(() => log.info('Application is up and running.'))
+    .catch(error => log.error('Application is crashed: ' + error));

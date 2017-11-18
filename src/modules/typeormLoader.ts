@@ -1,6 +1,6 @@
 import { createConnection } from 'typeorm';
 import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework';
-import { env } from '../env';
+import { env } from '../core/env';
 
 
 export const typeormLoader: MicroframeworkLoader = async (settings: MicroframeworkSettings | undefined) => {
