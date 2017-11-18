@@ -10,14 +10,14 @@ describe('/users', () => {
     const testUser = {
         firstName: 'Hans',
         lastName: 'Muster',
-        email: 'hans@muster.ch',
+        email: 'hans@gmail.com',
         auth0UserId: '1234'
     };
 
     const testUserUpdated = {
         firstName: 'Horst',
         lastName: 'Maier',
-        email: 'horst@maier.ch'
+        email: 'horst@gmail.com'
     };
 
     let token;

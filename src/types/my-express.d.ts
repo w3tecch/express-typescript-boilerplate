@@ -27,8 +27,9 @@ declare namespace myExpress {
         created<T>(data: T, options?: ResponseOptions): void;
         found<T>(data: T, options?: ResponseOptions): void;
         updated<T>(data: T, options?: ResponseOptions): void;
-        destroyed<T>(options?: ResponseOptions): void;
-        failed<T>(status: number, message: string, error?: any): void;
+        destroyed(options?: ResponseOptions): void;
+        failed(status: number, message: string, error?: any): void;
+        unavailable(): void;
     }
 
     interface ResponseOptions {

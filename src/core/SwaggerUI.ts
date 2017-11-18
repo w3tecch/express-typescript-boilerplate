@@ -2,12 +2,13 @@ import * as express from 'express';
 import * as path from 'path';
 import * as swaggerUi from 'swagger-ui-express';
 import { Environment } from './helpers/Environment';
+import { BasicAuthentication } from './BasicAuthentication';
 
 
 export class SwaggerUI {
 
     public static getRoute(): string {
-        return process.env.APP_URL_PREFIX + process.env.SWAGGER_ROUTE;
+        return process.env.SWAGGER_ROUTE;
     }
 
     public setup(app: express.Application): void {
@@ -25,7 +26,7 @@ export class SwaggerUI {
             };
 
             // Initialize swagger-jsdoc -> returns validated swagger spec in json format
-            app.use(SwaggerUI.getRoute(), swaggerUi.serve, swaggerUi.setup(swaggerFile));
+            app.use(SwaggerUI.getRoute(), BasicAuthentication(), swaggerUi.serve, swaggerUi.setup(swaggerFile));
         }
     }
 }

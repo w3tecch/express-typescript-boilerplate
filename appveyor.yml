@@ -6,7 +6,7 @@ install:
   - yarn install
 
 build_script:
-  - npm run build
+  - nps build
 
 test_script:
-  - npm test
+  - nps test
