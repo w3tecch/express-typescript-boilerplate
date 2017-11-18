@@ -34,6 +34,12 @@ export const env = {
         file: getOsEnv('SWAGGER_FILE'),
         username: getOsEnv('SWAGGER_USERNAME'),
         password: getOsEnv('SWAGGER_PASSWORD')
+    },
+    monitor: {
+        enabled: toBool(getOsEnv('MONITOR_ENABLED')),
+        route: getOsEnv('MONITOR_ROUTE'),
+        username: getOsEnv('MONITOR_USERNAME'),
+        password: getOsEnv('MONITOR_PASSWORD')
     }
 };
 

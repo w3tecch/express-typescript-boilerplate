@@ -21,6 +21,7 @@ import { expressLoader } from './modules/expressLoader';
 import { winstonLoader } from './modules/winstonLoader';
 import { typeormLoader } from './modules/typeormLoader';
 import { swaggerLoader } from './modules/swaggerLoader';
+import { monitorLoader } from './modules/monitorLoader';
 
 
 bootstrapMicroframework({
@@ -28,7 +29,8 @@ bootstrapMicroframework({
         winstonLoader,
         expressLoader,
         typeormLoader,
-        swaggerLoader
+        swaggerLoader,
+        monitorLoader
         // here we can setup other databases, any other lib we want to setup in our application
     ]
 })
