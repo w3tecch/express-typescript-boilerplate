@@ -2,6 +2,9 @@ const { series, crossEnv, concurrent, rimraf, runInNewWindow } = require('nps-ut
 
 module.exports = {
     scripts: {
+        default: {
+            script: 'nps start'
+        },
         /**
          * Starts the builded app from the dist directory
          */
@@ -14,7 +17,7 @@ module.exports = {
         serve: {
             script: series(
                 'nps banner.serve',
-                '\"./node_modules/.bin/nodemon\" --watch src --watch .env'
+                '\"./node_modules/.bin/nodemon\" --watch src --watch .env',
             )
         },
         /**
@@ -24,7 +27,7 @@ module.exports = {
             script: series(
                 'yarn install',
                 'nps db.migrate',
-                'nps db.seed'
+                'nps db.seed',
             )
         },
         /**
@@ -36,7 +39,7 @@ module.exports = {
                 'nps lint',
                 'nps clean.dist',
                 'nps transpile',
-                'nps copy'
+                'nps copy',
             )
         },
         /**
@@ -49,7 +52,7 @@ module.exports = {
                     script: series(
                         'nps banner.test',
                         'nps test.unit.pretest',
-                        'nps test.unit.run'
+                        'nps test.unit.run',
                     )
                 },
                 pretest: {
@@ -71,7 +74,7 @@ module.exports = {
                         'nps banner.test',
                         'nps test.e2e.pretest',
                         runInNewWindow(series('nps build', 'nps start')),
-                        'nps test.e2e.run'
+                        'nps test.e2e.run',
                     )
                 },
                 pretest: {
@@ -82,7 +85,7 @@ module.exports = {
                 },
                 run: series(
                     `wait-on --timeout 120000 http-get://localhost:3000/api/info`,
-                    './node_modules/.bin/cross-env NODE_ENV=test \"./node_modules/.bin/jest\" --testPathPattern=e2e -i'
+                    './node_modules/.bin/cross-env NODE_ENV=test \"./node_modules/.bin/jest\" --testPathPattern=e2e -i',
                 ),
             }
         },
@@ -103,7 +106,10 @@ module.exports = {
          */
         clean: {
             default: {
-                script: series(`nps banner.clean`, `nps clean.dist`)
+                script: series(
+                    `nps banner.clean`,
+                    `nps clean.dist`,
+                )
             },
             dist: {
                 script: `./node_modules/.bin/trash './dist'`
@@ -114,13 +120,22 @@ module.exports = {
          */
         copy: {
             default: {
-                script: `nps copy.swagger && nps copy.public`
+                script: series(
+                    `nps copy.swagger`,
+                    `nps copy.public`,
+                )
             },
             swagger: {
-                script: copy('./src/api/swagger.json', './dist')
+                script: copy(
+                    './src/api/swagger.json',
+                    './dist',
+                )
             },
             public: {
-                script: copy('./src/public/*', './dist')
+                script: copy(
+                    './src/public/*',
+                    './dist',
+                )
             }
         },
         /**
@@ -140,15 +155,27 @@ module.exports = {
         db: {
             migrate: {
                 default: {
-                    script: series('nps banner.migrate', '\"./node_modules/.bin/knex\" migrate:latest')
+                    script: series(
+                        'nps banner.migrate',
+                        '\"./node_modules/.bin/knex\" migrate:latest',
+                    )
                 },
-                rollback: series('nps banner.rollback', '\"./node_modules/.bin/knex\" migrate:rollback')
+                rollback: series(
+                    'nps banner.rollback',
+                    '\"./node_modules/.bin/knex\" migrate:rollback',
+                )
             },
             seed: {
-                script: series('nps banner.seed', '\"./node_modules/.bin/knex\" seed:run')
+                script: series(
+                    'nps banner.seed',
+                    '\"./node_modules/.bin/knex\" seed:run',
+                )
             },
             reset: {
-                script: series('nps banner.dbReset', 'nps console db:reset')
+                script: series(
+                    'nps banner.dbReset',
+                    'nps console db:reset',
+                )
             }
         },
         /**
