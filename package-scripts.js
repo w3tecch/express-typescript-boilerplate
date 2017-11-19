@@ -41,6 +41,31 @@ module.exports = {
             )
         },
         /**
+         * Migrate the database with TypeORM
+         */
+        migrate: {
+            default: {
+                script: series(
+                    'nps banner.migrate',
+                    'nps lint',
+                    'nps clean.dist',
+                    'nps transpile',
+                    'nps copy',
+                    '\"./node_modules/.bin/typeorm\" migrations:run',
+                )
+            },
+            rollback: {
+                script: series(
+                    'nps banner.rollback',
+                    'nps lint',
+                    'nps clean.dist',
+                    'nps transpile',
+                    'nps copy',
+                    '\"./node_modules/.bin/typeorm\" migrations:revert',
+                )
+            }
+        },
+        /**
          * These run various kinds of tests. Default is unit.
          */
         test: {
@@ -143,10 +168,8 @@ module.exports = {
             build: banner('build'),
             serve: banner('serve'),
             test: banner('test'),
-            migrate: banner('db.migrate'),
-            rollback: banner('db.migrate.rollback'),
-            dbReset: banner('db.reset'),
-            seed: banner('db.seed'),
+            migrate: banner('migrate'),
+            rollback: banner('rollback'),
             clean: banner('clean')
         }
     }
