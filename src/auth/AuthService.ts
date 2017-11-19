@@ -7,7 +7,7 @@ import { ITokenInfo } from './ITokenInfo';
 @Service()
 export class AuthService {
 
-    public parseTokenFromRequest(req: myExpress.Request): string | null {
+    public parseTokenFromRequest(req: myExpress.Request): string | undefined {
         const authorization = req.header('authorization');
 
         // Retrieve the token form the Authorization header
@@ -16,7 +16,7 @@ export class AuthService {
         }
 
         // No token was provided by the client
-        return null;
+        return;
     }
 
     public getTokenInfo(token: string): Promise<ITokenInfo> {

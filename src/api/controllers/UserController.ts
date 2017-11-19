@@ -1,5 +1,4 @@
 import { JsonController, Get, Post, Put, Param, Delete, Body, OnUndefined, Authorized, CurrentUser } from 'routing-controllers';
-import { Inject } from 'typedi';
 import { UserService } from '../services/UserService';
 import { User } from '../models/User';
 import { UserNotFoundError } from '../errors/UserNotFoundError';
@@ -9,8 +8,9 @@ import { UserNotFoundError } from '../errors/UserNotFoundError';
 @JsonController('/users')
 export class UserController {
 
-    @Inject()
-    private userService: UserService;
+    constructor(
+        private userService: UserService
+    ) { }
 
     @Get()
     public find( @CurrentUser() user?: User): Promise<User[]> {

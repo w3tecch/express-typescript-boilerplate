@@ -18,7 +18,7 @@ export function authorizationChecker(connection: Connection): (action: Action, r
         // demo code:
         const token = authService.parseTokenFromRequest(action.request);
 
-        if (token === null) {
+        if (token === undefined) {
             log.warn('No token given');
             return false; // res.failed(403, 'You are not allowed to request this resource!');
         }

@@ -25,7 +25,7 @@ export function currentUserChecker(connection: Connection): (action: Action) => 
             log.info('Current user is undefined');
         }
 
-        return Promise.resolve(user);
+        return user;
     };
 }
 

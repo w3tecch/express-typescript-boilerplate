@@ -19,12 +19,12 @@ export const swaggerLoader: MicroframeworkLoader = (settings: MicroframeworkSett
 
         expressApp.use(
             env.swagger.route,
-            basicAuth({
+            env.swagger.username ? basicAuth({
                 users: {
                     [`${env.swagger.username}`]: env.swagger.password
                 },
                 challenge: true
-            }),
+            }) : (req, res, next) => next(),
             swaggerUi.serve,
             swaggerUi.setup(swaggerFile)
         );

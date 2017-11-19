@@ -11,12 +11,12 @@ export const monitorLoader: MicroframeworkLoader = (settings: MicroframeworkSett
         expressApp.use(monitor());
         expressApp.get(
             env.monitor.route,
-            basicAuth({
+            env.monitor.username ? basicAuth({
                 users: {
                     [`${env.monitor.username}`]: env.monitor.password
                 },
                 challenge: true
-            }),
+            }) : (req, res, next) => next(),
             monitor().pageRoute
         );
 

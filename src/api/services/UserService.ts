@@ -7,8 +7,9 @@ import { User } from '../models/User';
 @Service()
 export class UserService {
 
-    @OrmRepository()
-    private userRepository: UserRepository;
+    constructor(
+        @OrmRepository() private userRepository: UserRepository
+    ) { }
 
     public find(): Promise<User[]> {
         return this.userRepository.find();

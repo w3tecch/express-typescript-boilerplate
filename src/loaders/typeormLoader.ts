@@ -5,9 +5,9 @@ import { env } from '../core/env';
 
 
 export const typeormLoader: MicroframeworkLoader = async (settings: MicroframeworkSettings | undefined) => {
-    // @ts-ignore this
+
     const connection = await createConnection({
-        type: env.db.type,
+        type: env.db.type as any, // See createConnection options for valid types
         host: env.db.host,
         port: env.db.port,
         username: env.db.username,

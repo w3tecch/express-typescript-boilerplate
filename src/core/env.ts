@@ -1,4 +1,4 @@
-const pkg = require('../../package.json');
+import * as pkg from '../../package.json';
 
 /**
  * Environment variables
@@ -7,8 +7,8 @@ export const env = {
     node: process.env.NODE_ENV || 'development',
     app: {
         name: getOsEnv('APP_NAME'),
-        version: pkg.version,
-        description: pkg.description,
+        version: (pkg as any).version,
+        description: (pkg as any).description,
         route: getOsEnv('APP_ROUTE'),
         routePrefix: getOsEnv('APP_ROUTE_PREFIX'),
         port: normalizePort(process.env.PORT || '3000')
@@ -47,7 +47,7 @@ export const env = {
 };
 
 function getOsEnv(key: string): string {
-    return `${process.env[key]}`;
+    return process.env[key] as string;
 }
 
 function toNumber(value: string): number {
