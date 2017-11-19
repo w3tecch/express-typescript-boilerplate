@@ -156,7 +156,6 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **src/api/validators/**       | Custom validators, which can be used in the request classes |
 | **src/api/** swagger.json     | Swagger documentation |
 | **src/console/**              | Command line scripts |
-| **src/constants/**            | Global Constants |
 | **src/core/**                 | The core features like logger and env variables |
 | **src/public/**               | Static assets (fonts, css, js, img). |
 | **src/types/** *.d.ts         | Custom type definitions and files that aren't on DefinitelyTyped |
