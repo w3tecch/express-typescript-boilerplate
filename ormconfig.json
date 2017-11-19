@@ -1,17 +1,17 @@
 {
-    "type": "mysql",
-    "host": "localhost",
-    "port": 3306,
-    "username": "root",
-    "password": "",
-    "database": "my_database",
-    "entities": [
-        "dist/api/**/*Models.js"
-    ],
-    "migrations": [
-        "dist/database/migrations/*.js"
-    ],
-    "cli": {
-        "migrationsDir": "dist/database/migrations"
-    }
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
+  "password": "",
+  "database": "my_database",
+  "entities": [
+    "src/api/**/*Models.ts"
+  ],
+  "migrations": [
+    "src/database/migrations/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "src/database/migrations"
+  }
 }

@@ -124,6 +124,12 @@ All script are defined in the package.json file, but the most important ones are
 - Run `nps build` to generated all JavaScript files from the TypeScript sources (There is also a vscode task for this called `build`).
 - To start the builded app located in `dist` use `npm start`.
 
+### Database
+
+- Run `./node_modules/.bin/typeorm create -n <migration-file-name>` to create a new migration file.
+- To migrate your database run `nps migrate`.
+- To revert your latest migration run `nps migrate.revert`.
+
 ## Using the debugger in VS Code
 
 Just set a breakpoint and hit `F5` in your Visual Studio Code.
