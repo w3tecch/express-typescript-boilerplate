@@ -150,35 +150,6 @@ module.exports = {
             help: runFast('./src/console/lib/console.ts --help')
         },
         /**
-         * All database related scripts are here
-         */
-        db: {
-            migrate: {
-                default: {
-                    script: series(
-                        'nps banner.migrate',
-                        '\"./node_modules/.bin/knex\" migrate:latest',
-                    )
-                },
-                rollback: series(
-                    'nps banner.rollback',
-                    '\"./node_modules/.bin/knex\" migrate:rollback',
-                )
-            },
-            seed: {
-                script: series(
-                    'nps banner.seed',
-                    '\"./node_modules/.bin/knex\" seed:run',
-                )
-            },
-            reset: {
-                script: series(
-                    'nps banner.dbReset',
-                    'nps console db:reset',
-                )
-            }
-        },
-        /**
          * This creates pretty banner to the terminal
          */
         banner: {
