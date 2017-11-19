@@ -16,14 +16,15 @@ export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSett
          */
         const expressApp = createExpressServer({
             cors: true,
+            classTransformer: true,
             routePrefix: env.app.routePrefix,
             /**
-             * TODO: We can add options about how routing-controllers should configure itself.
+             * We can add options about how routing-controllers should configure itself.
              * Here we specify what controllers should be registered in our express server.
              */
-            controllers: [path.join(__dirname, '..', 'api/controllers/*{.js,.ts}')],
-            middlewares: [path.join(__dirname, '..', 'api/middlewares/*{.js,.ts}')],
-            interceptors: [path.join(__dirname, '..', 'api/interceptors/*{.js,.ts}')],
+            controllers: [path.join(__dirname, '..', 'api/**/*Controller{.js,.ts}')],
+            middlewares: [path.join(__dirname, '..', 'api/**/*Middleware{.js,.ts}')],
+            interceptors: [path.join(__dirname, '..', 'api/**/*Interceptor{.js,.ts}')],
 
             /**
              * Authorization features
