@@ -7,9 +7,6 @@
  * the 'README.md' file.
  */
 import 'reflect-metadata';
-import * as dotenv from 'dotenv';
-dotenv.config();
-
 import { banner } from './core/banner';
 import { Log } from './core/Log';
 const log = new Log(__filename);

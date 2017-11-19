@@ -1,4 +1,7 @@
 import * as pkg from '../../package.json';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 
 /**
  * Environment variables
@@ -30,7 +33,10 @@ export const env = {
         password: getOsEnv('DB_PASSWORD'),
         database: getOsEnv('DB_DATABASE'),
         synchronize: toBool(getOsEnv('DB_SYNCHRONIZE')),
-        logging: toBool(getOsEnv('DB_LOGGING'))
+        logging: toBool(getOsEnv('DB_LOGGING')),
+        entities: toArray(getOsEnv('DB_ENTITIES')),
+        migrations: toArray(getOsEnv('DB_MIGRATIONS')),
+        migrationsDir: getOsEnv('DB_MIGRATIONS_DIR')
     },
     swagger: {
         enabled: toBool(getOsEnv('SWAGGER_ENABLED')),
@@ -57,6 +63,13 @@ function toNumber(value: string): number {
 
 function toBool(value: string): boolean {
     return value === 'true';
+}
+
+function toArray(value: string): string[] {
+    if (value && value.indexOf(',') >= 0) {
+        return value.split(',');
+    }
+    return [value];
 }
 
 function normalizePort(port: string): number | string | boolean {
