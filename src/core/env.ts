@@ -11,7 +11,8 @@ export const env = {
         description: (pkg as any).description,
         route: getOsEnv('APP_ROUTE'),
         routePrefix: getOsEnv('APP_ROUTE_PREFIX'),
-        port: normalizePort(process.env.PORT || '3000')
+        port: normalizePort(process.env.PORT || '3000'),
+        banner: toBool(getOsEnv('APP_BANNER'))
     },
     log: {
         level: getOsEnv('LOG_LEVEL'),

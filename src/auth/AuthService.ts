@@ -1,4 +1,5 @@
 import * as request from 'request';
+import * as express from 'express';
 import { Service } from 'typedi';
 import { env } from '../core/env';
 import { ITokenInfo } from './ITokenInfo';
@@ -7,7 +8,7 @@ import { ITokenInfo } from './ITokenInfo';
 @Service()
 export class AuthService {
 
-    public parseTokenFromRequest(req: myExpress.Request): string | undefined {
+    public parseTokenFromRequest(req: express.Request): string | undefined {
         const authorization = req.header('authorization');
 
         // Retrieve the token form the Authorization header

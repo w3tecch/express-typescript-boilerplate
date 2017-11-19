@@ -29,14 +29,9 @@ export class Log {
     }
 
     private scope: string;
-    private adapter: interfaces.LoggerAdapter;
 
     constructor(scope?: string) {
         this.scope = Log.parsePathToScope((scope) ? scope : Log.DEFAULT_SCOPE);
-    }
-
-    public getAdapter(): interfaces.LoggerAdapter {
-        return this.adapter;
     }
 
     public debug(message: string, ...args: any[]): void {
