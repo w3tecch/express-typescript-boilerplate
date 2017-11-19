@@ -47,22 +47,19 @@ module.exports = {
             default: {
                 script: series(
                     'nps banner.migrate',
-                    'nps lint',
-                    'nps clean.dist',
-                    'nps transpile',
-                    'nps copy',
-                    '\"./node_modules/.bin/typeorm\" migrations:run',
+                    'nps migrate.config',
+                    runFast('./node_modules/.bin/typeorm migrations:run'),
                 )
             },
-            rollback: {
+            revert: {
                 script: series(
-                    'nps banner.rollback',
-                    'nps lint',
-                    'nps clean.dist',
-                    'nps transpile',
-                    'nps copy',
-                    '\"./node_modules/.bin/typeorm\" migrations:revert',
+                    'nps banner.revert',
+                    'nps migrate.config',
+                    runFast('./node_modules/.bin/typeorm migrations:revert'),
                 )
+            },
+            config: {
+                script: runFast('./lib/ormconfig.ts'),
             }
         },
         /**
@@ -169,7 +166,7 @@ module.exports = {
             serve: banner('serve'),
             test: banner('test'),
             migrate: banner('migrate'),
-            rollback: banner('rollback'),
+            revert: banner('revert'),
             clean: banner('clean')
         }
     }
