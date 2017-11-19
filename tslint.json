@@ -8,7 +8,11 @@
         "no-unnecessary-initializer": false,
         "no-var-requires": false,
         "no-consecutive-blank-lines": false,
-        "quotemark": [true, "single", "avoid-escape"],
+        "quotemark": [
+            true,
+            "single",
+            "avoid-escape"
+        ],
         "interface-name": false,
         "no-empty-interface": false,
         "no-namespace": false,
@@ -46,12 +50,22 @@
             "timeEnd",
             "trace"
         ],
-        "no-inferrable-types": [true, "ignore-params"],
+        "no-inferrable-types": [
+            true,
+            "ignore-params"
+        ],
         "no-switch-case-fall-through": true,
-        "typedef": [true, "call-signature", "parameter"],
-        "trailing-comma": [true, {
-            "multiline": "never",
-            "singleline": "never"
-        }]
+        "typedef": [
+            true,
+            "call-signature",
+            "parameter"
+        ],
+        "trailing-comma": [
+            true,
+            {
+                "multiline": "never",
+                "singleline": "never"
+            }
+        ]
     }
 }
