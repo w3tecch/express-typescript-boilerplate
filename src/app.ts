@@ -22,13 +22,15 @@ import { swaggerLoader } from './loaders/swaggerLoader';
 import { monitorLoader } from './loaders/monitorLoader';
 import { homeLoader } from './loaders/homeLoader';
 import { publicLoader } from './loaders/publicLoader';
+import { iocLoader } from './loaders/iocLoader';
 
 
 bootstrapMicroframework({
     loaders: [
         winstonLoader,
-        expressLoader,
+        iocLoader,
         typeormLoader,
+        expressLoader,
         swaggerLoader,
         monitorLoader,
         homeLoader,

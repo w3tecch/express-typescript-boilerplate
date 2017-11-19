@@ -20,4 +20,8 @@ export class User extends BaseEntity {
     @Column()
     public email: string;
 
+    public toString(): string {
+        return `${this.firstName} ${this.lastName} (${this.email})`;
+    }
+
 }

@@ -2,31 +2,30 @@ import { Action } from 'routing-controllers';
 import { User } from '../api/models/User';
 import { Log } from '../core/Log';
 import { ITokenInfo } from './ITokenInfo';
-// import { UserRepository } from '../api/repositories/UserRepository';
-// import { getConnection } from 'typeorm';
-
-const log = new Log(__filename);
+import { Connection } from 'typeorm';
 
 
-export async function currentUserChecker(action: Action): Promise<User | undefined> {
-    // here you can use request/response objects from action
-    // you need to provide a user object that will be injected in controller actions
-    // demo code:
-    const tokeninfo: ITokenInfo = action.request.tokeninfo;
-    log.info('todo user checker', tokeninfo);
+export function currentUserChecker(connection: Connection): (action: Action) => Promise<User | undefined> {
+    const log = new Log(__filename);
 
-    // const connection = getConnection();
+    return async function innerCurrentUserChecker(action: Action): Promise<User | undefined> {
+        // here you can use request/response objects from action
+        // you need to provide a user object that will be injected in controller actions
+        // demo code:
+        const tokeninfo: ITokenInfo = action.request.tokeninfo;
+        const em = connection.createEntityManager();
+        const user = await em.findOne<User>(User, {
+            where: {
+                email: tokeninfo.user_id
+            }
+        });
+        if (user) {
+            log.info('Current user is ', user.toString());
+        } else {
+            log.info('Current user is undefined');
+        }
 
-    // const userRepository = connection.getRepository<User>(UserRepository);
-    // console.log(connection);
-    // const user = await userRepository.
-    //     findOne({
-    //         where: {
-    //             email: tokeninfo.user_id
-    //         }
-    //     });
-    // console.log(user);
-
-    return Promise.resolve(new User());
+        return Promise.resolve(user);
+    };
 }
 
