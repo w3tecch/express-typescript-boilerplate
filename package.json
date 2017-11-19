@@ -6,12 +6,7 @@
   "scripts": {
     "start": "nps",
     "test": "npm start test",
-    "build": "npm start build",
-    "ts-node": "./node_modules/.bin/ts-node",
-    "ts-node:fast": "./node_modules/.bin/ts-node -F",
-    "console": "npm run ts-node:fast -- ./src/console/lib/console.ts",
-    "console:dev": "npm run ts-node -- ./src/console/lib/console.ts",
-    "console:help": "npm run ts-node:fast -- ./src/console/lib/console.ts --help"
+    "build": "npm start build"
   },
   "repository": "git+ssh://git@github.com/w3tec/express-typescript-boilerplate.git",
   "keywords": [
