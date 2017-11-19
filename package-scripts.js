@@ -25,9 +25,7 @@ module.exports = {
          */
         setup: {
             script: series(
-                'yarn install',
-                'nps db.migrate',
-                'nps db.seed',
+                'yarn install'
             )
         },
         /**
@@ -137,17 +135,6 @@ module.exports = {
                     './dist',
                 )
             }
-        },
-        /**
-         * This our scaffold api
-         * @example > nps "console make:controller"
-         */
-        console: {
-            default: {
-                script: runFast('./src/console/lib/console.ts')
-            },
-            dev: run('./src/console/lib/console.ts'),
-            help: runFast('./src/console/lib/console.ts --help')
         },
         /**
          * This creates pretty banner to the terminal
