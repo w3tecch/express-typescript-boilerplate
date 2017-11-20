@@ -1399,6 +1399,13 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
 
+event-dispatch@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/event-dispatch/-/event-dispatch-0.4.1.tgz#5f9c272f5080f79d3e22827303a9fbcccd2c433e"
+  dependencies:
+    fs "0.0.2"
+    path "^0.11.14"
+
 event-stream@~3.3.0:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
@@ -1682,6 +1689,10 @@ fs-extra@^4.0.2:
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
+
+fs@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.2.tgz#e1f244ef3933c1b2a64bd4799136060d0f5914f8"
 
 fsevents@^1.0.0, fsevents@^1.1.1:
   version "1.1.3"
@@ -3501,6 +3512,10 @@ path-type@^2.0.0:
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-2.0.0.tgz#f012ccb8415b7096fc2daa1054c3d72389594c73"
   dependencies:
     pify "^2.0.0"
+
+path@^0.11.14:
+  version "0.11.14"
+  resolved "https://registry.yarnpkg.com/path/-/path-0.11.14.tgz#cbc7569355cb3c83afeb4ace43ecff95231e5a7d"
 
 path@^0.12.7:
   version "0.12.7"

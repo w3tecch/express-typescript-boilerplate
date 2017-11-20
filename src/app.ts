@@ -20,6 +20,7 @@ import { monitorLoader } from './loaders/monitorLoader';
 import { homeLoader } from './loaders/homeLoader';
 import { publicLoader } from './loaders/publicLoader';
 import { iocLoader } from './loaders/iocLoader';
+import { eventDispatchLoader } from './loaders/eventDispatchLoader';
 
 
 bootstrapMicroframework({
@@ -30,6 +31,7 @@ bootstrapMicroframework({
     loaders: [
         winstonLoader,
         iocLoader,
+        eventDispatchLoader,
         typeormLoader,
         expressLoader,
         swaggerLoader,

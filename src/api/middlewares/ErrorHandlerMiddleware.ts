@@ -9,18 +9,24 @@ const log = new Log(__filename);
 export class CustomErrorHandler implements ExpressErrorMiddlewareInterface {
 
     public error(error: HttpError, req: express.Request, res: express.Response, next: express.NextFunction): void {
+        res.status(error.httpCode || 500);
 
         // Standard output of an error to the user.
-        res.status(error.httpCode || 500);
-        res.json({
-            name: error.name,
-            message: error.message,
-        });
-
-        // Print stack if the status code matches or is higher than the defined one in the .env file.
-        if (error.httpCode >= (env.app.error.printStackCode || 404)) {
-            log.error(error.stack as string);
+        if (env.isProduction) {
+            res.json({
+                name: error.name,
+                message: error.message,
+                stack: error.stack,
+            });
+            log.error(error.name, error.stack);
+        } else {
+            res.json({
+                name: error.name,
+                message: error.message,
+            });
+            log.error(error.name, error.message);
         }
+
     }
 
 }
