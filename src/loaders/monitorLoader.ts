@@ -13,9 +13,9 @@ export const monitorLoader: MicroframeworkLoader = (settings: MicroframeworkSett
             env.monitor.route,
             env.monitor.username ? basicAuth({
                 users: {
-                    [`${env.monitor.username}`]: env.monitor.password
+                    [`${env.monitor.username}`]: env.monitor.password,
                 },
-                challenge: true
+                challenge: true,
             }) : (req, res, next) => next(),
             monitor().pageRoute
         );

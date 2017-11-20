@@ -18,6 +18,7 @@ export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSett
             cors: true,
             classTransformer: true,
             routePrefix: env.app.routePrefix,
+            defaultErrorHandler: false,
             /**
              * We can add options about how routing-controllers should configure itself.
              * Here we specify what controllers should be registered in our express server.
@@ -30,7 +31,7 @@ export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSett
              * Authorization features
              */
             authorizationChecker: authorizationChecker(connection),
-            currentUserChecker: currentUserChecker(connection)
+            currentUserChecker: currentUserChecker(connection),
         });
 
         // Run application to listen on given port

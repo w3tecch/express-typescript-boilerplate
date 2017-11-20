@@ -14,8 +14,8 @@ export class SecurityMiddleware implements ExpressMiddlewareInterface {
     public use(req: express.Request, res: express.Response, next: express.NextFunction): any {
         return morgan(env.log.output, {
             stream: {
-                write: this.log.info.bind(this.log)
-            }
+                write: this.log.info.bind(this.log),
+            },
         })(req, res, next);
     }
 

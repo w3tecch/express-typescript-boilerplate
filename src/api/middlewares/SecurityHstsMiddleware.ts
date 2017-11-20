@@ -10,7 +10,7 @@ export class SecurityMiddleware implements ExpressMiddlewareInterface {
     public use(req: express.Request, res: express.Response, next: express.NextFunction): any {
         return helmet.hsts({
             maxAge: 31536000,
-            includeSubdomains: true
+            includeSubdomains: true,
         })(req, res, next);
     }
 
