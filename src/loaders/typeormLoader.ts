@@ -1,4 +1,3 @@
-import * as path from 'path';
 import { createConnection } from 'typeorm';
 import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework';
 import { env } from '../core/env';
@@ -15,9 +14,7 @@ export const typeormLoader: MicroframeworkLoader = async (settings: Microframewo
         database: env.db.database,
         synchronize: env.db.synchronize,
         logging: env.db.logging,
-        entities: [
-            path.join(__dirname, '..', 'api/models/*{.js,.ts}'),
-        ],
+        entities: env.db.entities,
     });
 
     if (settings) {
