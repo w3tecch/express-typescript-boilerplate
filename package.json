@@ -67,6 +67,7 @@
     "mock-express-request": "^0.2.0",
     "morgan": "^1.9.0",
     "mysql": "^2.15.0",
+    "nock": "^9.1.0",
     "nodemon": "^1.12.1",
     "path": "^0.12.7",
     "reflect-metadata": "^0.1.10",

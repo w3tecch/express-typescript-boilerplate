@@ -1,12 +1,19 @@
 import * as request from 'request';
 import * as express from 'express';
-import { Service } from 'typedi';
+import { Service, Require } from 'typedi';
 import { env } from '../core/env';
 import { ITokenInfo } from './ITokenInfo';
 
 
 @Service()
 export class AuthService {
+
+    // private httpRequest = request;
+    private httpRequest: typeof request;
+
+    constructor( @Require('request') r: any) {
+        this.httpRequest = r; // the same if you do this.logger = require("logger")
+    }
 
     public parseTokenFromRequest(req: express.Request): string | undefined {
         const authorization = req.header('authorization');
@@ -22,7 +29,7 @@ export class AuthService {
 
     public getTokenInfo(token: string): Promise<ITokenInfo> {
         return new Promise((resolve, reject) => {
-            request({
+            this.httpRequest({
                 method: 'POST',
                 url: env.auth.route,
                 form: {

@@ -1,13 +1,16 @@
 import { Request } from 'express';
+import * as request from 'request';
 import * as MockExpressRequest from 'mock-express-request';
+import * as nock from 'nock';
 import { AuthService } from './../../../src/auth/AuthService';
+import { env } from './../../../src/core/env';
 
 
 describe('AuthService', () => {
 
     let authService: AuthService;
     beforeEach(() => {
-        authService = new AuthService();
+        authService = new AuthService(request);
     });
 
     describe('parseTokenFromRequest', () => {
@@ -35,6 +38,33 @@ describe('AuthService', () => {
             const req: Request = new MockExpressRequest();
             const token = authService.parseTokenFromRequest(req);
             expect(token).toBeUndefined();
+        });
+    });
+
+    describe('getTokenInfo', () => {
+        test('Should get the tokeninfo', async (done) => {
+            nock(env.auth.route)
+                .post('')
+                .reply(200, {
+                    user_id: 'auth0|test@test.com',
+                });
+
+            const tokeninfo = await authService.getTokenInfo('1234');
+            expect(tokeninfo.user_id).toBe('auth0|test@test.com');
+            done();
+        });
+
+        test('Should fail due to invalid token', async (done) => {
+            nock(env.auth.route)
+                .post('')
+                .reply(401, 'Invalid token');
+
+            try {
+                await authService.getTokenInfo('1234');
+            } catch (error) {
+                expect(error).toBe('Invalid token');
+            }
+            done();
         });
     });
 
