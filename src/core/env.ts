@@ -1,3 +1,4 @@
+import * as path from 'path';
 import * as pkg from '../../package.json';
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -17,6 +18,14 @@ export const env = {
         routePrefix: getOsEnv('APP_ROUTE_PREFIX'),
         port: normalizePort(process.env.PORT || '3000'),
         banner: toBool(getOsEnv('APP_BANNER')),
+        dirs: {
+            entities: [path.join(__dirname, '..', 'api/models/*{.js,.ts}')],
+            migrations: [path.join(__dirname, '..', 'database/migrations/*.ts')],
+            migrationsDir: path.join(__dirname, '..', 'database/migrations'),
+            controllers: [path.join(__dirname, '..', 'api/**/*Controller{.js,.ts}')],
+            middlewares: [path.join(__dirname, '..', 'api/**/*Middleware{.js,.ts}')],
+            interceptors: [path.join(__dirname, '..', 'api/**/*Interceptor{.js,.ts}')],
+        },
     },
     log: {
         level: getOsEnv('LOG_LEVEL'),
@@ -35,9 +44,6 @@ export const env = {
         database: getOsEnv('DB_DATABASE'),
         synchronize: toBool(getOsEnv('DB_SYNCHRONIZE')),
         logging: toBool(getOsEnv('DB_LOGGING')),
-        entities: toArray(getOsEnv('DB_ENTITIES')),
-        migrations: toArray(getOsEnv('DB_MIGRATIONS')),
-        migrationsDir: getOsEnv('DB_MIGRATIONS_DIR'),
     },
     swagger: {
         enabled: toBool(getOsEnv('SWAGGER_ENABLED')),
@@ -64,13 +70,6 @@ function toNumber(value: string): number {
 
 function toBool(value: string): boolean {
     return value === 'true';
-}
-
-function toArray(value: string): string[] {
-    if (value && value.indexOf(',') >= 0) {
-        return value.split(',');
-    }
-    return [value];
 }
 
 function normalizePort(port: string): number | string | boolean {
