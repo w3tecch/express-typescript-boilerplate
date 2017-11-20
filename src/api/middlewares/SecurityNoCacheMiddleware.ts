@@ -4,7 +4,7 @@ import * as helmet from 'helmet';
 import { ExpressMiddlewareInterface, Middleware } from 'routing-controllers';
 
 
-@Middleware({ type: 'after' })
+@Middleware({ type: 'before' })
 export class SecurityMiddleware implements ExpressMiddlewareInterface {
 
     public use(req: express.Request, res: express.Response, next: express.NextFunction): any {
