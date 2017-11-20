@@ -3,8 +3,7 @@ import * as express from 'express';
 import { Service, Require } from 'typedi';
 import { env } from '../core/env';
 import { ITokenInfo } from './ITokenInfo';
-import { Logger } from '../decorators/Logger';
-import { ILogger } from '../core/ILogger';
+import { Logger, ILogger } from '../decorators/Logger';
 
 
 @Service()

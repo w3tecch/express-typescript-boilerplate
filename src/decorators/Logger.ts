@@ -8,3 +8,5 @@ export function Logger(scope: string): any {
         Container.registerHandler({ object, propertyName, index, value: () => logger });
     };
 }
+
+export { ILogger } from '../core/ILogger';

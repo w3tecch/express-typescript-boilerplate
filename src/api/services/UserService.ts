@@ -4,8 +4,7 @@ import { UserRepository } from '../repositories/UserRepository';
 import { User } from '../models/User';
 import { events } from '../subscribers/events';
 import { EventDispatcher, IEventDispatcher } from '../../decorators/EventDispatcher';
-import { Logger } from '../../decorators/Logger';
-import { ILogger } from '../../core/ILogger';
+import { Logger, ILogger } from '../../decorators/Logger';
 
 
 @Service()
