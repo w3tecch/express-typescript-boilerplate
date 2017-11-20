@@ -4,8 +4,9 @@
 [![Build Status](https://travis-ci.org/w3tecch/express-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-typescript-boilerplate)
 [![Build status](https://ci.appveyor.com/api/projects/status/f8e7jdm8v58hcwpq/branch/master?svg=true&passingText=Windows%20passing&pendingText=Windows%20pending&failingText=Windows%20failing)](https://ci.appveyor.com/project/dweber019/express-typescript-boilerplate/branch/master)
 
-> A delightful way to building a RESTful API with NodeJs & TypeScript.
-> An Node.js Web-Serice boilerplate/skeleton/starter-kit featuring
+> A delightful way to building a RESTful API Services with beautiful code written in TypeScript.
+> An Node.js Web-Service boilerplate/skeleton/starter-kit featuring
+> Inspired by the awesome framework [laravel](https://laravel.com/) in PHP and of the repositories from [pleerock](https://github.com/pleerock).
 [TypeScript](https://www.typescriptlang.org/),
 [Express](https://expressjs.com/),
 [Winston](https://github.com/winstonjs/winston),
@@ -35,19 +36,32 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **Clear Structure** with different layers such as controllers, services, repositories, models, middlewares...
 - **Easy Exception Handling** thanks to [routing-controllers](https://github.com/pleerock/routing-controllers).
 - **Smart Validation** thanks to [class-validator](https://github.com/pleerock/class-validator) with some nice annotations.
-- **Custom Validators** to validate your request even better and stricter. [custom-validation-classes](https://github.com/pleerock/class-validator#custom-validation-classes)
+- **Custom Validators** to validate your request even better and stricter. [custom-validation-classes](https://github.com/pleerock/class-validator#custom-validation-classes).
 - **API Documentation** thanks to [swagger](http://swagger.io/).
 - **API Monitoring** thanks to [express-status-monitor](https://github.com/RafalWilinski/express-status-monitor).
-- **Integrated Testing Tool** thanks to [Jest](https://facebook.github.io/jest)
-- **Basic Security Features** thanks to [Helmet](https://helmetjs.github.io/)
-- **Easy event dispatching** thanks to [event-dispatch](https://github.com/pleerock/event-dispatch)
+- **Integrated Testing Tool** thanks to [Jest](https://facebook.github.io/jest).
+- **Basic Security Features** thanks to [Helmet](https://helmetjs.github.io/).
+- **Easy event dispatching** thanks to [event-dispatch](https://github.com/pleerock/event-dispatch).
+- **Fast Database Building** with simple migration from [TypeOrm](https://github.com/typeorm/typeorm).
 
 ### Comming soon
 
-- **Fast Database Building** with simple migration and seeding from [Knex](http://knexjs.org/).
 - **Easy Data Seeding** with our own factories.
 - **Custom Commands** are also available in our setup and really easy to use or even extend.
 - **Scaffolding Commands** will speed up your development tremendously as you should focus on business code and not scaffolding.
+
+# Table of Contents
+
+- [Getting Started](#getting-started)
+- [Scripts and Tasks](#scripts-and-tasks)
+- [Debugger in VSCode](#debugger-in-vscode)
+- [API Routes](#api-routes)
+- [Project Structure](#project-structure)
+- [Logging](#logging)
+- [Event Dispatching](#event-dispatching)
+- [Further Documentations](#further-documentation)
+- [Related Projects](#related-projects)
+- [License](#license)
 
 ## Getting Started
 
@@ -97,7 +111,7 @@ npm start serve
 > This starts a local server using `nodemon`, which will watch for any file changes and will restart the sever according to these changes.
 > The server address will be displayed to you as `http://0.0.0.0:3000`.
 
-## Scripts / Tasks
+## Scripts and Tasks
 
 All script are defined in the package.json file, but the most important ones are listed here.
 
@@ -131,7 +145,7 @@ All script are defined in the package.json file, but the most important ones are
 - To migrate your database run `npm start migrate`.
 - To revert your latest migration run `npm start migrate.revert`.
 
-## Using the debugger in VS Code
+## Debugger in VSCode
 
 Just set a breakpoint and hit `F5` in your Visual Studio Code.
 
@@ -172,14 +186,48 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **test/unit/** *.test.ts      | Unit tests |
 | .env.example                  | Environment configurations |
 
-## Related Projects
+## Logging
 
-- [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter) - A starter template for TypeScript and Node with a detailed README describing how to use the two together.
-- [express-graphql-typescript-boilerplate](https://github.com/w3tecch/express-graphql-typescript-boilerplate) - A starter kit for building amazing GraphQL API's with TypeScript and express by @w3tecch
-- [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
-- [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server) - Useful for e2e testing or faking an oAuth server
+Our logger is [winston](https://github.com/winstonjs/winston). To log http request we use the express middleware [morgan](https://github.com/expressjs/morgan).
+We created a simple annotation to inject the logger in your service (see example below).
 
-## Documentations of our main dependencies
+```typescript
+import { Logger, ILogger } from '../../decorators/Logger';
+
+@Service()
+export class UserService {
+
+    constructor(
+        @Logger(__filename) private log: ILogger
+    ) { }
+
+    ...
+```
+
+## Event Dispatching
+
+Our we use this awesome repository [event-dispatch](https://github.com/pleerock/event-dispatch) for event dispatching.
+We created a simple annotation to inject the EventDispatcher in your service (see example below). All events are listed in the `events.ts` file.
+
+```typescript
+import { events } from '../subscribers/events';
+import { EventDispatcher, IEventDispatcher } from '../../decorators/EventDispatcher';
+
+@Service()
+export class UserService {
+
+    constructor(
+        @EventDispatcher() private eventDispatcher: IEventDispatcher
+    ) { }
+
+    public async create(user: User): Promise<User> {
+        ...
+        this.eventDispatcher.dispatch(events.user.created, newUser);
+        ...
+    }
+```
+
+## Further Documentations
 
 | Name & Link                       | Description                       |
 | --------------------------------- | --------------------------------- |
@@ -195,6 +243,13 @@ The swagger and the monitor route can be altered in the `.env` file.
 | [Auth0 API Documentation](https://auth0.com/docs/api/management/v2) | Authentification service |
 | [Jest](http://facebook.github.io/jest/) | Delightful JavaScript Testing Library for unit and e2e tests |
 | [swagger Documentation](http://swagger.io/) | API Tool to describe and document your api. |
+
+## Related Projects
+
+- [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter) - A starter template for TypeScript and Node with a detailed README describing how to use the two together.
+- [express-graphql-typescript-boilerplate](https://github.com/w3tecch/express-graphql-typescript-boilerplate) - A starter kit for building amazing GraphQL API's with TypeScript and express by @w3tecch
+- [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
+- [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server) - Useful for e2e testing or faking an oAuth server
 
 ## License
 
