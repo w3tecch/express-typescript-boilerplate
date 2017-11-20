@@ -1,4 +1,3 @@
-import * as path from 'path';
 import { createExpressServer } from 'routing-controllers';
 import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework';
 import { env } from '../core/env';
@@ -23,9 +22,9 @@ export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSett
              * We can add options about how routing-controllers should configure itself.
              * Here we specify what controllers should be registered in our express server.
              */
-            controllers: [path.join(__dirname, '..', 'api/**/*Controller{.js,.ts}')],
-            middlewares: [path.join(__dirname, '..', 'api/**/*Middleware{.js,.ts}')],
-            interceptors: [path.join(__dirname, '..', 'api/**/*Interceptor{.js,.ts}')],
+            controllers: env.app.dirs.controllers,
+            middlewares: env.app.dirs.middlewares,
+            interceptors: env.app.dirs.interceptors,
 
             /**
              * Authorization features

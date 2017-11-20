@@ -13,11 +13,11 @@ const content = {
     username: env.db.username,
     password: env.db.password,
     database: env.db.database,
-    entities: env.db.entities,
-    migrations: env.db.migrations,
+    entities: env.app.dirs.entities,
+    migrations: env.app.dirs.migrations,
     cli: {
-        migrationsDir: env.db.migrationsDir
-    }
+        migrationsDir: env.app.dirs.migrationsDir,
+    },
 };
 
 const filePath = path.join(__dirname, '../', 'ormconfig.json');
