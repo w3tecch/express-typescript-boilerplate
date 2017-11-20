@@ -15,7 +15,10 @@ export const env = {
         route: getOsEnv('APP_ROUTE'),
         routePrefix: getOsEnv('APP_ROUTE_PREFIX'),
         port: normalizePort(process.env.PORT || '3000'),
-        banner: toBool(getOsEnv('APP_BANNER'))
+        banner: toBool(getOsEnv('APP_BANNER')),
+        error: {
+            printStackCode: toNumber(getOsEnv('APP_ERROR_PRINTSTACK_CODE'))
+        }
     },
     log: {
         level: getOsEnv('LOG_LEVEL'),
