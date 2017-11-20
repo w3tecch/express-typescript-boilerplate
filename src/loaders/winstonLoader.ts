@@ -11,8 +11,8 @@ export const winstonLoader: MicroframeworkLoader = (settings: MicroframeworkSett
                 handleExceptions: true,
                 json: env.log.json,
                 timestamp: env.node !== 'development',
-                colorize: env.node === 'development'
-            })
-        ]
+                colorize: env.node === 'development',
+            }),
+        ],
     });
 };

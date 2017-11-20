@@ -16,8 +16,8 @@ export function currentUserChecker(connection: Connection): (action: Action) => 
         const em = connection.createEntityManager();
         const user = await em.findOne<User>(User, {
             where: {
-                email: tokeninfo.user_id
-            }
+                email: tokeninfo.user_id,
+            },
         });
         if (user) {
             log.info('Current user is ', user.toString());

@@ -12,7 +12,7 @@ export const homeLoader: MicroframeworkLoader = (settings: MicroframeworkSetting
                 return res.json({
                     name: env.app.name,
                     version: env.app.version,
-                    description: env.app.description
+                    description: env.app.description,
                 });
             }
         );

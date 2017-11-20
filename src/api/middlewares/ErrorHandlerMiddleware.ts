@@ -14,7 +14,7 @@ export class CustomErrorHandler implements ExpressErrorMiddlewareInterface {
         res.status(error.httpCode || 500);
         res.json({
             name: error.name,
-            message: error.message
+            message: error.message,
         });
 
         // Print stack if the status code matches or is higher than the defined one in the .env file.

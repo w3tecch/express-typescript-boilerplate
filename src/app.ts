@@ -35,8 +35,8 @@ bootstrapMicroframework({
         swaggerLoader,
         monitorLoader,
         homeLoader,
-        publicLoader
-    ]
+        publicLoader,
+    ],
 })
     .then(() => banner(log))
     .catch(error => log.error('Application is crashed: ' + error));

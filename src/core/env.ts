@@ -17,16 +17,16 @@ export const env = {
         port: normalizePort(process.env.PORT || '3000'),
         banner: toBool(getOsEnv('APP_BANNER')),
         error: {
-            printStackCode: toNumber(getOsEnv('APP_ERROR_PRINTSTACK_CODE'))
-        }
+            printStackCode: toNumber(getOsEnv('APP_ERROR_PRINTSTACK_CODE')),
+        },
     },
     log: {
         level: getOsEnv('LOG_LEVEL'),
         json: toBool(getOsEnv('LOG_JSON')),
-        output: getOsEnv('LOG_OUTPUT')
+        output: getOsEnv('LOG_OUTPUT'),
     },
     auth: {
-        route: getOsEnv('AUTH_ROUTE')
+        route: getOsEnv('AUTH_ROUTE'),
     },
     db: {
         type: getOsEnv('DB_TYPE'),
@@ -39,21 +39,21 @@ export const env = {
         logging: toBool(getOsEnv('DB_LOGGING')),
         entities: toArray(getOsEnv('DB_ENTITIES')),
         migrations: toArray(getOsEnv('DB_MIGRATIONS')),
-        migrationsDir: getOsEnv('DB_MIGRATIONS_DIR')
+        migrationsDir: getOsEnv('DB_MIGRATIONS_DIR'),
     },
     swagger: {
         enabled: toBool(getOsEnv('SWAGGER_ENABLED')),
         route: getOsEnv('SWAGGER_ROUTE'),
         file: getOsEnv('SWAGGER_FILE'),
         username: getOsEnv('SWAGGER_USERNAME'),
-        password: getOsEnv('SWAGGER_PASSWORD')
+        password: getOsEnv('SWAGGER_PASSWORD'),
     },
     monitor: {
         enabled: toBool(getOsEnv('MONITOR_ENABLED')),
         route: getOsEnv('MONITOR_ROUTE'),
         username: getOsEnv('MONITOR_USERNAME'),
-        password: getOsEnv('MONITOR_PASSWORD')
-    }
+        password: getOsEnv('MONITOR_PASSWORD'),
+    },
 };
 
 function getOsEnv(key: string): string {

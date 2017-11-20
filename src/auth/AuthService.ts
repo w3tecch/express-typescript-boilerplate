@@ -26,8 +26,8 @@ export class AuthService {
                 method: 'POST',
                 url: env.auth.route,
                 form: {
-                    id_token: token
-                }
+                    id_token: token,
+                },
             }, (error: any, response: request.RequestResponse, body: any) => {
                 // Verify if the requests was successful and append user
                 // information to our extended express request object

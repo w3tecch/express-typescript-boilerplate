@@ -31,7 +31,7 @@ export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSett
              * Authorization features
              */
             authorizationChecker: authorizationChecker(connection),
-            currentUserChecker: currentUserChecker(connection)
+            currentUserChecker: currentUserChecker(connection),
         });
 
         // Run application to listen on given port
