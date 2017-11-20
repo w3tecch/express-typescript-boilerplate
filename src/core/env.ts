@@ -19,9 +19,10 @@ export const env = {
         port: normalizePort(process.env.PORT || '3000'),
         banner: toBool(getOsEnv('APP_BANNER')),
         dirs: {
-            entities: [path.join(__dirname, '..', 'api/models/*{.js,.ts}')],
             migrations: [path.join(__dirname, '..', 'database/migrations/*.ts')],
             migrationsDir: path.join(__dirname, '..', 'database/migrations'),
+            entities: [path.join(__dirname, '..', 'api/**/*Model{.js,.ts}')],
+            subscribers: [ path.join(__dirname, '..', 'api/**/*Subscriber{.js,.ts}')],
             controllers: [path.join(__dirname, '..', 'api/**/*Controller{.js,.ts}')],
             middlewares: [path.join(__dirname, '..', 'api/**/*Middleware{.js,.ts}')],
             interceptors: [path.join(__dirname, '..', 'api/**/*Interceptor{.js,.ts}')],

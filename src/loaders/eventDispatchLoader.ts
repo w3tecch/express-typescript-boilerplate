@@ -1,6 +1,6 @@
-import * as path from 'path';
 import * as glob from 'glob';
 import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework';
+import { env } from '../core/env';
 
 
 /**
@@ -11,11 +11,13 @@ import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework';
  */
 export const eventDispatchLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
     if (settings) {
-        const filePath = path.join(__dirname, '..', 'api/**/*Subscriber{.js,.ts}');
-        glob(filePath, (err: any, files: string[]) => {
-            for (const file of files) {
-                require(file);
-            }
+        const patterns = env.app.dirs.subscribers;
+        patterns.forEach((pattern) => {
+            glob(pattern, (err: any, files: string[]) => {
+                for (const file of files) {
+                    require(file);
+                }
+            });
         });
     }
 };
