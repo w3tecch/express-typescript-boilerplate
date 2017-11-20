@@ -21,7 +21,7 @@ export const env = {
         dirs: {
             migrations: [path.join(__dirname, '..', 'database/migrations/*.ts')],
             migrationsDir: path.join(__dirname, '..', 'database/migrations'),
-            entities: [path.join(__dirname, '..', 'api/**/*Model{.js,.ts}')],
+            entities: [path.join(__dirname, '..', 'api/**/models/*{.js,.ts}')],
             subscribers: [ path.join(__dirname, '..', 'api/**/*Subscriber{.js,.ts}')],
             controllers: [path.join(__dirname, '..', 'api/**/*Controller{.js,.ts}')],
             middlewares: [path.join(__dirname, '..', 'api/**/*Middleware{.js,.ts}')],
