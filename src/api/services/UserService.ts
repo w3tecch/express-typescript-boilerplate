@@ -1,7 +1,9 @@
 import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
+import { EventDispatcher } from 'event-dispatch';
 import { UserRepository } from '../repositories/UserRepository';
 import { User } from '../models/User';
+import { events } from '../subscribers/events';
 
 
 @Service()
@@ -19,8 +21,11 @@ export class UserService {
         return this.userRepository.findOne({ id });
     }
 
-    public create(user: User): Promise<User> {
-        return this.userRepository.save(user);
+    public async create(user: User): Promise<User> {
+        const newUser = await this.userRepository.save(user);
+        const eventDispatcher = new EventDispatcher();
+        eventDispatcher.dispatch(events.user.created, newUser);
+        return newUser;
     }
 
     public update(id: string, user: User): Promise<User> {
