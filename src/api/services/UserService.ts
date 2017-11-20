@@ -1,9 +1,9 @@
 import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
-import { EventDispatcher } from 'event-dispatch';
 import { UserRepository } from '../repositories/UserRepository';
 import { User } from '../models/User';
 import { events } from '../subscribers/events';
+import { EventDispatcher, IEventDispatcher } from '../../decorators/EventDispatcher';
 import { Logger } from '../../decorators/Logger';
 import { ILogger } from '../../core/ILogger';
 
@@ -13,6 +13,7 @@ export class UserService {
 
     constructor(
         @OrmRepository() private userRepository: UserRepository,
+        @EventDispatcher() private eventDispatcher: IEventDispatcher,
         @Logger(__filename) private log: ILogger
     ) { }
 
@@ -29,8 +30,7 @@ export class UserService {
     public async create(user: User): Promise<User> {
         this.log.info('Create a new user => ', user.toString());
         const newUser = await this.userRepository.save(user);
-        const eventDispatcher = new EventDispatcher();
-        eventDispatcher.dispatch(events.user.created, newUser);
+        this.eventDispatcher.dispatch(events.user.created, newUser);
         return newUser;
     }
 
