@@ -7,7 +7,7 @@ import { Logger } from '../core/Logger';
 
 export function authorizationChecker(connection: Connection): (action: Action, roles: any[]) => Promise<boolean> | boolean {
     const log = new Logger(__filename);
-    const authService = Container.get(AuthService);
+    const authService = Container.get<AuthService>(AuthService);
 
     return async function innerAuthorizationChecker(action: Action, roles: string[]): Promise<boolean> {
         // here you can use request/response objects from action
