@@ -38,7 +38,7 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **Custom Validators** to validate your request even better and stricter. [custom-validation-classes](https://github.com/pleerock/class-validator#custom-validation-classes)
 - **API Documentation** thanks to [swagger](http://swagger.io/).
 - **API Monitoring** thanks to [express-status-monitor](https://github.com/RafalWilinski/express-status-monitor).
-- **Integrated Testing Tool** thanks to [Wallaby.js](https://wallabyjs.com/)
+- **Integrated Testing Tool** thanks to [Jest](https://facebook.github.io/jest)
 - **Basic Security Features** thanks to [Helmet](https://helmetjs.github.io/)
 
 ### Comming soon
