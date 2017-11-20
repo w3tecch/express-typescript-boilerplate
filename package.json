@@ -64,6 +64,7 @@
     "jsonfile": "^4.0.0",
     "lodash": "^4.17.4",
     "microframework": "^0.6.4",
+    "mock-express-request": "^0.2.0",
     "morgan": "^1.9.0",
     "mysql": "^2.15.0",
     "nodemon": "^1.12.1",
