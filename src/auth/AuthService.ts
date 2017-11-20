@@ -3,16 +3,20 @@ import * as express from 'express';
 import { Service, Require } from 'typedi';
 import { env } from '../core/env';
 import { ITokenInfo } from './ITokenInfo';
+import { Logger } from '../decorators/Logger';
+import { ILogger } from '../core/ILogger';
 
 
 @Service()
 export class AuthService {
 
-    // private httpRequest = request;
     private httpRequest: typeof request;
 
-    constructor( @Require('request') r: any) {
-        this.httpRequest = r; // the same if you do this.logger = require("logger")
+    constructor(
+        @Require('request') r: any,
+        @Logger(__filename) private log: ILogger
+    ) {
+        this.httpRequest = r;
     }
 
     public parseTokenFromRequest(req: express.Request): string | undefined {
@@ -20,10 +24,11 @@ export class AuthService {
 
         // Retrieve the token form the Authorization header
         if (authorization && authorization.split(' ')[0] === 'Bearer') {
+            this.log.info('Token provided by the client');
             return authorization.split(' ')[1];
         }
 
-        // No token was provided by the client
+        this.log.info('No  Token provided by the client');
         return;
     }
 

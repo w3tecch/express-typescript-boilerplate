@@ -1,8 +1,8 @@
 import { EventSubscriber, On } from 'event-dispatch';
 import { User } from '../models/User';
 import { events } from './events';
-import { Log } from '../../core/Log';
-const log = new Log(__filename);
+import { Logger } from '../../core/Logger';
+const log = new Logger(__filename);
 
 
 @EventSubscriber()

@@ -1,12 +1,12 @@
 import { Action } from 'routing-controllers';
 import { User } from '../api/models/User';
-import { Log } from '../core/Log';
+import { Logger } from '../core/Logger';
 import { ITokenInfo } from './ITokenInfo';
 import { Connection } from 'typeorm';
 
 
 export function currentUserChecker(connection: Connection): (action: Action) => Promise<User | undefined> {
-    const log = new Log(__filename);
+    const log = new Logger(__filename);
 
     return async function innerCurrentUserChecker(action: Action): Promise<User | undefined> {
         // here you can use request/response objects from action

@@ -8,8 +8,8 @@
  */
 import 'reflect-metadata';
 import { banner } from './core/banner';
-import { Log } from './core/Log';
-const log = new Log(__filename);
+import { Logger } from './core/Logger';
+const log = new Logger(__filename);
 
 import { bootstrapMicroframework } from 'microframework';
 import { expressLoader } from './loaders/expressLoader';

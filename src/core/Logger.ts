@@ -12,7 +12,7 @@ import * as winston from 'winston';
  * this in the start up process in the core/index.ts file.
  */
 
-export class Log {
+export class Logger {
 
     public static DEFAULT_SCOPE = 'app';
 
@@ -31,7 +31,7 @@ export class Log {
     private scope: string;
 
     constructor(scope?: string) {
-        this.scope = Log.parsePathToScope((scope) ? scope : Log.DEFAULT_SCOPE);
+        this.scope = Logger.parsePathToScope((scope) ? scope : Logger.DEFAULT_SCOPE);
     }
 
     public debug(message: string, ...args: any[]): void {

@@ -1,8 +1,8 @@
-import { Log } from './Log';
+import { Logger } from './Logger';
 import { env } from './env';
 
 
-export function banner(log: Log): void {
+export function banner(log: Logger): void {
     if (env.app.banner) {
         log.info(``);
         log.info(`Aloha, your app is ready on ${env.app.route}${env.app.routePrefix}`);

@@ -2,11 +2,11 @@ import { Action } from 'routing-controllers';
 import { Container } from 'typedi';
 import { Connection } from 'typeorm';
 import { AuthService } from './AuthService';
-import { Log } from '../core/Log';
+import { Logger } from '../core/Logger';
 
 
 export function authorizationChecker(connection: Connection): (action: Action, roles: any[]) => Promise<boolean> | boolean {
-    const log = new Log(__filename);
+    const log = new Logger(__filename);
     const authService = Container.get(AuthService);
 
     return async function innerAuthorizationChecker(action: Action, roles: string[]): Promise<boolean> {

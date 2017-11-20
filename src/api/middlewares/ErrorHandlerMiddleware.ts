@@ -1,8 +1,8 @@
 import * as express from 'express';
 import { Middleware, ExpressErrorMiddlewareInterface, HttpError } from 'routing-controllers';
 import { env } from '../../core/env';
-import { Log } from '../../core/Log';
-const log = new Log(__filename);
+import { Logger } from '../../core/Logger';
+const log = new Logger(__filename);
 
 
 @Middleware({ type: 'after' })
