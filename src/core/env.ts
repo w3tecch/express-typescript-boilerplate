@@ -8,6 +8,7 @@ dotenv.config();
  */
 export const env = {
     node: process.env.NODE_ENV || 'development',
+    isProduction: process.env.NODE_ENV === 'production',
     app: {
         name: getOsEnv('APP_NAME'),
         version: (pkg as any).version,
@@ -16,9 +17,6 @@ export const env = {
         routePrefix: getOsEnv('APP_ROUTE_PREFIX'),
         port: normalizePort(process.env.PORT || '3000'),
         banner: toBool(getOsEnv('APP_BANNER')),
-        error: {
-            printStackCode: toNumber(getOsEnv('APP_ERROR_PRINTSTACK_CODE')),
-        },
     },
     log: {
         level: getOsEnv('LOG_LEVEL'),
