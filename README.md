@@ -40,6 +40,7 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **API Monitoring** thanks to [express-status-monitor](https://github.com/RafalWilinski/express-status-monitor).
 - **Integrated Testing Tool** thanks to [Jest](https://facebook.github.io/jest)
 - **Basic Security Features** thanks to [Helmet](https://helmetjs.github.io/)
+- **Easy event dispatching** thanks to [event-dispatch](https://github.com/pleerock/event-dispatch)
 
 ### Comming soon
 
@@ -159,6 +160,7 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **src/api/models/**           | Bookshelf Models |
 | **src/api/repositories/**     | Repository / DB layer |
 | **src/api/services/**         | Service layer |
+| **src/api/subscribers/**      | Event subscribers |
 | **src/api/validators/**       | Custom validators, which can be used in the request classes |
 | **src/api/** swagger.json     | Swagger documentation |
 | **src/console/**              | Command line scripts |
