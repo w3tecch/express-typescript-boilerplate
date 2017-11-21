@@ -49,30 +49,30 @@ module.exports = {
             migrate: {
                 script: series(
                     'nps banner.migrate',
-                    'nps migrate.config',
+                    'nps db.config',
                     runFast('./node_modules/.bin/typeorm migrations:run'),
                 ),
             },
             revert: {
                 script: series(
                     'nps banner.revert',
-                    'nps migrate.config',
+                    'nps db.config',
                     runFast('./node_modules/.bin/typeorm migrations:revert'),
                 ),
             },
             seed: {
                 script: series(
                     'nps banner.seed',
-                    'nps migrate.config',
-                    runFast('./src/lib/seeds.ts'),
+                    'nps db.config',
+                    runFast('./src/lib/seeds/'),
                 ),
             },
             config: {
                 script: runFast('./src/lib/ormconfig.ts'),
             },
             drop: {
-                script: runFast('./node_modules/.bin/typeorm schema:drop')
-            }
+                script: runFast('./node_modules/.bin/typeorm schema:drop'),
+            },
         },
         /**
          * These run various kinds of tests. Default is unit.
