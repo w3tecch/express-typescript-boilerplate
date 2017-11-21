@@ -41,7 +41,7 @@ module.exports = {
             ),
         },
         /**
-         * Migrate the database with TypeORM
+         * Database scripts
          */
         db: {
             migrate: {
