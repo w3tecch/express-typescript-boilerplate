@@ -8,3 +8,5 @@ scripts:
   - npm start build
 notifications:
   email: false
+env:
+  - APP_ROUTE="http://localhost:3000"
