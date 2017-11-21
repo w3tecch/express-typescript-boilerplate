@@ -4,7 +4,7 @@
   "description": "A delightful way to building a RESTful API with NodeJs & TypeScript",
   "main": "src/app.ts",
   "engines": {
-    "node": "8.2.1"
+    "node": ">= 6.9.1"
   },
   "scripts": {
     "start": "node dist/app.js",
@@ -85,7 +85,7 @@
     "helmet": "^3.9.0",
     "inquirer": "^3.3.0",
     "inversify": "^4.5.0",
-    "inversify-express-utils": "^4.1.0",
+    "inversify-express-utils": "^4.2.2",
     "jsonwebtoken": "^8.1.0",
     "knex": "^0.13.0",
     "lodash": "^4.17.4",
