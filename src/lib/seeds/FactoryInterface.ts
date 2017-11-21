@@ -9,7 +9,7 @@ export interface FactoryInterface {
     /**
      * Returns an EntityFactoryInterface
      */
-    get<Entity>(entityClass: ObjectType<Entity>): EntityFactoryInterface<Entity>;
+    get<Entity>(entityClass: ObjectType<Entity>, args: any[]): EntityFactoryInterface<Entity>;
     /**
      * Define an entity faker
      */
