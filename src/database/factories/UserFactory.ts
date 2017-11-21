@@ -2,21 +2,21 @@ import * as Faker from 'faker';
 import { Factory } from '../../../lib/seeds';
 import { User } from '../../../src/api/models/User';
 
-
 const factory = Factory.getInstance();
+
 
 /**
  * User factory
  */
 factory.define(User, (faker: typeof Faker) => {
     const gender = faker.random.number(1);
-    const fn = faker.name.firstName(gender);
-    const ln = faker.name.lastName(gender);
-    const e = faker.internet.email(fn, ln);
+    const firstName = faker.name.firstName(gender);
+    const lastName = faker.name.lastName(gender);
+    const email = faker.internet.email(firstName, lastName);
 
     const user = new User();
-    user.firstName = fn;
-    user.lastName = ln;
-    user.email = e;
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.email = email;
     return user;
 });
