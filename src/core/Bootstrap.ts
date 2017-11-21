@@ -40,7 +40,7 @@ export class Bootstrap {
 
     public setupInversifyExpressServer(app: express.Application, ioc: IoC): InversifyExpressServer {
         const inversifyExpressServer = new InversifyExpressServer(ioc.container, undefined, {
-            rootPath: process.env.APP_URL_PREFIX
+            rootPath: process.env.APP_URL_PREFIX as string
         }, app);
         // @ts-ignore: False type definitions from express
         inversifyExpressServer.setConfig((a) => a.use(extendExpressResponse));
