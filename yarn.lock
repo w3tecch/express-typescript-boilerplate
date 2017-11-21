@@ -4324,8 +4324,8 @@ supports-color@^4.0.0:
     has-flag "^2.0.0"
 
 swagger-ui-express@^2.0.10:
-  version "2.0.10"
-  resolved "https://registry.yarnpkg.com/swagger-ui-express/-/swagger-ui-express-2.0.10.tgz#a7beb3e44ad0abd3c9915afc6b41cb87a91aa3e7"
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/swagger-ui-express/-/swagger-ui-express-2.0.11.tgz#db331cf888640a93b7a5b06111b02907a4be9c35"
 
 symbol-tree@^3.2.1:
   version "3.2.2"
