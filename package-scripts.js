@@ -25,7 +25,9 @@ module.exports = {
          */
         setup: {
             script: series(
-                'yarn install'
+                'yarn install',
+                'nps db.migrate',
+                'nps db.seed'
             ),
         },
         /**
