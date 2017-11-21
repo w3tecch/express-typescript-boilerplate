@@ -247,7 +247,7 @@ How does it work? Just, create a factory for your entities and a seeds script.
 
 ### 1. Create a factory for your entity
 
-For all the entities we want to seed we need to define a factory. To do so we give you awesome the [faker](https://github.com/marak/Faker.js/) library. The create a new "fake" entity and return it. Those file should be in the `src/database/factories` folder and suffixed with `Factory`. Example `src/database/factories/UserFactory.ts`.
+For all the entities we want to seed, we need to define a factory. To do so we give you the awesome [faker](https://github.com/marak/Faker.js/) library as a parameter into your factory. Then create your "fake" entity as you would normally do and return it. Those factory files should be in the `src/database/factories` folder and suffixed with `Factory`. Example `src/database/factories/UserFactory.ts`.
 
 ```typescript
 factory.define(User, (faker: typeof Faker) => {
@@ -293,25 +293,18 @@ export class CreateUsers implements SeedsInterface {
 }
 ```
 
-Another example for nested entities. For that we use the each function to so.
+Here an example with nested factories.
 
 ```typescript
 ...
-await factory.get(Tournament, 2)
-    .each(async (tournament: Tournament) => {
+await factory.get(User)
+    .each(async (user: User) => {
 
-        const teams: Team[] = await factory.get(Team)
-            .each(async (team: Team) => {
+        const pets: Pet[] = await factory.get(Pet)
+            .create(2);
 
-                const users: User[] = await factory.get(User).create(2);
-                const userIds = users.map((u: User) => u.Id);
-                await team.users().attach(userIds);
-
-            })
-            .create(getRandomNumber(tournament.MaxSize));
-
-        const teamIds = teams.map((t: Team) => t.Id);
-        await tournament.teams().attach(teamIds);
+        const petIds = pets.map((pet: Pet) => pet.Id);
+        await user.pets().attach(petIds);
 
     })
     .create(5);

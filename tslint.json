@@ -6,7 +6,7 @@
             160
         ],
         "no-unnecessary-initializer": false,
-        "no-var-requires": false,
+        "no-var-requires": true,
         "no-null-keyword": true,
         "no-consecutive-blank-lines": false,
         "quotemark": [

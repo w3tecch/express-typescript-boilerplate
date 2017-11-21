@@ -10,14 +10,16 @@ const logging = args.indexOf('--logging') >= 0 || args.indexOf('-L') >= 0 || fal
 const configParam = '--config';
 const hasConfigPath = args.indexOf(configParam) >= 0 || false;
 const indexOfConfigPath = args.indexOf(configParam) + 1;
-const ormconfig = (hasConfigPath)
-    ? require(`${args[indexOfConfigPath]}`)
-    : require(`${runDir}/ormconfig.json`);
 
 /**
  * Returns a TypeORM database connection for our entity-manager
  */
 export const getConnection = async (): Promise<Connection | undefined> => {
+
+    const ormconfig = (hasConfigPath)
+        ? require(`${args[indexOfConfigPath]}`)
+        : require(`${runDir}/ormconfig.json`);
+
     try {
         const connection = await createConnection({
             type: (ormconfig as any).type as any,
