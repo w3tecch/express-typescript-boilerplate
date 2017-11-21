@@ -27,7 +27,7 @@ export class AuthService {
             return authorization.split(' ')[1];
         }
 
-        this.log.info('No  Token provided by the client');
+        this.log.info('No Token provided by the client');
         return;
     }
 
