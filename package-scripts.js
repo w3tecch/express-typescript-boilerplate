@@ -186,7 +186,7 @@ function banner(name) {
         silent: true,
         logLevel: 'error',
         description: `Shows ${name} banners to the console`,
-        script: runFast(`./src/console/lib/banner.ts ${name}`),
+        script: runFast(`./lib/banner.ts ${name}`),
     };
 }
 
