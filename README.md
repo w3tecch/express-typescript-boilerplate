@@ -287,6 +287,20 @@ export class CreateUsers implements SeedsInterface {
     public async seed(factory: FactoryInterface): Promise<any> {
         await factory
             .get(User)
+            .create(10);
+    }
+
+}
+```
+
+With the second parameter in the `.get(<Entity>, <args>)` you are able to create different variations of entities.
+
+```typescript
+export class CreateUsers implements SeedsInterface {
+
+    public async seed(factory: FactoryInterface): Promise<any> {
+        await factory
+            .get(User, 'admin')
             .create(1);
     }
 
