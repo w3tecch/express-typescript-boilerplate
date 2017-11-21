@@ -43,10 +43,10 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **Basic Security Features** thanks to [Helmet](https://helmetjs.github.io/).
 - **Easy event dispatching** thanks to [event-dispatch](https://github.com/pleerock/event-dispatch).
 - **Fast Database Building** with simple migration from [TypeOrm](https://github.com/typeorm/typeorm).
+- **Easy Data Seeding** with our own factories.
 
 ### Comming soon
 
-- **Easy Data Seeding** with our own factories.
 - **Custom Commands** are also available in our setup and really easy to use or even extend.
 - **Scaffolding Commands** will speed up your development tremendously as you should focus on business code and not scaffolding.
 
@@ -59,6 +59,7 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - [Project Structure](#project-structure)
 - [Logging](#logging)
 - [Event Dispatching](#event-dispatching)
+- [Seeding](#seeding)
 - [Further Documentations](#further-documentation)
 - [Related Projects](#related-projects)
 - [License](#license)
@@ -139,11 +140,15 @@ All script are defined in the package.json file, but the most important ones are
 - Run `npm start build` to generated all JavaScript files from the TypeScript sources (There is also a vscode task for this called `build`).
 - To start the builded app located in `dist` use `npm start`.
 
-### Database
+### Database Migration
 
 - Run `./node_modules/.bin/typeorm create -n <migration-file-name>` to create a new migration file.
 - To migrate your database run `npm start migrate`.
 - To revert your latest migration run `npm start migrate.revert`.
+
+### Database Seeding
+
+- Run `nps db.seed` to seed your seeds into the database.
 
 ## Debugger in VSCode
 
@@ -177,14 +182,20 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **src/api/subscribers/**      | Event subscribers |
 | **src/api/validators/**       | Custom validators, which can be used in the request classes |
 | **src/api/** swagger.json     | Swagger documentation |
-| **src/console/**              | Command line scripts |
+| **src/auth/**                 | Authentication checkers and services |
 | **src/core/**                 | The core features like logger and env variables |
+| **src/database/factories**    | Factory the generate fake entities |
+| **src/database/migrations**   | Database migration scripts |
+| **src/database/seeds**        | Seeds to create some data in the database |
+| **src/decoratros/**           | Custom decorators like @Logger & @EventDispatch |
+| **src/loaders/**              | Loader is a place where you can configure your app |
 | **src/public/**               | Static assets (fonts, css, js, img). |
 | **src/types/** *.d.ts         | Custom type definitions and files that aren't on DefinitelyTyped |
 | **test**                      | Tests |
 | **test/e2e/** *.test.ts       | End-2-End tests (like e2e) |
 | **test/unit/** *.test.ts      | Unit tests |
 | .env.example                  | Environment configurations |
+| ormconfig.json                | TypeORM configuration for the database. Used by seeds and the migration. (generated file) |
 
 ## Logging
 
@@ -225,6 +236,92 @@ export class UserService {
         this.eventDispatcher.dispatch(events.user.created, newUser);
         ...
     }
+```
+
+## Seeding
+
+Isn't exhausting to create some sample data into your fresh migrated database, well this time is over!
+How does it work? Just, create a factory for your entities and a seeds script.
+
+### 1. Create a factory for your entity
+
+For all the entities we want to seed we need to define a factory. To do so we give you awesome the [faker](https://github.com/marak/Faker.js/) library. The create a new "fake" entity and return it. Those file should be in the `src/database/factories` folder and suffixed with `Factory`. Example `src/database/factories/UserFactory.ts`.
+
+```typescript
+factory.define(User, (faker: typeof Faker) => {
+    const gender = faker.random.number(1);
+    const firstName = faker.name.firstName(gender);
+    const lastName = faker.name.lastName(gender);
+    const email = faker.internet.email(firstName, lastName);
+
+    const user = new User();
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.email = email;
+    return user;
+});
+```
+
+This is a nested example for a factory to get the foreign key of the other entity.
+
+```typescript
+factory.define(Pet, (faker: typeof Faker, args: any[]) => {
+    const type = args[0];
+    return {
+        name: faker.name.firstName(),
+        type: type || 'dog',
+        userId: factory.get(User).returning('id')
+    };
+});
+```
+
+### 2. Create a seed file
+
+The seeds files define how much and how the data are connected with each other. The files will be executed alphabetically.
+
+```typescript
+export class CreateUsers implements SeedsInterface {
+
+    public async seed(factory: FactoryInterface): Promise<any> {
+        await factory
+            .get(User)
+            .create(1);
+    }
+
+}
+```
+
+Another example for nested entities. For that we use the each function to so.
+
+```typescript
+...
+await factory.get(Tournament, 2)
+    .each(async (tournament: Tournament) => {
+
+        const teams: Team[] = await factory.get(Team)
+            .each(async (team: Team) => {
+
+                const users: User[] = await factory.get(User).create(2);
+                const userIds = users.map((u: User) => u.Id);
+                await team.users().attach(userIds);
+
+            })
+            .create(getRandomNumber(tournament.MaxSize));
+
+        const teamIds = teams.map((t: Team) => t.Id);
+        await tournament.teams().attach(teamIds);
+
+    })
+    .create(5);
+...
+```
+
+### 3. Run the seeder
+
+The last step is the easiest, just hit the following command in your terminal, but be sure you are in the projects root folder.
+
+```bash
+nps db.seed
 ```
 
 ## Further Documentations
