@@ -18,7 +18,7 @@ module.exports = {
             script: series(
                 'nps banner.serve',
                 '\"./node_modules/.bin/nodemon\" --watch src --watch .env',
-            )
+            ),
         },
         /**
          * Setup's the development environment and the database
@@ -26,7 +26,7 @@ module.exports = {
         setup: {
             script: series(
                 'yarn install'
-            )
+            ),
         },
         /**
          * Builds the app into the dist directory
@@ -38,25 +38,32 @@ module.exports = {
                 'nps clean.dist',
                 'nps transpile',
                 'nps copy',
-            )
+            ),
         },
         /**
          * Migrate the database with TypeORM
          */
-        migrate: {
-            default: {
+        db: {
+            migrate: {
                 script: series(
                     'nps banner.migrate',
                     'nps migrate.config',
                     runFast('./node_modules/.bin/typeorm migrations:run'),
-                )
+                ),
             },
             revert: {
                 script: series(
                     'nps banner.revert',
                     'nps migrate.config',
                     runFast('./node_modules/.bin/typeorm migrations:revert'),
-                )
+                ),
+            },
+            seed: {
+                script: series(
+                    'nps banner.seed',
+                    'nps migrate.config',
+                    runFast('./lib/seeds.ts'),
+                ),
             },
             config: {
                 script: runFast('./lib/ormconfig.ts'),
@@ -73,7 +80,7 @@ module.exports = {
                         'nps banner.test',
                         'nps test.unit.pretest',
                         'nps test.unit.run',
-                    )
+                    ),
                 },
                 pretest: {
                     script: './node_modules/.bin/tslint -c ./tslint.json -t stylish "./test/unit/**/*.ts"'
@@ -95,7 +102,7 @@ module.exports = {
                         'nps test.e2e.pretest',
                         runInNewWindow(series('nps build', 'nps start')),
                         'nps test.e2e.run',
-                    )
+                    ),
                 },
                 pretest: {
                     script: './node_modules/.bin/tslint -c ./tslint.json -t stylish "./test/e2e/**/*.ts"'
@@ -129,7 +136,7 @@ module.exports = {
                 script: series(
                     `nps banner.clean`,
                     `nps clean.dist`,
-                )
+                ),
             },
             dist: {
                 script: `./node_modules/.bin/trash './dist'`
@@ -143,19 +150,19 @@ module.exports = {
                 script: series(
                     `nps copy.swagger`,
                     `nps copy.public`,
-                )
+                ),
             },
             swagger: {
                 script: copy(
                     './src/api/swagger.json',
                     './dist',
-                )
+                ),
             },
             public: {
                 script: copy(
                     './src/public/*',
                     './dist',
-                )
+                ),
             }
         },
         /**
@@ -166,10 +173,11 @@ module.exports = {
             serve: banner('serve'),
             test: banner('test'),
             migrate: banner('migrate'),
+            seed: banner('seed'),
             revert: banner('revert'),
-            clean: banner('clean')
-        }
-    }
+            clean: banner('clean'),
+        },
+    },
 };
 
 function banner(name) {
@@ -178,18 +186,18 @@ function banner(name) {
         silent: true,
         logLevel: 'error',
         description: `Shows ${name} banners to the console`,
-        script: runFast(`./src/console/lib/banner.ts ${name}`)
-    }
+        script: runFast(`./src/console/lib/banner.ts ${name}`),
+    };
 }
 
 function copy(source, target) {
-    return `./node_modules/.bin/copyup ${source} ${target}`
+    return `./node_modules/.bin/copyup ${source} ${target}`;
 }
 
 function run(path) {
-    return `./node_modules/.bin/ts-node ${path}`
+    return `./node_modules/.bin/ts-node ${path}`;
 }
 
 function runFast(path) {
-    return run(`-F ${path}`)
+    return run(`-F ${path}`);
 }
