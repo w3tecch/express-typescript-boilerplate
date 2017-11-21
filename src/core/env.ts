@@ -1,8 +1,11 @@
 import * as path from 'path';
-import * as pkg from '../../package.json';
 import * as dotenv from 'dotenv';
-dotenv.config();
+import * as pkg from '../../package.json';
 
+/**
+ * Load .env file or for tests the .env.test file.
+ */
+dotenv.config({ path: path.join(process.cwd(), `.env${((process.env.NODE_ENV === 'test') ? '.test' : '')}`) });
 
 /**
  * Environment variables
@@ -22,7 +25,7 @@ export const env = {
             migrations: [path.join(__dirname, '..', 'database/migrations/*.ts')],
             migrationsDir: path.join(__dirname, '..', 'database/migrations'),
             entities: [path.join(__dirname, '..', 'api/**/models/*{.js,.ts}')],
-            subscribers: [ path.join(__dirname, '..', 'api/**/*Subscriber{.js,.ts}')],
+            subscribers: [path.join(__dirname, '..', 'api/**/*Subscriber{.js,.ts}')],
             controllers: [path.join(__dirname, '..', 'api/**/*Controller{.js,.ts}')],
             middlewares: [path.join(__dirname, '..', 'api/**/*Middleware{.js,.ts}')],
             interceptors: [path.join(__dirname, '..', 'api/**/*Interceptor{.js,.ts}')],
