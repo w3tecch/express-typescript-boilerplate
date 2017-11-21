@@ -1,7 +1,7 @@
 import { Action } from 'routing-controllers';
 import { User } from '../api/models/User';
 import { Logger } from '../core/Logger';
-import { ITokenInfo } from './ITokenInfo';
+import { TokenInfoInterface } from './TokenInfoInterface';
 import { Connection } from 'typeorm';
 
 
@@ -12,7 +12,7 @@ export function currentUserChecker(connection: Connection): (action: Action) => 
         // here you can use request/response objects from action
         // you need to provide a user object that will be injected in controller actions
         // demo code:
-        const tokeninfo: ITokenInfo = action.request.tokeninfo;
+        const tokeninfo: TokenInfoInterface = action.request.tokeninfo;
         const em = connection.createEntityManager();
         const user = await em.findOne<User>(User, {
             where: {

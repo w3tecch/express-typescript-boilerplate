@@ -2,8 +2,8 @@ import * as request from 'request';
 import * as express from 'express';
 import { Service, Require } from 'typedi';
 import { env } from '../core/env';
-import { ITokenInfo } from './ITokenInfo';
-import { Logger, ILogger } from '../decorators/Logger';
+import { TokenInfoInterface } from './TokenInfoInterface';
+import { Logger, LoggerInterface } from '../decorators/Logger';
 
 
 @Service()
@@ -13,7 +13,7 @@ export class AuthService {
 
     constructor(
         @Require('request') r: any,
-        @Logger(__filename) private log: ILogger
+        @Logger(__filename) private log: LoggerInterface
     ) {
         this.httpRequest = r;
     }
@@ -31,7 +31,7 @@ export class AuthService {
         return;
     }
 
-    public getTokenInfo(token: string): Promise<ITokenInfo> {
+    public getTokenInfo(token: string): Promise<TokenInfoInterface> {
         return new Promise((resolve, reject) => {
             this.httpRequest({
                 method: 'POST',

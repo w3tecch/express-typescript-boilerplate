@@ -3,7 +3,7 @@ import * as request from 'request';
 import * as MockExpressRequest from 'mock-express-request';
 import * as nock from 'nock';
 import { AuthService } from './../../../src/auth/AuthService';
-import { ILogger } from './../../../src/core/ILogger';
+import { LoggerInterface } from './../../../src/core/LoggerInterface';
 import { env } from './../../../src/core/env';
 
 
@@ -11,7 +11,7 @@ describe('AuthService', () => {
 
     let authService: AuthService;
     beforeEach(() => {
-        const log: ILogger = {
+        const log: LoggerInterface = {
             debug: () => void 0,
             info: () => void 0,
             warn: () => void 0,

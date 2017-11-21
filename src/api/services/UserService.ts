@@ -3,8 +3,8 @@ import { OrmRepository } from 'typeorm-typedi-extensions';
 import { UserRepository } from '../repositories/UserRepository';
 import { User } from '../models/User';
 import { events } from '../subscribers/events';
-import { EventDispatcher, IEventDispatcher } from '../../decorators/EventDispatcher';
-import { Logger, ILogger } from '../../decorators/Logger';
+import { EventDispatcher, EventDispatcherInterface } from '../../decorators/EventDispatcher';
+import { Logger, LoggerInterface } from '../../decorators/Logger';
 
 
 @Service()
@@ -12,8 +12,8 @@ export class UserService {
 
     constructor(
         @OrmRepository() private userRepository: UserRepository,
-        @EventDispatcher() private eventDispatcher: IEventDispatcher,
-        @Logger(__filename) private log: ILogger
+        @EventDispatcher() private eventDispatcher: EventDispatcherInterface,
+        @Logger(__filename) private log: LoggerInterface
     ) { }
 
     public find(): Promise<User[]> {

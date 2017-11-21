@@ -9,4 +9,4 @@ export function EventDispatcher(): any {
     };
 }
 
-export { EventDispatcher as IEventDispatcher } from 'event-dispatch';
+export { EventDispatcher as EventDispatcherInterface } from 'event-dispatch';

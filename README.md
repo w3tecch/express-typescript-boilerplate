@@ -32,7 +32,7 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **Beautiful Code** thanks to the awesome annotations of the libraries from [pleerock](https://github.com/pleerock).
 - **Easy API Testing** with included e2e testing.
 - **Dependency Injection** done with the nice framework from [TypeDI](https://github.com/pleerock/typedi).
-- **Simplified Database Query** with the ORM [TypeOrm](https://github.com/typeorm/typeorm).
+- **Simplified Database Query** with the ORM [TypeORM](https://github.com/typeorm/typeorm).
 - **Clear Structure** with different layers such as controllers, services, repositories, models, middlewares...
 - **Easy Exception Handling** thanks to [routing-controllers](https://github.com/pleerock/routing-controllers).
 - **Smart Validation** thanks to [class-validator](https://github.com/pleerock/class-validator) with some nice annotations.
@@ -42,7 +42,7 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **Integrated Testing Tool** thanks to [Jest](https://facebook.github.io/jest).
 - **Basic Security Features** thanks to [Helmet](https://helmetjs.github.io/).
 - **Easy event dispatching** thanks to [event-dispatch](https://github.com/pleerock/event-dispatch).
-- **Fast Database Building** with simple migration from [TypeOrm](https://github.com/typeorm/typeorm).
+- **Fast Database Building** with simple migration from [TypeORM](https://github.com/typeorm/typeorm).
 - **Easy Data Seeding** with our own factories.
 
 ### Comming soon
@@ -148,7 +148,7 @@ All script are defined in the package.json file, but the most important ones are
 
 ### Database Seeding
 
-- Run `nps db.seed` to seed your seeds into the database.
+- Run `npm start db.seed` to seed your seeds into the database.
 
 ## Debugger in VSCode
 
@@ -159,11 +159,12 @@ Just set a breakpoint and hit `F5` in your Visual Studio Code.
 The route prefix is `/api` by default, but you can change this in the .env file.
 The swagger and the monitor route can be altered in the `.env` file.
 
-| Route        | Description |
-| ------------ | ----------- |
-| **/api**     | Shows us the name, description and the version of the package.json |
-| **/swagger** | This is the Swagger UI with our API documentation |
-| **/monitor** | Shows a small monitor page for the server |
+| Route          | Description |
+| -------------- | ----------- |
+| **/api**       | Shows us the name, description and the version of the package.json |
+| **/swagger**   | This is the Swagger UI with our API documentation |
+| **/monitor**   | Shows a small monitor page for the server |
+| **/api/users** | Example entity endpoint |
 
 ## Project Structure
 
@@ -187,7 +188,7 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **src/database/factories**    | Factory the generate fake entities |
 | **src/database/migrations**   | Database migration scripts |
 | **src/database/seeds**        | Seeds to create some data in the database |
-| **src/decoratros/**           | Custom decorators like @Logger & @EventDispatch |
+| **src/decorators/**           | Custom decorators like @Logger & @EventDispatch |
 | **src/loaders/**              | Loader is a place where you can configure your app |
 | **src/public/**               | Static assets (fonts, css, js, img). |
 | **src/types/** *.d.ts         | Custom type definitions and files that aren't on DefinitelyTyped |
@@ -203,13 +204,13 @@ Our logger is [winston](https://github.com/winstonjs/winston). To log http reque
 We created a simple annotation to inject the logger in your service (see example below).
 
 ```typescript
-import { Logger, ILogger } from '../../decorators/Logger';
+import { Logger, LoggerInterface } from '../../decorators/Logger';
 
 @Service()
 export class UserService {
 
     constructor(
-        @Logger(__filename) private log: ILogger
+        @Logger(__filename) private log: LoggerInterface
     ) { }
 
     ...
@@ -222,13 +223,13 @@ We created a simple annotation to inject the EventDispatcher in your service (se
 
 ```typescript
 import { events } from '../subscribers/events';
-import { EventDispatcher, IEventDispatcher } from '../../decorators/EventDispatcher';
+import { EventDispatcher, EventDispatcherInterface } from '../../decorators/EventDispatcher';
 
 @Service()
 export class UserService {
 
     constructor(
-        @EventDispatcher() private eventDispatcher: IEventDispatcher
+        @EventDispatcher() private eventDispatcher: EventDispatcherInterface
     ) { }
 
     public async create(user: User): Promise<User> {
@@ -321,7 +322,7 @@ await factory.get(Tournament, 2)
 The last step is the easiest, just hit the following command in your terminal, but be sure you are in the projects root folder.
 
 ```bash
-nps db.seed
+npm start db.seed
 ```
 
 ## Further Documentations

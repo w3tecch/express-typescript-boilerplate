@@ -9,4 +9,4 @@ export function Logger(scope: string): any {
     };
 }
 
-export { ILogger } from '../core/ILogger';
+export { LoggerInterface } from '../core/LoggerInterface';
