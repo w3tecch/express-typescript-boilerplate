@@ -7,8 +7,7 @@ import { LogMock } from '../lib/LogMock';
 describe('ErrorHandlerMiddleware', () => {
 
     test('Should not print stack out in production', () => {
-        const middleware = new ErrorHandlerMiddleware();
-        middleware.log = new LogMock();
+        const middleware = new ErrorHandlerMiddleware(new LogMock());
         middleware.isProduction = true;
 
         const res = new MockExpressResponse();
@@ -21,8 +20,7 @@ describe('ErrorHandlerMiddleware', () => {
     });
 
     test('Should print stack out in production', () => {
-        const middleware = new ErrorHandlerMiddleware();
-        middleware.log = new LogMock();
+        const middleware = new ErrorHandlerMiddleware(new LogMock());
         middleware.isProduction = false;
 
         const res = new MockExpressResponse();
