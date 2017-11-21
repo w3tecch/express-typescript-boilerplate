@@ -143,8 +143,9 @@ All script are defined in the package.json file, but the most important ones are
 ### Database Migration
 
 - Run `./node_modules/.bin/typeorm create -n <migration-file-name>` to create a new migration file.
-- To migrate your database run `npm start migrate`.
-- To revert your latest migration run `npm start migrate.revert`.
+- To migrate your database run `npm start db.migrate`.
+- To revert your latest migration run `npm start db.revert`.
+- Drops the complete database schema `npm start db.drop`.
 
 ### Database Seeding
 

@@ -3,7 +3,7 @@ dotenv.config();
 
 import * as path from 'path';
 import * as jsonfile from 'jsonfile';
-import { env } from '../src/core/env';
+import { env } from '../core/env';
 
 
 const content = {
@@ -20,7 +20,7 @@ const content = {
     },
 };
 
-const filePath = path.join(__dirname, '../', 'ormconfig.json');
+const filePath = path.join(process.cwd(), 'ormconfig.json');
 jsonfile.writeFile(filePath, content, { spaces: 2 }, (err) => {
     if (err === null) {
         console.log('Successfully generated ormconfig.json form the .env file');

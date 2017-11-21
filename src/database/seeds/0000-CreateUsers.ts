@@ -1,4 +1,4 @@
-import { SeedsInterface, FactoryInterface } from '../../../lib/seeds';
+import { SeedsInterface, FactoryInterface } from '../../lib/seeds';
 import { User } from '../../../src/api/models/User';
 
 

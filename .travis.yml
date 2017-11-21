@@ -1,10 +1,10 @@
 language: node_js
 node_js:
-  - "7.7.3"
+  - "8.2.1"
 install:
   - yarn install
 scripts:
-  - nps test
-  - nps build
+  - npm test
+  - npm start build
 notifications:
   email: false
