@@ -9,9 +9,9 @@ export interface FactoryInterface {
     /**
      * Returns an EntityFactoryInterface
      */
-    get<Entity>(entityClass: ObjectType<Entity>, args: any[]): EntityFactoryInterface<Entity>;
+    get<Entity>(entityClass: ObjectType<Entity>, value?: any): EntityFactoryInterface<Entity>;
     /**
      * Define an entity faker
      */
-    define<Entity>(entityClass: ObjectType<Entity>, fakerFunction: (faker: typeof Faker, args: any[]) => Entity): void;
+    define<Entity>(entityClass: ObjectType<Entity>, fakerFunction: (faker: typeof Faker, value?: any) => Entity): void;
 }
