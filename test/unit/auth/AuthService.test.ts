@@ -2,21 +2,17 @@ import { Request } from 'express';
 import * as request from 'request';
 import * as MockExpressRequest from 'mock-express-request';
 import * as nock from 'nock';
+import { LogMock } from './../lib/LogMock';
 import { AuthService } from './../../../src/auth/AuthService';
-import { LoggerInterface } from './../../../src/core/LoggerInterface';
 import { env } from './../../../src/core/env';
 
 
 describe('AuthService', () => {
 
     let authService: AuthService;
+    let log: LogMock;
     beforeEach(() => {
-        const log: LoggerInterface = {
-            debug: () => void 0,
-            info: () => void 0,
-            warn: () => void 0,
-            error: () => void 0,
-        };
+        log = new LogMock();
         authService = new AuthService(request, log);
     });
 
@@ -39,12 +35,14 @@ describe('AuthService', () => {
             });
             const token = authService.parseTokenFromRequest(req);
             expect(token).toBeUndefined();
+            expect(log.infoMock).toBeCalledWith('info', 'No Token provided by the client', []);
         });
 
         test('Should return undefined if there is no "Authorization" header', () => {
             const req: Request = new MockExpressRequest();
             const token = authService.parseTokenFromRequest(req);
             expect(token).toBeUndefined();
+            expect(log.infoMock).toBeCalledWith('info', 'No Token provided by the client', []);
         });
     });
 
