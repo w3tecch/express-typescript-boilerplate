@@ -36,5 +36,11 @@
     },
     "include": [
         "src/**/*"
+    ],
+    "exclude": [
+        "lib",
+        "node_modules",
+        "**/*.test.ts",
+        "**/*.spec.ts"
     ]
 }

@@ -62,11 +62,11 @@ module.exports = {
                 script: series(
                     'nps banner.seed',
                     'nps migrate.config',
-                    runFast('./lib/seeds.ts'),
+                    runFast('./src/lib/seeds.ts'),
                 ),
             },
             config: {
-                script: runFast('./lib/ormconfig.ts'),
+                script: runFast('./src/lib/ormconfig.ts'),
             }
         },
         /**
@@ -186,7 +186,7 @@ function banner(name) {
         silent: true,
         logLevel: 'error',
         description: `Shows ${name} banners to the console`,
-        script: runFast(`./lib/banner.ts ${name}`),
+        script: runFast(`./src/lib/banner.ts ${name}`),
     };
 }
 
