@@ -69,6 +69,9 @@ module.exports = {
             },
             config: {
                 script: runFast('./src/lib/ormconfig.ts'),
+            },
+            drop: {
+                script: runFast('./node_modules/.bin/typeorm schema:drop')
             }
         },
         /**
