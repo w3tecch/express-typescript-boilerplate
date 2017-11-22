@@ -68,7 +68,7 @@ Create a new database with the name you have in your `.env`-file.
 
 Then setup your application environment.
 ```
-nps setup
+npm start setup
 ```
 
 > This installs all dependencies with yarn. After that it migrates the database and seeds some test data into it. So after that your development environment is ready to use.
@@ -76,7 +76,7 @@ nps setup
 ### Step 3: Serve your App
 Go to the project dir and start your app with this npm script.
 ```
-nps serve
+npm start serve
 ```
 
 > This starts a local server using `nodemon`, which will watch for any file changes and will restart the sever according to these changes.
@@ -149,26 +149,26 @@ All script are defined in the package.json file, but the most important ones are
 * Install all dependencies with `yarn install`
 
 ### Linting
-* Run code quality analysis using `nps lint`. This runs tslint.
+* Run code quality analysis using `npm start lint`. This runs tslint.
 * There is also a vscode task for this called `lint`.
 
 ### Tests
-* Run the unit tests using `nps test` (There is also a vscode task for this called `test`).
-* Run the e2e tests using `nps test:e2e` and don't forget to start your application and your [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server).
+* Run the unit tests using `npm start test` (There is also a vscode task for this called `test`).
+* Run the e2e tests using `npm start test:e2e` and don't forget to start your application and your [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server).
 
 ### Running in dev mode
-* Run `nps serve` to start nodemon with ts-node, to serve the app.
+* Run `npm start serve` to start nodemon with ts-node, to serve the app.
 * The server address will be displayed to you as `http://0.0.0.0:3000`
 
 ### Building the project and run it
-* Run `nps build` to generated all JavaScript files from the TypeScript sources (There is also a vscode task for this called `build`).
+* Run `npm start build` to generated all JavaScript files from the TypeScript sources (There is also a vscode task for this called `build`).
 * To start the builded app located in `dist` use `npm start`.
 
 ### Database
-* Run `nps db:migrate` to migrate schema changes to the database
-* Run `nps db:migrate:rollback` to rollback one migration
-* Run `nps db:seed` to seed sample data into the database
-* Run `nps db:reset` to rollback all migrations and migrate any migration again
+* Run `npm start db:migrate` to migrate schema changes to the database
+* Run `npm start db:migrate:rollback` to rollback one migration
+* Run `npm start db:seed` to seed sample data into the database
+* Run `npm start db:reset` to rollback all migrations and migrate any migration again
 
 ### Console
 * To run your own created command enter `npm run console <command-name>`.
