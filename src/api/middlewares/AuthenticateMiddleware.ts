@@ -1,19 +1,17 @@
-import { inject, named } from 'inversify';
+import {inject, named} from 'inversify';
 import * as Request from 'request';
-import { Logger as LoggerType } from '../../core/Logger';
-import { Types, Core } from '../../constants';
-import { events } from '../../core/api/events';
-import { UserAuthenticatedListener } from '../listeners/user/UserAuthenticatedListener';
+import {Logger as LoggerType} from '../../core/Logger';
+import {Types, Core} from '../../constants';
+import {events} from '../../core/api/events';
+import {UserAuthenticatedListener} from '../listeners/user/UserAuthenticatedListener';
 
 
 export class AuthenticateMiddleware implements interfaces.Middleware {
 
     public log: LoggerType;
 
-    constructor(
-        @inject(Types.Core) @named(Core.Logger) Logger: typeof LoggerType,
-        @inject(Types.Lib) @named('request') private request: typeof Request
-    ) {
+    constructor(@inject(Types.Core) @named(Core.Logger) Logger: typeof LoggerType,
+                @inject(Types.Lib) @named('request') private request: typeof Request) {
         this.log = new Logger(__filename);
     }
 
@@ -57,7 +55,7 @@ export class AuthenticateMiddleware implements interfaces.Middleware {
     }
 
     private getToken(req: myExpress.Request): string | null {
-        const authorization = req.headers.authorization;
+        const authorization: string = req.headers.authorization as string;
 
         // Retrieve the token form the Authorization header
         if (authorization && authorization.split(' ')[0] === 'Bearer') {

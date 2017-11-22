@@ -7,11 +7,11 @@ import { ApiMonitor } from './ApiMonitor';
 export class ApiInfo {
 
     public static getRoute(): string {
-        return process.env.APP_URL_PREFIX + process.env.API_INFO_ROUTE;
+        return process.env.APP_URL_PREFIX as string + process.env.API_INFO_ROUTE;
     }
 
     public setup(application: express.Application): void {
-        if (Environment.isTruthy(process.env.API_INFO_ENABLED)) {
+        if (Environment.isTruthy(process.env.API_INFO_ENABLED as string)) {
             application.get(
                 ApiInfo.getRoute(),
                 // @ts-ignore: False type definitions from express
@@ -20,11 +20,11 @@ export class ApiInfo {
                     const links = {
                         links: {}
                     };
-                    if (Environment.isTruthy(process.env.SWAGGER_ENABLED)) {
+                    if (Environment.isTruthy(process.env.SWAGGER_ENABLED as string)) {
                         links.links['swagger'] =
                             `${application.get('host')}${SwaggerUI.getRoute()}`;
                     }
-                    if (Environment.isTruthy(process.env.MONITOR_ENABLED)) {
+                    if (Environment.isTruthy(process.env.MONITOR_ENABLED as string)) {
                         links.links['monitor'] =
                             `${application.get('host')}${ApiMonitor.getRoute()}`;
                     }

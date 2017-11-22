@@ -16,8 +16,8 @@ export const DatabaseConfig = {
     client: process.env.DB_CLIENT,
     connection: process.env.DB_CONNECTION,
     pool: {
-        min: parseInt(process.env.DB_POOL_MIN, 10),
-        max: parseInt(process.env.DB_POOL_MAX, 10)
+        min: parseInt(process.env.DB_POOL_MIN as string, 10),
+        max: parseInt(process.env.DB_POOL_MAX as string, 10)
     },
     migrations: {
         directory: process.env.DB_MIGRATION_DIR,
