@@ -7,8 +7,9 @@
     "node": ">= 6.9.1"
   },
   "scripts": {
-    "start": "node dist/app.js",
-    "test": "nps test",
+    "start": "nps",
+    "test": "npm start test",
+    "build": "npm start build",
     "ts-node": "./node_modules/.bin/ts-node",
     "ts-node:fast": "./node_modules/.bin/ts-node -F",
     "console": "npm run ts-node:fast -- ./src/console/lib/console.ts",

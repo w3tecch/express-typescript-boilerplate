@@ -2,6 +2,9 @@ const { series, crossEnv, concurrent, rimraf, runInNewWindow } = require('nps-ut
 
 module.exports = {
     scripts: {
+        default: {
+            script: 'nps start'
+        },
         /**
          * Starts the builded app from the dist directory
          */
