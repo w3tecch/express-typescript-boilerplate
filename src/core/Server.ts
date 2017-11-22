@@ -72,13 +72,13 @@ export class Server {
         this.log.debug(`Environment  : ${Environment.getNodeEnv()}`);
         this.log.debug(`Version      : ${Environment.getPkg().version}`);
         this.log.debug(``);
-        if (Environment.isTruthy(process.env.API_INFO_ENABLED)) {
+        if (Environment.isTruthy(process.env.API_INFO_ENABLED as string)) {
             this.log.debug(`API Info     : ${app.get('host')}${ApiInfo.getRoute()}`);
         }
-        if (Environment.isTruthy(process.env.SWAGGER_ENABLED)) {
+        if (Environment.isTruthy(process.env.SWAGGER_ENABLED as string)) {
             this.log.debug(`Swagger      : ${app.get('host')}${SwaggerUI.getRoute()}`);
         }
-        if (Environment.isTruthy(process.env.MONITOR_ENABLED)) {
+        if (Environment.isTruthy(process.env.MONITOR_ENABLED as string)) {
             this.log.debug(`Monitor      : ${app.get('host')}${ApiMonitor.getRoute()}`);
         }
         this.log.debug('-------------------------------------------------------');

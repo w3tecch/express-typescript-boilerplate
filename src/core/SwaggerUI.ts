@@ -8,14 +8,14 @@ import { BasicAuthentication } from './BasicAuthentication';
 export class SwaggerUI {
 
     public static getRoute(): string {
-        return process.env.SWAGGER_ROUTE;
+        return process.env.SWAGGER_ROUTE as string;
     }
 
     public setup(app: express.Application): void {
-        if (Environment.isTruthy(process.env.SWAGGER_ENABLED)) {
+        if (Environment.isTruthy(process.env.SWAGGER_ENABLED as string)) {
             const baseFolder = __dirname.indexOf(`${path.sep}src${path.sep}`) >= 0 ? `${path.sep}src${path.sep}` : `${path.sep}dist${path.sep}`;
             const basePath = __dirname.substring(0, __dirname.indexOf(baseFolder));
-            const swaggerFile = require(path.join(basePath, process.env.SWAGGER_FILE));
+            const swaggerFile = require(path.join(basePath, process.env.SWAGGER_FILE as string));
             const packageJson = require(path.join(basePath, 'package.json'));
 
             // Add npm infos to the swagger doc

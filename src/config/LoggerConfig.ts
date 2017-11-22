@@ -13,6 +13,6 @@ import { Configurable } from '../core/App';
 export class LoggerConfig implements Configurable {
     public configure(): void {
         Logger.addAdapter('winston', WinstonAdapter);
-        Logger.setAdapter(process.env.LOG_ADAPTER);
+        Logger.setAdapter(process.env.LOG_ADAPTER as string);
     }
 }
