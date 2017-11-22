@@ -4,7 +4,7 @@ node_js:
 install:
   - yarn install
 scripts:
-  - nps test
-  - nps build
+  - npm test
+  - npm start build
 notifications:
   email: false
