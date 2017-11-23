@@ -3,10 +3,6 @@ import { Middleware, ExpressErrorMiddlewareInterface, HttpError } from 'routing-
 import { env } from '../../core/env';
 import { Logger, LoggerInterface } from '../../decorators/Logger';
 
-interface ErrorInterface extends HttpError {
-    errors: any[];
-}
-
 
 @Middleware({ type: 'after' })
 export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
@@ -17,12 +13,12 @@ export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
         @Logger(__filename) private log: LoggerInterface
     ) { }
 
-    public error(error: ErrorInterface, req: express.Request, res: express.Response, next: express.NextFunction): void {
+    public error(error: HttpError, req: express.Request, res: express.Response, next: express.NextFunction): void {
         res.status(error.httpCode || 500);
         res.json({
             name: error.name,
             message: error.message,
-            errors: error.errors || [],
+            errors: error['errors'] || [],
         });
 
         if (this.isProduction) {

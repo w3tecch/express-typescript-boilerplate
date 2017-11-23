@@ -35,14 +35,14 @@ describe('AuthService', () => {
             });
             const token = authService.parseTokenFromRequest(req);
             expect(token).toBeUndefined();
-            expect(log.infoMock).toBeCalledWith('info', 'No Token provided by the client', []);
+            expect(log.infoMock).toBeCalledWith('No Token provided by the client', []);
         });
 
         test('Should return undefined if there is no "Authorization" header', () => {
             const req: Request = new MockExpressRequest();
             const token = authService.parseTokenFromRequest(req);
             expect(token).toBeUndefined();
-            expect(log.infoMock).toBeCalledWith('info', 'No Token provided by the client', []);
+            expect(log.infoMock).toBeCalledWith('No Token provided by the client', []);
         });
     });
 

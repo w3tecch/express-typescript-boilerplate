@@ -6,30 +6,33 @@ import { LogMock } from '../lib/LogMock';
 
 describe('ErrorHandlerMiddleware', () => {
 
-    test('Should not print stack out in production', () => {
-        const middleware = new ErrorHandlerMiddleware(new LogMock());
-        middleware.isProduction = true;
-
-        const res = new MockExpressResponse();
-        const err = new HttpError(400, 'Test Error');
-        middleware.error(err, undefined, res, undefined);
-        const json = res._getJSON();
-        expect(json.name).toBe(err.name);
-        expect(json.message).toBe(err.message);
-        expect(json.stack).toBeUndefined();
+    let log;
+    let middleware;
+    let err;
+    let res;
+    beforeEach(() => {
+        log = new LogMock();
+        middleware = new ErrorHandlerMiddleware(log);
+        res = new MockExpressResponse();
+        err = new HttpError(400, 'Test Error');
     });
 
-    test('Should print stack out in production', () => {
-        const middleware = new ErrorHandlerMiddleware(new LogMock());
-        middleware.isProduction = false;
-
-        const res = new MockExpressResponse();
-        const err = new HttpError(400, 'Test Error');
+    test('Should not print stack out in production', () => {
+        middleware.isProduction = true;
         middleware.error(err, undefined, res, undefined);
         const json = res._getJSON();
         expect(json.name).toBe(err.name);
         expect(json.message).toBe(err.message);
-        expect(json.stack).toBeDefined();
+        expect(log.errorMock).toHaveBeenCalledWith(err.name, [err.message]);
+    });
+
+    test('Should print stack out in development', () => {
+        middleware.isProduction = false;
+        middleware.error(err, undefined, res, undefined);
+        const json = res._getJSON();
+        expect(json.name).toBe(err.name);
+        expect(json.message).toBe(err.message);
+        expect(log.errorMock).toHaveBeenCalled();
     });
 
 });

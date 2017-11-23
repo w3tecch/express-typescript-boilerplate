@@ -9,19 +9,19 @@ export class LogMock extends Logger {
     public errorMock = jest.fn();
 
     public debug(message: string, ...args: any[]): void {
-        this.debugMock('debug', message, args);
+        this.debugMock(message, args);
     }
 
     public info(message: string, ...args: any[]): void {
-        this.infoMock('info', message, args);
+        this.infoMock(message, args);
     }
 
     public warn(message: string, ...args: any[]): void {
-        this.warnMock('warn', message, args);
+        this.warnMock(message, args);
     }
 
     public error(message: string, ...args: any[]): void {
-        this.errorMock('error', message, args);
+        this.errorMock(message, args);
     }
 
 }
