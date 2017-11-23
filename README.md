@@ -153,7 +153,8 @@ All script are defined in the package.json file, but the most important ones are
 
 ## Debugger in VSCode
 
-Just set a breakpoint and hit `F5` in your Visual Studio Code.
+To debug your code run `npm start build` or hit `cmd + b` to build your app.
+Then, just set a breakpoint and hit `F5` in your Visual Studio Code.
 
 ## API Routes
 
