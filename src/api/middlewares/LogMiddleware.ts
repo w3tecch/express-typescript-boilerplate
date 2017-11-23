@@ -7,7 +7,7 @@ import { env } from '../../core/env';
 
 
 @Middleware({ type: 'before' })
-export class SecurityMiddleware implements ExpressMiddlewareInterface {
+export class LogMiddleware implements ExpressMiddlewareInterface {
 
     private log = new Logger(__dirname);
 

@@ -5,7 +5,7 @@ import { ExpressMiddlewareInterface, Middleware } from 'routing-controllers';
 
 
 @Middleware({ type: 'before' })
-export class SecurityMiddleware implements ExpressMiddlewareInterface {
+export class SecurityHstsMiddleware implements ExpressMiddlewareInterface {
 
     public use(req: express.Request, res: express.Response, next: express.NextFunction): any {
         return helmet.hsts({
