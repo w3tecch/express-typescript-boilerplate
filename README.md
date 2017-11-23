@@ -170,35 +170,37 @@ The swagger and the monitor route can be altered in the `.env` file.
 
 ## Project Structure
 
-| Name                          | Description |
-| ----------------------------- | ----------- |
-| **.vscode/**                  | VSCode tasks, launch configuration and some other settings |
-| **dist/**                     | Compiled source files will be placed here |
-| **src/**                      | Source files |
-| **src/api/controllers/**      | REST API Controllers |
-| **src/api/errors/**           | Custom HttpErrors like 404 NotFound |
-| **src/api/interceptors/**     | Interceptors are used to change or replace the data returned to the client. |
-| **src/api/middlewares/**      | Express Middlewares like helmet security features |
-| **src/api/models/**           | Bookshelf Models |
-| **src/api/repositories/**     | Repository / DB layer |
-| **src/api/services/**         | Service layer |
-| **src/api/subscribers/**      | Event subscribers |
-| **src/api/validators/**       | Custom validators, which can be used in the request classes |
-| **src/api/** swagger.json     | Swagger documentation |
-| **src/auth/**                 | Authentication checkers and services |
-| **src/core/**                 | The core features like logger and env variables |
-| **src/database/factories**    | Factory the generate fake entities |
-| **src/database/migrations**   | Database migration scripts |
-| **src/database/seeds**        | Seeds to create some data in the database |
-| **src/decorators/**           | Custom decorators like @Logger & @EventDispatch |
-| **src/loaders/**              | Loader is a place where you can configure your app |
-| **src/public/**               | Static assets (fonts, css, js, img). |
-| **src/types/** *.d.ts         | Custom type definitions and files that aren't on DefinitelyTyped |
-| **test**                      | Tests |
-| **test/e2e/** *.test.ts       | End-2-End tests (like e2e) |
-| **test/unit/** *.test.ts      | Unit tests |
-| .env.example                  | Environment configurations |
-| ormconfig.json                | TypeORM configuration for the database. Used by seeds and the migration. (generated file) |
+| Name                              | Description |
+| --------------------------------- | ----------- |
+| **.vscode/**                      | VSCode tasks, launch configuration and some other settings |
+| **dist/**                         | Compiled source files will be placed here |
+| **src/**                          | Source files |
+| **src/api/controllers/**          | REST API Controllers |
+| **src/api/controllers/requests**  | Request classes with validation rules if the body is not equal with a model |
+| **src/api/controllers/responses** | Response classes or interfaces to type json response bodies  |
+| **src/api/errors/**               | Custom HttpErrors like 404 NotFound |
+| **src/api/interceptors/**         | Interceptors are used to change or replace the data returned to the client. |
+| **src/api/middlewares/**          | Express Middlewares like helmet security features |
+| **src/api/models/**               | Bookshelf Models |
+| **src/api/repositories/**         | Repository / DB layer |
+| **src/api/services/**             | Service layer |
+| **src/api/subscribers/**          | Event subscribers |
+| **src/api/validators/**           | Custom validators, which can be used in the request classes |
+| **src/api/** swagger.json         | Swagger documentation |
+| **src/auth/**                     | Authentication checkers and services |
+| **src/core/**                     | The core features like logger and env variables |
+| **src/database/factories**        | Factory the generate fake entities |
+| **src/database/migrations**       | Database migration scripts |
+| **src/database/seeds**            | Seeds to create some data in the database |
+| **src/decorators/**               | Custom decorators like @Logger & @EventDispatch |
+| **src/loaders/**                  | Loader is a place where you can configure your app |
+| **src/public/**                   | Static assets (fonts, css, js, img). |
+| **src/types/** *.d.ts             | Custom type definitions and files that aren't on DefinitelyTyped |
+| **test**                          | Tests |
+| **test/e2e/** *.test.ts           | End-2-End tests (like e2e) |
+| **test/unit/** *.test.ts          | Unit tests |
+| .env.example                      | Environment configurations |
+| ormconfig.json                    | TypeORM configuration for the database. Used by seeds and the migration. (generated file) |
 
 ## Logging
 
