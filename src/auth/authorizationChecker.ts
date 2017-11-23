@@ -20,7 +20,7 @@ export function authorizationChecker(connection: Connection): (action: Action, r
 
         if (token === undefined) {
             log.warn('No token given');
-            return false; // res.failed(403, 'You are not allowed to request this resource!');
+            return false;
         }
 
         // Request user info at auth0 with the provided token
