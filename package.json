@@ -45,6 +45,8 @@
     "@types/helmet": "^0.0.37",
     "@types/lodash": "^4.14.80",
     "@types/morgan": "^1.7.35",
+    "@types/chalk": "^2.2.0",
+    "@types/commander": "^2.11.0",
     "@types/reflect-metadata": "0.0.5",
     "@types/request": "^2.0.8",
     "@types/serve-favicon": "^2.2.29",
@@ -84,6 +86,10 @@
     "typeorm-typedi-extensions": "^0.1.1",
     "typescript": "^2.6.1",
     "uuid": "^3.1.0",
+    "nps": "^5.7.1",
+    "nps-utils": "^1.5.0",
+    "chalk": "^2.3.0",
+    "commander": "^2.11.0",
     "winston": "^2.4.0"
   },
   "jest": {
@@ -102,18 +108,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@types/chalk": "^2.2.0",
-    "@types/commander": "^2.11.0",
     "@types/jest": "^21.1.5",
-    "chalk": "^2.3.0",
-    "commander": "^2.11.0",
     "cross-env": "^5.1.1",
     "jest": "^21.2.1",
     "mock-express-request": "^0.2.0",
     "mock-express-response": "^0.2.1",
     "nock": "^9.1.0",
-    "nps": "^5.7.1",
-    "nps-utils": "^1.5.0",
     "ts-jest": "^21.1.4"
   }
 }
