@@ -1,6 +1,7 @@
 import { api } from './lib/api';
 import { DatabaseResetCommand } from '../../src/console/DatabaseResetCommand';
 import { createAdminUser, getToken } from './lib/auth';
+import {LoggerConfig} from '../../src/config/LoggerConfig';
 
 
 describe('/{{name.pluralize}}', () => {
@@ -25,6 +26,7 @@ describe('/{{name.pluralize}}', () => {
     let auth;
     let createdId;
     beforeAll(async () => {
+        new LoggerConfig().configure();
         const command = new DatabaseResetCommand();
         await command.run();
         await createAdminUser();
@@ -127,9 +129,9 @@ describe('/{{name.pluralize}}', () => {
     });
 
     test('PUT       /{{name.pluralize}}/:id    Should return with a 404, because we just deleted the {{name.lowerCase}}', async () => {
-        const res = await api('PUT', `/api/{{name.pluralize}}/${createdId}`, auth);
-        res.expectJson();
-        res.expectStatusCode(404);
+        const res = await api('PUT', `/api/{{name.pluralize}}/${createdId}`, {
+        token,
+        body: testData
     });{{/if}}
 
 });
