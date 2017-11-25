@@ -17,25 +17,11 @@
         "noFallthroughCasesInSwitch": true,
         "moduleResolution": "node",
         "baseUrl": ".",
-        "paths": {
-            "*": [
-                "node_modules/*",
-                "src/types/*"
-            ]
-        },
-        "rootDirs": [],
-        "typeRoots": [
-            "src/types"
-        ],
-        "types": [],
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true
     },
     "include": [
         "src/**/*"
-    ],
-    "exclude": [
-        "knexfile.ts"
     ]
 }

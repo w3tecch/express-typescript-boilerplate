@@ -1,0 +1,23 @@
+import * as glob from 'glob';
+import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework';
+import { env } from '../core/env';
+
+
+/**
+ * eventDispatchLoader
+ * ------------------------------
+ * This loads all the created subscribers into the project, so we do not have to
+ * import them manually
+ */
+export const eventDispatchLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
+    if (settings) {
+        const patterns = env.app.dirs.subscribers;
+        patterns.forEach((pattern) => {
+            glob(pattern, (err: any, files: string[]) => {
+                for (const file of files) {
+                    require(file);
+                }
+            });
+        });
+    }
+};
