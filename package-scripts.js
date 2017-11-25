@@ -54,14 +54,14 @@ module.exports = {
                 script: series(
                     'nps banner.migrate',
                     'nps db.config',
-                    runFast('\"./node_modules/.bin/typeorm\" migrations:run')
+                    runFast('./node_modules/typeorm/cli.js migrations:run')
                 )
             },
             revert: {
                 script: series(
                     'nps banner.revert',
                     'nps db.config',
-                    runFast('\"./node_modules/.bin/typeorm\" migrations:revert')
+                    runFast('./node_modules/typeorm/cli.js migrations:revert')
                 )
             },
             seed: {
@@ -75,7 +75,7 @@ module.exports = {
                 script: runFast('./src/lib/ormconfig.ts')
             },
             drop: {
-                script: runFast('\"./node_modules/.bin/typeorm\" schema:drop')
+                script: runFast('./node_modules/typeorm/cli.js schema:drop')
             }
         },
         /**
