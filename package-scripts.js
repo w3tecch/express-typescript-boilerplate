@@ -2,9 +2,6 @@ const { series, crossEnv, concurrent, rimraf, runInNewWindow } = require('nps-ut
 
 module.exports = {
     scripts: {
-        default: {
-            script: 'nps start'
-        },
         /**
          * Starts the builded app from the dist directory
          */
@@ -112,18 +109,18 @@ module.exports = {
                 script: `"./node_modules/.bin/trash" './dist'`
             }
         },
-        /**
-         * Copies static files to the build folder
-         */
         copy: {
             default: {
-                script: `nps copy.swagger && nps copy.public`
+                script: `nps copy.swagger && nps copy.public && nps copy.envs`
             },
             swagger: {
                 script: copy('./src/api/swagger.json', './dist')
             },
             public: {
                 script: copy('./src/public/*', './dist')
+            },
+            envs: {
+                script: copy('./src/environments/*', './dist')
             }
         },
         /**
@@ -134,6 +131,7 @@ module.exports = {
             default: {
                 script: runFast('./src/console/lib/console.ts')
             },
+            dbReset: run('./src/console/lib/console.ts db:reset'),
             dev: run('./src/console/lib/console.ts'),
             help: runFast('./src/console/lib/console.ts --help')
         },
@@ -151,7 +149,7 @@ module.exports = {
                 script: series('nps banner.seed', '\"./node_modules/.bin/knex\" seed:run')
             },
             reset: {
-                script: series('nps banner.dbReset', 'nps console db:reset')
+                script: series('nps banner.dbReset', 'nps console.dbReset')
             }
         },
         /**

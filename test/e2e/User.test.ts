@@ -1,20 +1,20 @@
 import { api } from './lib/api';
 import { DatabaseResetCommand } from '../../src/console/DatabaseResetCommand';
 import { createAdminUser, getToken } from './lib/auth';
-
+import {LoggerConfig} from '../../src/config/LoggerConfig';
 
 describe('/users', () => {
 
     const userKeys = ['id', 'firstName', 'lastName', 'email', 'picture', 'auth0UserId', 'updatedAt', 'createdAt'];
 
-    const testUser = {
+    const testData = {
         firstName: 'Hans',
         lastName: 'Muster',
         email: 'hans@gmail.com',
         auth0UserId: '1234'
     };
 
-    const testUserUpdated = {
+    const testDataUpdated = {
         firstName: 'Horst',
         lastName: 'Maier',
         email: 'horst@gmail.com'
@@ -24,6 +24,7 @@ describe('/users', () => {
     let auth;
     let createdId;
     beforeAll(async () => {
+        new LoggerConfig().configure();
         const command = new DatabaseResetCommand();
         await command.run();
         await createAdminUser();
@@ -36,7 +37,7 @@ describe('/users', () => {
     test('POST      /users        Should create a new user', async () => {
         const res = await api('POST', '/api/users', {
             token,
-            body: testUser
+            body: testData
         });
         res.expectJson();
         res.expectStatusCode(201);
@@ -62,9 +63,9 @@ describe('/users', () => {
         expect(data.length).toBe(2);
 
         const user = data[1];
-        expect(user.firstName).toBe(testUser.firstName);
-        expect(user.lastName).toBe(testUser.lastName);
-        expect(user.email).toBe(testUser.email);
+        expect(user.firstName).toBe(testData.firstName);
+        expect(user.lastName).toBe(testData.lastName);
+        expect(user.email).toBe(testData.email);
     });
 
     test('GET       /users/:id    Should return one user', async () => {
@@ -74,24 +75,24 @@ describe('/users', () => {
         res.expectData(userKeys);
 
         const user: any = res.getData();
-        expect(user.firstName).toBe(testUser.firstName);
-        expect(user.lastName).toBe(testUser.lastName);
-        expect(user.email).toBe(testUser.email);
+        expect(user.firstName).toBe(testData.firstName);
+        expect(user.lastName).toBe(testData.lastName);
+        expect(user.email).toBe(testData.email);
     });
 
     test('PUT       /users/:id    Should update the user', async () => {
         const res = await api('PUT', `/api/users/${createdId}`, {
             token,
-            body: testUserUpdated
+            body: testDataUpdated
         });
         res.expectJson();
         res.expectStatusCode(200);
         res.expectData(userKeys);
 
         const user: any = res.getData();
-        expect(user.firstName).toBe(testUserUpdated.firstName);
-        expect(user.lastName).toBe(testUserUpdated.lastName);
-        expect(user.email).toBe(testUserUpdated.email);
+        expect(user.firstName).toBe(testDataUpdated.firstName);
+        expect(user.lastName).toBe(testDataUpdated.lastName);
+        expect(user.email).toBe(testDataUpdated.email);
     });
 
     test('PUT       /users/:id    Should fail because we want to update the user with a invalid email', async () => {
@@ -126,7 +127,10 @@ describe('/users', () => {
     });
 
     test('PUT       /users/:id    Should return with a 404, because we just deleted the user', async () => {
-        const res = await api('PUT', `/api/users/${createdId}`, auth);
+        const res = await api('PUT', `/api/users/${createdId}`, {
+            token,
+            body: testData
+        });
         res.expectJson();
         res.expectStatusCode(404);
     });
