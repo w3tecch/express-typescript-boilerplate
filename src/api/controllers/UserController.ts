@@ -1,60 +1,41 @@
-/**
- * UserController
- * ----------------------------------------
- *
- * This controller is in charge of the user resource and should
- * provide all crud actions.
- */
-
-import { inject, named } from 'inversify';
-import { controller, httpGet, httpPost, httpPut, httpDelete, response, request, requestBody, requestParam } from 'inversify-express-utils';
-import { app } from '../../app';
-import { Types, Targets } from '../../constants';
+import { JsonController, Get, Post, Put, Param, Delete, Body, OnUndefined, Authorized, CurrentUser } from 'routing-controllers';
 import { UserService } from '../services/UserService';
-
-// Get middlewares
-const populateUser = app.IoC.getNamed<interfaces.Middleware>(Types.Middleware, Targets.Middleware.PopulateUserMiddleware);
-const authenticate = app.IoC.getNamed<interfaces.Middleware>(Types.Middleware, Targets.Middleware.AuthenticateMiddleware);
+import { User } from '../models/User';
+import { UserNotFoundError } from '../errors/UserNotFoundError';
 
 
-@controller('/users', authenticate.use)
+@Authorized()
+@JsonController('/users')
 export class UserController {
 
-    constructor( @inject(Types.Service) @named(Targets.Service.UserService) private userService: UserService) { }
+    constructor(
+        private userService: UserService
+    ) { }
 
-    @httpGet('/')
-    public async findAll( @response() res: myExpress.Response): Promise<any> {
-        const users = await this.userService.findAll();
-        return res.found(users.toJSON());
+    @Get()
+    public find( @CurrentUser() user?: User): Promise<User[]> {
+        return this.userService.find();
     }
 
-    @httpPost('/')
-    public async create( @response() res: myExpress.Response, @requestBody() body: any): Promise<any> {
-        const user = await this.userService.create(body);
-        return res.created(user.toJSON());
+    @Get('/:id')
+    @OnUndefined(UserNotFoundError)
+    public one( @Param('id') id: string): Promise<User | undefined> {
+        return this.userService.findOne(id);
     }
 
-    @httpGet('/me', populateUser.use)
-    public async findMe( @request() req: myExpress.Request, @response() res: myExpress.Response): Promise<any> {
-        return res.found(req.user);
+    @Post()
+    public create( @Body() user: User): Promise<User> {
+        return this.userService.create(user);
     }
 
-    @httpGet('/:id')
-    public async findOne( @response() res: myExpress.Response, @requestParam('id') id: string): Promise<any> {
-        const user = await this.userService.findOne(parseInt(id, 10));
-        return res.found(user.toJSON());
+    @Put('/:id')
+    public update( @Param('id') id: string, @Body() user: User): Promise<User> {
+        return this.userService.update(id, user);
     }
 
-    @httpPut('/:id')
-    public async update( @response() res: myExpress.Response, @requestParam('id') id: string, @requestBody() body: any): Promise<any> {
-        const user = await this.userService.update(parseInt(id, 10), body);
-        return res.updated(user.toJSON());
-    }
-
-    @httpDelete('/:id')
-    public async destroy( @response() res: myExpress.Response, @requestParam('id') id: string): Promise<any> {
-        await this.userService.destroy(parseInt(id, 10));
-        return res.destroyed();
+    @Delete('/:id')
+    public delete( @Param('id') id: string): Promise<void> {
+        return this.userService.delete(id);
     }
 
 }

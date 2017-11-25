@@ -14,7 +14,6 @@
                 "../dist/**/*.js"
             ],
             "protocol": "inspector",
-            "preLaunchTask": "build",
             "env": {
                 "NODE_ENV": "development"
             }
