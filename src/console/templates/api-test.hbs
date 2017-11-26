@@ -130,8 +130,11 @@ describe('/{{name.pluralize}}', () => {
 
     test('PUT       /{{name.pluralize}}/:id    Should return with a 404, because we just deleted the {{name.lowerCase}}', async () => {
         const res = await api('PUT', `/api/{{name.pluralize}}/${createdId}`, {
-        token,
-        body: testData
+            token,
+            body: testData
+        });
+        res.expectJson();
+        res.expectStatusCode(404);
     });{{/if}}
 
 });
