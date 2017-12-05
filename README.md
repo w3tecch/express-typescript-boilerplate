@@ -1,57 +1,83 @@
 # Express Typescript Boilerplate
+
 [![Dependency Status](https://david-dm.org/w3tecch/express-typescript-boilerplate/status.svg?style=flat)](https://david-dm.org/w3tecch/express-typescript-boilerplate)
 [![Build Status](https://travis-ci.org/w3tecch/express-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-typescript-boilerplate)
 [![Build status](https://ci.appveyor.com/api/projects/status/f8e7jdm8v58hcwpq/branch/master?svg=true&passingText=Windows%20passing&pendingText=Windows%20pending&failingText=Windows%20failing)](https://ci.appveyor.com/project/dweber019/express-typescript-boilerplate/branch/master)
 
-> A delightful way to building a RESTful API with NodeJs & TypeScript.
-
-> An Node.js RESTful API boilerplate featuring
-[Express](https://expressjs.com/),
-[Inversify](http://inversify.io/),
-[Winston](https://github.com/winstonjs/winston),
+> A delightful way to building a RESTful API Services with beautiful code written in TypeScript.
+> An Node.js Web-Service boilerplate/skeleton/starter-kit featuring
+> Inspired by the awesome framework [laravel](https://laravel.com/) in PHP and of the repositories from [pleerock](https://github.com/pleerock).
 [TypeScript](https://www.typescriptlang.org/),
+[Express](https://expressjs.com/),
+[Winston](https://github.com/winstonjs/winston),
+[Microframework](https://github.com/pleerock/microframework),
+[TypeDI](https://github.com/pleerock/typedi),
+[TypeORM](https://github.com/typeorm/typeorm),
 [TsLint](http://palantir.github.io/tslint/),
 [@types](https://www.npmjs.com/~types),
 [Jest](https://facebook.github.io/jest/),
 [Swagger](http://swagger.io/),
 [validatejs](https://validatejs.org/),
-[knex](http://knexjs.org/) and
-[bookshelf](http://bookshelfjs.org/)
 by [w3tech](https://github.com/w3tecch)
 
 ## Why
+
 Our main goal with this project is a feature complete server application.
 We like you to be focused on your business and not spending hours in project configuration.
 
 Try it!! We are happy to hear your feedback or any kind of new features.
 
 ## Features
-- **Beautiful Syntax** thanks to the awesome annotations from [Inversify Express Utils](https://github.com/inversify/inversify-express-utils).
+
+- **Beautiful Code** thanks to the awesome annotations of the libraries from [pleerock](https://github.com/pleerock).
 - **Easy API Testing** with included e2e testing.
-- **Dependency Injection** done with the nice framework from [Inversify](http://inversify.io/).
-- **Fast Database Building** with simple migration and seeding from [Knex](http://knexjs.org/).
-- **Simplified Database Query** with the ORM of [Knex](http://knexjs.org/) called [Bookshelf](http://bookshelfjs.org/).
-- **Clear Structure** with controllers, services, repositories, models, middlewares...
-- **Easy Exception Handling** with our own simple and easy to adopt logic. You will love it.
-- **Easy Data Seeding** with our own factories.
-- **Custom Commands** are also available in our setup and really easy to use or even extend.
-- **Custom Validators** to validate your request even better and stricter. [custom-validation-classes](https://github.com/pleerock/class-validator#custom-validation-classes)
-- **Scaffolding Commands** will speed up your development tremendously as you should focus on business code and not scaffolding.
+- **Dependency Injection** done with the nice framework from [TypeDI](https://github.com/pleerock/typedi).
+- **Simplified Database Query** with the ORM [TypeORM](https://github.com/typeorm/typeorm).
+- **Clear Structure** with different layers such as controllers, services, repositories, models, middlewares...
+- **Easy Exception Handling** thanks to [routing-controllers](https://github.com/pleerock/routing-controllers).
 - **Smart Validation** thanks to [class-validator](https://github.com/pleerock/class-validator) with some nice annotations.
+- **Custom Validators** to validate your request even better and stricter. [custom-validation-classes](https://github.com/pleerock/class-validator#custom-validation-classes).
 - **API Documentation** thanks to [swagger](http://swagger.io/).
 - **API Monitoring** thanks to [express-status-monitor](https://github.com/RafalWilinski/express-status-monitor).
-- **Integrated Testing Tool** thanks to [Wallaby.js](https://wallabyjs.com/)
+- **Integrated Testing Tool** thanks to [Jest](https://facebook.github.io/jest).
+- **Basic Security Features** thanks to [Helmet](https://helmetjs.github.io/).
+- **Easy event dispatching** thanks to [event-dispatch](https://github.com/pleerock/event-dispatch).
+- **Fast Database Building** with simple migration from [TypeORM](https://github.com/typeorm/typeorm).
+- **Easy Data Seeding** with our own factories.
+
+### Comming soon
+
+- **Custom Commands** are also available in our setup and really easy to use or even extend.
+- **Scaffolding Commands** will speed up your development tremendously as you should focus on business code and not scaffolding.
+
+# Table of Contents
+
+- [Getting Started](#getting-started)
+- [Scripts and Tasks](#scripts-and-tasks)
+- [Debugger in VSCode](#debugger-in-vscode)
+- [API Routes](#api-routes)
+- [Project Structure](#project-structure)
+- [Logging](#logging)
+- [Event Dispatching](#event-dispatching)
+- [Seeding](#seeding)
+- [Further Documentations](#further-documentation)
+- [Related Projects](#related-projects)
+- [License](#license)
 
 ## Getting Started
+
 ### Step 1:  Set up the Development Environment
+
 You need to set up your development environment before you can do anything.
 
 Install [Node.js and NPM](https://nodejs.org/en/download/)
-* on OSX use [homebrew](http://brew.sh) `brew install node`
-* on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
+
+- on OSX use [homebrew](http://brew.sh) `brew install node`
+- on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
 
 Install yarn globally
-```
+
+```bash
 npm install yarn -g
 ```
 
@@ -60,6 +86,7 @@ Install a MySQL database.
 > If you work with a mac, we recommend to use homebrew for the installation.
 
 ### Step 2: Create new Project
+
 Fork or download this project. Configure your package.json for your new project.
 
 Then copy the `.env.example` file and rename it to `.env`. In this file you have to add your database connection information.
@@ -67,55 +94,183 @@ Then copy the `.env.example` file and rename it to `.env`. In this file you have
 Create a new database with the name you have in your `.env`-file.
 
 Then setup your application environment.
-```
-nps setup
+
+```bash
+npm start setup
 ```
 
 > This installs all dependencies with yarn. After that it migrates the database and seeds some test data into it. So after that your development environment is ready to use.
 
 ### Step 3: Serve your App
+
 Go to the project dir and start your app with this npm script.
-```
-nps serve
+
+```bash
+npm start serve
 ```
 
 > This starts a local server using `nodemon`, which will watch for any file changes and will restart the sever according to these changes.
 > The server address will be displayed to you as `http://0.0.0.0:3000`.
 
-### Step 4: Create a new Resource
-Go to the project dir and hit this command in your terminal.
-```
-npm run console make:resource
+## Scripts and Tasks
+
+All script are defined in the package.json file, but the most important ones are listed here.
+
+### Install
+
+- Install all dependencies with `yarn install`
+
+### Linting
+
+- Run code quality analysis using `npm start lint`. This runs tslint.
+- There is also a vscode task for this called `lint`.
+
+### Tests
+
+- Run the unit tests using `npm start test` (There is also a vscode task for this called `test`).
+- Run the e2e tests using `npm start test:e2e` and don't forget to start your application and your [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server).
+
+### Running in dev mode
+
+- Run `npm start serve` to start nodemon with ts-node, to serve the app.
+- The server address will be displayed to you as `http://0.0.0.0:3000`
+
+### Building the project and run it
+
+- Run `npm start build` to generated all JavaScript files from the TypeScript sources (There is also a vscode task for this called `build`).
+- To start the builded app located in `dist` use `npm start`.
+
+### Database Migration
+
+- Run `./node_modules/.bin/typeorm create -n <migration-file-name>` to create a new migration file.
+- To migrate your database run `npm start db.migrate`.
+- To revert your latest migration run `npm start db.revert`.
+- Drops the complete database schema `npm start db.drop`.
+
+### Database Seeding
+
+- Run `npm start db.seed` to seed your seeds into the database.
+
+## Debugger in VSCode
+
+To debug your code run `npm start build` or hit `cmd + b` to build your app.
+Then, just set a breakpoint and hit `F5` in your Visual Studio Code.
+
+## API Routes
+
+The route prefix is `/api` by default, but you can change this in the .env file.
+The swagger and the monitor route can be altered in the `.env` file.
+
+| Route          | Description |
+| -------------- | ----------- |
+| **/api**       | Shows us the name, description and the version of the package.json |
+| **/swagger**   | This is the Swagger UI with our API documentation |
+| **/monitor**   | Shows a small monitor page for the server |
+| **/api/users** | Example entity endpoint |
+
+## Project Structure
+
+| Name                              | Description |
+| --------------------------------- | ----------- |
+| **.vscode/**                      | VSCode tasks, launch configuration and some other settings |
+| **dist/**                         | Compiled source files will be placed here |
+| **src/**                          | Source files |
+| **src/api/controllers/**          | REST API Controllers |
+| **src/api/controllers/requests**  | Request classes with validation rules if the body is not equal with a model |
+| **src/api/controllers/responses** | Response classes or interfaces to type json response bodies  |
+| **src/api/errors/**               | Custom HttpErrors like 404 NotFound |
+| **src/api/interceptors/**         | Interceptors are used to change or replace the data returned to the client. |
+| **src/api/middlewares/**          | Express Middlewares like helmet security features |
+| **src/api/models/**               | Bookshelf Models |
+| **src/api/repositories/**         | Repository / DB layer |
+| **src/api/services/**             | Service layer |
+| **src/api/subscribers/**          | Event subscribers |
+| **src/api/validators/**           | Custom validators, which can be used in the request classes |
+| **src/api/** swagger.json         | Swagger documentation |
+| **src/auth/**                     | Authentication checkers and services |
+| **src/core/**                     | The core features like logger and env variables |
+| **src/database/factories**        | Factory the generate fake entities |
+| **src/database/migrations**       | Database migration scripts |
+| **src/database/seeds**            | Seeds to create some data in the database |
+| **src/decorators/**               | Custom decorators like @Logger & @EventDispatch |
+| **src/loaders/**                  | Loader is a place where you can configure your app |
+| **src/public/**                   | Static assets (fonts, css, js, img). |
+| **src/types/** *.d.ts             | Custom type definitions and files that aren't on DefinitelyTyped |
+| **test**                          | Tests |
+| **test/e2e/** *.test.ts           | End-2-End tests (like e2e) |
+| **test/unit/** *.test.ts          | Unit tests |
+| .env.example                      | Environment configurations |
+| ormconfig.json                    | TypeORM configuration for the database. Used by seeds and the migration. (generated file) |
+
+## Logging
+
+Our logger is [winston](https://github.com/winstonjs/winston). To log http request we use the express middleware [morgan](https://github.com/expressjs/morgan).
+We created a simple annotation to inject the logger in your service (see example below).
+
+```typescript
+import { Logger, LoggerInterface } from '../../decorators/Logger';
+
+@Service()
+export class UserService {
+
+    constructor(
+        @Logger(__filename) private log: LoggerInterface
+    ) { }
+
+    ...
 ```
 
-Apply the same information like you see in the screenshot below.
+## Event Dispatching
 
-![console](console.png)
+Our we use this awesome repository [event-dispatch](https://github.com/pleerock/event-dispatch) for event dispatching.
+We created a simple annotation to inject the EventDispatcher in your service (see example below). All events are listed in the `events.ts` file.
 
-> With that you just have created a complete new endpoint in your api for the resource pets.
+```typescript
+import { events } from '../subscribers/events';
+import { EventDispatcher, EventDispatcherInterface } from '../../decorators/EventDispatcher';
 
-Normally a pet belogns to a user, so we have to add the relationship between users an pets. Open the created migration file and replace the user property with these lines.
+@Service()
+export class UserService {
+
+    constructor(
+        @EventDispatcher() private eventDispatcher: EventDispatcherInterface
+    ) { }
+
+    public async create(user: User): Promise<User> {
+        ...
+        this.eventDispatcher.dispatch(events.user.created, newUser);
+        ...
+    }
 ```
-table.integer('user_id').unsigned();
-table.foreign('user_id').references('id').inTable('users').onDelete('cascade');
+
+## Seeding
+
+Isn't exhausting to create some sample data into your fresh migrated database, well this time is over!
+How does it work? Just, create a factory for your entities and a seeds script.
+
+### 1. Create a factory for your entity
+
+For all the entities we want to seed, we need to define a factory. To do so we give you the awesome [faker](https://github.com/marak/Faker.js/) library as a parameter into your factory. Then create your "fake" entity as you would normally do and return it. Those factory files should be in the `src/database/factories` folder and suffixed with `Factory`. Example `src/database/factories/UserFactory.ts`.
+
+```typescript
+factory.define(User, (faker: typeof Faker) => {
+    const gender = faker.random.number(1);
+    const firstName = faker.name.firstName(gender);
+    const lastName = faker.name.lastName(gender);
+    const email = faker.internet.email(firstName, lastName);
+
+    const user = new User();
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.email = email;
+    return user;
+});
 ```
 
-Next we have to add this relationship also in the pets model.
-```
-public user(): User {
-    return this.belongsTo(User);
-}
-```
+This is a nested example for a factory to get the foreign key of the other entity.
 
-> The relationship between the users and pets are set and ready. So you can migrate your database with `npm run db:migrate`
-
-### Step 5: Create a Seeder
-To seed some cute pets we need a smart factory. So open the ./src/database/factories/index.ts and add this code.
-```
-/**
- * PET - Factory
- */
-factory.define(Pet, (faker: Faker.FakerStatic, args: any[]) => {
+```typescript
+factory.define(Pet, (faker: typeof Faker, args: any[]) => {
     const type = args[0];
     return {
         name: faker.name.firstName(),
@@ -125,150 +280,89 @@ factory.define(Pet, (faker: Faker.FakerStatic, args: any[]) => {
 });
 ```
 
-> This factory helps us to create a fake pet to seed to the database.
+### 2. Create a seed file
 
-Run this command in your terminal and call the new seeder `create pets`.
-```
-npm run console make:seed
-```
+The seeds files define how much and how the data are connected with each other. The files will be executed alphabetically.
 
-Open the file and place this code into it.
-```
-await factory.get(Pet)
-    .create(10);
-```
+```typescript
+export class CreateUsers implements SeedsInterface {
 
-> Now we can seed some nice cats into the database with `npm run db:seed`.
+    public async seed(factory: FactoryInterface): Promise<any> {
+        await factory
+            .get(User)
+            .create(10);
+    }
 
-> That was easy! Now its your turn to make something great out of it.
-
-## Scripts / Tasks
-All script are defined in the package.json file, but the most important ones are listed here.
-
-### Install
-* Install all dependencies with `yarn install`
-
-### Linting
-* Run code quality analysis using `nps lint`. This runs tslint.
-* There is also a vscode task for this called `lint`.
-
-### Tests
-* Run the unit tests using `nps test` (There is also a vscode task for this called `test`).
-* Run the e2e tests using `nps test:e2e` and don't forget to start your application and your [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server).
-
-### Running in dev mode
-* Run `nps serve` to start nodemon with ts-node, to serve the app.
-* The server address will be displayed to you as `http://0.0.0.0:3000`
-
-### Building the project and run it
-* Run `nps build` to generated all JavaScript files from the TypeScript sources (There is also a vscode task for this called `build`).
-* To start the builded app located in `dist` use `npm start`.
-
-### Database
-* Run `nps db:migrate` to migrate schema changes to the database
-* Run `nps db:migrate:rollback` to rollback one migration
-* Run `nps db:seed` to seed sample data into the database
-* Run `nps db:reset` to rollback all migrations and migrate any migration again
-
-### Console
-* To run your own created command enter `npm run console <command-name>`.
-* This list all your created commands `npm run console:help`.
-
-### Scaffolding Commands
-All the templates for the commands are located in `src/console/templates`.
-
-* `npm run console make:resource <file>` - Generates a controller, service, requests, repo, model and a migration with CRUD operations.
-* `npm run console make:controller <file>` - Generates a controller.
-* `npm run console make:service <file>` - Generates a service.
-* `npm run console make:repo <file>` - Generates a repository.
-* `npm run console make:model <file>` - Generates a model with the props and configurations.
-* `npm run console make:middleware <file>` - Generates a basic middleware.
-* `npm run console make:request <file>` - Generates a basic request.
-* `npm run console make:listener <file>` - Generates a basic listener.
-* `npm run console make:exception <file>` - Generates a basic exception.
-* `npm run console make:validator <file>` - Generates a custom validator.
-* `npm run console update:targets <file>` - Reads all the API files and generate a new `constants/Targets.ts` file out of it.
-
-**Example**
-```
-$ npm run console make:controller auth/auth
-// -> creates `api/controllers/auth/AuthController.ts
-
-$ npm run console make:model user
-// -> creates `api/models/User.ts
+}
 ```
 
-## IoC
-Our IoC automatically looks through the `controllers`, `listeners` , `middlewares`, `services`,
-`repositories` and `models` folders in `src/api/` for files to bound automatically into the IoC - Container, so you have nothing to do.
+With the second parameter in the `.get(<Entity>, <args>)` you are able to create different variations of entities.
 
-**However it is very important to keep the naming right, because otherwise our IoC will not find your
-created files!!**
+```typescript
+export class CreateUsers implements SeedsInterface {
 
-## Using the debugger in VS Code
-Just set a breakpoint and hit `F5` in your Visual Studio Code.
+    public async seed(factory: FactoryInterface): Promise<any> {
+        await factory
+            .get(User, 'admin')
+            .create(1);
+    }
 
-## API Routes
-The route prefix is `/api` by default, but you can change this in the .env file.
+}
+```
 
-| Route       | Description |
-| ----------- | ----------- |
-| **/api/info**   | Shows us the name, description and the version of the package.json |
-| **/api/docs**   | This is the Swagger UI with our API documentation |
-| **/status** | Shows a small monitor page for the server |
+Here an example with nested factories.
 
-## Project Structure
+```typescript
+...
+await factory.get(User)
+    .each(async (user: User) => {
 
-| Name                          | Description |
-| ----------------------------- | ----------- |
-| **.vscode/**                  | VSCode tasks, launch configuration and some other settings |
-| **dist/**                     | Compiled source files will be placed here |
-| **src/**                      | Source files |
-| **src/api/controllers/**      | REST API Controllers |
-| **src/api/exceptions/**       | Exceptions like 404 NotFound |
-| **src/api/listeners/**        | Event listeners |
-| **src/api/middlewares/**      | Express Middlewares like populateUser |
-| **src/api/models/**           | Bookshelf Models |
-| **src/api/repositories/**     | Repository / DB layer |
-| **src/api/requests/**         | Request bodys with validations |
-| **src/api/services/**         | Service layer |
-| **src/api/validators/**       | Custom validators, which can be used in the request classes |
-| **src/api/** swagger.json     | Swagger documentation |
-| **src/console/**              | Command line scripts |
-| **src/config/**               | Configurations like database or logger |
-| **src/constants/**            | Global Constants |
-| **src/core/**                 | The core framework |
-| **src/database/factories/**   | Model factories to generate database records |
-| **src/database/migrations/**  | Migrations scripts to build up the database schema |
-| **src/database/seeds/**       | Seed scripts to fake sample data into the database |
-| **src/public/**               | Static assets (fonts, css, js, img). |
-| **src/types/** *.d.ts         | Custom type definitions and files that aren't on DefinitelyTyped |
-| **test**                      | Tests |
-| **test/e2e/** *.test.ts       | End-2-End tests (like e2e) |
-| **test/unit/** *.test.ts      | Unit tests |
-| .env.example                  | Environment configurations |
-| knexfile.ts                   | This file is used for the migrations and seed task of knex |
+        const pets: Pet[] = await factory.get(Pet)
+            .create(2);
+
+        const petIds = pets.map((pet: Pet) => pet.Id);
+        await user.pets().attach(petIds);
+
+    })
+    .create(5);
+...
+```
+
+### 3. Run the seeder
+
+The last step is the easiest, just hit the following command in your terminal, but be sure you are in the projects root folder.
+
+```bash
+npm start db.seed
+```
+
+## Further Documentations
+
+| Name & Link                       | Description                       |
+| --------------------------------- | --------------------------------- |
+| [Express](https://expressjs.com/) | Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. |
+| [Microframework](https://github.com/pleerock/microframework) | Microframework is a simple tool that allows you to execute your modules in a proper order, helping you to organize bootstrap code in your application. |
+| [TypeDI](https://github.com/pleerock/typedi) | Dependency Injection for TypeScript. |
+| [routing-controllers](https://github.com/pleerock/routing-controllers) | Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage in Express / Koa using TypeScript and Routing Controllers Framework. |
+| [TypeORM](http://typeorm.io/#/) | TypeORM is highly influenced by other ORMs, such as Hibernate, Doctrine and Entity Framework. |
+| [class-validator](https://github.com/pleerock/class-validator) | Validation made easy using TypeScript decorators. |
+| [class-transformer](https://github.com/pleerock/class-transformer) | Proper decorator-based transformation / serialization / deserialization of plain javascript objects to class constructors |
+| [event-dispatcher](https://github.com/pleerock/event-dispatch) | Dispatching and listening for application events in Typescript |
+| [Helmet](https://helmetjs.github.io/) | Helmet helps you secure your Express apps by setting various HTTP headers. It’s not a silver bullet, but it can help! |
+| [Auth0 API Documentation](https://auth0.com/docs/api/management/v2) | Authentification service |
+| [Jest](http://facebook.github.io/jest/) | Delightful JavaScript Testing Library for unit and e2e tests |
+| [swagger Documentation](http://swagger.io/) | API Tool to describe and document your api. |
 
 ## Related Projects
-* [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter) - A starter template for TypeScript and Node with a detailed README describing how to use the two together.
-* [express-graphql-typescript-boilerplate](https://github.com/w3tecch/express-graphql-typescript-boilerplate) - A starter kit for building amazing GraphQL API's with TypeScript and express by @w3tecch
-* [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
-* [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server) - Useful for e2e testing or faking an oAuth server
 
-## Documentations of our main dependencies
-* [Express](https://expressjs.com/)
-* [Knex](http://knexjs.org/)
-* [Bookshelf](http://bookshelfjs.org/)
-* [Bookshelf Cheatsheet](http://ricostacruz.com/cheatsheets/bookshelf.html)
-* [Inversify](http://inversify.io/)
-* [Inversify Express Utils](https://github.com/inversify/inversify-express-utils)
-* [class-validator](https://github.com/pleerock/class-validator)
-* [Jest](http://facebook.github.io/jest/)
-* [Auth0 API Documentation](https://auth0.com/docs/api/management/v2)
-* [swagger Documentation](http://swagger.io/)
+- [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter) - A starter template for TypeScript and Node with a detailed README describing how to use the two together.
+- [express-graphql-typescript-boilerplate](https://github.com/w3tecch/express-graphql-typescript-boilerplate) - A starter kit for building amazing GraphQL API's with TypeScript and express by @w3tecch
+- [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
+- [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server) - Useful for e2e testing or faking an oAuth server
 
 ## License
- [MIT](/LICENSE)
+
+[MIT](/LICENSE)
 
 ---
 Made with ♥ by w3tech ([w3tech](https://github.com/w3tecch)), Gery Hirschfeld ([@GeryHirschfeld1](https://twitter.com/GeryHirschfeld1)) and [contributors](https://github.com/w3tecch/express-typescript-boilerplate/graphs/contributors)
