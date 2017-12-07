@@ -3,7 +3,10 @@ import * as path from 'path';
 import * as glob from 'glob';
 import * as commander from 'commander';
 import * as Chalk from 'chalk';
+import { Connection } from 'typeorm';
 import { Factory } from './Factory';
+import { getConnection } from './connection';
+
 
 // Get executiuon path to look from there for seeds and factories
 const runDir = process.cwd();
@@ -44,32 +47,42 @@ glob(path.join(runDir, factoryPath, '**/*Factory{.js,.ts}'), (errFactories: any,
             require(factory);
         }
 
-        // Initialize and seed all seeds.
-        const queue: Array<Promise<void>> = [];
-        for (const seed of seeds) {
-            try {
-                const seedFile: any = require(seed);
-                let className = seed.split('/')[seed.split('/').length - 1];
-                className = className.replace('.ts', '').replace('.js', '');
-                className = className.split('-')[className.split('-').length - 1];
-                log('\n' + chalk.gray.underline(`executing seed:  `), chalk.green.bold(`${className}`));
-                queue.push((new seedFile[className]()).seed(Factory.getInstance()));
-            } catch (error) {
-                console.error('Could not run seed ' + seed, error);
-            }
-        }
+        // Get typeorm database connection and pass them to the factory instance
+        getConnection().then((connection: Connection) => {
+            const factory = Factory.getInstance();
+            factory.setConnection(connection);
 
-        // Promise to catch the end for termination and logging
-        Promise
-            .all(queue)
-            .then(() => {
-                log('\n👍 ', chalk.gray.underline(`finished seeding`));
-                process.exit(0);
-            })
-            .catch((error) => {
-                console.error('Could not run seed ' + error);
-                process.exit(1);
-            });
+            // Initialize and seed all seeds.
+            const queue: Array<Promise<void>> = [];
+            for (const seed of seeds) {
+                try {
+                    const seedFile: any = require(seed);
+                    let className = seed.split('/')[seed.split('/').length - 1];
+                    className = className.replace('.ts', '').replace('.js', '');
+                    className = className.split('-')[className.split('-').length - 1];
+                    log('\n' + chalk.gray.underline(`executing seed:  `), chalk.green.bold(`${className}`));
+                    queue.push((new seedFile[className]()).seed(factory));
+                } catch (error) {
+                    console.error('Could not run seed ' + seed, error);
+                }
+            }
+
+            // Promise to catch the end for termination and logging
+            Promise
+                .all(queue)
+                .then(() => {
+                    log('\n👍 ', chalk.gray.underline(`finished seeding`));
+                    process.exit(0);
+                })
+                .catch((error) => {
+                    console.error('Could not run seed ' + error);
+                    process.exit(1);
+                });
+
+        }).catch((error) => {
+            console.error('Could not connection to database ' + error);
+            process.exit(1);
+        });
     });
 });
 
@@ -77,3 +90,4 @@ export * from './FactoryInterface';
 export * from './EntityFactoryInterface';
 export * from './SeedsInterface';
 export * from './Factory';
+export * from './utils';
