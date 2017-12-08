@@ -8,12 +8,12 @@ export class CreateUserTable1511105183653 implements MigrationInterface {
                 \`id\` varchar(255) NOT NULL PRIMARY KEY,
                 \`first_name\` varchar(255) NOT NULL,
                 \`last_name\` varchar(255) NOT NULL,
-                \`email\` varchar(255) NOT NULL) ENGINE=InnoDB`
+                \`email\` varchar(255) NOT NULL) ENGINE=InnoDB;`
         );
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.query(`DROP TABLE \`user\``);
+        await queryRunner.query(`DROP TABLE \`user\`;`);
     }
 
 }

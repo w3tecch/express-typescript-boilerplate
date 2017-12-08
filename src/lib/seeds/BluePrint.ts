@@ -8,5 +8,5 @@ import { ObjectType } from 'typeorm';
 export class BluePrint<Entity> {
     constructor(
         public EntityClass: ObjectType<Entity>,
-        public callback: (faker: typeof Faker, args: any[]) => any) { }
+        public create: (faker: typeof Faker, args: any[]) => Entity) { }
 }

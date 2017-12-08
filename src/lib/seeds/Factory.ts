@@ -1,5 +1,6 @@
-import { ObjectType } from 'typeorm';
 import * as Faker from 'faker';
+import { ObjectType } from 'typeorm';
+import { Connection } from 'typeorm/connection/Connection';
 import { FactoryInterface } from './FactoryInterface';
 import { EntityFactory } from './EntityFactory';
 import { BluePrint } from './BluePrint';
@@ -16,10 +17,19 @@ export class Factory implements FactoryInterface {
 
     private static instance: Factory;
 
+    private connection: Connection;
     private blueprints: { [key: string]: BluePrint<any> };
 
     constructor(private faker: typeof Faker) {
         this.blueprints = {};
+    }
+
+    public getConnection(): Connection {
+        return this.connection;
+    }
+
+    public setConnection(connection: Connection): void {
+        this.connection = connection;
     }
 
     public define<Entity>(entityClass: ObjectType<Entity>, callback: (faker: typeof Faker, args: any[]) => Entity): void {
@@ -29,6 +39,7 @@ export class Factory implements FactoryInterface {
     public get<Entity>(entityClass: ObjectType<Entity>, ...args: any[]): EntityFactory<Entity> {
         return new EntityFactory<Entity>(
             this.faker,
+            this.connection,
             this.blueprints[this.getNameOfEntity(entityClass)],
             args
         );
