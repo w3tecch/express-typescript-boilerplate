@@ -7,7 +7,7 @@ export class CreateUsers implements SeedsInterface {
     public async seed(factory: FactoryInterface): Promise<any> {
         await factory
             .get(User)
-            .create(1);
+            .create();
     }
 
 }

@@ -142,7 +142,8 @@ All script are defined in the package.json file, but the most important ones are
 
 ### Database Migration
 
-- Run `./node_modules/.bin/typeorm create -n <migration-file-name>` to create a new migration file.
+- Run `typeorm migrations:create -n <migration-file-name>` to create a new migration file.
+- Try `typeorm -h` to see more useful cli commands like generating migration out of your models.
 - To migrate your database run `npm start db.migrate`.
 - To revert your latest migration run `npm start db.revert`.
 - Drops the complete database schema `npm start db.drop`.
@@ -267,17 +268,42 @@ factory.define(User, (faker: typeof Faker) => {
 });
 ```
 
-This is a nested example for a factory to get the foreign key of the other entity.
+This can be used to pass some dynamic value into the factory.
 
 ```typescript
 factory.define(Pet, (faker: typeof Faker, args: any[]) => {
     const type = args[0];
     return {
         name: faker.name.firstName(),
-        type: type || 'dog',
-        userId: factory.get(User).returning('id')
+        type: type || 'dog'
     };
 });
+```
+
+To deal with relations you can use the entity manager like this.
+
+```typescript
+import { SeedsInterface, FactoryInterface, times } from '../../lib/seeds';
+import { Pet } from '../../../src/api/models/Pet';
+import { User } from '../../../src/api/models/User';
+
+export class CreatePets implements SeedsInterface {
+
+    public async seed(factory: FactoryInterface): Promise<any> {
+        const connection = await factory.getConnection();
+        const em = connection.createEntityManager();
+
+        await times(10, async (n) => {
+            // This creates a pet in the database
+            const pet = await factory.get(Pet).create();
+            // This only returns a entity with fake data
+            const user = await factory.get(User).make();
+            user.pets = [pet];
+            await em.save(user);
+        });
+    }
+
+}
 ```
 
 ### 2. Create a seed file

@@ -7,5 +7,4 @@ export interface SeedsInterface {
      * Seed data into the databas.
      */
     seed(factory: FactoryInterface): Promise<any>;
-
 }
