@@ -1,12 +1,12 @@
 {
     "swagger": "2.0",
-    "host": "localhost:3000",
+    "host": "",
     "info": {
         "title": "",
         "description": "",
         "version": ""
     },
-    "basePath": "/api",
+    "basePath": "",
     "consumes": [
         "application/json"
     ],
