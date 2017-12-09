@@ -13,6 +13,8 @@ dotenv.config({ path: path.join(process.cwd(), `.env${((process.env.NODE_ENV ===
 export const env = {
     node: process.env.NODE_ENV || 'development',
     isProduction: process.env.NODE_ENV === 'production',
+    isTest: process.env.NODE_ENV === 'test',
+    isDevelopment: process.env.NODE_ENV === 'development',
     app: {
         name: getOsEnv('APP_NAME'),
         version: (pkg as any).version,
@@ -29,6 +31,8 @@ export const env = {
             controllers: [path.join(__dirname, '..', 'api/**/*Controller{.js,.ts}')],
             middlewares: [path.join(__dirname, '..', 'api/**/*Middleware{.js,.ts}')],
             interceptors: [path.join(__dirname, '..', 'api/**/*Interceptor{.js,.ts}')],
+            queries: [path.join(__dirname, '..', 'api/**/*Query{.js,.ts}')],
+            mutations: [path.join(__dirname, '..', 'api/**/*Mutation{.js,.ts}')],
         },
     },
     log: {
@@ -48,6 +52,10 @@ export const env = {
         database: getOsEnv('DB_DATABASE'),
         synchronize: toBool(getOsEnv('DB_SYNCHRONIZE')),
         logging: toBool(getOsEnv('DB_LOGGING')),
+    },
+    graphql: {
+        enabled: toBool(getOsEnv('GRAPHQL_ENABLED')),
+        route: getOsEnv('GRAPHQL_ROUTE'),
     },
     swagger: {
         enabled: toBool(getOsEnv('SWAGGER_ENABLED')),
