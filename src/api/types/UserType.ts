@@ -1,8 +1,13 @@
+import { PetService } from './../services/PetService';
 import {
     GraphQLID,
     GraphQLString,
     GraphQLObjectType,
+    GraphQLList,
 } from 'graphql';
+import { PetType } from './PetType';
+import { User } from '../models/User';
+import { GraphQLContext } from '../../lib/graphql';
 
 export const UserType = new GraphQLObjectType({
     name: 'User',
@@ -24,9 +29,11 @@ export const UserType = new GraphQLObjectType({
             type: GraphQLString,
             description: 'The email of this user.',
         },
-        // pets: {
-        //     type: GraphQLString,
-        //     description: 'The personal number of this user.‚',
-        // },
+        pets: {
+            type: new GraphQLList(PetType),
+            description: 'The pets of a user',
+            resolve: (user: User, args: any, context: GraphQLContext<any, any>) =>
+                context.container.get<PetService>(PetService).findByUser(user),
+        },
     },
 });
