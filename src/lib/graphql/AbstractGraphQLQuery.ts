@@ -1,7 +1,7 @@
 import { AbstractGraphQLHooks } from './AbstractGraphQLHooks';
 
 
-export abstract class AbstractQuery<TContext, TResult, TArgs> extends AbstractGraphQLHooks<TContext, TResult, TArgs> {
+export abstract class AbstractGraphQLQuery<TContext, TResult, TArgs> extends AbstractGraphQLHooks<TContext, TResult, TArgs> {
 
     /**
      * This will be called by graphQL and they need to have it not as a

@@ -1,11 +1,5 @@
 import { UserError } from './graphql-error-handling';
 
-// export interface GraphQLHooks {
-//     before<C, A, S>(context: C, args: A, source?: S): Promise<A> | A;
-//     after<R, C, A, S>(result: R, context: C, args: A, source?: S): Promise<R> | R;
-//     run<S, A, C, R>(rootOrSource: S, args: A, context: C): Promise<R> | Promise<undefined> | R | undefined;
-// }implements GraphQLHooks
-
 export abstract class AbstractGraphQLHooks<TContext, TResult, TArgs>  {
 
     /**

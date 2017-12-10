@@ -1,12 +1,12 @@
 import { GraphQLFieldConfig, GraphQLList } from 'graphql';
-import { Query, AbstractQuery, GraphQLContext } from './../../lib/graphql';
+import { Query, AbstractGraphQLQuery, GraphQLContext } from './../../lib/graphql';
 import { UserService } from '../services/UserService';
 import { UserType } from './../types/UserType';
 import { User } from '../models/User';
 import { Logger } from '../../core/Logger';
 
 @Query()
-export class GetUsersQuery extends AbstractQuery<GraphQLContext<any, any>, User[], any> implements GraphQLFieldConfig {
+export class GetUsersQuery extends AbstractGraphQLQuery<GraphQLContext<any, any>, User[], any> implements GraphQLFieldConfig {
     public type = new GraphQLList(UserType);
     public allow = [];
     public args = {};
