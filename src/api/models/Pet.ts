@@ -17,7 +17,9 @@ export class Pet {
     @Column()
     public age: number;
 
-    @Column()
+    @Column({
+        nullable: true,
+    })
     public userId: number;
 
     @ManyToOne(type => User, user => user.pets)

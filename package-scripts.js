@@ -104,6 +104,24 @@ module.exports = {
                     script: 'nps "test --coverage"'
                 }
             },
+            integration: {
+                default: {
+                    script: series(
+                        'nps banner.test',
+                        'nps test.integration.pretest',
+                        'nps test.integration.run'
+                    )
+                },
+                pretest: {
+                    script: 'tslint -c ./tslint.json -t stylish ./test/integration/**/*.ts'
+                },
+                verbose: {
+                    script: 'nps "test.integration --verbose"'
+                },
+                run: {
+                    script: 'cross-env NODE_ENV=test jest --testPathPattern=integration -i'
+                },
+            },
             e2e: {
                 default: {
                     script: series(
