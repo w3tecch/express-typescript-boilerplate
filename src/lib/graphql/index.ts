@@ -1,12 +1,15 @@
 import * as express from 'express';
 import * as GraphQLHTTP from 'express-graphql';
+import * as DataLoader from 'dataloader';
 import { GraphQLSchema, GraphQLObjectType } from 'graphql';
-import { Container as container } from 'typedi';
+import { Container as container, ObjectType } from 'typedi';
 
-import { GraphQLContext } from './GraphQLContext';
+import { GraphQLContext, GraphQLContextDataLoader } from './GraphQLContext';
 import { MetadataArgsStorage } from './MetadataArgsStorage';
 import { importClassesFromDirectories } from './importClassesFromDirectories';
 import { handlingErrors, getErrorCode, getErrorMessage } from './graphql-error-handling';
+import { ensureInputOrder } from './dataloader';
+import { Repository, getCustomRepository, getRepository } from 'typeorm';
 
 // -------------------------------------------------------------------------
 // Main exports
@@ -25,12 +28,40 @@ export * from './graphql-error-handling';
 // -------------------------------------------------------------------------
 
 /**
+ * Creates a new dataloader wiht the typorm repository
+ */
+export function createDataLoader<T>(obj: ObjectType<T>, method?: string, key?: string): DataLoader<any, any> {
+    let repository;
+    try {
+        repository = getCustomRepository<Repository<any>>(obj);
+    } catch (errorRepo) {
+        try {
+            repository = getRepository(obj);
+        } catch (errorModel) {
+            throw new Error('Could not create a dataloader, because obj is nether model or repository!');
+        }
+    }
+
+    return new DataLoader(async (ids: number[]) => {
+        let items = [];
+        if (method) {
+            items = await repository[method](ids);
+        } else {
+            items = await repository.findByIds(ids);
+        }
+
+        return ensureInputOrder(ids, items, key || 'id');
+    });
+}
+
+/**
  * Defines the options to create a GraphQLServer
  */
 export interface GraphQLServerOptions<TData> {
     queries: string[];
     mutations: string[];
     route?: string;
+    dataLoaders?: GraphQLContextDataLoader;
     editorEnabled?: boolean;
     contextData?: TData;
 }
@@ -56,6 +87,7 @@ export function createGraphQLServer<TData>(expressApp: express.Application, opti
             container,
             request,
             response,
+            dataLoaders: options.dataLoaders || {},
             resolveArgs: {},
             data: options.contextData,
         };
