@@ -14,7 +14,7 @@ export const graphqlLoader: MicroframeworkLoader = (settings: MicroframeworkSett
             route: env.graphql.route,
             editorEnabled: env.graphql.enabled,
             queries: env.app.dirs.queries,
-            mutations: env.app.dirs.queries,
+            mutations: env.app.dirs.mutations,
             dataLoaders: {
                 users: createDataLoader(UserRepository),
                 pets: createDataLoader(Pet),
