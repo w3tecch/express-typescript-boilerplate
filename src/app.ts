@@ -27,7 +27,7 @@ import { eventDispatchLoader } from './loaders/eventDispatchLoader';
 bootstrapMicroframework({
     /**
      * Loader is a place where you can configure all your modules during microframework
-     * bootstrap. All loaders are executed one by one in a sequential order.
+     * bootstrap process. All loaders are executed one by one in a sequential order.
      */
     loaders: [
         winstonLoader,

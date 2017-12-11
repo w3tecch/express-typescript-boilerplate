@@ -119,6 +119,7 @@ module.exports = {
                     script: 'nps "test.integration --verbose"'
                 },
                 run: {
+                    // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
                     script: 'cross-env NODE_ENV=test jest --testPathPattern=integration -i'
                 },
             },
@@ -127,7 +128,6 @@ module.exports = {
                     script: series(
                         'nps banner.test',
                         'nps test.e2e.pretest',
-                        runInNewWindow(series('nps build', 'nps start')),
                         'nps test.e2e.run'
                     )
                 },
@@ -136,11 +136,10 @@ module.exports = {
                 },
                 verbose: {
                     script: 'nps "test.e2e --verbose"'
+                },run: {
+                    // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
+                    script: 'cross-env NODE_ENV=test jest --testPathPattern=e2e -i'
                 },
-                run: series(
-                    `wait-on --timeout 120000 http-get://localhost:3000/api/info`,
-                    'cross-env NODE_ENV=test jest --testPathPattern=e2e -i'
-                )
             }
         },
         /**

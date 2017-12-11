@@ -42,6 +42,7 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **API Documentation** thanks to [swagger](http://swagger.io/).
 - **API Monitoring** thanks to [express-status-monitor](https://github.com/RafalWilinski/express-status-monitor).
 - **Integrated Testing Tool** thanks to [Jest](https://facebook.github.io/jest).
+- **E2E API Testing** thanks to [supertest](https://github.com/visionmedia/supertest).
 - **Basic Security Features** thanks to [Helmet](https://helmetjs.github.io/).
 - **Easy event dispatching** thanks to [event-dispatch](https://github.com/pleerock/event-dispatch).
 - **Fast Database Building** with simple migration from [TypeORM](https://github.com/typeorm/typeorm).
@@ -389,6 +390,7 @@ npm start db.seed
 | [Helmet](https://helmetjs.github.io/) | Helmet helps you secure your Express apps by setting various HTTP headers. It’s not a silver bullet, but it can help! |
 | [Auth0 API Documentation](https://auth0.com/docs/api/management/v2) | Authentification service |
 | [Jest](http://facebook.github.io/jest/) | Delightful JavaScript Testing Library for unit and e2e tests |
+| [supertest](https://github.com/visionmedia/supertest) | Super-agent driven library for testing node.js HTTP servers using a fluent API |
 | [swagger Documentation](http://swagger.io/) | API Tool to describe and document your api. |
 | [SQLite Documentation](https://www.sitepoint.com/getting-started-sqlite3-basic-commands/) | Getting Started with SQLite3 – Basic Commands. |
 | [GraphQL Documentation](http://graphql.org/graphql-js/) | A query language for your API. |
