@@ -3,13 +3,13 @@ import { createConnection, useContainer, Connection } from 'typeorm';
 
 import { Pet } from '../../src/api/models/Pet';
 import { PetService } from './../../src/api/services/PetService';
-import { createDatabaseConnection, prepareDatabase, closeDatabase } from './utils/database';
+import { createDatabaseConnection, synchronizeDatabase, closeDatabase } from './utils/database';
 
 describe('PetService', () => {
 
     let connection: Connection;
     beforeAll(async () => connection = await createDatabaseConnection());
-    beforeEach(() => prepareDatabase(connection));
+    beforeEach(() => synchronizeDatabase(connection));
     afterAll(() => closeDatabase(connection));
 
     test('should create a new pet in the database', async (done) => {
