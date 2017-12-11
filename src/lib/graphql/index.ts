@@ -28,7 +28,7 @@ export * from './graphql-error-handling';
 // -------------------------------------------------------------------------
 
 /**
- * Creates a new dataloader wiht the typorm repository
+ * Creates a new dataloader with the typorm repository
  */
 export function createDataLoader<T>(obj: ObjectType<T>, method?: string, key?: string): DataLoader<any, any> {
     let repository;
