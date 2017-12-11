@@ -20,6 +20,7 @@ import { monitorLoader } from './loaders/monitorLoader';
 import { homeLoader } from './loaders/homeLoader';
 import { publicLoader } from './loaders/publicLoader';
 import { iocLoader } from './loaders/iocLoader';
+import { graphqlLoader } from './loaders/graphqlLoader';
 import { eventDispatchLoader } from './loaders/eventDispatchLoader';
 
 
@@ -38,6 +39,7 @@ bootstrapMicroframework({
         monitorLoader,
         homeLoader,
         publicLoader,
+        graphqlLoader,
     ],
 })
     .then(() => banner(log))

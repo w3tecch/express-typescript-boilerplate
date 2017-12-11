@@ -18,6 +18,8 @@
 [Jest](https://facebook.github.io/jest/),
 [Swagger](http://swagger.io/),
 [validatejs](https://validatejs.org/),
+[GraphQL](http://graphql.org/),
+[DataLoaders](https://github.com/facebook/dataloader),
 by [w3tech](https://github.com/w3tecch)
 
 ## Why
@@ -44,6 +46,8 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **Easy event dispatching** thanks to [event-dispatch](https://github.com/pleerock/event-dispatch).
 - **Fast Database Building** with simple migration from [TypeORM](https://github.com/typeorm/typeorm).
 - **Easy Data Seeding** with our own factories.
+- **GraphQL** provides as a awesome query language for our api [GraphQL](http://graphql.org/).
+- **DataLoaders** helps with performance thanks to caching and batching [DataLoaders](https://github.com/facebook/dataloader).
 
 ### Comming soon
 
@@ -128,6 +132,7 @@ All script are defined in the package.json file, but the most important ones are
 ### Tests
 
 - Run the unit tests using `npm start test` (There is also a vscode task for this called `test`).
+- Run the integration tests using `npm start test:integration`.
 - Run the e2e tests using `npm start test:e2e` and don't forget to start your application and your [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server).
 
 ### Running in dev mode
@@ -165,9 +170,11 @@ The swagger and the monitor route can be altered in the `.env` file.
 | Route          | Description |
 | -------------- | ----------- |
 | **/api**       | Shows us the name, description and the version of the package.json |
+| **/graphql**   | Route to the graphql editor or your query/mutations requests |
 | **/swagger**   | This is the Swagger UI with our API documentation |
 | **/monitor**   | Shows a small monitor page for the server |
 | **/api/users** | Example entity endpoint |
+| **/api/pets**  | Example entity endpoint |
 
 ## Project Structure
 
@@ -187,6 +194,9 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **src/api/services/**             | Service layer |
 | **src/api/subscribers/**          | Event subscribers |
 | **src/api/validators/**           | Custom validators, which can be used in the request classes |
+| **src/api/queries/**              | GraphQL queries |
+| **src/api/mutations/**            | GraphQL mutations |
+| **src/api/types/**                | GraphQL types |
 | **src/api/** swagger.json         | Swagger documentation |
 | **src/auth/**                     | Authentication checkers and services |
 | **src/core/**                     | The core features like logger and env variables |
@@ -199,9 +209,12 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **src/types/** *.d.ts             | Custom type definitions and files that aren't on DefinitelyTyped |
 | **test**                          | Tests |
 | **test/e2e/** *.test.ts           | End-2-End tests (like e2e) |
+| **test/integration/** *.test.ts   | Integration test with SQLite3 |
 | **test/unit/** *.test.ts          | Unit tests |
 | .env.example                      | Environment configurations |
+| .env.test                         | Test environment configurations |
 | ormconfig.json                    | TypeORM configuration for the database. Used by seeds and the migration. (generated file) |
+| mydb.sql                          | SQLite database for integration tests. Ignored by git and only available after integration tests |
 
 ## Logging
 
@@ -378,6 +391,9 @@ npm start db.seed
 | [Auth0 API Documentation](https://auth0.com/docs/api/management/v2) | Authentification service |
 | [Jest](http://facebook.github.io/jest/) | Delightful JavaScript Testing Library for unit and e2e tests |
 | [swagger Documentation](http://swagger.io/) | API Tool to describe and document your api. |
+| [SQLite Documentation](https://www.sitepoint.com/getting-started-sqlite3-basic-commands/) | Getting Started with SQLite3 – Basic Commands. |
+| [GraphQL Documentation](http://graphql.org/graphql-js/) | A query language for your API. |
+| [DataLoader Documentation](https://github.com/facebook/dataloader) | DataLoader is a generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching. |
 
 ## Related Projects
 
