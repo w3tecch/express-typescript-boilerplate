@@ -203,6 +203,7 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **src/database/factories**        | Factory the generate fake entities |
 | **src/database/migrations**       | Database migration scripts |
 | **src/database/seeds**            | Seeds to create some data in the database |
+| **src/database/mydb.sql           | SQLite database for integration tests |
 | **src/decorators/**               | Custom decorators like @Logger & @EventDispatch |
 | **src/loaders/**                  | Loader is a place where you can configure your app |
 | **src/public/**                   | Static assets (fonts, css, js, img). |
