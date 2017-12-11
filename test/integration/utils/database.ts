@@ -13,6 +13,10 @@ export const createDatabaseConnection = async (): Promise<Connection> => {
     return connection;
 };
 
-export const prepareDatabase = (connection: Connection) => {
+export const synchronizeDatabase = (connection: Connection) => {
     return connection.synchronize(true);
+};
+
+export const closeDatabase = (connection: Connection) => {
+    return connection.close();
 };

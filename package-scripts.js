@@ -6,77 +6,57 @@ const { series, crossEnv, concurrent, rimraf, runInNewWindow } = require('nps-ut
 
 module.exports = {
     scripts: {
-        default: {
-            script: 'nps start'
-        },
+        default: 'nps start',
         /**
          * Starts the builded app from the dist directory
          */
-        start: {
-            script: 'node dist/app.js'
-        },
+        start: 'node dist/app.js',
         /**
          * Serves the current app and watches for changes to restart it
          */
-        serve: {
-            script: series(
-                'nps banner.serve',
-                'nodemon --watch src --watch .env'
-            )
-        },
+        serve: series(
+            'nps banner.serve',
+            'nodemon --watch src --watch .env'
+        ),
         /**
          * Setup's the development environment and the database
          */
-        setup: {
-            script: series(
-                'yarn install',
-                'nps db.migrate',
-                'nps db.seed'
-            )
-        },
+        setup: series(
+            'yarn install',
+            'nps db.migrate',
+            'nps db.seed'
+        ),
         /**
          * Builds the app into the dist directory
          */
-        build: {
-            script: series(
-                'nps banner.build',
-                'nps lint',
-                'nps clean.dist',
-                'nps transpile',
-                'nps copy'
-            )
-        },
+        build: series(
+            'nps banner.build',
+            'nps lint',
+            'nps clean.dist',
+            'nps transpile',
+            'nps copy'
+        ),
         /**
          * Database scripts
          */
         db: {
-            migrate: {
-                script: series(
-                    'nps banner.migrate',
-                    'nps db.config',
-                    runFast('./node_modules/typeorm/cli.js migrations:run')
-                )
-            },
-            revert: {
-                script: series(
-                    'nps banner.revert',
-                    'nps db.config',
-                    runFast('./node_modules/typeorm/cli.js migrations:revert')
-                )
-            },
-            seed: {
-                script: series(
-                    'nps banner.seed',
-                    'nps db.config',
-                    runFast('./src/lib/seeds/')
-                )
-            },
-            config: {
-                script: runFast('./src/lib/ormconfig.ts')
-            },
-            drop: {
-                script: runFast('./node_modules/typeorm/cli.js schema:drop')
-            }
+            migrate: series(
+                'nps banner.migrate',
+                'nps db.config',
+                runFast('./node_modules/typeorm/cli.js migrations:run')
+            ),
+            revert: series(
+                'nps banner.revert',
+                'nps db.config',
+                runFast('./node_modules/typeorm/cli.js migrations:revert')
+            ),
+            seed: series(
+                'nps banner.seed',
+                'nps db.config',
+                runFast('./src/lib/seeds/')
+            ),
+            config: runFast('./src/lib/ormconfig.ts'),
+            drop: runFast('./node_modules/typeorm/cli.js schema:drop')
         },
         /**
          * These run various kinds of tests. Default is unit.
@@ -84,112 +64,73 @@ module.exports = {
         test: {
             default: 'nps test.unit',
             unit: {
-                default: {
-                    script: series(
-                        'nps banner.test',
-                        'nps test.unit.pretest',
-                        'nps test.unit.run'
-                    )
-                },
-                pretest: {
-                    script: 'tslint -c ./tslint.json -t stylish ./test/unit/**/*.ts'
-                },
-                run: {
-                    script: 'cross-env NODE_ENV=test jest --testPathPattern=unit'
-                },
-                verbose: {
-                    script: 'nps "test --verbose"'
-                },
-                coverage: {
-                    script: 'nps "test --coverage"'
-                }
+                default: series(
+                    'nps banner.test',
+                    'nps test.unit.pretest',
+                    'nps test.unit.run'
+                ),
+                pretest: 'tslint -c ./tslint.json -t stylish ./test/unit/**/*.ts',
+                run: 'cross-env NODE_ENV=test jest --testPathPattern=unit',
+                verbose: 'nps "test --verbose"',
+                coverage: 'nps "test --coverage"'
             },
             integration: {
-                default: {
-                    script: series(
-                        'nps banner.test',
-                        'nps test.integration.pretest',
-                        'nps test.integration.run'
-                    )
-                },
-                pretest: {
-                    script: 'tslint -c ./tslint.json -t stylish ./test/integration/**/*.ts'
-                },
-                verbose: {
-                    script: 'nps "test.integration --verbose"'
-                },
-                run: {
-                    // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
-                    script: 'cross-env NODE_ENV=test jest --testPathPattern=integration -i'
-                },
+                default: series(
+                    'nps banner.test',
+                    'nps test.integration.pretest',
+                    'nps test.integration.run'
+                ),
+                pretest: 'tslint -c ./tslint.json -t stylish ./test/integration/**/*.ts',
+                verbose: 'nps "test.integration --verbose"',
+                // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
+                run: 'cross-env NODE_ENV=test jest --testPathPattern=integration -i',
             },
             e2e: {
-                default: {
-                    script: series(
-                        'nps banner.test',
-                        'nps test.e2e.pretest',
-                        'nps test.e2e.run'
-                    )
-                },
-                pretest: {
-                    script: 'tslint -c ./tslint.json -t stylish ./test/e2e/**/*.ts'
-                },
-                verbose: {
-                    script: 'nps "test.e2e --verbose"'
-                },run: {
-                    // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
-                    script: 'cross-env NODE_ENV=test jest --testPathPattern=e2e -i'
-                },
+                default: series(
+                    'nps banner.test',
+                    'nps test.e2e.pretest',
+                    'nps test.e2e.run'
+                ),
+                pretest: 'tslint -c ./tslint.json -t stylish ./test/e2e/**/*.ts',
+                verbose: 'nps "test.e2e --verbose"',
+                // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
+                run: 'cross-env NODE_ENV=test jest --testPathPattern=e2e -i',
             }
         },
         /**
          * Runs TSLint over your project
          */
-        lint: {
-            script: `tslint -c ./tslint.json -p tsconfig.json src/**/*.ts --format stylish`
-        },
+        lint: `tslint -c ./tslint.json -p tsconfig.json src/**/*.ts --format stylish`,
         /**
          * Transpile your app into javascript
          */
-        transpile: {
-            script: `tsc`
-        },
+        transpile: `tsc`,
         /**
          * Clean files and folders
          */
         clean: {
-            default: {
-                script: series(
-                    `nps banner.clean`,
-                    `nps clean.dist`
-                )
-            },
-            dist: {
-                script: rimraf('./dist')
-            }
+            default: series(
+                `nps banner.clean`,
+                `nps clean.dist`
+            ),
+            dist: rimraf('./dist')
         },
         /**
          * Copies static files to the build folder
          */
         copy: {
-            default: {
-                script: series(
-                    `nps copy.swagger`,
-                    `nps copy.public`
-                )
-            },
-            swagger: {
-                script: copy(
-                    './src/api/swagger.json',
-                    './dist'
-                )
-            },
-            public: {
-                script: copy(
-                    './src/public/*',
-                    './dist'
-                )
-            }
+            default: series(
+                `nps copy.swagger`,
+                `nps copy.public`
+            ),
+            swagger: copy(
+                './src/api/swagger.json',
+                './dist'
+            ),
+            public: copy(
+                './src/public/*',
+                './dist'
+            )
         },
         /**
          * This creates pretty banner to the terminal

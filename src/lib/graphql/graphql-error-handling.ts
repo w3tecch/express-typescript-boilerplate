@@ -105,7 +105,7 @@ export const getErrorCode = (message: string): string => {
     if (hasErrorCode(message)) {
         return message.substring(0, 3);
     }
-    return '000'; // unkown error code
+    return '500'; // unkown error code
 };
 
 export const getErrorMessage = (message: string): string => {
