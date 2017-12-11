@@ -1,6 +1,7 @@
 import { Application } from 'express';
 import * as request from 'supertest';
 import { bootstrapApp } from '../utils/app';
+import { env } from '../../../src/core/env';
 
 describe('/api', () => {
 
@@ -13,7 +14,7 @@ describe('/api', () => {
             .expect('Content-Type', /json/)
             .expect(200);
 
-        console.log(response);
+        expect(response.body.version).toBe(env.app.version);
         done();
     });
 
