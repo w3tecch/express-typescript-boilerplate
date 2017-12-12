@@ -325,7 +325,7 @@ export class CreateUsers implements SeedsInterface {
     public async seed(factory: FactoryInterface): Promise<any> {
         await factory
             .get(User)
-            .create(10);
+            .createMany(10);
     }
 
 }
@@ -339,7 +339,7 @@ export class CreateUsers implements SeedsInterface {
     public async seed(factory: FactoryInterface): Promise<any> {
         await factory
             .get(User, 'admin')
-            .create(1);
+            .create();
     }
 
 }
@@ -353,7 +353,7 @@ await factory.get(User)
     .each(async (user: User) => {
 
         const pets: Pet[] = await factory.get(Pet)
-            .create(2);
+            .createMany(2);
 
         const petIds = pets.map((pet: Pet) => pet.Id);
         await user.pets().attach(petIds);
@@ -387,6 +387,7 @@ npm start db.seed
 | [Auth0 API Documentation](https://auth0.com/docs/api/management/v2) | Authentification service |
 | [Jest](http://facebook.github.io/jest/) | Delightful JavaScript Testing Library for unit and e2e tests |
 | [supertest](https://github.com/visionmedia/supertest) | Super-agent driven library for testing node.js HTTP servers using a fluent API |
+| [nock](https://github.com/node-nock/nock) | HTTP mocking and expectations library |
 | [swagger Documentation](http://swagger.io/) | API Tool to describe and document your api. |
 | [SQLite Documentation](https://www.sitepoint.com/getting-started-sqlite3-basic-commands/) | Getting Started with SQLite3 – Basic Commands. |
 | [GraphQL Documentation](http://graphql.org/graphql-js/) | A query language for your API. |
