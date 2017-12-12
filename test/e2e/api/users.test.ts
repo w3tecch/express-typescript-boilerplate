@@ -10,6 +10,7 @@ import { env } from '../../../src/core/env';
 import { synchronizeDatabase, closeDatabase } from '../../integration/utils/database';
 import { fakeAuthenticationForUser } from '../utils/auth';
 
+
 describe('/api/users', () => {
 
     // -------------------------------------------------------------------------

@@ -1,5 +1,3 @@
-
-
 import * as http from 'http';
 import { bootstrapMicroframework, Microframework } from 'microframework';
 import { Application } from 'express';
@@ -14,6 +12,7 @@ import { publicLoader } from './../../../src/loaders/publicLoader';
 import { iocLoader } from './../../../src/loaders/iocLoader';
 import { graphqlLoader } from './../../../src/loaders/graphqlLoader';
 import { eventDispatchLoader } from './../../../src/loaders/eventDispatchLoader';
+
 
 export interface BootstrapSettings {
     app: Application;
