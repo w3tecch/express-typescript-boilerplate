@@ -5,7 +5,6 @@ import { env } from '../../../src/core/env';
 
 export const fakeAuthenticationForUser = (user: User, persist = false): nock.Scope => {
     const scope = nock(env.auth.route)
-        // .persist()
         .post('')
         .reply(200, {
             user_id: `auth0|${user.email}`,
