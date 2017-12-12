@@ -50,11 +50,6 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **GraphQL** provides as a awesome query language for our api [GraphQL](http://graphql.org/).
 - **DataLoaders** helps with performance thanks to caching and batching [DataLoaders](https://github.com/facebook/dataloader).
 
-### Comming soon
-
-- **Custom Commands** are also available in our setup and really easy to use or even extend.
-- **Scaffolding Commands** will speed up your development tremendously as you should focus on business code and not scaffolding.
-
 # Table of Contents
 
 - [Getting Started](#getting-started)
