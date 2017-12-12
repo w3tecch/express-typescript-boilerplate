@@ -113,11 +113,12 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^21.1.5",
+    "@types/nock": "^8.2.1",
     "cross-env": "^5.1.1",
     "jest": "^21.2.1",
     "mock-express-request": "^0.2.0",
     "mock-express-response": "^0.2.1",
-    "nock": "^9.1.0",
+    "nock": "^9.1.4",
     "sqlite3": "^3.1.13",
     "ts-jest": "^21.1.4"
   }

@@ -85,6 +85,12 @@
   dependencies:
     "@types/express" "*"
 
+"@types/nock@^8.2.1":
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/@types/nock/-/nock-8.2.1.tgz#1fbe5bdecb943c109a778553fa4d2401cb9394b4"
+  dependencies:
+    "@types/node" "*"
+
 "@types/node@*":
   version "8.0.57"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.57.tgz#e5d8b4dc112763e35cfc51988f4f38da3c486d99"
@@ -2973,7 +2979,7 @@ nocache@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/nocache/-/nocache-2.0.0.tgz#202b48021a0c4cbde2df80de15a17443c8b43980"
 
-nock@^9.1.0:
+nock@^9.1.4:
   version "9.1.4"
   resolved "https://registry.yarnpkg.com/nock/-/nock-9.1.4.tgz#5cdda89c5effaed0f448486f0135bf7b1e7bf1dc"
   dependencies:
