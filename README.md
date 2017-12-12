@@ -129,7 +129,7 @@ All script are defined in the package.json file, but the most important ones are
 
 - Run the unit tests using `npm start test` (There is also a vscode task for this called `test`).
 - Run the integration tests using `npm start test:integration`.
-- Run the e2e tests using `npm start test:e2e` and don't forget to start your application and your [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server).
+- Run the e2e tests using `npm start test:e2e`.
 
 ### Running in dev mode
 
