@@ -69,7 +69,7 @@ module.exports = {
                     'nps test.unit.pretest',
                     'nps test.unit.run'
                 ),
-                pretest: 'tslint -c ./tslint.json -t stylish ./test/unit/**/*.ts',
+                pretest: tslint(`./test/unit/**.ts`),
                 run: 'cross-env NODE_ENV=test jest --testPathPattern=unit',
                 verbose: 'nps "test --verbose"',
                 coverage: 'nps "test --coverage"'
@@ -80,7 +80,7 @@ module.exports = {
                     'nps test.integration.pretest',
                     'nps test.integration.run'
                 ),
-                pretest: 'tslint -c ./tslint.json -t stylish ./test/integration/**/*.ts',
+                pretest: tslint(`./test/integration/**.ts`),
                 verbose: 'nps "test.integration --verbose"',
                 // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
                 run: 'cross-env NODE_ENV=test jest --testPathPattern=integration -i',
@@ -91,7 +91,7 @@ module.exports = {
                     'nps test.e2e.pretest',
                     'nps test.e2e.run'
                 ),
-                pretest: 'tslint -c ./tslint.json -t stylish ./test/e2e/**/*.ts',
+                pretest: tslint(`./test/e2e/**.ts`),
                 verbose: 'nps "test.e2e --verbose"',
                 // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
                 run: 'cross-env NODE_ENV=test jest --testPathPattern=e2e -i',
@@ -100,7 +100,7 @@ module.exports = {
         /**
          * Runs TSLint over your project
          */
-        lint: `tslint -c ./tslint.json -p tsconfig.json src/**/*.ts --format stylish`,
+        lint: tslint(`./src/**/*.ts`),
         /**
          * Transpile your app into javascript
          */
@@ -167,4 +167,8 @@ function run(path) {
 
 function runFast(path) {
     return run(`-F ${path}`);
+}
+
+function tslint(path) {
+    return `tslint -c './tslint.json' '${path}' --format stylish`;
 }
