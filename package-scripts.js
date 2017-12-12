@@ -53,7 +53,7 @@ module.exports = {
             seed: series(
                 'nps banner.seed',
                 'nps db.config',
-                runFast('./src/lib/seeds/')
+                runFast('./src/lib/seeds/cli.ts')
             ),
             config: runFast('./src/lib/ormconfig.ts'),
             drop: runFast('./node_modules/typeorm/cli.js schema:drop')
