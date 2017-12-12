@@ -1,5 +1,5 @@
 import { Container } from 'typedi';
-import { createConnection, useContainer, Connection } from 'typeorm';
+import { Connection } from 'typeorm';
 
 import { Pet } from '../../src/api/models/Pet';
 import { PetService } from './../../src/api/services/PetService';
@@ -22,8 +22,12 @@ describe('PetService', () => {
         expect(resultCreate.age).toBe(pet.age);
 
         const resultFind = await service.findOne(resultCreate.id);
-        expect(resultFind.name).toBe(pet.name);
-        expect(resultFind.age).toBe(pet.age);
+        if (resultFind) {
+            expect(resultFind.name).toBe(pet.name);
+            expect(resultFind.age).toBe(pet.age);
+        } else {
+            fail('Could not find pet');
+        }
         done();
     });
 

@@ -1,16 +1,12 @@
 import * as http from 'http';
-import { bootstrapMicroframework, Microframework } from 'microframework-w3tec';
+import { bootstrapMicroframework } from 'microframework-w3tec';
 import { Application } from 'express';
 import { Connection } from 'typeorm/connection/Connection';
 import { expressLoader } from './../../../src/loaders/expressLoader';
 import { winstonLoader } from './../../../src/loaders/winstonLoader';
-import { swaggerLoader } from './../../../src/loaders/swaggerLoader';
-import { monitorLoader } from './../../../src/loaders/monitorLoader';
 import { homeLoader } from './../../../src/loaders/homeLoader';
 import { typeormLoader } from '../utils/typeormLoader';
-import { publicLoader } from './../../../src/loaders/publicLoader';
 import { iocLoader } from './../../../src/loaders/iocLoader';
-import { graphqlLoader } from './../../../src/loaders/graphqlLoader';
 import { eventDispatchLoader } from './../../../src/loaders/eventDispatchLoader';
 
 

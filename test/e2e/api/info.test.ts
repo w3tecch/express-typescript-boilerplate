@@ -1,4 +1,3 @@
-import { Application } from 'express';
 import * as request from 'supertest';
 import { bootstrapApp, BootstrapSettings } from '../utils/bootstrap';
 import { env } from '../../../src/core/env';

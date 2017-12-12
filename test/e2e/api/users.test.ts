@@ -1,12 +1,10 @@
 import * as nock from 'nock';
 import * as request from 'supertest';
-import { Application } from 'express';
 import { CreateBruce } from './../../../src/database/seeds/CreateBruce';
 import { getFactory } from './../../../src/lib/seeds/index';
 import { Factory } from './../../../src/lib/seeds/Factory';
 import { User } from './../../../src/api/models/User';
 import { bootstrapApp, BootstrapSettings } from '../utils/bootstrap';
-import { env } from '../../../src/core/env';
 import { synchronizeDatabase, closeDatabase } from '../../integration/utils/database';
 import { fakeAuthenticationForUser } from '../utils/auth';
 

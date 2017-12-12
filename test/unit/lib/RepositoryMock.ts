@@ -1,6 +1,3 @@
-import { validate } from 'class-validator';
-
-
 export class RepositoryMock<T> {
 
     public one: T;
