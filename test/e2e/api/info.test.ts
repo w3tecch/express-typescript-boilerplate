@@ -1,15 +1,17 @@
 import { Application } from 'express';
 import * as request from 'supertest';
-import { bootstrapApp } from '../utils/app';
+import { bootstrapApp, BootstrapSettings } from '../utils/bootstrap';
 import { env } from '../../../src/core/env';
+import { synchronizeDatabase } from '../../integration/utils/database';
 
 describe('/api', () => {
 
-    let app: Application;
-    beforeAll(async () => app = await bootstrapApp());
+    let settings: BootstrapSettings;
+    beforeAll(async () => settings = await bootstrapApp());
+    beforeAll(async () => synchronizeDatabase(settings.connection));
 
     test('GET: / should return the api-version', async (done) => {
-        const response = await request(app)
+        const response = await request(settings.app)
             .get('/api')
             .expect('Content-Type', /json/)
             .expect(200);
