@@ -24,7 +24,7 @@ describe('/api/users', () => {
     beforeAll(async () => synchronizeDatabase(settings.connection));
     beforeAll(async () => factory = getFactory(settings.connection));
     beforeAll(async () => bruce = await factory.runSeed<User>(CreateBruce));
-    beforeAll(async () => authServer = fakeAuthenticationForUser(bruce));
+    beforeAll(async () => authServer = fakeAuthenticationForUser(bruce, true));
 
     // -------------------------------------------------------------------------
     // Tear down
