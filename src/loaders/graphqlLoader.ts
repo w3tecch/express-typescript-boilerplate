@@ -1,4 +1,4 @@
-import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework';
+import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework-w3tec';
 import { createGraphQLServer, createDataLoader } from '../lib/graphql';
 import { env } from '../core/env';
 import { PetRepository } from './../api/repositories/PetRepository';

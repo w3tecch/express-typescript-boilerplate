@@ -2804,9 +2804,9 @@ methods@^1.1.1, methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
 
-microframework@^0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/microframework/-/microframework-0.6.4.tgz#668ad0a8f5d7acdfec1bbdc3c01d430ef70021fd"
+microframework-w3tec@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/microframework-w3tec/-/microframework-w3tec-0.6.3.tgz#19a672d6a3b021ca3aaf30244b1b28bcea036ec0"
   dependencies:
     app-root-path "^2.0.1"
 

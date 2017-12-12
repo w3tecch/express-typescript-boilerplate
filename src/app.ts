@@ -11,7 +11,7 @@ import { banner } from './core/banner';
 import { Logger } from './core/Logger';
 const log = new Logger(__filename);
 
-import { bootstrapMicroframework } from 'microframework';
+import { bootstrapMicroframework } from 'microframework-w3tec';
 import { expressLoader } from './loaders/expressLoader';
 import { winstonLoader } from './loaders/winstonLoader';
 import { typeormLoader } from './loaders/typeormLoader';

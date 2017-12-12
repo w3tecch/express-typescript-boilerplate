@@ -1,6 +1,6 @@
 import { Application } from 'express';
 import { createExpressServer } from 'routing-controllers';
-import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework';
+import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework-w3tec';
 import { env } from '../core/env';
 import { authorizationChecker } from '../auth/authorizationChecker';
 import { currentUserChecker } from '../auth/currentUserChecker';

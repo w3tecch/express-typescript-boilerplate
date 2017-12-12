@@ -1,7 +1,7 @@
 import { createDatabaseConnection } from './../../integration/utils/database';
 import { Connection } from 'typeorm/connection/Connection';
 import { createConnection } from 'typeorm';
-import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework';
+import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework-w3tec';
 import { env } from '../../../src/core/env';
 
 

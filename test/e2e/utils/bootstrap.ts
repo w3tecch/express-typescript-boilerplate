@@ -1,5 +1,5 @@
 import * as http from 'http';
-import { bootstrapMicroframework, Microframework } from 'microframework';
+import { bootstrapMicroframework, Microframework } from 'microframework-w3tec';
 import { Application } from 'express';
 import { Connection } from 'typeorm/connection/Connection';
 import { expressLoader } from './../../../src/loaders/expressLoader';
