@@ -10,135 +10,257 @@ module.exports = {
         /**
          * Starts the builded app from the dist directory
          */
-        start: 'node dist/app.js',
+        start: {
+            script: 'node dist/app.js',
+            description: 'Starts the builded app from the dist directory'
+        },
         /**
          * Serves the current app and watches for changes to restart it
          */
-        serve: series(
-            'nps banner.serve',
-            'nodemon --watch src --watch .env'
-        ),
+        serve: {
+            script: series(
+                'nps banner.serve',
+                'nodemon --watch src --watch .env'
+            ),
+            description: 'Serves the current app and watches for changes to restart it'
+        },
         /**
          * Setup's the development environment and the database
          */
-        setup: series(
-            'yarn install',
-            'nps config',
-            'nps db.migrate',
-            'nps db.seed'
-        ),
-        /**
-         * Builds the app into the dist directory
-         */
-        build: series(
-            'nps banner.build',
-            'nps config',
-            'nps lint',
-            'nps clean.dist',
-            'nps transpile',
-            'nps copy'
-        ),
-        /**
-         * Database scripts
-         */
-        db: {
-            migrate: series(
-                'nps banner.migrate',
+        setup: {
+            script: series(
+                'yarn install',
+                copy(
+                    '.env.example',
+                    '.env'
+                ),
                 'nps config',
-                runFast('./node_modules/typeorm/cli.js migrations:run')
+                'nps db.migrate',
+                'nps db.seed'
             ),
-            revert: series(
-                'nps banner.revert',
-                'nps config',
-                runFast('./node_modules/typeorm/cli.js migrations:revert')
-            ),
-            seed: series(
-                'nps banner.seed',
-                'nps config',
-                runFast('./src/lib/seeds/cli.ts')
-            ),
-            drop: runFast('./node_modules/typeorm/cli.js schema:drop')
+            description: 'Setup`s the development environment and the database'
         },
         /**
          * Creates the needed configuration files
          */
-        config: series(
-            runFast('./src/lib/tsconfig.ts'),
-            runFast('./src/lib/ormconfig.ts')
-        ),
+        config: {
+            script: series(
+                runFast('./commands/tsconfig.ts'),
+                runFast('./commands/ormconfig.ts')
+            ),
+            hiddenFromHelp: true
+        },
+        /**
+         * Builds the app into the dist directory
+         */
+        build: {
+            script: series(
+                'nps banner.build',
+                'nps config',
+                'nps lint',
+                'nps clean.dist',
+                'nps transpile',
+                'nps copy'
+            ),
+            description: 'Builds the app into the dist directory'
+        },
+        /**
+         * Runs TSLint over your project
+         */
+        lint: {
+            script: tslint(`./src/**/*.ts`),
+            hiddenFromHelp: true
+        },
+        /**
+         * Transpile your app into javascript
+         */
+        transpile: {
+            script: `tsc --project ./tsconfig.build.json`,
+            hiddenFromHelp: true
+        },
+        /**
+         * Clean files and folders
+         */
+        clean: {
+            default: {
+                script: series(
+                    `nps banner.clean`,
+                    `nps clean.dist`
+                ),
+                description: 'Deletes the ./dist folder'
+            },
+            dist: {
+                script: rimraf('./dist'),
+                hiddenFromHelp: true
+            }
+        },
+        /**
+         * Copies static files to the build folder
+         */
+        copy: {
+            default: {
+                script: series(
+                    `nps copy.swagger`,
+                    `nps copy.public`
+                ),
+                hiddenFromHelp: true
+            },
+            swagger: {
+                script: copy(
+                    './src/api/swagger.json',
+                    './dist'
+                ),
+                hiddenFromHelp: true
+            },
+            public: {
+                script: copy(
+                    './src/public/*',
+                    './dist'
+                ),
+                hiddenFromHelp: true
+            }
+        },
+        /**
+         * Database scripts
+         */
+        db: {
+            migrate: {
+                script: series(
+                    'nps banner.migrate',
+                    'nps config',
+                    runFast('./node_modules/typeorm/cli.js migrations:run')
+                ),
+                description: 'Migrates the database to newest version available'
+            },
+            revert: {
+                script: series(
+                    'nps banner.revert',
+                    'nps config',
+                    runFast('./node_modules/typeorm/cli.js migrations:revert')
+                ),
+                description: 'Downgrades the database'
+            },
+            seed: {
+                script: series(
+                    'nps banner.seed',
+                    'nps config',
+                    runFast('./src/lib/seeds/cli.ts')
+                ),
+                description: 'Seeds generated records into the database'
+            },
+            drop: {
+                script: runFast('./node_modules/typeorm/cli.js schema:drop'),
+                description: 'Drops the schema of the database'
+            }
+
+        },
         /**
          * These run various kinds of tests. Default is unit.
          */
         test: {
             default: 'nps test.unit',
             unit: {
-                default: series(
-                    'nps banner.test',
-                    'nps test.unit.pretest',
-                    'nps test.unit.run'
-                ),
-                pretest: tslint(`./test/unit/**.ts`),
-                run: 'cross-env NODE_ENV=test jest --testPathPattern=unit',
-                verbose: 'nps "test --verbose"',
-                coverage: 'nps "test --coverage"'
+                default: {
+                    script: series(
+                        'nps banner.testUnit',
+                        'nps test.unit.pretest',
+                        'nps test.unit.run'
+                    ),
+                    description: 'Runs the unit tests'
+                },
+                pretest: {
+                    script: tslint(`./test/unit/**.ts`),
+                    hiddenFromHelp: true
+                },
+                run: {
+                    script: 'cross-env NODE_ENV=test jest --testPathPattern=unit',
+                    hiddenFromHelp: true
+                },
+                verbose: {
+                    script: 'nps "test --verbose"',
+                    hiddenFromHelp: true
+                },
+                coverage: {
+                    script: 'nps "test --coverage"',
+                    hiddenFromHelp: true
+                }
             },
             integration: {
-                default: series(
-                    'nps banner.test',
-                    'nps test.integration.pretest',
-                    'nps test.integration.run'
-                ),
-                pretest: tslint(`./test/integration/**.ts`),
-                verbose: 'nps "test.integration --verbose"',
-                // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
-                run: 'cross-env NODE_ENV=test jest --testPathPattern=integration -i',
+                default: {
+                    script: series(
+                        'nps banner.testIntegration',
+                        'nps test.integration.pretest',
+                        'nps test.integration.run'
+                    ),
+                    description: 'Runs the integration tests'
+                },
+                pretest: {
+                    script: tslint(`./test/integration/**.ts`),
+                    hiddenFromHelp: true
+                },
+                run: {
+                    // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
+                    script: 'cross-env NODE_ENV=test jest --testPathPattern=integration -i',
+                    hiddenFromHelp: true
+                },
+                verbose: {
+                    script: 'nps "test --verbose"',
+                    hiddenFromHelp: true
+                },
+                coverage: {
+                    script: 'nps "test --coverage"',
+                    hiddenFromHelp: true
+                }
             },
             e2e: {
-                default: series(
-                    'nps banner.test',
-                    'nps test.e2e.pretest',
-                    'nps test.e2e.run'
-                ),
-                pretest: tslint(`./test/e2e/**.ts`),
-                verbose: 'nps "test.e2e --verbose"',
-                // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
-                run: 'cross-env NODE_ENV=test jest --testPathPattern=e2e -i',
-            }
-        },
-        /**
-         * Runs TSLint over your project
-         */
-        lint: tslint(`./src/**/*.ts`),
-        /**
-         * Transpile your app into javascript
-         */
-        transpile: `tsc --project ./tsconfig.build.json`,
-        /**
-         * Clean files and folders
-         */
-        clean: {
-            default: series(
-                `nps banner.clean`,
-                `nps clean.dist`
-            ),
-            dist: rimraf('./dist')
-        },
-        /**
-         * Copies static files to the build folder
-         */
-        copy: {
-            default: series(
-                `nps copy.swagger`,
-                `nps copy.public`
-            ),
-            swagger: copy(
-                './src/api/swagger.json',
-                './dist'
-            ),
-            public: copy(
-                './src/public/*',
-                './dist'
-            )
+                default: {
+                    script: series(
+                        'nps banner.testE2E',
+                        'nps test.e2e.pretest',
+                        'nps test.e2e.run'
+                    ),
+                    description: 'Runs the e2e tests'
+                },
+                pretest: {
+                    script: tslint(`./test/e2e/**.ts`),
+                    hiddenFromHelp: true
+                },
+                run: {
+                    // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
+                    script: 'cross-env NODE_ENV=test jest --testPathPattern=e2e -i',
+                    hiddenFromHelp: true
+                },
+                verbose: {
+                    script: 'nps "test --verbose"',
+                    hiddenFromHelp: true
+                },
+                coverage: {
+                    script: 'nps "test --coverage"',
+                    hiddenFromHelp: true
+                }
+            },
+            // integration: {
+            //     default: series(
+            //         'nps banner.testIntegration',
+            //         'nps test.integration.pretest',
+            //         'nps test.integration.run'
+            //     ),
+            //     pretest: tslint(`./test/integration/**.ts`),
+            //     verbose: 'nps "test.integration --verbose"',
+            //     // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
+            //     run: 'cross-env NODE_ENV=test jest --testPathPattern=integration -i',
+            // },
+            // e2e: {
+            //     default: series(
+            //         'nps banner.testE2E',
+            //         'nps test.e2e.pretest',
+            //         'nps test.e2e.run'
+            //     ),
+            //     pretest: tslint(`./test/e2e/**.ts`),
+            //     verbose: 'nps "test.e2e --verbose"',
+            //     // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
+            //     run: 'cross-env NODE_ENV=test jest --testPathPattern=e2e -i',
+            // }
         },
         /**
          * This creates pretty banner to the terminal
@@ -146,7 +268,9 @@ module.exports = {
         banner: {
             build: banner('build'),
             serve: banner('serve'),
-            test: banner('test'),
+            testUnit: banner('test.unit'),
+            testIntegration: banner('test.integration'),
+            testE2E: banner('test.e2e'),
             migrate: banner('migrate'),
             seed: banner('seed'),
             revert: banner('revert'),
@@ -159,9 +283,8 @@ function banner(name) {
     return {
         hiddenFromHelp: true,
         silent: true,
-        logLevel: 'error',
         description: `Shows ${name} banners to the console`,
-        script: runFast(`./src/lib/banner.ts ${name}`),
+        script: runFast(`./commands/banner.ts ${name}`),
     };
 }
 
