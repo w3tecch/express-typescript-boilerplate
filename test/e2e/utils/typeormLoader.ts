@@ -1,4 +1,4 @@
-import { createDatabaseConnection } from './../../integration/utils/database';
+import { createDatabaseConnection } from './../../utils/database';
 import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework-w3tec';
 
 
