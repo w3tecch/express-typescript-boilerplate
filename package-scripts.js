@@ -23,6 +23,7 @@ module.exports = {
          */
         setup: series(
             'yarn install',
+            'nps config',
             'nps db.migrate',
             'nps db.seed'
         ),
@@ -31,6 +32,7 @@ module.exports = {
          */
         build: series(
             'nps banner.build',
+            'nps config',
             'nps lint',
             'nps clean.dist',
             'nps transpile',
@@ -42,22 +44,28 @@ module.exports = {
         db: {
             migrate: series(
                 'nps banner.migrate',
-                'nps db.config',
+                'nps config',
                 runFast('./node_modules/typeorm/cli.js migrations:run')
             ),
             revert: series(
                 'nps banner.revert',
-                'nps db.config',
+                'nps config',
                 runFast('./node_modules/typeorm/cli.js migrations:revert')
             ),
             seed: series(
                 'nps banner.seed',
-                'nps db.config',
+                'nps config',
                 runFast('./src/lib/seeds/cli.ts')
             ),
-            config: runFast('./src/lib/ormconfig.ts'),
             drop: runFast('./node_modules/typeorm/cli.js schema:drop')
         },
+        /**
+         * Creates the needed configuration files
+         */
+        config: series(
+            runFast('./src/lib/tsconfig.ts'),
+            runFast('./src/lib/ormconfig.ts')
+        ),
         /**
          * These run various kinds of tests. Default is unit.
          */
@@ -104,7 +112,7 @@ module.exports = {
         /**
          * Transpile your app into javascript
          */
-        transpile: `tsc`,
+        transpile: `tsc --project ./tsconfig.build.json`,
         /**
          * Clean files and folders
          */
