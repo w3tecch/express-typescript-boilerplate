@@ -10,12 +10,19 @@ export const createDatabaseConnection = async (): Promise<Connection> => {
         database: env.db.database,
         logging: env.db.logging,
         entities: env.app.dirs.entities,
+        migrations: env.app.dirs.migrations,
     });
     return connection;
 };
 
-export const synchronizeDatabase = (connection: Connection) => {
+export const synchronizeDatabase = async (connection: Connection) => {
+    await connection.dropDatabase();
     return connection.synchronize(true);
+};
+
+export const migrateDatabase = async (connection: Connection) => {
+    await connection.dropDatabase();
+    return connection.runMigrations();
 };
 
 export const closeDatabase = (connection: Connection) => {

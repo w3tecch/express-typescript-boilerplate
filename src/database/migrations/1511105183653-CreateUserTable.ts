@@ -1,19 +1,40 @@
-import { MigrationInterface, QueryRunner } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateUserTable1511105183653 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.query(`
-            CREATE TABLE \`user\` (
-                \`id\` varchar(255) NOT NULL PRIMARY KEY,
-                \`first_name\` varchar(255) NOT NULL,
-                \`last_name\` varchar(255) NOT NULL,
-                \`email\` varchar(255) NOT NULL) ENGINE=InnoDB;`
-        );
+        const table = new Table('user', [
+            {
+                name: 'id',
+                type: 'varchar',
+                length: 255,
+                isPrimary: true,
+                isNullable: false,
+            }, {
+                name: 'first_name',
+                type: 'varchar',
+                length: 255,
+                isPrimary: false,
+                isNullable: false,
+            }, {
+                name: 'last_name',
+                type: 'varchar',
+                length: 255,
+                isPrimary: false,
+                isNullable: false,
+            }, {
+                name: 'email',
+                type: 'varchar',
+                length: 255,
+                isPrimary: false,
+                isNullable: false,
+            },
+        ]);
+        await queryRunner.createTable(table);
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.query(`DROP TABLE \`user\`;`);
+        await queryRunner.dropTable('user');
     }
 
 }

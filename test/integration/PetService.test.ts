@@ -3,7 +3,7 @@ import { Connection } from 'typeorm';
 
 import { Pet } from '../../src/api/models/Pet';
 import { PetService } from './../../src/api/services/PetService';
-import { createDatabaseConnection, synchronizeDatabase, closeDatabase } from '../utils/database';
+import { createDatabaseConnection, migrateDatabase, closeDatabase } from '../utils/database';
 
 describe('PetService', () => {
 
@@ -13,7 +13,7 @@ describe('PetService', () => {
 
     let connection: Connection;
     beforeAll(async () => connection = await createDatabaseConnection());
-    beforeEach(() => synchronizeDatabase(connection));
+    beforeEach(() => migrateDatabase(connection));
 
     // -------------------------------------------------------------------------
     // Tear down

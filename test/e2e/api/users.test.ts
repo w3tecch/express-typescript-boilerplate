@@ -5,7 +5,7 @@ import { getFactory } from './../../../src/lib/seeds/index';
 import { Factory } from './../../../src/lib/seeds/Factory';
 import { User } from './../../../src/api/models/User';
 import { bootstrapApp, BootstrapSettings } from '../utils/bootstrap';
-import { synchronizeDatabase, closeDatabase } from '../../utils/database';
+import { migrateDatabase, closeDatabase } from '../../utils/database';
 import { fakeAuthenticationForUser } from '../utils/auth';
 
 
@@ -20,7 +20,7 @@ describe('/api/users', () => {
     let bruce: User;
     let authServer: nock.Scope;
     beforeAll(async () => settings = await bootstrapApp());
-    beforeAll(async () => synchronizeDatabase(settings.connection));
+    beforeAll(async () => migrateDatabase(settings.connection));
     beforeAll(async () => factory = getFactory(settings.connection));
     beforeAll(async () => bruce = await factory.runSeed<User>(CreateBruce));
     beforeAll(async () => authServer = fakeAuthenticationForUser(bruce, true));

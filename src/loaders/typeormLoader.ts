@@ -15,6 +15,7 @@ export const typeormLoader: MicroframeworkLoader = async (settings: Microframewo
         synchronize: env.db.synchronize,
         logging: env.db.logging,
         entities: env.app.dirs.entities,
+        migrations: env.app.dirs.migrations,
     });
 
     if (settings) {
