@@ -239,28 +239,6 @@ module.exports = {
                     hiddenFromHelp: true
                 }
             },
-            // integration: {
-            //     default: series(
-            //         'nps banner.testIntegration',
-            //         'nps test.integration.pretest',
-            //         'nps test.integration.run'
-            //     ),
-            //     pretest: tslint(`./test/integration/**.ts`),
-            //     verbose: 'nps "test.integration --verbose"',
-            //     // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
-            //     run: 'cross-env NODE_ENV=test jest --testPathPattern=integration -i',
-            // },
-            // e2e: {
-            //     default: series(
-            //         'nps banner.testE2E',
-            //         'nps test.e2e.pretest',
-            //         'nps test.e2e.run'
-            //     ),
-            //     pretest: tslint(`./test/e2e/**.ts`),
-            //     verbose: 'nps "test.e2e --verbose"',
-            //     // -i. Run all tests serially in the current process, rather than creating a worker pool of child processes that run tests. This can be useful for debugging.
-            //     run: 'cross-env NODE_ENV=test jest --testPathPattern=e2e -i',
-            // }
         },
         /**
          * This creates pretty banner to the terminal
@@ -301,5 +279,5 @@ function runFast(path) {
 }
 
 function tslint(path) {
-    return `tslint -c './tslint.json' '${path}' --format stylish`;
+    return `tslint -c ./tslint.json ${path} --format stylish`;
 }
