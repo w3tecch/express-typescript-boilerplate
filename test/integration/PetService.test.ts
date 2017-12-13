@@ -7,10 +7,23 @@ import { createDatabaseConnection, synchronizeDatabase, closeDatabase } from '..
 
 describe('PetService', () => {
 
+    // -------------------------------------------------------------------------
+    // Setup up
+    // -------------------------------------------------------------------------
+
     let connection: Connection;
     beforeAll(async () => connection = await createDatabaseConnection());
     beforeEach(() => synchronizeDatabase(connection));
+
+    // -------------------------------------------------------------------------
+    // Tear down
+    // -------------------------------------------------------------------------
+
     afterAll(() => closeDatabase(connection));
+
+    // -------------------------------------------------------------------------
+    // Test cases
+    // -------------------------------------------------------------------------
 
     test('should create a new pet in the database', async (done) => {
         const pet = new Pet();

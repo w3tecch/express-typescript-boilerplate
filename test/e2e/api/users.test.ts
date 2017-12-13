@@ -12,7 +12,7 @@ import { fakeAuthenticationForUser } from '../utils/auth';
 describe('/api/users', () => {
 
     // -------------------------------------------------------------------------
-    // Tear up
+    // Setup up
     // -------------------------------------------------------------------------
 
     let settings: BootstrapSettings;
