@@ -1,7 +1,6 @@
 import * as request from 'supertest';
 import { bootstrapApp, BootstrapSettings } from '../utils/bootstrap';
 import { env } from '../../../src/core/env';
-import { synchronizeDatabase, closeDatabase } from '../../integration/utils/database';
 
 
 describe('/api', () => {
@@ -12,13 +11,6 @@ describe('/api', () => {
 
     let settings: BootstrapSettings;
     beforeAll(async () => settings = await bootstrapApp());
-    beforeAll(async () => synchronizeDatabase(settings.connection));
-
-    // -------------------------------------------------------------------------
-    // Tear down
-    // -------------------------------------------------------------------------
-
-    afterAll(async () => closeDatabase(settings.connection));
 
     // -------------------------------------------------------------------------
     // Test cases

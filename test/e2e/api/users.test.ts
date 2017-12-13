@@ -5,7 +5,7 @@ import { getFactory } from './../../../src/lib/seeds/index';
 import { Factory } from './../../../src/lib/seeds/Factory';
 import { User } from './../../../src/api/models/User';
 import { bootstrapApp, BootstrapSettings } from '../utils/bootstrap';
-import { synchronizeDatabase, closeDatabase } from '../../integration/utils/database';
+import { synchronizeDatabase, closeDatabase } from '../../utils/database';
 import { fakeAuthenticationForUser } from '../utils/auth';
 
 
