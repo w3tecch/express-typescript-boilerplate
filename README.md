@@ -42,17 +42,13 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **API Documentation** thanks to [swagger](http://swagger.io/).
 - **API Monitoring** thanks to [express-status-monitor](https://github.com/RafalWilinski/express-status-monitor).
 - **Integrated Testing Tool** thanks to [Jest](https://facebook.github.io/jest).
+- **E2E API Testing** thanks to [supertest](https://github.com/visionmedia/supertest).
 - **Basic Security Features** thanks to [Helmet](https://helmetjs.github.io/).
 - **Easy event dispatching** thanks to [event-dispatch](https://github.com/pleerock/event-dispatch).
 - **Fast Database Building** with simple migration from [TypeORM](https://github.com/typeorm/typeorm).
 - **Easy Data Seeding** with our own factories.
 - **GraphQL** provides as a awesome query language for our api [GraphQL](http://graphql.org/).
 - **DataLoaders** helps with performance thanks to caching and batching [DataLoaders](https://github.com/facebook/dataloader).
-
-### Comming soon
-
-- **Custom Commands** are also available in our setup and really easy to use or even extend.
-- **Scaffolding Commands** will speed up your development tremendously as you should focus on business code and not scaffolding.
 
 # Table of Contents
 
@@ -133,7 +129,7 @@ All script are defined in the package.json file, but the most important ones are
 
 - Run the unit tests using `npm start test` (There is also a vscode task for this called `test`).
 - Run the integration tests using `npm start test:integration`.
-- Run the e2e tests using `npm start test:e2e` and don't forget to start your application and your [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server).
+- Run the e2e tests using `npm start test:e2e`.
 
 ### Running in dev mode
 
@@ -329,7 +325,7 @@ export class CreateUsers implements SeedsInterface {
     public async seed(factory: FactoryInterface): Promise<any> {
         await factory
             .get(User)
-            .create(10);
+            .createMany(10);
     }
 
 }
@@ -343,7 +339,7 @@ export class CreateUsers implements SeedsInterface {
     public async seed(factory: FactoryInterface): Promise<any> {
         await factory
             .get(User, 'admin')
-            .create(1);
+            .create();
     }
 
 }
@@ -357,7 +353,7 @@ await factory.get(User)
     .each(async (user: User) => {
 
         const pets: Pet[] = await factory.get(Pet)
-            .create(2);
+            .createMany(2);
 
         const petIds = pets.map((pet: Pet) => pet.Id);
         await user.pets().attach(petIds);
@@ -390,6 +386,8 @@ npm start db.seed
 | [Helmet](https://helmetjs.github.io/) | Helmet helps you secure your Express apps by setting various HTTP headers. It’s not a silver bullet, but it can help! |
 | [Auth0 API Documentation](https://auth0.com/docs/api/management/v2) | Authentification service |
 | [Jest](http://facebook.github.io/jest/) | Delightful JavaScript Testing Library for unit and e2e tests |
+| [supertest](https://github.com/visionmedia/supertest) | Super-agent driven library for testing node.js HTTP servers using a fluent API |
+| [nock](https://github.com/node-nock/nock) | HTTP mocking and expectations library |
 | [swagger Documentation](http://swagger.io/) | API Tool to describe and document your api. |
 | [SQLite Documentation](https://www.sitepoint.com/getting-started-sqlite3-basic-commands/) | Getting Started with SQLite3 – Basic Commands. |
 | [GraphQL Documentation](http://graphql.org/graphql-js/) | A query language for your API. |

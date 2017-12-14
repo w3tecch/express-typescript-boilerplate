@@ -1,16 +1,29 @@
 import { Container } from 'typedi';
-import { createConnection, useContainer, Connection } from 'typeorm';
+import { Connection } from 'typeorm';
 
 import { Pet } from '../../src/api/models/Pet';
 import { PetService } from './../../src/api/services/PetService';
-import { createDatabaseConnection, synchronizeDatabase, closeDatabase } from './utils/database';
+import { createDatabaseConnection, migrateDatabase, closeDatabase } from '../utils/database';
 
 describe('PetService', () => {
 
+    // -------------------------------------------------------------------------
+    // Setup up
+    // -------------------------------------------------------------------------
+
     let connection: Connection;
     beforeAll(async () => connection = await createDatabaseConnection());
-    beforeEach(() => synchronizeDatabase(connection));
+    beforeEach(() => migrateDatabase(connection));
+
+    // -------------------------------------------------------------------------
+    // Tear down
+    // -------------------------------------------------------------------------
+
     afterAll(() => closeDatabase(connection));
+
+    // -------------------------------------------------------------------------
+    // Test cases
+    // -------------------------------------------------------------------------
 
     test('should create a new pet in the database', async (done) => {
         const pet = new Pet();
@@ -22,8 +35,12 @@ describe('PetService', () => {
         expect(resultCreate.age).toBe(pet.age);
 
         const resultFind = await service.findOne(resultCreate.id);
-        expect(resultFind.name).toBe(pet.name);
-        expect(resultFind.age).toBe(pet.age);
+        if (resultFind) {
+            expect(resultFind.name).toBe(pet.name);
+            expect(resultFind.age).toBe(pet.age);
+        } else {
+            fail('Could not find pet');
+        }
         done();
     });
 

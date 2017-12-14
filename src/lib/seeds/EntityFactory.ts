@@ -24,6 +24,17 @@ export class EntityFactory<Entity> implements EntityFactoryInterface<Entity> {
         return await this.makeEntity(this.blueprint.create(this.faker, this.args));
     }
 
+    public async makeMany(amount: number): Promise<Entity[]> {
+        const results: Entity[] = [];
+        for (let i = 0; i < amount; i++) {
+            const entity = await this.makeEntity(this.blueprint.create(this.faker, this.args));
+            if (entity) {
+                results.push(entity);
+            }
+        }
+        return results;
+    }
+
     public async create(): Promise<Entity> {
         const entity = await this.build();
         if (typeof this.eachFn === 'function') {

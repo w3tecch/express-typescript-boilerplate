@@ -20,8 +20,5 @@
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true
-    },
-    "include": [
-        "src/**/*"
-    ]
+    }
 }

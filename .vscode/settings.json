@@ -1,4 +1,8 @@
 {
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "cSpell.enabled": true
+    "cSpell.enabled": true,
+    "files.exclude": {
+        "tsconfig.build.json": true,
+        "ormconfig.json": true
+    }
 }

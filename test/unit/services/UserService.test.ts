@@ -1,5 +1,4 @@
 import { UserService } from '../../../src/api/services/UserService';
-import { UserRepository } from '../../../src/api/repositories/UserRepository';
 import { User } from '../../../src/api/models/User';
 import { events } from '../../../src/api/subscribers/events';
 import { LogMock } from '../lib/LogMock';
