@@ -10,6 +10,8 @@ import { PetType } from '../types/PetType';
 import { PetService } from '../services/PetService';
 import { GraphQLContext, Mutation } from '../../lib/graphql';
 import { Pet } from '../models/Pet';
+import { Logger, LoggerInterface } from '../../decorators/Logger';
+
 
 interface CreatePetMutationArguments {
     name: string;
@@ -24,9 +26,16 @@ export class CreatePetMutation extends AbstractGraphQLMutation<GraphQLContext<an
         age: { type: new GraphQLNonNull(GraphQLInt) },
     };
 
+    constructor(
+        private petService: PetService,
+        @Logger(__filename) private log: LoggerInterface
+    ) {
+        super();
+    }
+
     public async run(root: any, args: CreatePetMutationArguments, context: GraphQLContext<any, any>): Promise<Pet> {
-        const petService = context.container.get<PetService>(PetService);
-        const pet = await petService.create(plainToClass(Pet, args));
+        const pet = await this.petService.create(plainToClass(Pet, args));
+        this.log.info('Successfully created a new pet');
         return pet;
     }
 }

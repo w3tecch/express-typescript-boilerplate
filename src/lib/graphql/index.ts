@@ -3,13 +3,14 @@ import * as GraphQLHTTP from 'express-graphql';
 import * as DataLoader from 'dataloader';
 import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 import { Container as container, ObjectType } from 'typedi';
+import { Repository, getCustomRepository, getRepository } from 'typeorm';
 
 import { GraphQLContext, GraphQLContextDataLoader } from './GraphQLContext';
 import { MetadataArgsStorage } from './MetadataArgsStorage';
 import { importClassesFromDirectories } from './importClassesFromDirectories';
 import { handlingErrors, getErrorCode, getErrorMessage } from './graphql-error-handling';
 import { ensureInputOrder } from './dataloader';
-import { Repository, getCustomRepository, getRepository } from 'typeorm';
+import { getFromContainer } from './container';
 
 // -------------------------------------------------------------------------
 // Main exports
@@ -22,6 +23,7 @@ export * from './AbstractGraphQLHooks';
 export * from './AbstractGraphQLQuery';
 export * from './GraphQLContext';
 export * from './graphql-error-handling';
+export * from './container';
 
 // -------------------------------------------------------------------------
 // Main Functions
@@ -168,8 +170,8 @@ export function createSchema(options: GraphQLSchemaOptions): GraphQLSchema {
     }
 
     const queries = {};
-    queryClasses.forEach(queryClass => {
-        queries[createQueryName(queryClass.name)] = new queryClass();
+    getMetadataArgsStorage().queries.forEach(queryMetdadata => {
+        queries[createQueryName(queryMetdadata.name)] = getFromContainer(queryMetdadata.target);
     });
 
     const RootQuery = new GraphQLObjectType({
@@ -186,8 +188,8 @@ export function createSchema(options: GraphQLSchemaOptions): GraphQLSchema {
     }
 
     const mutations = {};
-    mutationClasses.forEach(mutationClass => {
-        mutations[createMutationName(mutationClass.name)] = new mutationClass();
+    getMetadataArgsStorage().mutations.forEach(mutationMetdadata => {
+        mutations[createMutationName(mutationMetdadata.name)] = getFromContainer(mutationMetdadata.target);
     });
 
     const RootMutation: GraphQLObjectType = new GraphQLObjectType({

@@ -3,7 +3,8 @@ import { Query, AbstractGraphQLQuery, GraphQLContext } from './../../lib/graphql
 import { UserService } from '../services/UserService';
 import { UserType } from './../types/UserType';
 import { User } from '../models/User';
-import { Logger } from '../../core/Logger';
+import { Logger, LoggerInterface } from '../../decorators/Logger';
+
 
 @Query()
 export class GetUsersQuery extends AbstractGraphQLQuery<GraphQLContext<any, any>, User[], any> implements GraphQLFieldConfig {
@@ -11,10 +12,15 @@ export class GetUsersQuery extends AbstractGraphQLQuery<GraphQLContext<any, any>
     public allow = [];
     public args = {};
 
-    private log = new Logger(__filename);
+    constructor(
+        private userService: UserService,
+        @Logger(__filename) private log: LoggerInterface
+    ) {
+        super();
+    }
 
     public async run(root: any, args: any, context: GraphQLContext<any, any>): Promise<User[]> {
-        const users = await context.container.get<UserService>(UserService).find();
+        const users = await this.userService.find();
         this.log.info(`Found ${users.length} users`);
         return users;
     }
