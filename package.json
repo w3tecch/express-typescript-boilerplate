@@ -6,7 +6,9 @@
   "scripts": {
     "start": "nps",
     "test": "npm start test",
-    "build": "npm start build"
+    "build": "npm start build",
+    "presetup": "yarn install",
+    "setup": "npm start setup.db"
   },
   "engines": {
     "node": ">=8.0.0"

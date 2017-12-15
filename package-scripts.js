@@ -25,20 +25,16 @@ module.exports = {
             description: 'Serves the current app and watches for changes to restart it'
         },
         /**
-         * Setup's the development environment and the database
+         * Setup's stuff
          */
         setup: {
-            script: series(
-                'yarn install',
-                copy(
-                    '.env.example',
-                    '.env'
+            db: {
+                script: series(
+                    'nps db.migrate',
+                    'nps db.seed'
                 ),
-                'nps config',
-                'nps db.migrate',
-                'nps db.seed'
-            ),
-            description: 'Setup`s the development environment and the database'
+                description: 'Setup`s the database by migrating and seeding'
+            }
         },
         /**
          * Creates the needed configuration files
