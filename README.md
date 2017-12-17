@@ -96,7 +96,7 @@ Create a new database with the name you have in your `.env`-file.
 Then setup your application environment.
 
 ```bash
-npm start setup
+npm run setup
 ```
 
 > This installs all dependencies with yarn. After that it migrates the database and seeds some test data into it. So after that your development environment is ready to use.
