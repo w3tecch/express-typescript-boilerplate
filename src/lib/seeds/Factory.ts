@@ -4,6 +4,7 @@ import { Connection } from 'typeorm/connection/Connection';
 import { FactoryInterface } from './FactoryInterface';
 import { EntityFactory } from './EntityFactory';
 import { BluePrint } from './BluePrint';
+import { SeedsConstructorInterface } from './SeedsInterface';
 
 
 export class Factory implements FactoryInterface {
@@ -30,6 +31,11 @@ export class Factory implements FactoryInterface {
 
     public setConnection(connection: Connection): void {
         this.connection = connection;
+    }
+
+    public async runSeed<T>(seedClass: SeedsConstructorInterface): Promise<T> {
+        const seeder = new seedClass();
+        return await seeder.seed(this);
     }
 
     public define<Entity>(entityClass: ObjectType<Entity>, callback: (faker: typeof Faker, args: any[]) => Entity): void {

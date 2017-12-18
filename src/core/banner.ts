@@ -13,6 +13,9 @@ export function banner(log: Logger): void {
         log.info(`Version      : ${env.app.version}`);
         log.info(``);
         log.info(`API Info     : ${env.app.route}${env.app.routePrefix}`);
+        if (env.graphql.enabled) {
+            log.info(`GraphQL      : ${env.app.route}${env.graphql.route}`);
+        }
         if (env.swagger.enabled) {
             log.info(`Swagger      : ${env.app.route}${env.swagger.route}`);
         }

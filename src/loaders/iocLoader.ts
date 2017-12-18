@@ -1,7 +1,8 @@
 import { Container } from 'typedi';
 import { useContainer as ormUseContainer } from 'typeorm';
 import { useContainer as routingUseContainer } from 'routing-controllers';
-import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework';
+import { useContainer as graphqlUseContainer } from '../lib/graphql';
+import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework-w3tec';
 
 
 export const iocLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
@@ -11,5 +12,6 @@ export const iocLoader: MicroframeworkLoader = (settings: MicroframeworkSettings
      */
     routingUseContainer(Container);
     ormUseContainer(Container);
+    graphqlUseContainer(Container);
 
 };

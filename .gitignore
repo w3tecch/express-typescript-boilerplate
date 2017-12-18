@@ -21,6 +21,7 @@ typings/
 # Dist #
 dist/
 ormconfig.json
+tsconfig.build.json
 
 # IDE #
 .idea/
@@ -34,3 +35,4 @@ test/**/*.js
 test/**/*.js.map
 coverage/
 !test/preprocessor.js
+mydb.sql
