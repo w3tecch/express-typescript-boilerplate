@@ -371,6 +371,50 @@ The last step is the easiest, just hit the following command in your terminal, b
 npm start db.seed
 ```
 
+## Run in Docker container
+
+### Install Docker
+
+Before you start, make sure you have a recent version of [Docker](https://docs.docker.com/engine/installation/) installed
+
+### Build Docker image
+
+```shell
+docker build -t <your-image-name> .
+```
+
+### Run Docker image in container and map port
+
+#### Run image in detached mode
+
+```shell
+docker run -d -p <port-on-host>:<port-inside-docker-container> <your-image-name>
+```
+
+#### Run image in foreground mode
+
+```shell
+docker run -i -t -p <port-on-host>:<port-inside-docker-container> <your-image-name>
+```
+
+### Stop Docker container
+
+#### Detached mode
+
+```shell
+docker stop <container-id>
+```
+
+You can get a list of all running Docker container and its ids by following command
+
+```shell
+docker images
+```
+
+#### Foreground mode
+
+Go to console and press <CTRL> + C at any time.
+
 ## Further Documentations
 
 | Name & Link                       | Description                       |
