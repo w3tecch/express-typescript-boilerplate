@@ -385,6 +385,8 @@ docker build -t <your-image-name> .
 
 ### Run Docker image in container and map port
 
+The port which runs your application inside Docker container is either configured as `PORT` property in your `.env` configuration file or passed to Docker container via environment variable `PORT`. Default port is `3000`.
+
 #### Run image in detached mode
 
 ```shell
@@ -414,6 +416,39 @@ docker images
 #### Foreground mode
 
 Go to console and press <CTRL> + C at any time.
+
+### Docker environment variables
+
+There are several options to configure your app inside a Docker container
+
+#### project .env file
+
+You can use `.env` file in project root folder which will be copied inside Docker image. If you want to change a property inside `.env` you have to rebuild your Docker image.
+
+#### run options
+
+You can also change app configuration by passing environment variables via `docker run` option `-e` or `--env`.
+
+```shell
+docker run --env DB_HOST=localhost -e DB_PORT=3306
+```
+
+#### environment file
+
+Last but not least you can pass a config file to `docker run`.
+
+```shell
+docker run --env-file ./env.list
+```
+
+`env.list` example:
+
+```
+# this is a comment
+DB_TYPE=mysql
+DB_HOST=localhost
+DB_PORT=3306
+```
 
 ## Further Documentations
 
