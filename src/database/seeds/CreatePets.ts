@@ -12,7 +12,7 @@ export class CreatePets implements SeedsInterface {
         await times(10, async (n) => {
             const pet = await factory.get(Pet).create();
             const user = await factory.get(User).make();
-            user.pets = [pet];
+            user.pets = Promise.resolve([pet]);
             await em.save(user);
         });
     }

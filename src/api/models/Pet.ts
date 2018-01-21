@@ -1,7 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { IsNotEmpty } from 'class-validator';
 import { User } from './User';
-
 
 @Entity()
 export class Pet {
@@ -9,11 +7,9 @@ export class Pet {
     @PrimaryGeneratedColumn('uuid')
     public id: string;
 
-    @IsNotEmpty()
     @Column()
     public name: string;
 
-    @IsNotEmpty()
     @Column()
     public age: number;
 
@@ -25,7 +21,7 @@ export class Pet {
 
     @ManyToOne(type => User, user => user.pets)
     @JoinColumn({ name: 'user_id' })
-    public user: User;
+    public user: Promise<User>;
 
     public toString(): string {
         return `${this.name}`;

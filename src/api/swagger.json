@@ -1,574 +1,368 @@
 {
-    "swagger": "2.0",
-    "host": "",
-    "info": {
-        "title": "",
-        "description": "",
-        "version": ""
-    },
-    "basePath": "",
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "schemes": [
-        "http"
-    ],
-    "securityDefinitions": {
-        "JWT": {
-            "type": "apiKey",
-            "in": "header",
-            "name": "Authorization"
-        }
-    },
-    "tags": [
-        {
-            "name": "Info"
+  "components": {
+    "schemas": {
+      "PetDto": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "User email"
+          },
+          "name": {
+            "type": "string",
+            "description": "User email"
+          },
+          "age": {
+            "type": "number",
+            "description": "Pet owner id"
+          },
+          "userId": {
+            "type": "number",
+            "description": "Pet owner id"
+          }
         },
-        {
-            "name": "User"
+        "required": [
+          "id",
+          "name",
+          "age",
+          "userId"
+        ],
+        "type": "object"
+      },
+      "UserDto": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "User email"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "User email"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "User email"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email"
+          },
+          "petsId": {
+            "items": {},
+            "type": "array"
+          }
         },
-        {
-            "name": "Pet"
-        }
-    ],
-    "paths": {
-        "/info": {
-            "get": {
-                "tags": [
-                    "Info"
-                ],
-                "summary": "Show API information",
-                "description": "This is a public route",
-                "operationId": "showApiInfo",
-                "responses": {
-                    "200": {
-                        "description": "ok"
-                    }
-                }
-            }
-        },
-        "/users": {
-            "get": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "List all users",
-                "description": "Returns all users",
-                "operationId": "FindAllUsers",
-                "security": [
-                    {
-                        "JWT": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/User"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Create new user",
-                "description": "",
-                "operationId": "CreateUser",
-                "security": [
-                    {
-                        "JWT": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "User object that needs to be added to the database",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/NewUser"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "created",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/User"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/users/{id}": {
-            "get": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Get user",
-                "description": "Returns the given user",
-                "operationId": "FindUser",
-                "security": [
-                    {
-                        "JWT": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of user to return",
-                        "required": true,
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/User"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Update user",
-                "description": "Updates the given user",
-                "operationId": "UpdateUser",
-                "security": [
-                    {
-                        "JWT": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of user to update",
-                        "required": true,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "User object that needs to be added to the database",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/NewUser"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/User"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Delete user",
-                "description": "Removes the given user",
-                "operationId": "DeleteUser",
-                "security": [
-                    {
-                        "JWT": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of user to delete",
-                        "required": true,
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/pets": {
-            "get": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "List all pets",
-                "description": "Returns all pets",
-                "operationId": "FindAllPets",
-                "security": [
-                    {
-                        "JWT": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/Pet"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "Create new pet",
-                "description": "",
-                "operationId": "CreatePet",
-                "security": [
-                    {
-                        "JWT": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "User object that needs to be added to the database",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/NewPet"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "created",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Pet"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/pets/{id}": {
-            "get": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "Get pet",
-                "description": "Returns the given pet",
-                "operationId": "FindPet",
-                "security": [
-                    {
-                        "JWT": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of pet to return",
-                        "required": true,
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Pet"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "Update pet",
-                "description": "Updates the given pet",
-                "operationId": "UpdatePet",
-                "security": [
-                    {
-                        "JWT": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of pet to update",
-                        "required": true,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Pet object that needs to be added to the database",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/NewPet"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Pet"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Pet"
-                ],
-                "summary": "Delete pet",
-                "description": "Removes the given pet",
-                "operationId": "DeletePet",
-                "security": [
-                    {
-                        "JWT": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of pet to delete",
-                        "required": true,
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "NewUser": {
-            "type": "object",
-            "properties": {
-                "firstName": {
-                    "type": "string"
-                },
-                "lastName": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "picture": {
-                    "type": "string"
-                }
-            }
-        },
-        "NewPet": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "age": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "userId": {
-                    "type": "integer",
-                    "format": "int64"
-                }
-            }
-        },
-        "User": {
-            "title": "User",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/NewUser"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "updatedAt": {
-                            "type": "string",
-                            "format": "date-time"
-                        },
-                        "createdAt": {
-                            "type": "string",
-                            "format": "date-time"
-                        }
-                    }
-                }
-            ]
-        },
-        "Pet": {
-            "title": "Pet",
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "name": {
-                            "type": "string"
-                        },
-                        "age": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "user": {
-                            "$ref": "#/definitions/User"
-                        },
-                        "updatedAt": {
-                            "type": "string",
-                            "format": "date-time"
-                        },
-                        "createdAt": {
-                            "type": "string",
-                            "format": "date-time"
-                        }
-                    }
-                }
-            ]
-        }
+        "required": [
+          "id",
+          "firstName",
+          "lastName",
+          "email",
+          "petsId"
+        ],
+        "type": "object"
+      }
     }
+  },
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/pets": {
+      "get": {
+        "operationId": "PetController.find",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Find",
+        "tags": [
+          "Pet"
+        ],
+        "description": "Find all pets"
+      },
+      "post": {
+        "operationId": "PetController.create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PetDto"
+              }
+            }
+          },
+          "description": "PetDto",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Create",
+        "tags": [
+          "Pet"
+        ],
+        "description": "Create one pet"
+      }
+    },
+    "/api/pets/{id}": {
+      "get": {
+        "operationId": "PetController.one",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pet id to find"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "One",
+        "tags": [
+          "Pet"
+        ],
+        "description": "Find one pet"
+      },
+      "put": {
+        "operationId": "PetController.update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pet id to update"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PetDto"
+              }
+            }
+          },
+          "description": "PetDto",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Update",
+        "tags": [
+          "Pet"
+        ],
+        "description": "Update one pet"
+      },
+      "delete": {
+        "operationId": "PetController.delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pet id to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Delete",
+        "tags": [
+          "Pet"
+        ],
+        "description": "Delete one pet"
+      }
+    },
+    "/api/users": {
+      "get": {
+        "operationId": "UserController.find",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Find",
+        "tags": [
+          "User"
+        ],
+        "description": "Find all users"
+      },
+      "post": {
+        "operationId": "UserController.create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDto"
+              }
+            }
+          },
+          "description": "UserDto",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Create",
+        "tags": [
+          "User"
+        ],
+        "description": "Create one user"
+      }
+    },
+    "/api/users/self": {
+      "get": {
+        "operationId": "UserController.self",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Self",
+        "tags": [
+          "User"
+        ],
+        "description": "Find current user"
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "operationId": "UserController.one",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pet id to find"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "One",
+        "tags": [
+          "User"
+        ],
+        "description": "Find one user"
+      },
+      "put": {
+        "operationId": "UserController.update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "User id to update"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDto"
+              }
+            }
+          },
+          "description": "UserDto",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Update",
+        "tags": [
+          "User"
+        ],
+        "description": "Update one user"
+      },
+      "delete": {
+        "operationId": "UserController.delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "User id to update"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Delete",
+        "tags": [
+          "User"
+        ],
+        "description": "Delete one user"
+      }
+    }
+  }
 }
