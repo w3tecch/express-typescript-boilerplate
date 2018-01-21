@@ -1,7 +1,10 @@
 import { JsonController, Get, Post, Put, Param, Delete, Body, OnUndefined, Authorized, CurrentUser } from 'routing-controllers';
+import { OpenAPI } from 'routing-controllers-openapi';
 import { UserService } from '../services/UserService';
-import { User } from '../models/User';
 import { UserNotFoundError } from '../errors/UserNotFoundError';
+import { User } from '../models/User';
+import { UserDto as ReqUserDto } from './requests/UserDto';
+import { UserDto as ResUserDto } from './responses/UserDto';
 
 
 @Authorized()
@@ -13,29 +16,71 @@ export class UserController {
     ) { }
 
     @Get()
-    public find( @CurrentUser() user?: User): Promise<User[]> {
-        return this.userService.find();
+    @OpenAPI({
+        description: 'Find all users',
+    })
+    public async find(): Promise<ResUserDto[]> {
+        const entities = await this.userService.find();
+        const dtos = entities.map((entity) => ResUserDto.fromEntity(entity) as Promise<ResUserDto>);
+        return Promise.all(dtos);
+    }
+
+    @Get('/self')
+    @OpenAPI({
+        description: 'Find current user',
+    })
+    public async self( @CurrentUser() user?: User): Promise<ResUserDto | undefined> {
+        return ResUserDto.fromEntity(user);
     }
 
     @Get('/:id')
     @OnUndefined(UserNotFoundError)
-    public one( @Param('id') id: string): Promise<User | undefined> {
-        return this.userService.findOne(id);
+    @OpenAPI({
+        description: 'Find one user',
+        parameters: [{
+            name: 'id',
+            in: 'path',
+            description: 'Pet id to find',
+        }],
+    })
+    public async one( @Param('id') id: string): Promise<ResUserDto | undefined> {
+        const entity = await this.userService.findOne(id);
+        return ResUserDto.fromEntity(entity);
     }
 
     @Post()
-    public create( @Body() user: User): Promise<User> {
-        return this.userService.create(user);
+    @OpenAPI({
+        description: 'Create one user',
+    })
+    public async create( @Body() dto: ReqUserDto): Promise<ResUserDto | undefined> {
+        const entity = await this.userService.create(await dto.toEntity());
+        return ResUserDto.fromEntity(entity);
     }
 
     @Put('/:id')
-    public update( @Param('id') id: string, @Body() user: User): Promise<User> {
-        return this.userService.update(id, user);
+    @OpenAPI({
+        description: 'Update one user',
+        parameters: [{
+            name: 'id',
+            in: 'path',
+            description: 'User id to update',
+        }],
+    })
+    public async update( @Param('id') id: string, @Body() dto: ReqUserDto): Promise<ResUserDto | undefined> {
+        const entity = await this.userService.update(id, await dto.toEntity());
+        return ResUserDto.fromEntity(entity);
     }
 
     @Delete('/:id')
-    public delete( @Param('id') id: string): Promise<void> {
+    @OpenAPI({
+        description: 'Delete one user',
+        parameters: [{
+            name: 'id',
+            in: 'path',
+            description: 'User id to update',
+        }],
+    })
+    public async delete( @Param('id') id: string): Promise<void> {
         return this.userService.delete(id);
     }
-
 }

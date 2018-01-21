@@ -1,1 +1,368 @@
-{"components":{"schemas":{"Pet":{"properties":{"name":{"minLength":1,"type":"string"},"age":{"minLength":1,"type":"string"}},"required":["name","age"],"type":"object"},"User":{"properties":{"firstName":{"minLength":1,"type":"string"},"lastName":{"minLength":1,"type":"string"},"email":{"minLength":1,"type":"string"}},"required":["firstName","lastName","email"],"type":"object"}}},"info":{"title":"","version":"1.0.0"},"openapi":"3.0.0","paths":{"/api/petsundefined":{"get":{"operationId":"PetController.find","responses":{"200":{"content":{"application/json":{}},"description":"Successful response"}},"summary":"Find","tags":["Pet"]},"post":{"operationId":"PetController.create","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Pet"}}},"description":"Pet","required":false},"responses":{"200":{"content":{"application/json":{}},"description":"Successful response"}},"summary":"Create","tags":["Pet"]}},"/api/pets/{id}":{"get":{"operationId":"PetController.one","parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}],"responses":{"200":{"content":{"application/json":{}},"description":"Successful response"}},"summary":"One","tags":["Pet"]},"put":{"operationId":"PetController.update","parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Pet"}}},"description":"Pet","required":false},"responses":{"200":{"content":{"application/json":{}},"description":"Successful response"}},"summary":"Update","tags":["Pet"]},"delete":{"operationId":"PetController.delete","parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}],"responses":{"200":{"content":{"application/json":{}},"description":"Successful response"}},"summary":"Delete","tags":["Pet"]}},"/api/usersundefined":{"get":{"operationId":"UserController.find","responses":{"200":{"content":{"application/json":{}},"description":"Successful response"}},"summary":"Find","tags":["User"]},"post":{"operationId":"UserController.create","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}},"description":"User","required":false},"responses":{"200":{"content":{"application/json":{}},"description":"Successful response"}},"summary":"Create","tags":["User"]}},"/api/users/{id}":{"get":{"operationId":"UserController.one","parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}],"responses":{"200":{"content":{"application/json":{}},"description":"Successful response"}},"summary":"One","tags":["User"]},"put":{"operationId":"UserController.update","parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}},"description":"User","required":false},"responses":{"200":{"content":{"application/json":{}},"description":"Successful response"}},"summary":"Update","tags":["User"]},"delete":{"operationId":"UserController.delete","parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}],"responses":{"200":{"content":{"application/json":{}},"description":"Successful response"}},"summary":"Delete","tags":["User"]}}}}
+{
+  "components": {
+    "schemas": {
+      "PetDto": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "User email"
+          },
+          "name": {
+            "type": "string",
+            "description": "User email"
+          },
+          "age": {
+            "type": "number",
+            "description": "Pet owner id"
+          },
+          "userId": {
+            "type": "number",
+            "description": "Pet owner id"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "age",
+          "userId"
+        ],
+        "type": "object"
+      },
+      "UserDto": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "User email"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "User email"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "User email"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email"
+          },
+          "petsId": {
+            "items": {},
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "firstName",
+          "lastName",
+          "email",
+          "petsId"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/pets": {
+      "get": {
+        "operationId": "PetController.find",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Find",
+        "tags": [
+          "Pet"
+        ],
+        "description": "Find all pets"
+      },
+      "post": {
+        "operationId": "PetController.create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PetDto"
+              }
+            }
+          },
+          "description": "PetDto",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Create",
+        "tags": [
+          "Pet"
+        ],
+        "description": "Create one pet"
+      }
+    },
+    "/api/pets/{id}": {
+      "get": {
+        "operationId": "PetController.one",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pet id to find"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "One",
+        "tags": [
+          "Pet"
+        ],
+        "description": "Find one pet"
+      },
+      "put": {
+        "operationId": "PetController.update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pet id to update"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PetDto"
+              }
+            }
+          },
+          "description": "PetDto",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Update",
+        "tags": [
+          "Pet"
+        ],
+        "description": "Update one pet"
+      },
+      "delete": {
+        "operationId": "PetController.delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pet id to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Delete",
+        "tags": [
+          "Pet"
+        ],
+        "description": "Delete one pet"
+      }
+    },
+    "/api/users": {
+      "get": {
+        "operationId": "UserController.find",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Find",
+        "tags": [
+          "User"
+        ],
+        "description": "Find all users"
+      },
+      "post": {
+        "operationId": "UserController.create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDto"
+              }
+            }
+          },
+          "description": "UserDto",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Create",
+        "tags": [
+          "User"
+        ],
+        "description": "Create one user"
+      }
+    },
+    "/api/users/self": {
+      "get": {
+        "operationId": "UserController.self",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Self",
+        "tags": [
+          "User"
+        ],
+        "description": "Find current user"
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "operationId": "UserController.one",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pet id to find"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "One",
+        "tags": [
+          "User"
+        ],
+        "description": "Find one user"
+      },
+      "put": {
+        "operationId": "UserController.update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "User id to update"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDto"
+              }
+            }
+          },
+          "description": "UserDto",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Update",
+        "tags": [
+          "User"
+        ],
+        "description": "Update one user"
+      },
+      "delete": {
+        "operationId": "UserController.delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "User id to update"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "Delete",
+        "tags": [
+          "User"
+        ],
+        "description": "Delete one user"
+      }
+    }
+  }
+}
