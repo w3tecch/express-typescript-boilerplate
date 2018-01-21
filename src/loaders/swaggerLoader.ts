@@ -14,20 +14,21 @@ export const swaggerLoader: MicroframeworkLoader = (settings: MicroframeworkSett
     if (settings && env.swagger.enabled) {
 
         // Generate swagger file from controllers
+        if (env.swagger.autoGenerate) {
+            const metadataContainer = getFromContainer(MetadataStorage) as any;
+            const metadatas = metadataContainer.validationMetadatas;
+            const schemas = validationMetadatasToSchemas(metadatas, {
+                refPointerPrefix: '#/components/schemas',
+            });
 
-        const metadataContainer = getFromContainer(MetadataStorage) as any;
-        const metadatas = metadataContainer.validationMetadatas;
-        const schemas = validationMetadatasToSchemas(metadatas, {
-            refPointerPrefix: '#/components/schemas',
-        });
+            const storage = getMetadataArgsStorage();
+            const spec = routingControllersToSpec(storage, {
+                routePrefix: env.app.routePrefix,
+            }, { components: { schemas } });
 
-        const storage = getMetadataArgsStorage();
-        const spec = routingControllersToSpec(storage, {
-            routePrefix: env.app.routePrefix,
-        }, { components: { schemas } });
-
-        const swaggerFilePath = path.join(__dirname, '..', env.swagger.file);
-        jsonfile.writeFileSync(swaggerFilePath, spec, { spaces: 2 });
+            const swaggerFilePath = path.join(__dirname, '..', env.swagger.file);
+            jsonfile.writeFileSync(swaggerFilePath, spec, { spaces: 2 });
+        }
 
         // Add npm infos to the swagger doc
 
