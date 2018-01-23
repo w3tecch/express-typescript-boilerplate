@@ -71,7 +71,7 @@ export class EntityFactory<Entity> implements EntityFactoryInterface<Entity> {
     private async makeEntity(entity: Entity): Promise<Entity> {
         for (const attribute in entity) {
             if (entity.hasOwnProperty(attribute)) {
-                if (this.isPromiseLike(typeof entity[attribute])) {
+                if (this.isPromiseLike(entity[attribute])) {
                     entity[attribute] = await entity[attribute];
                 }
                 
