@@ -71,6 +71,10 @@ export class EntityFactory<Entity> implements EntityFactoryInterface<Entity> {
     private async makeEntity(entity: Entity): Promise<Entity> {
         for (const attribute in entity) {
             if (entity.hasOwnProperty(attribute)) {
+                if (this.isPromiseLike(entity[attribute])) {
+                    entity[attribute] = await entity[attribute];
+                }
+
                 if (typeof entity[attribute] === 'object' && entity[attribute] instanceof EntityFactory) {
                     const subEntityFactory = entity[attribute];
                     const subEntity = await (subEntityFactory as any).build();
@@ -81,4 +85,7 @@ export class EntityFactory<Entity> implements EntityFactoryInterface<Entity> {
         return entity;
     }
 
+    private isPromiseLike(object: any): boolean {
+        return !!object && (typeof object === 'object' || typeof object === 'function') && typeof object.then === 'function';
+    }
 }
