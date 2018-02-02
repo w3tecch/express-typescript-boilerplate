@@ -7,7 +7,7 @@
  * the 'README.md' file.
  */
 import 'reflect-metadata';
-import { banner } from './core/banner';
+import { banner } from './lib/banner';
 import { Logger } from './core/Logger';
 const log = new Logger(__filename);
 
