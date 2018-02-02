@@ -28,7 +28,7 @@ export class AuthService {
         }
 
         this.log.info('No Token provided by the client');
-        return;
+        return undefined;
     }
 
     public getTokenInfo(token: string): Promise<TokenInfoInterface> {
