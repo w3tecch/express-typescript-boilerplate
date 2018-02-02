@@ -50,7 +50,7 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **GraphQL** provides as a awesome query language for our api [GraphQL](http://graphql.org/).
 - **DataLoaders** helps with performance thanks to caching and batching [DataLoaders](https://github.com/facebook/dataloader).
 
-# Table of Contents
+## Table of Contents
 
 - [Getting Started](#getting-started)
 - [Scripts and Tasks](#scripts-and-tasks)
