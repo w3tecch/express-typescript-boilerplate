@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as dotenv from 'dotenv';
-import * as pkg from '../../package.json';
+import * as pkg from '../package.json';
 
 /**
  * Load .env file or for tests the .env.test file.

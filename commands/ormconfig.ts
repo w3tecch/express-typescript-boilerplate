@@ -3,7 +3,7 @@ dotenv.config();
 
 import * as path from 'path';
 import * as jsonfile from 'jsonfile';
-import { env } from '../src/core/env';
+import { env } from '../src/env';
 
 
 const content = {

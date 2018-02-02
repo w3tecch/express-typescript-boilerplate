@@ -1,7 +1,7 @@
 import * as request from 'request';
 import * as express from 'express';
 import { Service, Require } from 'typedi';
-import { env } from '../core/env';
+import { env } from '../env';
 import { TokenInfoInterface } from './TokenInfoInterface';
 import { Logger, LoggerInterface } from '../decorators/Logger';
 

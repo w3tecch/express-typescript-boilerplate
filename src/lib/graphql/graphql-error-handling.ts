@@ -2,7 +2,7 @@
 import * as uuid from 'uuid';
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 
-import { env } from '../../core/env';
+import { env } from '../../env';
 import { Logger } from '../../core/Logger';
 const logger = new Logger('app:errors');
 

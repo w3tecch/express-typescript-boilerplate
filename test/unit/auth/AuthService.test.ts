@@ -4,7 +4,7 @@ import * as MockExpressRequest from 'mock-express-request';
 import * as nock from 'nock';
 import { LogMock } from './../lib/LogMock';
 import { AuthService } from './../../../src/auth/AuthService';
-import { env } from './../../../src/core/env';
+import { env } from './../../../src/env';
 
 
 describe('AuthService', () => {

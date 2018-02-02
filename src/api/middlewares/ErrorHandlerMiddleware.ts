@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { Middleware, ExpressErrorMiddlewareInterface, HttpError } from 'routing-controllers';
-import { env } from '../../core/env';
+import { env } from '../../env';
 import { Logger, LoggerInterface } from '../../decorators/Logger';
 
 

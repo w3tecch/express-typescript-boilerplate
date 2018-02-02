@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as swaggerUi from 'swagger-ui-express';
 import * as basicAuth from 'express-basic-auth';
 import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework-w3tec';
-import { env } from '../core/env';
+import { env } from '../env';
 
 
 export const swaggerLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {

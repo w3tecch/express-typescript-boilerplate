@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework-w3tec';
-import { env } from '../core/env';
+import { env } from '../env';
 
 
 export const homeLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
