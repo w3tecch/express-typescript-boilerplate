@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as dotenv from 'dotenv';
 import * as pkg from '../package.json';
+import { toBool, toNumber, normalizePort, getOsEnv } from './lib/env';
 
 /**
  * Load .env file or for tests the .env.test file.
@@ -72,26 +73,3 @@ export const env = {
         password: getOsEnv('MONITOR_PASSWORD'),
     },
 };
-
-function getOsEnv(key: string): string {
-    return process.env[key] as string;
-}
-
-function toNumber(value: string): number {
-    return parseInt(value, 10);
-}
-
-function toBool(value: string): boolean {
-    return value === 'true';
-}
-
-function normalizePort(port: string): number | string | boolean {
-    const parsedPort = parseInt(port, 10);
-    if (isNaN(parsedPort)) { // named pipe
-        return port;
-    }
-    if (parsedPort >= 0) { // port number
-        return parsedPort;
-    }
-    return false;
-}
