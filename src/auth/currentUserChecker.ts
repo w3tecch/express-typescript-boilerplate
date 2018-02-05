@@ -1,6 +1,6 @@
 import { Action } from 'routing-controllers';
 import { User } from '../api/models/User';
-import { Logger } from '../core/Logger';
+import { Logger } from '../lib/logger';
 import { TokenInfoInterface } from './TokenInfoInterface';
 import { Connection } from 'typeorm';
 

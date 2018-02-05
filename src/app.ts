@@ -8,7 +8,7 @@
  */
 import 'reflect-metadata';
 import { banner } from './lib/banner';
-import { Logger } from './core/Logger';
+import { Logger } from './lib/logger';
 const log = new Logger(__filename);
 
 import { bootstrapMicroframework } from 'microframework-w3tec';

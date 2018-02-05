@@ -2,7 +2,7 @@ import { Action } from 'routing-controllers';
 import { Container } from 'typedi';
 import { Connection } from 'typeorm';
 import { AuthService } from './AuthService';
-import { Logger } from '../core/Logger';
+import { Logger } from '../lib/logger';
 
 
 export function authorizationChecker(connection: Connection): (action: Action, roles: any[]) => Promise<boolean> | boolean {
