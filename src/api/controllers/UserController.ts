@@ -1,8 +1,10 @@
-import { JsonController, Get, Post, Put, Param, Delete, Body, OnUndefined, Authorized, CurrentUser } from 'routing-controllers';
-import { UserService } from '../services/UserService';
-import { User } from '../models/User';
-import { UserNotFoundError } from '../errors/UserNotFoundError';
+import {
+    Authorized, Body, CurrentUser, Delete, Get, JsonController, OnUndefined, Param, Post, Put
+} from 'routing-controllers';
 
+import { UserNotFoundError } from '../errors/UserNotFoundError';
+import { User } from '../models/User';
+import { UserService } from '../services/UserService';
 
 @Authorized()
 @JsonController('/users')

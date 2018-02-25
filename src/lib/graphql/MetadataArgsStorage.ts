@@ -1,5 +1,5 @@
-import { QueryMetadataArgs } from './QueryMetadataArgs';
 import { MutationMetadataArgs } from './MutationMetadataArgs';
+import { QueryMetadataArgs } from './QueryMetadataArgs';
 
 /**
  * Storage all metadatas read from decorators.
@@ -19,7 +19,6 @@ export class MetadataArgsStorage {
      * Registered middleware metadata args.
      */
     public mutations: MutationMetadataArgs[] = [];
-
 
     // -------------------------------------------------------------------------
     // Public Methods

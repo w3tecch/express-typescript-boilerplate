@@ -1,9 +1,9 @@
 import { Action } from 'routing-controllers';
 import { Container } from 'typedi';
 import { Connection } from 'typeorm';
-import { AuthService } from './AuthService';
-import { Logger } from '../lib/logger';
 
+import { Logger } from '../lib/logger';
+import { AuthService } from './AuthService';
 
 export function authorizationChecker(connection: Connection): (action: Action, roles: any[]) => Promise<boolean> | boolean {
     const log = new Logger(__filename);

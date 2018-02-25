@@ -1,12 +1,12 @@
 import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
-import { PetRepository } from '../repositories/PetRepository';
-import { Pet } from '../models/Pet';
-import { events } from '../subscribers/events';
+
 import { EventDispatcher, EventDispatcherInterface } from '../../decorators/EventDispatcher';
 import { Logger, LoggerInterface } from '../../decorators/Logger';
+import { Pet } from '../models/Pet';
 import { User } from '../models/User';
-
+import { PetRepository } from '../repositories/PetRepository';
+import { events } from '../subscribers/events';
 
 @Service()
 export class PetService {

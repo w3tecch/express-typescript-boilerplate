@@ -1,8 +1,8 @@
-import { HttpError } from 'routing-controllers';
 import * as MockExpressResponse from 'mock-express-response';
+import { HttpError } from 'routing-controllers';
+
 import { ErrorHandlerMiddleware } from '../../../src/api/middlewares/ErrorHandlerMiddleware';
 import { LogMock } from '../lib/LogMock';
-
 
 describe('ErrorHandlerMiddleware', () => {
 

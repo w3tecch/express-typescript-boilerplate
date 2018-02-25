@@ -1,8 +1,10 @@
-import { JsonController, Get, Post, Put, Param, Delete, Body, OnUndefined, Authorized } from 'routing-controllers';
-import { PetService } from '../services/PetService';
-import { Pet } from '../models/Pet';
-import { PetNotFoundError } from '../errors/PetNotFoundError';
+import {
+    Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put
+} from 'routing-controllers';
 
+import { PetNotFoundError } from '../errors/PetNotFoundError';
+import { Pet } from '../models/Pet';
+import { PetService } from '../services/PetService';
 
 @Authorized()
 @JsonController('/pets')

@@ -1,7 +1,7 @@
-import * as path from 'path';
 import * as jsonfile from 'jsonfile';
-import * as tsconfig from '../tsconfig.json';
+import * as path from 'path';
 
+import * as tsconfig from '../tsconfig.json';
 
 const content: any = tsconfig;
 content.include = [

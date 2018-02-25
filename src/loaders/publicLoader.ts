@@ -1,8 +1,7 @@
-import * as path from 'path';
 import * as express from 'express';
+import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
+import * as path from 'path';
 import * as favicon from 'serve-favicon';
-import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework-w3tec';
-
 
 export const publicLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
     if (settings) {

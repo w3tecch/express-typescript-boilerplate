@@ -1,13 +1,10 @@
 import {
-    GraphQLID,
-    GraphQLString,
-    GraphQLInt,
-    GraphQLObjectType,
-    GraphQLFieldConfigMap,
+    GraphQLFieldConfigMap, GraphQLID, GraphQLInt, GraphQLObjectType, GraphQLString
 } from 'graphql';
-import { OwnerType } from './UserType';
-import { Pet } from '../models/Pet';
+
 import { GraphQLContext } from '../../lib/graphql';
+import { Pet } from '../models/Pet';
+import { OwnerType } from './UserType';
 
 const PetFields: GraphQLFieldConfigMap = {
     id: {

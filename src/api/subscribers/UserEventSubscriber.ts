@@ -1,9 +1,10 @@
 import { EventSubscriber, On } from 'event-dispatch';
+
+import { Logger } from '../../lib/logger';
 import { User } from '../models/User';
 import { events } from './events';
-import { Logger } from '../../lib/logger';
-const log = new Logger(__filename);
 
+const log = new Logger(__filename);
 
 @EventSubscriber()
 export class UserEventSubscriber {

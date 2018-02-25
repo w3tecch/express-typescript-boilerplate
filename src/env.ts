@@ -1,7 +1,8 @@
-import * as path from 'path';
 import * as dotenv from 'dotenv';
+import * as path from 'path';
+
 import * as pkg from '../package.json';
-import { toBool, toNumber, normalizePort, getOsEnv } from './lib/env';
+import { getOsEnv, normalizePort, toBool, toNumber } from './lib/env';
 
 /**
  * Load .env file or for tests the .env.test file.

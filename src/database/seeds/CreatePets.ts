@@ -1,7 +1,6 @@
-import { SeedsInterface, FactoryInterface, times } from '../../lib/seeds';
 import { Pet } from '../../../src/api/models/Pet';
 import { User } from '../../../src/api/models/User';
-
+import { FactoryInterface, SeedsInterface, times } from '../../lib/seeds';
 
 export class CreatePets implements SeedsInterface {
 

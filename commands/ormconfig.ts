@@ -1,10 +1,10 @@
 import * as dotenv from 'dotenv';
-dotenv.config();
-
-import * as path from 'path';
 import * as jsonfile from 'jsonfile';
+import * as path from 'path';
+
 import { env } from '../src/env';
 
+dotenv.config();
 
 const content = {
     type: env.db.type,

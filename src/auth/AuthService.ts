@@ -1,10 +1,10 @@
-import * as request from 'request';
 import * as express from 'express';
-import { Service, Require } from 'typedi';
+import * as request from 'request';
+import { Require, Service } from 'typedi';
+
+import { Logger, LoggerInterface } from '../decorators/Logger';
 import { env } from '../env';
 import { TokenInfoInterface } from './TokenInfoInterface';
-import { Logger, LoggerInterface } from '../decorators/Logger';
-
 
 @Service()
 export class AuthService {

@@ -1,6 +1,6 @@
 import { validate } from 'class-validator';
-import { User } from './../../../src/api/models/User';
 
+import { User } from '../../../src/api/models/User';
 
 describe('UserValidations', () => {
 

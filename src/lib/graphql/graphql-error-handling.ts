@@ -1,11 +1,11 @@
-// This feature is a copy from https://github.com/kadirahq/graphql-errors
-import * as uuid from 'uuid';
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
+import * as uuid from 'uuid';
 
 import { env } from '../../env';
 import { Logger } from '../../lib/logger';
-const logger = new Logger('app:errors');
 
+// This feature is a copy from https://github.com/kadirahq/graphql-errors
+const logger = new Logger('app:errors');
 
 // Mark field/type/schema
 export const Processed = Symbol();

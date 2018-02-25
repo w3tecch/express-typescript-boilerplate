@@ -1,7 +1,7 @@
 import * as nock from 'nock';
+
 import { User } from '../../../src/api/models/User';
 import { env } from '../../../src/env';
-
 
 export const fakeAuthenticationForUser = (user: User, persist = false): nock.Scope => {
     const scope = nock(env.auth.route)

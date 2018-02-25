@@ -1,5 +1,4 @@
-import { Logger } from '../../../src/core/Logger';
-
+import { Logger } from '../../../src/lib/logger';
 
 export class LogMock extends Logger {
 

@@ -1,9 +1,9 @@
 import { Action } from 'routing-controllers';
+import { Connection } from 'typeorm';
+
 import { User } from '../api/models/User';
 import { Logger } from '../lib/logger';
 import { TokenInfoInterface } from './TokenInfoInterface';
-import { Connection } from 'typeorm';
-
 
 export function currentUserChecker(connection: Connection): (action: Action) => Promise<User | undefined> {
     const log = new Logger(__filename);
@@ -28,4 +28,3 @@ export function currentUserChecker(connection: Connection): (action: Action) => 
         return user;
     };
 }
-

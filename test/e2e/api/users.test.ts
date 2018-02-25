@@ -1,13 +1,13 @@
 import * as nock from 'nock';
 import * as request from 'supertest';
-import { CreateBruce } from './../../../src/database/seeds/CreateBruce';
-import { getFactory } from './../../../src/lib/seeds/index';
-import { Factory } from './../../../src/lib/seeds/Factory';
-import { User } from './../../../src/api/models/User';
-import { bootstrapApp, BootstrapSettings } from '../utils/bootstrap';
-import { migrateDatabase, closeDatabase } from '../../utils/database';
-import { fakeAuthenticationForUser } from '../utils/auth';
 
+import { User } from '../../../src/api/models/User';
+import { CreateBruce } from '../../../src/database/seeds/CreateBruce';
+import { Factory } from '../../../src/lib/seeds/Factory';
+import { getFactory } from '../../../src/lib/seeds/index';
+import { closeDatabase, migrateDatabase } from '../../utils/database';
+import { fakeAuthenticationForUser } from '../utils/auth';
+import { bootstrapApp, BootstrapSettings } from '../utils/bootstrap';
 
 describe('/api/users', () => {
 

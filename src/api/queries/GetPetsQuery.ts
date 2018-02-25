@@ -1,10 +1,10 @@
 import { GraphQLFieldConfig, GraphQLList } from 'graphql';
-import { Query, AbstractGraphQLQuery, GraphQLContext } from './../../lib/graphql';
-import { PetService } from '../services/PetService';
-import { PetType } from './../types/PetType';
-import { Pet } from '../models/Pet';
-import { Logger, LoggerInterface } from '../../decorators/Logger';
 
+import { Logger, LoggerInterface } from '../../decorators/Logger';
+import { AbstractGraphQLQuery, GraphQLContext, Query } from '../../lib/graphql';
+import { Pet } from '../models/Pet';
+import { PetService } from '../services/PetService';
+import { PetType } from '../types/PetType';
 
 @Query()
 export class GetPetsQuery extends AbstractGraphQLQuery<GraphQLContext<any, any>, Pet[], any> implements GraphQLFieldConfig {

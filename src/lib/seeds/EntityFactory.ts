@@ -1,8 +1,8 @@
 import * as Faker from 'faker';
 import { Connection } from 'typeorm/connection/Connection';
-import { EntityFactoryInterface } from './EntityFactoryInterface';
-import { BluePrint } from './BluePrint';
 
+import { BluePrint } from './BluePrint';
+import { EntityFactoryInterface } from './EntityFactoryInterface';
 
 export class EntityFactory<Entity> implements EntityFactoryInterface<Entity> {
 

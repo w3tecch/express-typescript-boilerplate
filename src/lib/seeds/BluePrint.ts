@@ -1,7 +1,6 @@
 import * as Faker from 'faker';
 import { ObjectType } from 'typeorm';
 
-
 /**
  * BluePrint has the factory function for the given EntityClass
  */
