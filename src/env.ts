@@ -21,9 +21,10 @@ export const env = {
         name: getOsEnv('APP_NAME'),
         version: (pkg as any).version,
         description: (pkg as any).description,
-        route: getOsEnv('APP_ROUTE'),
+        host: getOsEnv('APP_HOST'),
+        schema: getOsEnv('APP_SCHEMA'),
         routePrefix: getOsEnv('APP_ROUTE_PREFIX'),
-        port: normalizePort(process.env.PORT || '3000'),
+        port: normalizePort(process.env.PORT || getOsEnv('APP_PORT')),
         banner: toBool(getOsEnv('APP_BANNER')),
         dirs: {
             migrations: [path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations/*.ts'))],

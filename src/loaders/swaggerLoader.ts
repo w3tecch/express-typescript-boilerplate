@@ -16,8 +16,9 @@ export const swaggerLoader: MicroframeworkLoader = (settings: MicroframeworkSett
             description: env.app.description,
             version: env.app.version,
         };
-        swaggerFile.host = env.app.route;
+        swaggerFile.host = `${env.app.host}:${env.app.port}`;
         swaggerFile.basePath = env.app.routePrefix;
+        swaggerFile.schemes = [env.app.schema];
 
         expressApp.use(
             env.swagger.route,

@@ -13,9 +13,7 @@
     "produces": [
         "application/json"
     ],
-    "schemes": [
-        "http"
-    ],
+    "schemes": [],
     "securityDefinitions": {
         "JWT": {
             "type": "apiKey",
@@ -35,7 +33,7 @@
         }
     ],
     "paths": {
-        "/info": {
+        "/": {
             "get": {
                 "tags": [
                     "Info"
