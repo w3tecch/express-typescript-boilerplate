@@ -1,5 +1,6 @@
-import { Connection } from 'typeorm';
 import 'reflect-metadata';
+import { Connection } from 'typeorm';
+
 import { Factory } from './Factory';
 
 // -------------------------------------------------------------------------

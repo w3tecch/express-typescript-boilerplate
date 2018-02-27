@@ -1,8 +1,8 @@
 import * as express from 'express';
-import { Middleware, ExpressErrorMiddlewareInterface, HttpError } from 'routing-controllers';
-import { env } from '../../core/env';
-import { Logger, LoggerInterface } from '../../decorators/Logger';
+import { ExpressErrorMiddlewareInterface, HttpError, Middleware } from 'routing-controllers';
 
+import { Logger, LoggerInterface } from '../../decorators/Logger';
+import { env } from '../../env';
 
 @Middleware({ type: 'after' })
 export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {

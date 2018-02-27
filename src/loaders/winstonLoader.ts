@@ -1,7 +1,7 @@
-import { MicroframeworkSettings, MicroframeworkLoader } from 'microframework-w3tec';
+import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
 import * as winston from 'winston';
-import { env } from '../core/env';
 
+import { env } from '../env';
 
 export const winstonLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
     winston.configure({

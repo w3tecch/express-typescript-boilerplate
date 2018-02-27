@@ -1,17 +1,12 @@
-import {
-    GraphQLFieldConfig,
-    GraphQLNonNull,
-    GraphQLString,
-    GraphQLInt
-} from 'graphql';
 import { plainToClass } from 'class-transformer';
-import { AbstractGraphQLMutation } from '../../lib/graphql/AbstractGraphQLMutation';
-import { PetType } from '../types/PetType';
-import { PetService } from '../services/PetService';
-import { GraphQLContext, Mutation } from '../../lib/graphql';
-import { Pet } from '../models/Pet';
-import { Logger, LoggerInterface } from '../../decorators/Logger';
+import { GraphQLFieldConfig, GraphQLInt, GraphQLNonNull, GraphQLString } from 'graphql';
 
+import { Logger, LoggerInterface } from '../../decorators/Logger';
+import { GraphQLContext, Mutation } from '../../lib/graphql';
+import { AbstractGraphQLMutation } from '../../lib/graphql/AbstractGraphQLMutation';
+import { Pet } from '../models/Pet';
+import { PetService } from '../services/PetService';
+import { PetType } from '../types/PetType';
 
 interface CreatePetMutationArguments {
     name: string;

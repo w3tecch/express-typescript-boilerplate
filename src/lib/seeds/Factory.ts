@@ -1,11 +1,11 @@
 import * as Faker from 'faker';
 import { ObjectType } from 'typeorm';
 import { Connection } from 'typeorm/connection/Connection';
-import { FactoryInterface } from './FactoryInterface';
-import { EntityFactory } from './EntityFactory';
-import { BluePrint } from './BluePrint';
-import { SeedsConstructorInterface } from './SeedsInterface';
 
+import { BluePrint } from './BluePrint';
+import { EntityFactory } from './EntityFactory';
+import { FactoryInterface } from './FactoryInterface';
+import { SeedsConstructorInterface } from './SeedsInterface';
 
 export class Factory implements FactoryInterface {
 

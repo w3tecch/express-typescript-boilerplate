@@ -1,3 +1,19 @@
+import { bootstrapMicroframework } from 'microframework-w3tec';
+import 'reflect-metadata';
+
+import { banner } from './lib/banner';
+import { Logger } from './lib/logger';
+import { eventDispatchLoader } from './loaders/eventDispatchLoader';
+import { expressLoader } from './loaders/expressLoader';
+import { graphqlLoader } from './loaders/graphqlLoader';
+import { homeLoader } from './loaders/homeLoader';
+import { iocLoader } from './loaders/iocLoader';
+import { monitorLoader } from './loaders/monitorLoader';
+import { publicLoader } from './loaders/publicLoader';
+import { swaggerLoader } from './loaders/swaggerLoader';
+import { typeormLoader } from './loaders/typeormLoader';
+import { winstonLoader } from './loaders/winstonLoader';
+
 /**
  * EXPRESS TYPESCRIPT BOILERPLATE
  * ----------------------------------------
@@ -6,23 +22,7 @@
  * The basic layer of this app is express. For further information visit
  * the 'README.md' file.
  */
-import 'reflect-metadata';
-import { banner } from './core/banner';
-import { Logger } from './core/Logger';
 const log = new Logger(__filename);
-
-import { bootstrapMicroframework } from 'microframework-w3tec';
-import { expressLoader } from './loaders/expressLoader';
-import { winstonLoader } from './loaders/winstonLoader';
-import { typeormLoader } from './loaders/typeormLoader';
-import { swaggerLoader } from './loaders/swaggerLoader';
-import { monitorLoader } from './loaders/monitorLoader';
-import { homeLoader } from './loaders/homeLoader';
-import { publicLoader } from './loaders/publicLoader';
-import { iocLoader } from './loaders/iocLoader';
-import { graphqlLoader } from './loaders/graphqlLoader';
-import { eventDispatchLoader } from './loaders/eventDispatchLoader';
-
 
 bootstrapMicroframework({
     /**

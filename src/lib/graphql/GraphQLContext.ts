@@ -1,5 +1,5 @@
-import * as express from 'express';
 import * as DataLoader from 'dataloader';
+import * as express from 'express';
 import { Container } from 'typedi';
 
 export interface GraphQLContext<TData, TResolveArgs> {

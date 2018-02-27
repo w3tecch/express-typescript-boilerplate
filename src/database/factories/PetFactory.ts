@@ -1,13 +1,10 @@
 import * as Faker from 'faker';
-import { Factory } from '../../lib/seeds';
+
 import { Pet } from '../../../src/api/models/Pet';
+import { Factory } from '../../lib/seeds';
 
 const factory = Factory.getInstance();
 
-
-/**
- * Pet factory
- */
 factory.define(Pet, (faker: typeof Faker) => {
     const gender = faker.random.number(1);
     const name = faker.name.firstName(gender);

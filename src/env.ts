@@ -1,6 +1,8 @@
-import * as path from 'path';
 import * as dotenv from 'dotenv';
-import * as pkg from '../../package.json';
+import * as path from 'path';
+
+import * as pkg from '../package.json';
+import { getOsEnv, normalizePort, toBool, toNumber } from './lib/env';
 
 /**
  * Load .env file or for tests the .env.test file.
@@ -19,20 +21,21 @@ export const env = {
         name: getOsEnv('APP_NAME'),
         version: (pkg as any).version,
         description: (pkg as any).description,
-        route: getOsEnv('APP_ROUTE'),
+        host: getOsEnv('APP_HOST'),
+        schema: getOsEnv('APP_SCHEMA'),
         routePrefix: getOsEnv('APP_ROUTE_PREFIX'),
-        port: normalizePort(process.env.PORT || '3000'),
+        port: normalizePort(process.env.PORT || getOsEnv('APP_PORT')),
         banner: toBool(getOsEnv('APP_BANNER')),
         dirs: {
-            migrations: [path.relative(path.join(process.cwd()), path.join(__dirname, '..', 'database/migrations/*.ts'))],
-            migrationsDir: path.relative(path.join(process.cwd()), path.join(__dirname, '..', 'database/migrations')),
-            entities: [path.relative(path.join(process.cwd()), path.join(__dirname, '..', 'api/**/models/*{.js,.ts}'))],
-            subscribers: [path.join(__dirname, '..', 'api/**/*Subscriber{.js,.ts}')],
-            controllers: [path.join(__dirname, '..', 'api/**/*Controller{.js,.ts}')],
-            middlewares: [path.join(__dirname, '..', 'api/**/*Middleware{.js,.ts}')],
-            interceptors: [path.join(__dirname, '..', 'api/**/*Interceptor{.js,.ts}')],
-            queries: [path.join(__dirname, '..', 'api/**/*Query{.js,.ts}')],
-            mutations: [path.join(__dirname, '..', 'api/**/*Mutation{.js,.ts}')],
+            migrations: [path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations/*.ts'))],
+            migrationsDir: path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations')),
+            entities: [path.relative(path.join(process.cwd()), path.join(__dirname, 'api/**/models/*{.js,.ts}'))],
+            subscribers: [path.join(__dirname, 'api/**/*Subscriber{.js,.ts}')],
+            controllers: [path.join(__dirname, 'api/**/*Controller{.js,.ts}')],
+            middlewares: [path.join(__dirname, 'api/**/*Middleware{.js,.ts}')],
+            interceptors: [path.join(__dirname, 'api/**/*Interceptor{.js,.ts}')],
+            queries: [path.join(__dirname, 'api/**/*Query{.js,.ts}')],
+            mutations: [path.join(__dirname, 'api/**/*Mutation{.js,.ts}')],
         },
     },
     log: {
@@ -72,26 +75,3 @@ export const env = {
         password: getOsEnv('MONITOR_PASSWORD'),
     },
 };
-
-function getOsEnv(key: string): string {
-    return process.env[key] as string;
-}
-
-function toNumber(value: string): number {
-    return parseInt(value, 10);
-}
-
-function toBool(value: string): boolean {
-    return value === 'true';
-}
-
-function normalizePort(port: string): number | string | boolean {
-    const parsedPort = parseInt(port, 10);
-    if (isNaN(parsedPort)) { // named pipe
-        return port;
-    }
-    if (parsedPort >= 0) { // port number
-        return parsedPort;
-    }
-    return false;
-}

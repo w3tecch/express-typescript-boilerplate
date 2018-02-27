@@ -1,10 +1,10 @@
-import * as request from 'request';
 import * as express from 'express';
-import { Service, Require } from 'typedi';
-import { env } from '../core/env';
-import { TokenInfoInterface } from './TokenInfoInterface';
-import { Logger, LoggerInterface } from '../decorators/Logger';
+import * as request from 'request';
+import { Require, Service } from 'typedi';
 
+import { Logger, LoggerInterface } from '../decorators/Logger';
+import { env } from '../env';
+import { TokenInfoInterface } from './TokenInfoInterface';
 
 @Service()
 export class AuthService {
@@ -28,7 +28,7 @@ export class AuthService {
         }
 
         this.log.info('No Token provided by the client');
-        return;
+        return undefined;
     }
 
     public getTokenInfo(token: string): Promise<TokenInfoInterface> {

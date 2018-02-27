@@ -1,6 +1,5 @@
-import * as figlet from 'figlet';
 import chalk from 'chalk';
-
+import * as figlet from 'figlet';
 
 figlet(process.argv[2], (error: any, data: any) => {
     if (error) {

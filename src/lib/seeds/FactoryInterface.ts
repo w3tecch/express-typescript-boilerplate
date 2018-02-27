@@ -1,8 +1,10 @@
 import * as Faker from 'faker';
-import { ObjectType } from 'typeorm';
-import { EntityFactoryInterface } from './EntityFactoryInterface';
-import { Connection } from 'typeorm/connection/Connection';
 import { SeedsConstructorInterface } from 'src/lib/seeds';
+import { ObjectType } from 'typeorm';
+import { Connection } from 'typeorm/connection/Connection';
+
+import { EntityFactoryInterface } from './EntityFactoryInterface';
+
 /**
  * This interface is used to define new entity faker factories or to get such a
  * entity faker factory to start seeding.

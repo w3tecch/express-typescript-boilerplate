@@ -1,6 +1,5 @@
-import { SeedsInterface, FactoryInterface } from '../../lib/seeds';
 import { User } from '../../../src/api/models/User';
-
+import { FactoryInterface, SeedsInterface } from '../../lib/seeds';
 
 export class CreateBruce implements SeedsInterface {
 

@@ -25,16 +25,16 @@ module.exports = {
             description: 'Serves the current app and watches for changes to restart it'
         },
         /**
-         * Setup's stuff
+         * Setup of the development environment
          */
         setup: {
-            db: {
-                script: series(
-                    'nps db.migrate',
-                    'nps db.seed'
-                ),
-                description: 'Setup`s the database by migrating and seeding'
-            }
+            script: series(
+                'yarn install',
+                'nps db.drop',
+                'nps db.migrate',
+                'nps db.seed'
+            ),
+            description: 'Setup`s the development environment(yarn & database)'
         },
         /**
          * Creates the needed configuration files
@@ -267,11 +267,11 @@ function copy(source, target) {
 }
 
 function run(path) {
-    return `ts-node ${path}`;
+    return `ts-node --typeCheck ${path}`;
 }
 
 function runFast(path) {
-    return run(`-F ${path}`);
+    return `ts-node ${path}`;
 }
 
 function tslint(path) {

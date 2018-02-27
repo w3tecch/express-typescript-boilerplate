@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "eg2.tslint",
+    "steoates.autoimport",
+    "EditorConfig.EditorConfig",
+    "christian-kohler.path-intellisense",
+    "mike-co.import-sorter",
+    "mikestead.dotenv",
+    "Orta.vscode-jest"
+  ]
+}

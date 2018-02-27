@@ -1,6 +1,5 @@
 import * as Faker from 'faker';
 
-
 /**
  * EntityFactoryInterface is the one we use in our seed files.
  * This will be returne of the main factory's get method.

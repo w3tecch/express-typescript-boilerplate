@@ -2,8 +2,8 @@ import { Container } from 'typedi';
 import { Connection } from 'typeorm';
 
 import { Pet } from '../../src/api/models/Pet';
-import { PetService } from './../../src/api/services/PetService';
-import { createDatabaseConnection, migrateDatabase, closeDatabase } from '../utils/database';
+import { PetService } from '../../src/api/services/PetService';
+import { closeDatabase, createDatabaseConnection, migrateDatabase } from '../utils/database';
 
 describe('PetService', () => {
 

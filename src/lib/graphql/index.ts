@@ -1,16 +1,16 @@
+import * as DataLoader from 'dataloader';
 import * as express from 'express';
 import * as GraphQLHTTP from 'express-graphql';
-import * as DataLoader from 'dataloader';
-import { GraphQLSchema, GraphQLObjectType } from 'graphql';
+import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 import { Container as container, ObjectType } from 'typedi';
-import { Repository, getCustomRepository, getRepository } from 'typeorm';
+import { getCustomRepository, getRepository, Repository } from 'typeorm';
 
-import { GraphQLContext, GraphQLContextDataLoader } from './GraphQLContext';
-import { MetadataArgsStorage } from './MetadataArgsStorage';
-import { importClassesFromDirectories } from './importClassesFromDirectories';
-import { handlingErrors, getErrorCode, getErrorMessage } from './graphql-error-handling';
-import { ensureInputOrder } from './dataloader';
 import { getFromContainer } from './container';
+import { ensureInputOrder } from './dataloader';
+import { getErrorCode, getErrorMessage, handlingErrors } from './graphql-error-handling';
+import { GraphQLContext, GraphQLContextDataLoader } from './GraphQLContext';
+import { importClassesFromDirectories } from './importClassesFromDirectories';
+import { MetadataArgsStorage } from './MetadataArgsStorage';
 
 // -------------------------------------------------------------------------
 // Main exports

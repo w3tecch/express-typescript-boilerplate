@@ -19,4 +19,3 @@ export class AddUserRelationToPetTable1512663990063 implements MigrationInterfac
     }
 
 }
-

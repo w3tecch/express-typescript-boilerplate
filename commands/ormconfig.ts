@@ -1,11 +1,10 @@
 import * as dotenv from 'dotenv';
-dotenv.config();
-
-import * as path from 'path';
-import * as Chalk from 'chalk';
 import * as jsonfile from 'jsonfile';
-import { env } from '../src/core/env';
+import * as path from 'path';
 
+import { env } from '../src/env';
+
+dotenv.config();
 
 const content = {
     type: env.db.type,
@@ -24,11 +23,7 @@ const content = {
 const filePath = path.join(process.cwd(), 'ormconfig.json');
 jsonfile.writeFile(filePath, content, { spaces: 2 }, (err) => {
     if (err === null) {
-        const chalk = Chalk.default;
-        console.log('👍 ',
-            chalk.gray.underline('generated:'),
-            chalk.blue.bold('ormconfig.json')
-        );
+        process.exit(0);
     } else {
         console.error('Failed to generate the ormconfig.json', err);
         process.exit(1);

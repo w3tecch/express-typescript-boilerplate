@@ -1,4 +1,5 @@
 import { Factory } from './Factory';
+
 /**
  * Seeds should implement this interface and all its methods.
  */

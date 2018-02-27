@@ -1,12 +1,12 @@
-import 'reflect-metadata';
-import * as path from 'path';
-import * as glob from 'glob';
-import * as commander from 'commander';
 import * as Chalk from 'chalk';
+import * as commander from 'commander';
+import * as glob from 'glob';
+import * as path from 'path';
+import 'reflect-metadata';
 import { Connection } from 'typeorm';
-import { Factory } from './Factory';
-import { getConnection } from './connection';
 
+import { getConnection } from './connection';
+import { Factory } from './Factory';
 
 // Get executiuon path to look from there for seeds and factories
 const runDir = process.cwd();

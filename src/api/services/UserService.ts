@@ -1,11 +1,11 @@
 import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
-import { UserRepository } from '../repositories/UserRepository';
-import { User } from '../models/User';
-import { events } from '../subscribers/events';
+
 import { EventDispatcher, EventDispatcherInterface } from '../../decorators/EventDispatcher';
 import { Logger, LoggerInterface } from '../../decorators/Logger';
-
+import { User } from '../models/User';
+import { UserRepository } from '../repositories/UserRepository';
+import { events } from '../subscribers/events';
 
 @Service()
 export class UserService {
