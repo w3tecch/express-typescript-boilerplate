@@ -1,11 +1,10 @@
 import * as Faker from 'faker';
 
 import { User } from '../../../src/api/models/User';
-import { Factory } from '../../lib/seeds';
+import { define } from '../../lib/seed';
 
-const factory = Factory.getInstance();
-
-factory.define(User, (faker: typeof Faker) => {
+define(User, (faker: typeof Faker, settings: { role: string }) => {
+    console.log('UserFactory', settings.role);
     const gender = faker.random.number(1);
     const firstName = faker.name.firstName(gender);
     const lastName = faker.name.lastName(gender);

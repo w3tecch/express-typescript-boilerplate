@@ -3,34 +3,35 @@ import * as request from 'supertest';
 
 import { User } from '../../../src/api/models/User';
 import { CreateBruce } from '../../../src/database/seeds/CreateBruce';
-import { Factory } from '../../../src/lib/seeds/Factory';
-import { getFactory } from '../../../src/lib/seeds/index';
-import { closeDatabase, migrateDatabase } from '../../utils/database';
+import { runSeeder } from '../../../src/lib/seed';
+import { closeDatabase } from '../../utils/database';
 import { fakeAuthenticationForUser } from '../utils/auth';
-import { bootstrapApp, BootstrapSettings } from '../utils/bootstrap';
+import { BootstrapSettings } from '../utils/bootstrap';
+import { prepareServer } from '../utils/server';
 
 describe('/api/users', () => {
+
+    let bruce: User;
+    let settings: BootstrapSettings;
 
     // -------------------------------------------------------------------------
     // Setup up
     // -------------------------------------------------------------------------
 
-    let settings: BootstrapSettings;
-    let factory: Factory;
-    let bruce: User;
-    let authServer: nock.Scope;
-    beforeAll(async () => settings = await bootstrapApp());
-    beforeAll(async () => migrateDatabase(settings.connection));
-    beforeAll(async () => factory = getFactory(settings.connection));
-    beforeAll(async () => bruce = await factory.runSeed<User>(CreateBruce));
-    beforeAll(async () => authServer = fakeAuthenticationForUser(bruce, true));
+    beforeAll(async () => {
+        settings = await prepareServer({ migrate: true });
+        bruce = await runSeeder<User>(CreateBruce);
+        fakeAuthenticationForUser(bruce, true);
+    });
 
     // -------------------------------------------------------------------------
     // Tear down
     // -------------------------------------------------------------------------
 
-    afterAll(() => nock.cleanAll());
-    afterAll(async () => closeDatabase(settings.connection));
+    afterAll(async () => {
+        nock.cleanAll();
+        await closeDatabase(settings.connection);
+    });
 
     // -------------------------------------------------------------------------
     // Test cases

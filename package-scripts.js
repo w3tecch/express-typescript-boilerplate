@@ -140,7 +140,7 @@ module.exports = {
                 script: series(
                     'nps banner.seed',
                     'nps config',
-                    runFast('./src/lib/seeds/cli.ts')
+                    runFast('./src/lib/seed/cli.ts')
                 ),
                 description: 'Seeds generated records into the database'
             },
