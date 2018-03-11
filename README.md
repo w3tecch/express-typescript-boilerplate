@@ -321,7 +321,6 @@ define(Pet, (faker: typeof Faker, settings: undefined) => {
 The seeds files define how much and how the data are connected with each other. The files will be executed alphabetically.
 With the second function you are able to create different variations of entities.
 
-
 ```typescript
 export class CreateUsers implements Seed {
 
