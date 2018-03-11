@@ -1,5 +1,5 @@
 import * as Faker from 'faker';
-import { Connection } from 'typeorm/connection/Connection';
+import { Connection, ObjectType } from 'typeorm';
 
 import { FactoryFunction } from './types';
 import { isPromiseLike } from './utils';
@@ -13,7 +13,7 @@ export class EntityFactory<Entity, Settings> {
 
     constructor(
         public name: string,
-        public entity: Entity,
+        public entity: ObjectType<Entity>,
         private factory: FactoryFunction<Entity, Settings>,
         private settings?: Settings
     ) { }
@@ -54,7 +54,7 @@ export class EntityFactory<Entity, Settings> {
             const em = connection.createEntityManager();
             try {
                 const entity = await this.make();
-                return await em.save<Entity>(this.entity, entity);
+                return await em.save<Entity>(entity);
             } catch (error) {
                 throw new Error('Could not save entity');
             }

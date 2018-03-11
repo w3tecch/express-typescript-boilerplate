@@ -10,8 +10,8 @@ export class CreatePets implements Seed {
         const em = connection.createEntityManager();
 
         await times(10, async (n) => {
-            const pet = await factory<Pet, undefined>(Pet as any)().seed();
-            const user = await factory<User, undefined>(User as any)().make();
+            const pet = await factory(Pet)().seed();
+            const user = await factory(User)().make();
             user.pets = [pet];
             await em.save(user);
         });
