@@ -12,15 +12,9 @@ const loadFiles =
         (pathToFolder: string) =>
             (successFn: (files: string[]) => void) =>
                 (failedFn: (error: any) => void) => {
-                    glob(path.join(process.cwd(), pathToFolder, filePattern), (error: any, files: string[]) => {
-                        if (error) {
-                            return failedFn(error);
-                        }
-                        successFn(files);
-                    });
-                    // error
-                    //     ? failedFn(error)
-                    //     : successFn(files));
+                    glob(path.join(process.cwd(), pathToFolder, filePattern), (error: any, files: string[]) => error
+                        ? failedFn(error)
+                        : successFn(files));
                 };
 
 const loadFactoryFiles = loadFiles('**/*Factory{.js,.ts}');
@@ -40,9 +34,6 @@ export const loadEntityFactories = (pathToFolder: string): Promise<string[]> => 
 
 export const loadSeeds = (pathToFolder: string): Promise<string[]> => {
     return new Promise((resolve, reject) => {
-        loadFiles('**/*{.js,.ts}')(pathToFolder)(files => {
-            // TODO: load seeds
-            resolve(files);
-        })(reject);
+        loadFiles('**/*{.js,.ts}')(pathToFolder)(resolve)(reject);
     });
 };

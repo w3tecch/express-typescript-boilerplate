@@ -2,7 +2,9 @@ import 'reflect-metadata';
 import { Connection, ObjectType } from 'typeorm';
 
 import { EntityFactory } from './EntityFactory';
-import { EntityFactoryDefinition, FactoryFunction, SeedConstructor } from './types';
+import {
+    EntityConstructor, EntityFactoryDefinition, FactoryFunction, SeedConstructor
+} from './types';
 import { getNameOfClass } from './utils';
 
 // -------------------------------------------------------------------------
@@ -10,6 +12,8 @@ import { getNameOfClass } from './utils';
 // -------------------------------------------------------------------------
 
 export * from './importer';
+export { Factory, Seed } from './types';
+export { times } from './utils';
 
 // -------------------------------------------------------------------------
 // Types & Variables
@@ -21,22 +25,31 @@ export * from './importer';
 };
 
 // -------------------------------------------------------------------------
-// Util functions
-// -------------------------------------------------------------------------
-
-// -------------------------------------------------------------------------
 // Facade functions
 // -------------------------------------------------------------------------
 
+/**
+ * Adds the typorm connection to the seed options
+ */
 export const setConnection = (connection: Connection) => (global as any).seeder.connection = connection;
 
+/**
+ * Returns the typorm connection from our seed options
+ */
 export const getConnection = () => (global as any).seeder.connection;
 
+/**
+ * Defines a new entity factory
+ */
 export const define = <Entity, Settings>(entity: ObjectType<Entity>, factoryFn: FactoryFunction<Entity, Settings>) => {
     (global as any).seeder.entityFactories.set(getNameOfClass(entity), { entity, factory: factoryFn });
 };
 
-export const factory = <Entity, Settings>(entity: any) => (settings?: Settings) => {
+
+/**
+ * Gets a defined entity factory and pass the settigns along to the entity factory function
+ */
+export const factory = <Entity, Settings>(entity: EntityConstructor<Entity>) => (settings?: Settings) => {
     const name = getNameOfClass(entity);
     const entityFactoryObject = (global as any).seeder.entityFactories.get(name);
     return new EntityFactory<Entity, Settings>(
@@ -47,22 +60,10 @@ export const factory = <Entity, Settings>(entity: any) => (settings?: Settings) 
     );
 };
 
-export const seed = async <Entity, Settings>(entityFactory: EntityFactory<Entity, Settings>): Promise<Entity> => {
-    const connection: Connection = (global as any).seeder.connection;
-    if (connection) {
-        const em = connection.createEntityManager();
-        try {
-            const entity = await entityFactory.make();
-            return await em.save<Entity>(entityFactory.entity, entity);
-        } catch (error) {
-            throw new Error('Could not save entity');
-        }
-    } else {
-        throw new Error('No db connection is given');
-    }
-};
-
-export const runSeeder = async <T>(seederConstructor: SeedConstructor): Promise<T> => {
+/**
+ * Runs a seed class
+ */
+export const runSeed = async <T>(seederConstructor: SeedConstructor): Promise<T> => {
     const seeder = new seederConstructor();
     return seeder.seed(factory, getConnection());
 };

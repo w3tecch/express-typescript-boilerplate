@@ -1,16 +1,15 @@
 import { Connection } from 'typeorm/connection/Connection';
 
+import { User } from '../../../src/api/models/User';
 import { Factory, Seed } from '../../lib/seed/types';
 
-// import { User } from '../../../src/api/models/User';
 export class CreateUsers implements Seed {
 
     public async seed(factory: Factory, connection: Connection): Promise<any> {
         console.log('CreateUsers');
 
-        // await factory
-        //     .get(User)
-        //     .createMany(10);
+        await factory(User)()
+            .seedMany(10);
     }
 
 }

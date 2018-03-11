@@ -4,6 +4,9 @@ import { Connection } from 'typeorm/connection/Connection';
 import { FactoryFunction } from './types';
 import { isPromiseLike } from './utils';
 
+/**
+ * EntityFactory ...
+ */
 export class EntityFactory<Entity, Settings> {
 
     private mapFunction: (entity: Entity) => Promise<Entity>;
@@ -19,11 +22,18 @@ export class EntityFactory<Entity, Settings> {
     // Public API
     // -------------------------------------------------------------------------
 
+    /**
+     * This fucntion is used to alter the generated values of entity, before it
+     * is persist into the database
+     */
     public map(mapFunction: (entity: Entity) => Promise<Entity>): EntityFactory<Entity, Settings> {
         this.mapFunction = mapFunction;
         return this;
     }
 
+    /**
+     * Make generate a new entity, but does not persist it
+     */
     public async make(): Promise<Entity> {
         if (this.factory) {
             let entity = await this.resolveEntity(this.factory(Faker, this.settings));
@@ -35,6 +45,9 @@ export class EntityFactory<Entity, Settings> {
         throw new Error('Could not found entity');
     }
 
+    /**
+     * Seed persist and generates a given entity
+     */
     public async seed(): Promise<Entity> {
         const connection: Connection = (global as any).seeder.connection;
         if (connection) {

@@ -5,12 +5,11 @@ import * as path from 'path';
 import { loadEntityFactories } from './';
 import { getConnection } from './connection';
 import { loadSeeds } from './importer';
-import { runSeeder, setConnection } from './index';
-import { SeedConstructor } from './types';
+import { runSeed, setConnection } from './index';
 
 // Cli helper
 commander
-    .version('0.0.0')
+    .version('1.0.0')
     .description('Run database seeds of your project')
     .option('-L, --logging', 'enable sql query logging')
     .option('--factories <path>', 'add filepath for your factories')
@@ -89,10 +88,6 @@ const run = async () => {
 const handleError = (error) => {
     console.error(error);
     process.exit(1);
-};
-
-const runSeed = async (seedClass: SeedConstructor): Promise<void> => {
-    await runSeeder(seedClass);
 };
 
 run();
