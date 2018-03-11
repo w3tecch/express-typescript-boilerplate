@@ -2,9 +2,7 @@ import 'reflect-metadata';
 import { Connection, ObjectType } from 'typeorm';
 
 import { EntityFactory } from './EntityFactory';
-import {
-    EntityConstructor, EntityFactoryDefinition, FactoryFunction, SeedConstructor
-} from './types';
+import { EntityFactoryDefinition, FactoryFunction, SeedConstructor } from './types';
 import { getNameOfClass } from './utils';
 
 // -------------------------------------------------------------------------
@@ -45,11 +43,10 @@ export const define = <Entity, Settings>(entity: ObjectType<Entity>, factoryFn: 
     (global as any).seeder.entityFactories.set(getNameOfClass(entity), { entity, factory: factoryFn });
 };
 
-
 /**
  * Gets a defined entity factory and pass the settigns along to the entity factory function
  */
-export const factory = <Entity, Settings>(entity: EntityConstructor<Entity>) => (settings?: Settings) => {
+export const factory = <Entity, Settings>(entity: Entity) => (settings?: Settings) => {
     const name = getNameOfClass(entity);
     const entityFactoryObject = (global as any).seeder.entityFactories.get(name);
     return new EntityFactory<Entity, Settings>(

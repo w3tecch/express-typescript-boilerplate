@@ -6,10 +6,7 @@ import { Factory, Seed } from '../../lib/seed/types';
 export class CreateUsers implements Seed {
 
     public async seed(factory: Factory, connection: Connection): Promise<any> {
-        console.log('CreateUsers');
-
-        await factory(User)()
-            .seedMany(10);
+        await factory(User)().seedMany(10);
     }
 
 }

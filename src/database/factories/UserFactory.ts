@@ -4,7 +4,6 @@ import { User } from '../../../src/api/models/User';
 import { define } from '../../lib/seed';
 
 define(User, (faker: typeof Faker, settings: { role: string }) => {
-    console.log('UserFactory', settings.role);
     const gender = faker.random.number(1);
     const firstName = faker.name.firstName(gender);
     const lastName = faker.name.lastName(gender);

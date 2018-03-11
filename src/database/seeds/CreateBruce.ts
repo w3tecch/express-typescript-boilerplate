@@ -6,8 +6,6 @@ import { Factory, Seed } from '../../lib/seed/types';
 export class CreateBruce implements Seed {
 
     public async seed(factory: Factory, connection: Connection): Promise<User> {
-        console.log('CreateBruce');
-
         // const userFactory = factory<User, { role: string }>(User as any);
         // const adminUserFactory = userFactory({ role: 'admin' });
 
