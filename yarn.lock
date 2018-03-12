@@ -3480,8 +3480,8 @@ nps-utils@^1.5.0:
     rimraf "^2.6.1"
 
 nps@^5.7.1:
-  version "5.8.1"
-  resolved "https://registry.yarnpkg.com/nps/-/nps-5.8.1.tgz#180ca887a3bf8abdb860fb972d135310260580bb"
+  version "5.8.2"
+  resolved "https://registry.yarnpkg.com/nps/-/nps-5.8.2.tgz#17fc2e86f5f5577c54c49423996a63ef9299a889"
   dependencies:
     arrify "^1.0.1"
     chalk "^2.0.1"
@@ -5173,8 +5173,8 @@ window-size@0.1.0:
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
 
 winston@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/winston/-/winston-2.4.0.tgz#808050b93d52661ed9fb6c26b3f0c826708b0aee"
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/winston/-/winston-2.4.1.tgz#a3a9265105564263c6785b4583b8c8aca26fded6"
   dependencies:
     async "~1.0.0"
     colors "1.0.x"
