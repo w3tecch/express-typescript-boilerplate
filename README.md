@@ -354,6 +354,17 @@ The last step is the easiest, just hit the following command in your terminal, b
 npm start db.seed
 ```
 
+#### CLI Interface
+
+| Command                                             | Description |
+| --------------------------------------------------- | ----------- |
+| `npm start "db.seed"`                               | Run all seeds |
+| `npm start "db.seed --list CreateBruce,CreatePets"` | List seeds to run |
+| `npm start "db.seed -L`                             | Log database queries to the terminal |
+| `npm start "db.seed --factories`                    | Add a different path to your factories (Default: `src/database/`) |
+| `npm start "db.seed --seeds`                        | Add a different path to your seeds (Default: `src/database/seeds/`) |
+| `npm start "db.seed --config`                       | Path to your ormconfig.json file |
+
 ## Run in Docker container
 
 ### Install Docker
