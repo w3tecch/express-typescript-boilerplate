@@ -11,7 +11,7 @@ export type FactoryFunction<Entity, Settings> = (faker: typeof Faker, settings?:
 /**
  * Factory gets the EntityFactory to the given Entity and pass the settings along
  */
-export type Factory = <Entity, Settings>(entity: Entity) => (settings?: Settings) => EntityFactory<Entity, Settings>;
+export type Factory = <Entity, Settings>(entity: ObjectType<Entity>) => (settings?: Settings) => EntityFactory<Entity, Settings>;
 
 /**
  * Seed are the class to create some data. Those seed are run by the cli.

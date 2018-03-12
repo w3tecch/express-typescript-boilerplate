@@ -1,9 +1,8 @@
 import 'reflect-metadata';
 import { Connection, ObjectType } from 'typeorm';
 
-import { Factory } from '../seeds/Factory';
 import { EntityFactory } from './EntityFactory';
-import { EntityFactoryDefinition, FactoryFunction, SeedConstructor } from './types';
+import { EntityFactoryDefinition, Factory, FactoryFunction, SeedConstructor } from './types';
 import { getNameOfClass } from './utils';
 
 // -------------------------------------------------------------------------

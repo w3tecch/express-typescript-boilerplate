@@ -4,9 +4,6 @@ import { Connection, ObjectType } from 'typeorm';
 import { FactoryFunction } from './types';
 import { isPromiseLike } from './utils';
 
-/**
- * EntityFactory ...
- */
 export class EntityFactory<Entity, Settings> {
 
     private mapFunction: (entity: Entity) => Promise<Entity>;
