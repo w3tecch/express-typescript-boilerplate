@@ -255,12 +255,14 @@ export class UserService {
 
 ## Seeding
 
-Isn't exhausting to create some sample data into your fresh migrated database, well this time is over!
-How does it work? Just, create a factory for your entities and a seed script.
+Isn't it exhausting to create some sample data for your database, well this time is over!
+
+How does it work? Just create a factory for your entities (models) and a seed script.
 
 ### 1. Create a factory for your entity
 
-For all the entities we want to seed, we need to define a factory. To do so we give you the awesome [faker](https://github.com/marak/Faker.js/) library as a parameter into your factory. Then create your "fake" entity as you would normally do and return it. Those factory files should be in the `src/database/factories` folder and suffixed with `Factory`. Example `src/database/factories/UserFactory.ts`.
+For all entities we want to seed, we need to define a factory. To do so we give you the awesome [faker](https://github.com/marak/Faker.js/) library as a parameter into your factory. Then create your "fake" entity and return it. Those factory files should be in the `src/database/factories` folder and suffixed with `Factory` like `src/database/factories/UserFactory.ts`.
+
 Settings can be used to pass some static value into the factory.
 
 ```typescript
@@ -279,29 +281,7 @@ define(User, (faker: typeof Faker, settings: { roles: string[] }) => {
 });
 ```
 
-To deal with relations you can use the entity manager like this.
-
-```typescript
-export class CreatePets implements SeedsInterface {
-
-    public async seed(factory: FactoryInterface, connection: Connection): Promise<any> {
-        const connection = await factory.getConnection();
-        const em = connection.createEntityManager();
-
-        await times(10, async (n) => {
-            // This creates a pet in the database
-            const pet = await factory(Pet)().create();
-            // This only returns a entity with fake data
-            const user = await factory(User)({ roles: ['admin'] }).make();
-            user.pets = [pet];
-            await em.save(user);
-        });
-    }
-
-}
-```
-
-Or you could do the relation in the entity factory like this.
+Handle relation in the entity factory like this.
 
 ```typescript
 define(Pet, (faker: typeof Faker, settings: undefined) => {
@@ -319,7 +299,7 @@ define(Pet, (faker: typeof Faker, settings: undefined) => {
 ### 2. Create a seed file
 
 The seeds files define how much and how the data are connected with each other. The files will be executed alphabetically.
-With the second function you are able to create different variations of entities.
+With the second function, accepting your settings defined in the factories, you are able to create different variations of entities.
 
 ```typescript
 export class CreateUsers implements Seed {
@@ -346,6 +326,28 @@ await factory(User)()
 ...
 ```
 
+To deal with relations you can use the entity manager like this.
+
+```typescript
+export class CreatePets implements SeedsInterface {
+
+    public async seed(factory: FactoryInterface, connection: Connection): Promise<any> {
+        const connection = await factory.getConnection();
+        const em = connection.createEntityManager();
+
+        await times(10, async (n) => {
+            // This creates a pet in the database
+            const pet = await factory(Pet)().create();
+            // This only returns a entity with fake data
+            const user = await factory(User)({ roles: ['admin'] }).make();
+            user.pets = [pet];
+            await em.save(user);
+        });
+    }
+
+}
+```
+
 ### 3. Run the seeder
 
 The last step is the easiest, just hit the following command in your terminal, but be sure you are in the projects root folder.
@@ -359,11 +361,11 @@ npm start db.seed
 | Command                                             | Description |
 | --------------------------------------------------- | ----------- |
 | `npm start "db.seed"`                               | Run all seeds |
-| `npm start "db.seed --list CreateBruce,CreatePets"` | List seeds to run |
-| `npm start "db.seed -L`                             | Log database queries to the terminal |
-| `npm start "db.seed --factories`                    | Add a different path to your factories (Default: `src/database/`) |
-| `npm start "db.seed --seeds`                        | Add a different path to your seeds (Default: `src/database/seeds/`) |
-| `npm start "db.seed --config`                       | Path to your ormconfig.json file |
+| `npm start "db.seed --run CreateBruce,CreatePets"`  | Run specific seeds (file names without extension) |
+| `npm start "db.seed -L"`                            | Log database queries to the terminal |
+| `npm start "db.seed --factories <path>"`            | Add a different path to your factories (Default: `src/database/`) |
+| `npm start "db.seed --seeds <path>"`                | Add a different path to your seeds (Default: `src/database/seeds/`) |
+| `npm start "db.seed --config <file>"`               | Path to your ormconfig.json file |
 
 ## Run in Docker container
 

@@ -20,7 +20,7 @@ export class EntityFactory<Entity, Settings> {
     // -------------------------------------------------------------------------
 
     /**
-     * This fucntion is used to alter the generated values of entity, before it
+     * This function is used to alter the generated values of entity, before it
      * is persist into the database
      */
     public map(mapFunction: (entity: Entity) => Promise<Entity>): EntityFactory<Entity, Settings> {
@@ -29,7 +29,7 @@ export class EntityFactory<Entity, Settings> {
     }
 
     /**
-     * Make generate a new entity, but does not persist it
+     * Make a new entity, but does not persist it
      */
     public async make(): Promise<Entity> {
         if (this.factory) {
@@ -43,7 +43,7 @@ export class EntityFactory<Entity, Settings> {
     }
 
     /**
-     * Seed persist and generates a given entity
+     * Seed makes a new entity and does persist it
      */
     public async seed(): Promise<Entity> {
         const connection: Connection = (global as any).seeder.connection;

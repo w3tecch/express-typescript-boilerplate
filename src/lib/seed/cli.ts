@@ -14,8 +14,8 @@ commander
     .option('-L, --logging', 'enable sql query logging')
     .option('--factories <path>', 'add filepath for your factories')
     .option('--seeds <path>', 'add filepath for your seeds')
-    .option('--list <seeds>', 'list seeds to seed', (val) => val.split(','))
-    .option('--config <filepath>', 'add filepath to your database config (must be a json)')
+    .option('--run <seeds>', 'run specific seeds (file names without extension)', (val) => val.split(','))
+    .option('--config <file>', 'path to your ormconfig.json file (must be a json)')
     .parse(process.argv);
 
 // Get cli parameter for a different factory path
@@ -29,8 +29,8 @@ const seedsPath = (commander.seeds)
     : 'src/database/seeds/';
 
 // Get a list of seeds
-const listOfSeeds = (commander.list)
-    ? commander.list.map(l => l.trim()).filter(l => l.length > 0)
+const listOfSeeds = (commander.run)
+    ? commander.run.map(l => l.trim()).filter(l => l.length > 0)
     : [];
 
 // Search for seeds and factories
