@@ -1,35 +1,43 @@
-# Express Typescript Boilerplate
+<p align="center">
+  <img src="./w3tec-logo.png" alt="w3tec" width="400" />
+</p>
 
-[![Dependency Status](https://david-dm.org/w3tecch/express-typescript-boilerplate/status.svg?style=flat)](https://david-dm.org/w3tecch/express-typescript-boilerplate)
-[![Build Status](https://travis-ci.org/w3tecch/express-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-typescript-boilerplate)
-[![Build status](https://ci.appveyor.com/api/projects/status/f8e7jdm8v58hcwpq/branch/master?svg=true&passingText=Windows%20passing&pendingText=Windows%20pending&failingText=Windows%20failing)](https://ci.appveyor.com/project/dweber019/express-typescript-boilerplate/branch/master)
+<h1 align="center">Express Typescript Boilerplate</h1>
 
-> A delightful way to building a RESTful API Services with beautiful code written in TypeScript.
-> An Node.js Web-Service boilerplate/skeleton/starter-kit featuring
-> Inspired by the awesome framework [laravel](https://laravel.com/) in PHP and of the repositories from [pleerock](https://github.com/pleerock).
-[TypeScript](https://www.typescriptlang.org/),
-[Express](https://expressjs.com/),
-[Winston](https://github.com/winstonjs/winston),
-[Microframework](https://github.com/pleerock/microframework),
-[TypeDI](https://github.com/pleerock/typedi),
-[TypeORM](https://github.com/typeorm/typeorm),
-[TsLint](http://palantir.github.io/tslint/),
-[@types](https://www.npmjs.com/~types),
-[Jest](https://facebook.github.io/jest/),
-[Swagger](http://swagger.io/),
-[validatejs](https://validatejs.org/),
-[GraphQL](http://graphql.org/),
-[DataLoaders](https://github.com/facebook/dataloader),
-by [w3tech](https://github.com/w3tecch)
+<p align="center">
+  <a href="https://david-dm.org/w3tecch/express-typescript-boilerplate">
+    <img src="https://david-dm.org/w3tecch/express-typescript-boilerplate/status.svg?style=flat" alt="dependency" />
+  </a>
+  <a href="https://travis-ci.org/w3tecch/express-typescript-boilerplate">
+    <img src="https://travis-ci.org/w3tecch/express-typescript-boilerplate.svg?branch=master" alt="travis" />
+  </a>
+  <a href="https://ci.appveyor.com/project/dweber019/express-typescript-boilerplate/branch/master">
+    <img src="https://ci.appveyor.com/api/projects/status/f8e7jdm8v58hcwpq/branch/master?svg=true&passingText=Windows%20passing&pendingText=Windows%20pending&failingText=Windows%20failing" alt="appveyor" />
+  </a>
+  <a href="https://stackshare.io/hirsch88/express-typescript-boilerplate">
+    <img src="https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat" alt="StackShare" />
+  </a>
+</p>
 
-## Why
+<p align="center">
+  <b>A delightful way to building a RESTful API Services with beautiful code written in TypeScript.</b></br>
+  <sub>Inspired by the awesome framework <a href="https://laravel.com/">laravel</a> in PHP and of the repositories from <a href="https://github.com/pleerock">pleerock</a></sub>
+</p>
+
+<br />
+
+> An Node.js Web-Service boilerplate/skeleton/starter-kit with TypeScript, Express, Winston, Microframework, TypeDI, TypeORM, TsLint, @types, Jest, Swagger, validatejs, GraphQL, DataLoaders, by w3tech
+
+![divider](./w3tec-divider.png)
+
+## ❯ Why
 
 Our main goal with this project is a feature complete server application.
 We like you to be focused on your business and not spending hours in project configuration.
 
 Try it!! We are happy to hear your feedback or any kind of new features.
 
-## Features
+### Features
 
 - **Beautiful Code** thanks to the awesome annotations of the libraries from [pleerock](https://github.com/pleerock).
 - **Easy API Testing** with included e2e testing.
@@ -50,23 +58,27 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **GraphQL** provides as a awesome query language for our api [GraphQL](http://graphql.org/).
 - **DataLoaders** helps with performance thanks to caching and batching [DataLoaders](https://github.com/facebook/dataloader).
 
-## Table of Contents
+![divider](./w3tec-divider.png)
 
-- [Getting Started](#getting-started)
-- [Scripts and Tasks](#scripts-and-tasks)
-- [Debugger in VSCode](#debugger-in-vscode)
-- [API Routes](#api-routes)
-- [Project Structure](#project-structure)
-- [Logging](#logging)
-- [Event Dispatching](#event-dispatching)
-- [Seeding](#seeding)
-- [Further Documentations](#further-documentation)
-- [Related Projects](#related-projects)
-- [License](#license)
+## ❯ Table of Contents
 
-## Getting Started
+- [Getting Started](#-getting-started)
+- [Scripts and Tasks](#-scripts-and-tasks)
+- [Debugger in VSCode](#-debugger-in-vscode)
+- [API Routes](#-api-routes)
+- [Project Structure](#-project-structure)
+- [Logging](#-logging)
+- [Event Dispatching](#-event-dispatching)
+- [Seeding](#-seeding)
+- [Further Documentations](#-further-documentation)
+- [Related Projects](#-related-projects)
+- [License](#-license)
 
-### Step 1:  Set up the Development Environment
+![divider](./w3tec-divider.png)
+
+## ❯ Getting Started
+
+### Step 1: Set up the Development Environment
 
 You need to set up your development environment before you can do anything.
 
@@ -112,9 +124,11 @@ npm start serve
 > This starts a local server using `nodemon`, which will watch for any file changes and will restart the sever according to these changes.
 > The server address will be displayed to you as `http://0.0.0.0:3000`.
 
-## Scripts and Tasks
+![divider](./w3tec-divider.png)
 
-All script are defined in the package.json file, but the most important ones are listed here.
+## ❯ Scripts and Tasks
+
+All script are defined in the `package-scripts.js` file, but the most important ones are listed here.
 
 ### Install
 
@@ -153,12 +167,16 @@ All script are defined in the package.json file, but the most important ones are
 
 - Run `npm start db.seed` to seed your seeds into the database.
 
-## Debugger in VSCode
+![divider](./w3tec-divider.png)
+
+## ❯ Debugger in VSCode
 
 To debug your code run `npm start build` or hit `cmd + b` to build your app.
 Then, just set a breakpoint and hit `F5` in your Visual Studio Code.
 
-## API Routes
+![divider](./w3tec-divider.png)
+
+## ❯ API Routes
 
 The route prefix is `/api` by default, but you can change this in the .env file.
 The swagger and the monitor route can be altered in the `.env` file.
@@ -172,7 +190,9 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **/api/users** | Example entity endpoint |
 | **/api/pets**  | Example entity endpoint |
 
-## Project Structure
+![divider](./w3tec-divider.png)
+
+## ❯ Project Structure
 
 | Name                              | Description |
 | --------------------------------- | ----------- |
@@ -212,7 +232,9 @@ The swagger and the monitor route can be altered in the `.env` file.
 | ormconfig.json                    | TypeORM configuration for the database. Used by seeds and the migration. (generated file) |
 | mydb.sql                          | SQLite database for integration tests. Ignored by git and only available after integration tests |
 
-## Logging
+![divider](./w3tec-divider.png)
+
+## ❯ Logging
 
 Our logger is [winston](https://github.com/winstonjs/winston). To log http request we use the express middleware [morgan](https://github.com/expressjs/morgan).
 We created a simple annotation to inject the logger in your service (see example below).
@@ -230,7 +252,9 @@ export class UserService {
     ...
 ```
 
-## Event Dispatching
+![divider](./w3tec-divider.png)
+
+## ❯ Event Dispatching
 
 Our we use this awesome repository [event-dispatch](https://github.com/pleerock/event-dispatch) for event dispatching.
 We created a simple annotation to inject the EventDispatcher in your service (see example below). All events are listed in the `events.ts` file.
@@ -253,7 +277,9 @@ export class UserService {
     }
 ```
 
-## Seeding
+![divider](./w3tec-divider.png)
+
+## ❯ Seeding
 
 Isn't it exhausting to create some sample data for your database, well this time is over!
 
@@ -367,7 +393,9 @@ npm start db.seed
 | `npm start "db.seed --seeds <path>"`                | Add a different path to your seeds (Default: `src/database/seeds/`) |
 | `npm start "db.seed --config <file>"`               | Path to your ormconfig.json file |
 
-## Run in Docker container
+![divider](./w3tec-divider.png)
+
+## ❯ Run in Docker container
 
 ### Install Docker
 
@@ -446,7 +474,9 @@ DB_HOST=localhost
 DB_PORT=3306
 ```
 
-## Further Documentations
+![divider](./w3tec-divider.png)
+
+## ❯ Further Documentations
 
 | Name & Link                       | Description                       |
 | --------------------------------- | --------------------------------- |
@@ -468,14 +498,18 @@ DB_PORT=3306
 | [GraphQL Documentation](http://graphql.org/graphql-js/) | A query language for your API. |
 | [DataLoader Documentation](https://github.com/facebook/dataloader) | DataLoader is a generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching. |
 
-## Related Projects
+![divider](./w3tec-divider.png)
+
+## ❯ Related Projects
 
 - [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter) - A starter template for TypeScript and Node with a detailed README describing how to use the two together.
 - [express-graphql-typescript-boilerplate](https://github.com/w3tecch/express-graphql-typescript-boilerplate) - A starter kit for building amazing GraphQL API's with TypeScript and express by @w3tecch
 - [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
 - [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server) - Useful for e2e testing or faking an oAuth server
 
-## License
+![divider](./w3tec-divider.png)
+
+## ❯ License
 
 [MIT](/LICENSE)
 
