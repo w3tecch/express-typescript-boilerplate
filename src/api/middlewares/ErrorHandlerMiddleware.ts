@@ -18,7 +18,7 @@ export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
         res.json({
             name: error.name,
             message: error.message,
-            errors: error['errors'] || [],
+            errors: error[`errors`] || [],
         });
 
         if (this.isProduction) {
