@@ -3,7 +3,7 @@ import * as request from 'supertest';
 
 import { User } from '../../../src/api/models/User';
 import { CreateBruce } from '../../../src/database/seeds/CreateBruce';
-import { runSeeder } from '../../../src/lib/seed';
+import { runSeed } from '../../../src/lib/seed';
 import { closeDatabase } from '../../utils/database';
 import { fakeAuthenticationForUser } from '../utils/auth';
 import { BootstrapSettings } from '../utils/bootstrap';
@@ -20,7 +20,7 @@ describe('/api/users', () => {
 
     beforeAll(async () => {
         settings = await prepareServer({ migrate: true });
-        bruce = await runSeeder<User>(CreateBruce);
+        bruce = await runSeed<User>(CreateBruce);
         fakeAuthenticationForUser(bruce, true);
     });
 

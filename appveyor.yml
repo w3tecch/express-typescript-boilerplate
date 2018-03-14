@@ -1,5 +1,8 @@
 environment:
   nodejs_version: "8"
+  DB_TYPE: "sqlite"
+  DB_DATABASE: "./mydb.sql"
+  DB_LOGGING: false
 
 install:
   - ps: Install-Product node $env:nodejs_version
@@ -9,4 +12,6 @@ build_script:
   - npm start build
 
 test_script:
-  - npm test
+  - npm start test
+  - npm start test.integration
+  - npm start test.e2e
