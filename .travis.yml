@@ -4,13 +4,11 @@ node_js:
 install:
   - yarn install
 env:
-  - DB_TYPE="sqlite"
-  - DB_DATABASE="./mydb.sql"
-  - DB_LOGGING=false
+  - DB_TYPE="sqlite" DB_DATABASE="./mydb.sql" DB_LOGGING=false
 scripts:
-  - npm test
+  - npm start build
+  - npm start test
   - npm start test.integration
   - npm start test.e2e
-  - npm start build
 notifications:
   email: false
