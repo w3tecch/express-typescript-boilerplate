@@ -20,7 +20,6 @@
         "ordered-imports": false,
         "object-literal-sort-keys": false,
         "arrow-parens": false,
-        "no-string-literal": false,
         "member-ordering": [
             true,
             {
@@ -72,6 +71,58 @@
                 },
                 "singleline": "never"
             }
+        ],
+        "align": [
+            true,
+            "parameters"
+        ],
+        "class-name": true,
+        "curly": true,
+        "eofline": true,
+        "jsdoc-format": true,
+        "member-access": true,
+        "no-arg": true,
+        "no-construct": true,
+        "no-duplicate-variable": true,
+        "no-empty": true,
+        "no-eval": true,
+        "no-internal-module": true,
+        "no-string-literal": true,
+        "no-trailing-whitespace": true,
+        "no-unused-expression": true,
+        "no-var-keyword": true,
+        "one-line": [
+            true,
+            "check-open-brace",
+            "check-catch",
+            "check-else",
+            "check-finally",
+            "check-whitespace"
+        ],
+        "semicolon": true,
+        "switch-default": true,
+        "triple-equals": [
+            true,
+            "allow-null-check"
+        ],
+        "typedef-whitespace": [
+            true,
+            {
+                "call-signature": "nospace",
+                "index-signature": "nospace",
+                "parameter": "nospace",
+                "property-declaration": "nospace",
+                "variable-declaration": "nospace"
+            }
+        ],
+        "variable-name": false,
+        "whitespace": [
+            true,
+            "check-branch",
+            "check-decl",
+            "check-operator",
+            "check-separator",
+            "check-type"
         ]
     }
 }
