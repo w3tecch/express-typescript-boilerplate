@@ -18,7 +18,7 @@
 
 <p align="center">
   <b>A delightful way to building a RESTful API Services with beautiful code written in TypeScript.</b></br>
-  <sub>> Inspired by the awesome framework <a href="https://laravel.com/">laravel</a> in PHP and of the repositories from <a href="https://github.com/pleerock">pleerock</a></sub>
+  <sub>Inspired by the awesome framework <a href="https://laravel.com/">laravel</a> in PHP and of the repositories from <a href="https://github.com/pleerock">pleerock</a></sub>
 </p>
 
 <br />
