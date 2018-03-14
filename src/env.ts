@@ -26,6 +26,7 @@ export const env = {
         routePrefix: getOsEnv('APP_ROUTE_PREFIX'),
         port: normalizePort(process.env.PORT || getOsEnv('APP_PORT')),
         banner: toBool(getOsEnv('APP_BANNER')),
+        multiCore: toBool(getOsEnv('APP_MULTI_CORE')),
         dirs: {
             migrations: [path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations/*.ts'))],
             migrationsDir: path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations')),
