@@ -23,6 +23,8 @@
 
 <br />
 
+> An Node.js Web-Service boilerplate/skeleton/starter-kit with TypeScript, Express, Winston, Microframework, TypeDI, TypeORM, TsLint, @types, Jest, Swagger, validatejs, GraphQL, DataLoaders, by w3tech
+
 ![divider](./w3tec-divider.png)
 
 ## ❯ Why
@@ -57,17 +59,17 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 
 ## ❯ Table of Contents
 
-- [Getting Started](#getting-started)
-- [Scripts and Tasks](#scripts-and-tasks)
-- [Debugger in VSCode](#debugger-in-vscode)
-- [API Routes](#api-routes)
-- [Project Structure](#project-structure)
-- [Logging](#logging)
-- [Event Dispatching](#event-dispatching)
-- [Seeding](#seeding)
-- [Further Documentations](#further-documentation)
-- [Related Projects](#related-projects)
-- [License](#license)
+- [Getting Started](#-getting-started)
+- [Scripts and Tasks](#-scripts-and-tasks)
+- [Debugger in VSCode](#-debugger-in-vscode)
+- [API Routes](#-api-routes)
+- [Project Structure](#-project-structure)
+- [Logging](#-logging)
+- [Event Dispatching](#-event-dispatching)
+- [Seeding](#-seeding)
+- [Further Documentations](#-further-documentation)
+- [Related Projects](#-related-projects)
+- [License](#-license)
 
 ![divider](./w3tec-divider.png)
 
@@ -162,7 +164,9 @@ All script are defined in the `package-scripts.js` file, but the most important 
 
 - Run `npm start db.seed` to seed your seeds into the database.
 
-## Debugger in VSCode
+![divider](./w3tec-divider.png)
+
+## ❯ Debugger in VSCode
 
 To debug your code run `npm start build` or hit `cmd + b` to build your app.
 Then, just set a breakpoint and hit `F5` in your Visual Studio Code.
