@@ -1,6 +1,8 @@
 import * as path from 'path';
 import * as winston from 'winston';
 
+import { env } from '../../env';
+
 /**
  * core.Log
  * ------------------------------------------------
@@ -57,7 +59,7 @@ export class Logger {
     }
 
     private formatScope(): string {
-        return `[${this.scope}]`;
+        return `[${env.app.multiCore ? `${process.pid}:` : ''}${this.scope}]`;
     }
 
 }
