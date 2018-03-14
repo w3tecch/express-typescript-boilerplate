@@ -5,6 +5,8 @@ install:
   - yarn install
 scripts:
   - npm test
+  - npm test.integration
+  - npm test.e2e
   - npm start build
 notifications:
   email: false
