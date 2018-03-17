@@ -35,7 +35,7 @@ export const PetType = new GraphQLObjectType({
             type: OwnerType,
             description: 'The owner of the pet',
             resolve: (pet: Pet, args: any, context: GraphQLContext<any, any>) =>
-                context.dataLoaders.users.load(pet.userId),
+                context.dataLoaders.user.load(pet.userId),
         },
     } }),
 });

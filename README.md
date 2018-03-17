@@ -1,35 +1,42 @@
-# Express Typescript Boilerplate
+<p align="center">
+  <img src="./w3tec-logo.png" alt="w3tec" width="400" />
+</p>
 
-[![Dependency Status](https://david-dm.org/w3tecch/express-typescript-boilerplate/status.svg?style=flat)](https://david-dm.org/w3tecch/express-typescript-boilerplate)
-[![Build Status](https://travis-ci.org/w3tecch/express-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-typescript-boilerplate)
-[![Build status](https://ci.appveyor.com/api/projects/status/f8e7jdm8v58hcwpq/branch/master?svg=true&passingText=Windows%20passing&pendingText=Windows%20pending&failingText=Windows%20failing)](https://ci.appveyor.com/project/dweber019/express-typescript-boilerplate/branch/master)
+<h1 align="center">Express Typescript Boilerplate</h1>
 
-> A delightful way to building a RESTful API Services with beautiful code written in TypeScript.
-> An Node.js Web-Service boilerplate/skeleton/starter-kit featuring
-> Inspired by the awesome framework [laravel](https://laravel.com/) in PHP and of the repositories from [pleerock](https://github.com/pleerock).
-[TypeScript](https://www.typescriptlang.org/),
-[Express](https://expressjs.com/),
-[Winston](https://github.com/winstonjs/winston),
-[Microframework](https://github.com/pleerock/microframework),
-[TypeDI](https://github.com/pleerock/typedi),
-[TypeORM](https://github.com/typeorm/typeorm),
-[TsLint](http://palantir.github.io/tslint/),
-[@types](https://www.npmjs.com/~types),
-[Jest](https://facebook.github.io/jest/),
-[Swagger](http://swagger.io/),
-[validatejs](https://validatejs.org/),
-[GraphQL](http://graphql.org/),
-[DataLoaders](https://github.com/facebook/dataloader),
-by [w3tech](https://github.com/w3tecch)
+<p align="center">
+  <a href="https://david-dm.org/w3tecch/express-typescript-boilerplate">
+    <img src="https://david-dm.org/w3tecch/express-typescript-boilerplate/status.svg?style=flat" alt="dependency" />
+  </a>
+  <a href="https://travis-ci.org/w3tecch/express-typescript-boilerplate">
+    <img src="https://travis-ci.org/w3tecch/express-typescript-boilerplate.svg?branch=master" alt="travis" />
+  </a>
+  <a href="https://ci.appveyor.com/project/dweber019/express-typescript-boilerplate/branch/master">
+    <img src="https://ci.appveyor.com/api/projects/status/f8e7jdm8v58hcwpq/branch/master?svg=true&passingText=Windows%20passing&pendingText=Windows%20pending&failingText=Windows%20failing" alt="appveyor" />
+  </a>
+  <a href="https://stackshare.io/hirsch88/express-typescript-boilerplate">
+    <img src="https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat" alt="StackShare" />
+  </a>
+</p>
 
-## Why
+<p align="center">
+  <b>A delightful way to building a Node.js RESTful API Services with beautiful code written in TypeScript.</b></br>
+  <span>Inspired by the awesome framework <a href="https://laravel.com/">laravel</a> in PHP and of the repositories from <a href="https://github.com/pleerock">pleerock</a></span></br>
+  <sub>Made with ❤️ by <a href="https://github.com/w3tecch">w3tech</a>, <a href="https://twitter.com/GeryHirschfeld1">Gery Hirschfeld</a> and <a href="https://github.com/w3tecch/express-typescript-boilerplate/graphs/contributors">contributors</a></sub>
+</p>
+
+<br />
+
+![divider](./w3tec-divider.png)
+
+## ❯ Why
 
 Our main goal with this project is a feature complete server application.
 We like you to be focused on your business and not spending hours in project configuration.
 
 Try it!! We are happy to hear your feedback or any kind of new features.
 
-## Features
+### Features
 
 - **Beautiful Code** thanks to the awesome annotations of the libraries from [pleerock](https://github.com/pleerock).
 - **Easy API Testing** with included e2e testing.
@@ -50,23 +57,27 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **GraphQL** provides as a awesome query language for our api [GraphQL](http://graphql.org/).
 - **DataLoaders** helps with performance thanks to caching and batching [DataLoaders](https://github.com/facebook/dataloader).
 
-## Table of Contents
+![divider](./w3tec-divider.png)
 
-- [Getting Started](#getting-started)
-- [Scripts and Tasks](#scripts-and-tasks)
-- [Debugger in VSCode](#debugger-in-vscode)
-- [API Routes](#api-routes)
-- [Project Structure](#project-structure)
-- [Logging](#logging)
-- [Event Dispatching](#event-dispatching)
-- [Seeding](#seeding)
-- [Further Documentations](#further-documentation)
-- [Related Projects](#related-projects)
-- [License](#license)
+## ❯ Table of Contents
 
-## Getting Started
+- [Getting Started](#-getting-started)
+- [Scripts and Tasks](#-scripts-and-tasks)
+- [Debugger in VSCode](#-debugger-in-vscode)
+- [API Routes](#-api-routes)
+- [Project Structure](#-project-structure)
+- [Logging](#-logging)
+- [Event Dispatching](#-event-dispatching)
+- [Seeding](#-seeding)
+- [Further Documentations](#-further-documentation)
+- [Related Projects](#-related-projects)
+- [License](#-license)
 
-### Step 1:  Set up the Development Environment
+![divider](./w3tec-divider.png)
+
+## ❯ Getting Started
+
+### Step 1: Set up the Development Environment
 
 You need to set up your development environment before you can do anything.
 
@@ -112,9 +123,11 @@ npm start serve
 > This starts a local server using `nodemon`, which will watch for any file changes and will restart the sever according to these changes.
 > The server address will be displayed to you as `http://0.0.0.0:3000`.
 
-## Scripts and Tasks
+![divider](./w3tec-divider.png)
 
-All script are defined in the package.json file, but the most important ones are listed here.
+## ❯ Scripts and Tasks
+
+All script are defined in the `package-scripts.js` file, but the most important ones are listed here.
 
 ### Install
 
@@ -153,12 +166,16 @@ All script are defined in the package.json file, but the most important ones are
 
 - Run `npm start db.seed` to seed your seeds into the database.
 
-## Debugger in VSCode
+![divider](./w3tec-divider.png)
 
-To debug your code run `npm start build` or hit `cmd + b` to build your app.
-Then, just set a breakpoint and hit `F5` in your Visual Studio Code.
+## ❯ Debugger in VSCode
 
-## API Routes
+To debug your code run `npm start build` or hit <kbd>cmd</kbd> + <kbd>b</kbd> to build your app.
+Then, just set a breakpoint and hit <kbd>F5</kbd> in your Visual Studio Code.
+
+![divider](./w3tec-divider.png)
+
+## ❯ API Routes
 
 The route prefix is `/api` by default, but you can change this in the .env file.
 The swagger and the monitor route can be altered in the `.env` file.
@@ -172,7 +189,9 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **/api/users** | Example entity endpoint |
 | **/api/pets**  | Example entity endpoint |
 
-## Project Structure
+![divider](./w3tec-divider.png)
+
+## ❯ Project Structure
 
 | Name                              | Description |
 | --------------------------------- | ----------- |
@@ -212,7 +231,9 @@ The swagger and the monitor route can be altered in the `.env` file.
 | ormconfig.json                    | TypeORM configuration for the database. Used by seeds and the migration. (generated file) |
 | mydb.sql                          | SQLite database for integration tests. Ignored by git and only available after integration tests |
 
-## Logging
+![divider](./w3tec-divider.png)
+
+## ❯ Logging
 
 Our logger is [winston](https://github.com/winstonjs/winston). To log http request we use the express middleware [morgan](https://github.com/expressjs/morgan).
 We created a simple annotation to inject the logger in your service (see example below).
@@ -230,9 +251,11 @@ export class UserService {
     ...
 ```
 
-## Event Dispatching
+![divider](./w3tec-divider.png)
 
-Our we use this awesome repository [event-dispatch](https://github.com/pleerock/event-dispatch) for event dispatching.
+## ❯ Event Dispatching
+
+We use this awesome repository [event-dispatch](https://github.com/pleerock/event-dispatch) for event dispatching.
 We created a simple annotation to inject the EventDispatcher in your service (see example below). All events are listed in the `events.ts` file.
 
 ```typescript
@@ -253,17 +276,22 @@ export class UserService {
     }
 ```
 
-## Seeding
+![divider](./w3tec-divider.png)
 
-Isn't exhausting to create some sample data into your fresh migrated database, well this time is over!
-How does it work? Just, create a factory for your entities and a seeds script.
+## ❯ Seeding
+
+Isn't it exhausting to create some sample data for your database, well this time is over!
+
+How does it work? Just create a factory for your entities (models) and a seed script.
 
 ### 1. Create a factory for your entity
 
-For all the entities we want to seed, we need to define a factory. To do so we give you the awesome [faker](https://github.com/marak/Faker.js/) library as a parameter into your factory. Then create your "fake" entity as you would normally do and return it. Those factory files should be in the `src/database/factories` folder and suffixed with `Factory`. Example `src/database/factories/UserFactory.ts`.
+For all entities we want to seed, we need to define a factory. To do so we give you the awesome [faker](https://github.com/marak/Faker.js/) library as a parameter into your factory. Then create your "fake" entity and return it. Those factory files should be in the `src/database/factories` folder and suffixed with `Factory` like `src/database/factories/UserFactory.ts`.
+
+Settings can be used to pass some static value into the factory.
 
 ```typescript
-factory.define(User, (faker: typeof Faker) => {
+define(User, (faker: typeof Faker, settings: { roles: string[] }) => {
     const gender = faker.random.number(1);
     const firstName = faker.name.firstName(gender);
     const lastName = faker.name.lastName(gender);
@@ -273,94 +301,76 @@ factory.define(User, (faker: typeof Faker) => {
     user.firstName = firstName;
     user.lastName = lastName;
     user.email = email;
+    user.roles = settings.roles;
     return user;
 });
 ```
 
-This can be used to pass some dynamic value into the factory.
+Handle relation in the entity factory like this.
 
 ```typescript
-factory.define(Pet, (faker: typeof Faker, args: any[]) => {
-    const type = args[0];
-    return {
-        name: faker.name.firstName(),
-        type: type || 'dog'
-    };
+define(Pet, (faker: typeof Faker, settings: undefined) => {
+    const gender = faker.random.number(1);
+    const name = faker.name.firstName(gender);
+
+    const pet = new Pet();
+    pet.name = name;
+    pet.age = faker.random.number();
+    pet.user = factory(User)({ roles: ['admin'] })
+    return pet;
 });
+```
+
+### 2. Create a seed file
+
+The seeds files define how much and how the data are connected with each other. The files will be executed alphabetically.
+With the second function, accepting your settings defined in the factories, you are able to create different variations of entities.
+
+```typescript
+export class CreateUsers implements Seed {
+
+    public async seed(factory: Factory, connection: Connection): Promise<any> {
+        await factory(User)({ roles: [] }).createMany(10);
+    }
+
+}
+```
+
+Here an example with nested factories. You can use the `.map()` function to alter
+the generated value before they get persisted.
+
+```typescript
+...
+await factory(User)()
+    .map(async (user: User) => {
+        const pets: Pet[] = await factory(Pet)().createMany(2);
+        const petIds = pets.map((pet: Pet) => pet.Id);
+        await user.pets().attach(petIds);
+    })
+    .createMany(5);
+...
 ```
 
 To deal with relations you can use the entity manager like this.
 
 ```typescript
-import { SeedsInterface, FactoryInterface, times } from '../../lib/seeds';
-import { Pet } from '../../../src/api/models/Pet';
-import { User } from '../../../src/api/models/User';
-
 export class CreatePets implements SeedsInterface {
 
-    public async seed(factory: FactoryInterface): Promise<any> {
+    public async seed(factory: FactoryInterface, connection: Connection): Promise<any> {
         const connection = await factory.getConnection();
         const em = connection.createEntityManager();
 
         await times(10, async (n) => {
             // This creates a pet in the database
-            const pet = await factory.get(Pet).create();
+            const pet = await factory(Pet)().create();
             // This only returns a entity with fake data
-            const user = await factory.get(User).make();
+            const user = await factory(User)({ roles: ['admin'] }).make();
             user.pets = [pet];
             await em.save(user);
         });
     }
 
 }
-```
-
-### 2. Create a seed file
-
-The seeds files define how much and how the data are connected with each other. The files will be executed alphabetically.
-
-```typescript
-export class CreateUsers implements SeedsInterface {
-
-    public async seed(factory: FactoryInterface): Promise<any> {
-        await factory
-            .get(User)
-            .createMany(10);
-    }
-
-}
-```
-
-With the second parameter in the `.get(<Entity>, <args>)` you are able to create different variations of entities.
-
-```typescript
-export class CreateUsers implements SeedsInterface {
-
-    public async seed(factory: FactoryInterface): Promise<any> {
-        await factory
-            .get(User, 'admin')
-            .create();
-    }
-
-}
-```
-
-Here an example with nested factories.
-
-```typescript
-...
-await factory.get(User)
-    .each(async (user: User) => {
-
-        const pets: Pet[] = await factory.get(Pet)
-            .createMany(2);
-
-        const petIds = pets.map((pet: Pet) => pet.Id);
-        await user.pets().attach(petIds);
-
-    })
-    .create(5);
-...
 ```
 
 ### 3. Run the seeder
@@ -371,7 +381,20 @@ The last step is the easiest, just hit the following command in your terminal, b
 npm start db.seed
 ```
 
-## Run in Docker container
+#### CLI Interface
+
+| Command                                             | Description |
+| --------------------------------------------------- | ----------- |
+| `npm start "db.seed"`                               | Run all seeds |
+| `npm start "db.seed --run CreateBruce,CreatePets"`  | Run specific seeds (file names without extension) |
+| `npm start "db.seed -L"`                            | Log database queries to the terminal |
+| `npm start "db.seed --factories <path>"`            | Add a different path to your factories (Default: `src/database/`) |
+| `npm start "db.seed --seeds <path>"`                | Add a different path to your seeds (Default: `src/database/seeds/`) |
+| `npm start "db.seed --config <file>"`               | Path to your ormconfig.json file |
+
+![divider](./w3tec-divider.png)
+
+## ❯ Run in Docker container
 
 ### Install Docker
 
@@ -450,7 +473,9 @@ DB_HOST=localhost
 DB_PORT=3306
 ```
 
-## Further Documentations
+![divider](./w3tec-divider.png)
+
+## ❯ Further Documentations
 
 | Name & Link                       | Description                       |
 | --------------------------------- | --------------------------------- |
@@ -472,16 +497,17 @@ DB_PORT=3306
 | [GraphQL Documentation](http://graphql.org/graphql-js/) | A query language for your API. |
 | [DataLoader Documentation](https://github.com/facebook/dataloader) | DataLoader is a generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching. |
 
-## Related Projects
+![divider](./w3tec-divider.png)
+
+## ❯ Related Projects
 
 - [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter) - A starter template for TypeScript and Node with a detailed README describing how to use the two together.
 - [express-graphql-typescript-boilerplate](https://github.com/w3tecch/express-graphql-typescript-boilerplate) - A starter kit for building amazing GraphQL API's with TypeScript and express by @w3tecch
 - [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
 - [Auth0 Mock Server](https://github.com/hirsch88/auth0-mock-server) - Useful for e2e testing or faking an oAuth server
 
-## License
+![divider](./w3tec-divider.png)
+
+## ❯ License
 
 [MIT](/LICENSE)
-
----
-Made with ♥ by w3tech ([w3tech](https://github.com/w3tecch)), Gery Hirschfeld ([@GeryHirschfeld1](https://twitter.com/GeryHirschfeld1)) and [contributors](https://github.com/w3tecch/express-typescript-boilerplate/graphs/contributors)

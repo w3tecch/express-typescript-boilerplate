@@ -34,7 +34,7 @@ export const UserType = new GraphQLObjectType({
             description: 'The pets of a user',
             resolve: async (user: User, args: any, context: GraphQLContext<any, any>) =>
                 // We use data-loaders to save db queries
-                context.dataLoaders.petByUserIds.loadMany([user.id]),
+                context.dataLoaders.petsByUserIds.load(user.id),
                 // This would be the case with a normal service, but not very fast
                 // context.container.get<PetService>(PetService).findByUser(user),
         },

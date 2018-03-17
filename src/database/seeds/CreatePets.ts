@@ -1,18 +1,18 @@
+import { Connection } from 'typeorm';
+
 import { Pet } from '../../../src/api/models/Pet';
 import { User } from '../../../src/api/models/User';
-import { FactoryInterface, SeedsInterface, times } from '../../lib/seeds';
+import { Factory, Seed, times } from '../../lib/seed';
 
-export class CreatePets implements SeedsInterface {
+export class CreatePets implements Seed {
 
-    public async seed(factory: FactoryInterface): Promise<any> {
-        const connection = await factory.getConnection();
+    public async seed(factory: Factory, connection: Connection): Promise<any> {
         const em = connection.createEntityManager();
-
         await times(10, async (n) => {
-            const pet = await factory.get(Pet).create();
-            const user = await factory.get(User).make();
+            const pet = await factory(Pet)().seed();
+            const user = await factory(User)().make();
             user.pets = [pet];
-            await em.save(user);
+            return await em.save(user);
         });
     }
 

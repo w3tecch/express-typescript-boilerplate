@@ -8,24 +8,24 @@ export class RepositoryMock<T> {
     public saveMock = jest.fn();
     public deleteMock = jest.fn();
 
-    public find(...args: any[]): T[] {
+    public find(...args: any[]): Promise<T[]> {
         this.findMock(args);
-        return this.list;
+        return Promise.resolve(this.list);
     }
 
-    public findOne(...args: any[]): T {
+    public findOne(...args: any[]): Promise<T> {
         this.findOneMock(args);
-        return this.one;
+        return Promise.resolve(this.one);
     }
 
-    public save(value: T, ...args: any[]): T {
+    public save(value: T, ...args: any[]): Promise<T> {
         this.saveMock(value, args);
-        return value;
+        return Promise.resolve(value);
     }
 
-    public delete(value: T, ...args: any[]): T {
+    public delete(value: T, ...args: any[]): Promise<T> {
         this.deleteMock(value, args);
-        return value;
+        return Promise.resolve(value);
     }
 
 }
