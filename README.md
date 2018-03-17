@@ -171,8 +171,8 @@ All script are defined in the `package-scripts.js` file, but the most important 
 
 ## ❯ Debugger in VSCode
 
-To debug your code run `npm start build` or hit `cmd + b` to build your app.
-Then, just set a breakpoint and hit `F5` in your Visual Studio Code.
+To debug your code run `npm start build` or hit <kbd>cmd</kbd> + <kbd>b</kbd> to build your app.
+Then, just set a breakpoint and hit <kbd>F5</kbd> in your Visual Studio Code.
 
 ![divider](./w3tec-divider.png)
 
