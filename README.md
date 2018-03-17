@@ -256,7 +256,7 @@ export class UserService {
 
 ## ❯ Event Dispatching
 
-Our we use this awesome repository [event-dispatch](https://github.com/pleerock/event-dispatch) for event dispatching.
+We use this awesome repository [event-dispatch](https://github.com/pleerock/event-dispatch) for event dispatching.
 We created a simple annotation to inject the EventDispatcher in your service (see example below). All events are listed in the `events.ts` file.
 
 ```typescript
