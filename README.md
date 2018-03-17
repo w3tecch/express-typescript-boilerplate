@@ -20,13 +20,12 @@
 </p>
 
 <p align="center">
-  <b>A delightful way to building a RESTful API Services with beautiful code written in TypeScript.</b></br>
-  <sub>Inspired by the awesome framework <a href="https://laravel.com/">laravel</a> in PHP and of the repositories from <a href="https://github.com/pleerock">pleerock</a></sub>
+  <b>A delightful way to building a Node.js RESTful API Services with beautiful code written in TypeScript.</b></br>
+  <span>Inspired by the awesome framework <a href="https://laravel.com/">laravel</a> in PHP and of the repositories from <a href="https://github.com/pleerock">pleerock</a></span></br>
+  <sub>Made with ❤️ by <a href="https://github.com/w3tecch">w3tech</a>, <a href="https://twitter.com/GeryHirschfeld1">Gery Hirschfeld</a> and <a href="https://github.com/w3tecch/express-typescript-boilerplate/graphs/contributors">contributors</a></sub>
 </p>
 
 <br />
-
-> An Node.js Web-Service boilerplate/skeleton/starter-kit with TypeScript, Express, Winston, Microframework, TypeDI, TypeORM, TsLint, @types, Jest, Swagger, validatejs, GraphQL, DataLoaders, by w3tech
 
 ![divider](./w3tec-divider.png)
 
@@ -512,6 +511,3 @@ DB_PORT=3306
 ## ❯ License
 
 [MIT](/LICENSE)
-
----
-Made with ♥ by w3tech ([w3tech](https://github.com/w3tecch)), Gery Hirschfeld ([@GeryHirschfeld1](https://twitter.com/GeryHirschfeld1)) and [contributors](https://github.com/w3tecch/express-typescript-boilerplate/graphs/contributors)
