@@ -31,7 +31,7 @@ export * from './container';
 export interface CreateDataLoaderOptions {
     method?: string;
     key?: string;
-    batch?: boolean;
+    multiple?: boolean;
 }
 
 /**
@@ -57,7 +57,7 @@ export function createDataLoader<T>(obj: ObjectType<T>, options: CreateDataLoade
             items = await repository.findByIds(ids);
         }
 
-        const handleBatch = (arr: any[]) => options.batch === true ? arr : arr[0];
+        const handleBatch = (arr: any[]) => options.multiple === true ? arr : arr[0];
         return ids.map(id => handleBatch(items.filter(item => item[options.key || 'id'] === id)));
     });
 }

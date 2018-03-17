@@ -21,7 +21,7 @@ export const graphqlLoader: MicroframeworkLoader = (settings: MicroframeworkSett
                 petsByUserIds: createDataLoader(PetRepository, {
                     method: 'findByUserIds',
                     key: 'userId',
-                    batch: true,
+                    multiple: true,
                 }),
             },
         });
