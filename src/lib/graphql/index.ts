@@ -6,7 +6,6 @@ import { Container as container, ObjectType } from 'typedi';
 import { getCustomRepository, getRepository, Repository } from 'typeorm';
 
 import { getFromContainer } from './container';
-import { ensureInputOrder } from './dataloader';
 import { getErrorCode, getErrorMessage, handlingErrors } from './graphql-error-handling';
 import { GraphQLContext, GraphQLContextDataLoader } from './GraphQLContext';
 import { importClassesFromDirectories } from './importClassesFromDirectories';
@@ -29,10 +28,16 @@ export * from './container';
 // Main Functions
 // -------------------------------------------------------------------------
 
+export interface CreateDataLoaderOptions {
+    method?: string;
+    key?: string;
+    batch?: boolean;
+}
+
 /**
  * Creates a new dataloader with the typorm repository
  */
-export function createDataLoader<T>(obj: ObjectType<T>, method?: string, key?: string): DataLoader<any, any> {
+export function createDataLoader<T>(obj: ObjectType<T>, options: CreateDataLoaderOptions = {}): DataLoader<any, any> {
     let repository;
     try {
         repository = getCustomRepository<Repository<any>>(obj);
@@ -46,13 +51,14 @@ export function createDataLoader<T>(obj: ObjectType<T>, method?: string, key?: s
 
     return new DataLoader(async (ids: number[]) => {
         let items = [];
-        if (method) {
-            items = await repository[method](ids);
+        if (options.method) {
+            items = await repository[options.method](ids);
         } else {
             items = await repository.findByIds(ids);
         }
 
-        return ensureInputOrder(ids, items, key || 'id');
+        const handleBatch = (arr: any[]) => options.batch === true ? arr : arr[0];
+        return ids.map(id => handleBatch(items.filter(item => item[options.key || 'id'] === id)));
     });
 }
 

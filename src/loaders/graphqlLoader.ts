@@ -16,9 +16,13 @@ export const graphqlLoader: MicroframeworkLoader = (settings: MicroframeworkSett
             queries: env.app.dirs.queries,
             mutations: env.app.dirs.mutations,
             dataLoaders: {
-                users: createDataLoader(UserRepository),
-                pets: createDataLoader(Pet),
-                petByUserIds: createDataLoader(PetRepository, 'findByUserIds', 'userId'),
+                user: createDataLoader(UserRepository),
+                pet: createDataLoader(Pet),
+                petsByUserIds: createDataLoader(PetRepository, {
+                    method: 'findByUserIds',
+                    key: 'userId',
+                    batch: true,
+                }),
             },
         });
 
