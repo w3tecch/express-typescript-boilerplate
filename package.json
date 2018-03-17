@@ -1,7 +1,7 @@
 {
   "name": "express-typescript-boilerplate",
-  "version": "3.0.0-rc.2",
-  "description": "A delightful way to building a RESTful API with NodeJs & TypeScript",
+  "version": "3.0.0",
+  "description": "A delightful way to building a Node.js RESTful API Services with beautiful code written in TypeScript",
   "main": "src/app.ts",
   "scripts": {
     "start": "nps",
