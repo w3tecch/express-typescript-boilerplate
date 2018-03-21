@@ -141,8 +141,8 @@ All script are defined in the `package-scripts.js` file, but the most important 
 ### Tests
 
 - Run the unit tests using `npm start test` (There is also a vscode task for this called `test`).
-- Run the integration tests using `npm start test:integration`.
-- Run the e2e tests using `npm start test:e2e`.
+- Run the integration tests using `npm start test.integration`.
+- Run the e2e tests using `npm start test.e2e`.
 
 ### Running in dev mode
 
