@@ -132,7 +132,7 @@ module.exports = {
                 script: series(
                     'nps banner.revert',
                     'nps config',
-                    runFast('./node_modules/typeorm/cli.js migrations:revert')
+                    runFast('./node_modules/typeorm/cli.js migration:revert')
                 ),
                 description: 'Downgrades the database'
             },

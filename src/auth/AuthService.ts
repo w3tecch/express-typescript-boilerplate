@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as request from 'request';
-import { Require, Service } from 'typedi';
+import { Service } from 'typedi';
 
 import { Logger, LoggerInterface } from '../decorators/Logger';
 import { env } from '../env';
@@ -12,10 +12,9 @@ export class AuthService {
     private httpRequest: typeof request;
 
     constructor(
-        @Require('request') r: any,
         @Logger(__filename) private log: LoggerInterface
     ) {
-        this.httpRequest = r;
+        this.httpRequest = request;
     }
 
     public parseTokenFromRequest(req: express.Request): string | undefined {
