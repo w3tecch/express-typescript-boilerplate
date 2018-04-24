@@ -124,7 +124,7 @@ module.exports = {
                 script: series(
                     'nps banner.migrate',
                     'nps config',
-                    runFast('./node_modules/typeorm/cli.js migrations:run')
+                    runFast('./node_modules/typeorm/cli.js migration:run')
                 ),
                 description: 'Migrates the database to newest version available'
             },
@@ -267,11 +267,11 @@ function copy(source, target) {
 }
 
 function run(path) {
-    return `ts-node --typeCheck ${path}`;
+    return `ts-node ${path}`;
 }
 
 function runFast(path) {
-    return `ts-node ${path}`;
+    return `ts-node --transpileOnly ${path}`;
 }
 
 function tslint(path) {
