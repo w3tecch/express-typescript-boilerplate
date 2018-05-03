@@ -13,7 +13,7 @@ describe('AuthService', () => {
     let log: LogMock;
     beforeEach(() => {
         log = new LogMock();
-        authService = new AuthService(request, log);
+        authService = new AuthService(log);
     });
 
     describe('parseTokenFromRequest', () => {

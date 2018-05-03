@@ -49,9 +49,10 @@ export class PetService {
         return this.petRepository.save(pet);
     }
 
-    public delete(id: string): Promise<void> {
+    public async delete(id: string): Promise<void> {
         this.log.info('Delete a pet');
-        return this.petRepository.removeById(id);
+        await this.petRepository.delete(id);
+        return;
     }
 
 }

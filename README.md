@@ -156,7 +156,7 @@ All script are defined in the `package-scripts.js` file, but the most important 
 
 ### Database Migration
 
-- Run `typeorm migrations:create -n <migration-file-name>` to create a new migration file.
+- Run `typeorm migration:create -n <migration-file-name>` to create a new migration file.
 - Try `typeorm -h` to see more useful cli commands like generating migration out of your models.
 - To migrate your database run `npm start db.migrate`.
 - To revert your latest migration run `npm start db.revert`.
