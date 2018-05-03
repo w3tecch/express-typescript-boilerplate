@@ -1,6 +1,9 @@
+import * as cluster from 'cluster';
 import { bootstrapMicroframework } from 'microframework-w3tec';
+import * as os from 'os';
 import 'reflect-metadata';
 
+import { env } from './env';
 import { banner } from './lib/banner';
 import { Logger } from './lib/logger';
 import { eventDispatchLoader } from './loaders/eventDispatchLoader';
@@ -22,6 +25,14 @@ import { winstonLoader } from './loaders/winstonLoader';
  * The basic layer of this app is express. For further information visit
  * the 'README.md' file.
  */
+if (env.app.multiCore && cluster.isMaster) {
+    // Fork workers.
+    for (let i = 0; i < os.cpus().length;) {
+        i++;
+        cluster.fork();
+    }
+} else {
+
 const log = new Logger(__filename);
 
 bootstrapMicroframework({
@@ -44,3 +55,5 @@ bootstrapMicroframework({
 })
     .then(() => banner(log))
     .catch(error => log.error('Application is crashed: ' + error));
+
+}
