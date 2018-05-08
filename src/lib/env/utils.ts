@@ -2,6 +2,10 @@ export function getOsEnv(key: string): string {
     return process.env[key] as string;
 }
 
+export function getOsEnvArray(value: string, delimiter: string = ','): string[] | boolean {
+    return value && value.split(delimiter) || false;
+}
+
 export function toNumber(value: string): number {
     return parseInt(value, 10);
 }
