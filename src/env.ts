@@ -27,39 +27,15 @@ export const env = {
         port: normalizePort(process.env.PORT || getOsEnv('APP_PORT')),
         banner: toBool(getOsEnv('APP_BANNER')),
         dirs: {
-            migrations: (
-                getOsEnvArray('TYPEORM_MIGRATIONS') ||
-                [path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations/**/*.ts'))]
-            ) as string[],
-            migrationsDir: getOsEnv('TYPEORM_MIGRATIONS_DIR') || path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations')),
-            entities: (
-                getOsEnvArray('TYPEORM_ENTITIES') ||
-                [path.relative(path.join(process.cwd()), path.join(__dirname, 'api/models/**/*{.js,.ts}'))]
-            ) as string[],
-            subscribers: (
-                getOsEnvArray('TYPEORM_SUBSCRIBERS') ||
-                [path.join(__dirname, 'api/subscribers/**/*Subscriber{.js,.ts}')]
-            ) as string[],
-            controllers: (
-                getOsEnvArray('CONTROLLERS') ||
-                [path.join(__dirname, 'api/controllers/**/*Controller{.js,.ts}')]
-            ) as string[],
-            middlewares: (
-                getOsEnvArray('MIDDLEWARES') ||
-                [path.join(__dirname, 'api/middlewares/**/*Middleware{.js,.ts}')]
-            ) as string[],
-            interceptors: (
-                getOsEnvArray('INTERCEPTORS') ||
-                [path.join(__dirname, 'api/interceptors/**/*Interceptor{.js,.ts}')]
-            ) as string[],
-            queries: (
-                getOsEnvArray('QUERIES') ||
-                [path.join(__dirname, 'api/queries/**/*Query{.js,.ts}')]
-            ) as string[],
-            mutations: (
-                getOsEnvArray('MUTATIONS') ||
-                [path.join(__dirname, 'api/mutations/**/*Mutation{.js,.ts}')]
-            ) as string[],
+            migrations: getOsEnvArray('TYPEORM_MIGRATIONS'),
+            migrationsDir: getOsEnv('TYPEORM_MIGRATIONS_DIR'),
+            entities: getOsEnvArray('TYPEORM_ENTITIES'),
+            subscribers: getOsEnvArray('TYPEORM_SUBSCRIBERS'),
+            controllers: getOsEnvArray('CONTROLLERS'),
+            middlewares: getOsEnvArray('MIDDLEWARES'),
+            interceptors: getOsEnvArray('INTERCEPTORS'),
+            queries: getOsEnvArray('QUERIES'),
+            mutations: getOsEnvArray('MUTATIONS'),
         },
     },
     log: {

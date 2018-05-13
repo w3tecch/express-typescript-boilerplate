@@ -92,7 +92,7 @@
     "ts-node": "^6.0.0",
     "tslint": "^5.8.0",
     "typedi": "^0.7.2",
-    "typeorm": "^0.2.1",
+    "typeorm": "^0.2.5",
     "typeorm-typedi-extensions": "^0.2.1",
     "typescript": "2.8.3",
     "uuid": "^3.1.0",

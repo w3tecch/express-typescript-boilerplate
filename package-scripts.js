@@ -42,7 +42,6 @@ module.exports = {
         config: {
             script: series(
                 runFast('./commands/tsconfig.ts'),
-                runFast('./commands/ormconfig.ts')
             ),
             hiddenFromHelp: true
         },
