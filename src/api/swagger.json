@@ -133,8 +133,8 @@
                         "description": "ID of user to return",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     }
                 ],
@@ -181,8 +181,8 @@
                         "description": "ID of user to update",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     }
                 ],
@@ -232,8 +232,8 @@
                         "description": "ID of user to delete",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     }
                 ],
@@ -367,8 +367,8 @@
                         "description": "ID of pet to return",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     }
                 ],
@@ -415,8 +415,8 @@
                         "description": "ID of pet to update",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     }
                 ],
@@ -474,8 +474,8 @@
                         "description": "ID of pet to delete",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     }
                 ],
