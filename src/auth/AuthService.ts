@@ -23,24 +23,22 @@ export class AuthService {
             const decodedToken = Buffer.from(authorization.split(' ')[1], 'base64').toString('ascii');
             const username = decodedToken.split(':')[0];
             const password = decodedToken.split(':')[1];
-            return { username, password };
+            if (username && password) {
+                return { username, password };
+            }
         }
 
         this.log.info('No Token provided by the client');
         return undefined;
     }
 
-    public async validateUser(username: string, password: string): Promise<User> {
-        const user = await this.userRepository.findOne({
+    public async findUserByUsernameAndPassword(username: string, password: string): Promise<User> {
+        return this.userRepository.findOne({
             where: {
                 username,
                 password,
             },
         });
-        if (user) {
-            return user;
-        }
-        throw new Error('Invalid credentials');
     }
 
 }

@@ -38,4 +38,8 @@ export class User {
         return `${this.firstName} ${this.lastName} (${this.email})`;
     }
 
+    public toBase64(): string {
+        return Buffer.from(`${this.username}:${this.password}`).toString('base64');
+    }
+
 }

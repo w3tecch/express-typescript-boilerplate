@@ -22,13 +22,13 @@ export function authorizationChecker(connection: Connection): (action: Action, r
             return false;
         }
 
-        try {
-            action.request.user = await authService.validateUser(credentials.username, credentials.password);
-            log.info('Successfully checked credentials');
-            return true;
-        } catch (e) {
-            log.warn(e);
+        action.request.user = await authService.findUserByUsernameAndPassword(credentials.username, credentials.password);
+        if (action.request.user === undefined) {
+            log.warn('Invalid credentials given');
             return false;
         }
+
+        log.info('Successfully checked credentials');
+        return true;
     };
 }
