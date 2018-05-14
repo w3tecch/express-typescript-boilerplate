@@ -36,7 +36,7 @@ describe('AuthService', () => {
             });
             const token = authService.parseBasicAuthFromRequest(req);
             expect(token).toBeUndefined();
-            expect(log.infoMock).toBeCalledWith('No Token provided by the client', []);
+            expect(log.infoMock).toBeCalledWith('No credentials provided by the client', []);
         });
 
         test('Should return undefined if there is a invalid basic authorization header', () => {
@@ -47,7 +47,7 @@ describe('AuthService', () => {
             });
             const token = authService.parseBasicAuthFromRequest(req);
             expect(token).toBeUndefined();
-            expect(log.infoMock).toBeCalledWith('No Token provided by the client', []);
+            expect(log.infoMock).toBeCalledWith('No credentials provided by the client', []);
         });
 
     });

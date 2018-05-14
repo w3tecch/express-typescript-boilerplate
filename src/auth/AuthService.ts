@@ -27,7 +27,7 @@ export class AuthService {
             }
         }
 
-        this.log.info('No Credentials provided by the client');
+        this.log.info('No credentials provided by the client');
         return undefined;
     }
 
