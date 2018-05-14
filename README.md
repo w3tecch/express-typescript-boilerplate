@@ -228,7 +228,6 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **test/unit/** *.test.ts          | Unit tests |
 | .env.example                      | Environment configurations |
 | .env.test                         | Test environment configurations |
-| ormconfig.json                    | TypeORM configuration for the database. Used by seeds and the migration. (generated file) |
 | mydb.sql                          | SQLite database for integration tests. Ignored by git and only available after integration tests |
 
 ![divider](./w3tec-divider.png)
@@ -390,7 +389,6 @@ npm start db.seed
 | `npm start "db.seed -L"`                            | Log database queries to the terminal |
 | `npm start "db.seed --factories <path>"`            | Add a different path to your factories (Default: `src/database/`) |
 | `npm start "db.seed --seeds <path>"`                | Add a different path to your seeds (Default: `src/database/seeds/`) |
-| `npm start "db.seed --config <file>"`               | Path to your ormconfig.json file |
 
 ![divider](./w3tec-divider.png)
 
