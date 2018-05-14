@@ -1,11 +1,31 @@
+import * as bcrypt from 'bcrypt';
 import { Exclude } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Pet } from './Pet';
 
 @Entity()
 export class User {
+
+    public static hashPassword(password: string): Promise<string> {
+        return new Promise((resolve, reject) => {
+            bcrypt.hash(password, 10, (err, hash) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(hash);
+            });
+        });
+    }
+
+    public static comparePassword(user: User, password: string): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            bcrypt.compare(password, user.password, (err, res) => {
+                resolve(res === true);
+            });
+        });
+    }
 
     @PrimaryGeneratedColumn('uuid')
     public id: string;
@@ -38,8 +58,9 @@ export class User {
         return `${this.firstName} ${this.lastName} (${this.email})`;
     }
 
-    public toBase64(): string {
-        return Buffer.from(`${this.username}:${this.password}`).toString('base64');
+    @BeforeInsert()
+    public async hashPassword(): Promise<void> {
+        this.password = await User.hashPassword(this.password);
     }
 
 }

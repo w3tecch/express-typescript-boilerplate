@@ -17,28 +17,32 @@ export class AuthService {
     public parseBasicAuthFromRequest(req: express.Request): { username: string, password: string } {
         const authorization = req.header('authorization');
 
-        // Retrieve the token form the Authorization header
         if (authorization && authorization.split(' ')[0] === 'Basic') {
-            this.log.info('Token provided by the client');
-            const decodedToken = Buffer.from(authorization.split(' ')[1], 'base64').toString('ascii');
-            const username = decodedToken.split(':')[0];
-            const password = decodedToken.split(':')[1];
+            this.log.info('Credentials provided by the client');
+            const decodedBase64 = Buffer.from(authorization.split(' ')[1], 'base64').toString('ascii');
+            const username = decodedBase64.split(':')[0];
+            const password = decodedBase64.split(':')[1];
             if (username && password) {
                 return { username, password };
             }
         }
 
-        this.log.info('No Token provided by the client');
+        this.log.info('No Credentials provided by the client');
         return undefined;
     }
 
-    public async findUserByUsernameAndPassword(username: string, password: string): Promise<User> {
-        return this.userRepository.findOne({
+    public async validateUser(username: string, password: string): Promise<User> {
+        const user = await this.userRepository.findOne({
             where: {
                 username,
-                password,
             },
         });
+
+        if (await User.comparePassword(user, password)) {
+            return user;
+        }
+
+        return undefined;
     }
 
 }

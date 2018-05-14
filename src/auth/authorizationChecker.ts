@@ -22,7 +22,7 @@ export function authorizationChecker(connection: Connection): (action: Action, r
             return false;
         }
 
-        action.request.user = await authService.findUserByUsernameAndPassword(credentials.username, credentials.password);
+        action.request.user = await authService.validateUser(credentials.username, credentials.password);
         if (action.request.user === undefined) {
             log.warn('Invalid credentials given');
             return false;

@@ -1,3 +1,4 @@
+import { hash } from 'bcrypt';
 import { Connection } from 'typeorm';
 
 import { User } from '../../../src/api/models/User';
