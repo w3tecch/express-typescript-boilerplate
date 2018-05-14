@@ -30,9 +30,7 @@ module.exports = {
         setup: {
             script: series(
                 'yarn install',
-                'nps db.drop',
-                'nps db.migrate',
-                'nps db.seed'
+                'nps db.setup',
             ),
             description: 'Setup`s the development environment(yarn & database)'
         },
@@ -146,8 +144,15 @@ module.exports = {
             drop: {
                 script: runFast('./node_modules/typeorm/cli.js schema:drop'),
                 description: 'Drops the schema of the database'
+            },
+            setup: {
+                script: series(
+                    'nps db.drop',
+                    'nps db.migrate',
+                    'nps db.seed'
+                ),
+                description: 'Recreates the database with seeded data'
             }
-
         },
         /**
          * These run various kinds of tests. Default is unit.
