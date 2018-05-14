@@ -1,23 +1,10 @@
 {
-    "swagger": "2.0",
-    "host": "",
+    "openapi": "3.0.0",
+    "servers": [],
     "info": {
         "title": "",
         "description": "",
         "version": ""
-    },
-    "basePath": "",
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "schemes": [],
-    "securityDefinitions": {
-        "basicAuth": {
-            "type": "basic"
-        }
     },
     "tags": [
         {
@@ -62,19 +49,23 @@
                 "responses": {
                     "200": {
                         "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/User"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/User"
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -94,35 +85,31 @@
                         "basicAuth": []
                     }
                 ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "User object that needs to be added to the database",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/NewUser"
-                        }
-                    }
-                ],
                 "responses": {
                     "201": {
                         "description": "created",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/User"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
+                },
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/NewUser"
                 }
             }
         },
@@ -145,24 +132,30 @@
                         "in": "path",
                         "description": "ID of user to return",
                         "required": true,
-                        "type": "integer",
-                        "format": "int64"
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/User"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -187,37 +180,37 @@
                         "in": "path",
                         "description": "ID of user to update",
                         "required": true,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "User object that needs to be added to the database",
-                        "required": true,
                         "schema": {
-                            "$ref": "#/definitions/NewUser"
+                            "type": "integer",
+                            "format": "int64"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/User"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
+                },
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/NewUser"
                 }
             },
             "delete": {
@@ -238,21 +231,27 @@
                         "in": "path",
                         "description": "ID of user to delete",
                         "required": true,
-                        "type": "integer",
-                        "format": "int64"
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -276,19 +275,23 @@
                 "responses": {
                     "200": {
                         "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/Pet"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Pet"
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -308,35 +311,39 @@
                         "basicAuth": []
                     }
                 ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "User object that needs to be added to the database",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/NewPet"
-                        }
-                    }
-                ],
                 "responses": {
                     "201": {
                         "description": "created",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Pet"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Pet"
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewPet"
+                            }
+                        }
+                    },
+                    "description": "User object that needs to be added to the database",
+                    "required": true
                 }
             }
         },
@@ -359,24 +366,30 @@
                         "in": "path",
                         "description": "ID of pet to return",
                         "required": true,
-                        "type": "integer",
-                        "format": "int64"
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Pet"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Pet"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -401,37 +414,45 @@
                         "in": "path",
                         "description": "ID of pet to update",
                         "required": true,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Pet object that needs to be added to the database",
-                        "required": true,
                         "schema": {
-                            "$ref": "#/definitions/NewPet"
+                            "type": "integer",
+                            "format": "int64"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/Pet"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Pet"
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewPet"
+                            }
+                        }
+                    },
+                    "description": "Pet object that needs to be added to the database",
+                    "required": true
                 }
             },
             "delete": {
@@ -452,21 +473,27 @@
                         "in": "path",
                         "description": "ID of pet to delete",
                         "required": true,
-                        "type": "integer",
-                        "format": "int64"
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "ok",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "message": {
-                                    "type": "string"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -475,96 +502,125 @@
             }
         }
     },
-    "definitions": {
-        "NewUser": {
-            "type": "object",
-            "properties": {
-                "firstName": {
-                    "type": "string"
-                },
-                "lastName": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "picture": {
-                    "type": "string"
-                }
-            }
-        },
-        "NewPet": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "age": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "userId": {
-                    "type": "integer",
-                    "format": "int64"
-                }
-            }
-        },
-        "User": {
-            "title": "User",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/NewUser"
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "updatedAt": {
-                            "type": "string",
-                            "format": "date-time"
-                        },
-                        "createdAt": {
-                            "type": "string",
-                            "format": "date-time"
+    "components": {
+        "requestBodies": {
+            "NewUser": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/NewUser"
                         }
                     }
-                }
-            ]
+                },
+                "description": "User object that needs to be added to the database",
+                "required": true
+            }
         },
-        "Pet": {
-            "title": "Pet",
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "name": {
-                            "type": "string"
-                        },
-                        "age": {
-                            "type": "integer",
-                            "format": "int64"
-                        },
-                        "user": {
-                            "$ref": "#/definitions/User"
-                        },
-                        "updatedAt": {
-                            "type": "string",
-                            "format": "date-time"
-                        },
-                        "createdAt": {
-                            "type": "string",
-                            "format": "date-time"
-                        }
+        "securitySchemes": {
+            "basicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "NewUser": {
+                "type": "object",
+                "properties": {
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
                     }
                 }
-            ]
+            },
+            "NewPet": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "age": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "userId": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            },
+            "User": {
+                "title": "User",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "Pet": {
+                "title": "Pet",
+                "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "age": {
+                                "type": "integer",
+                                "format": "int64"
+                            },
+                            "user": {
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "updatedAt": {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "createdAt": {
+                                "type": "string",
+                                "format": "date-time"
+                            }
+                        }
+                    }
+                ]
+            }
         }
     }
 }
