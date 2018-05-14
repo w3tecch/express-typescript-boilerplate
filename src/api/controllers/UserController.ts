@@ -12,7 +12,9 @@ export class UserController {
 
     constructor(
         private userService: UserService
-    ) { }
+    ) {
+        console.log('UserControllerUserControllerUserController');
+    }
 
     @Get()
     public find( @CurrentUser() user?: User): Promise<User[]> {

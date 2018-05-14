@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -20,6 +21,15 @@ export class User {
     @IsNotEmpty()
     @Column()
     public email: string;
+
+    @IsNotEmpty()
+    @Column()
+    @Exclude()
+    public password: string;
+
+    @IsNotEmpty()
+    @Column()
+    public username: string;
 
     @OneToMany(type => Pet, pet => pet.user)
     public pets: Pet[];

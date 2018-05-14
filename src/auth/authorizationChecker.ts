@@ -15,18 +15,16 @@ export function authorizationChecker(connection: Connection): (action: Action, r
         // you can use them to provide granular access check
         // checker must return either boolean (true or false)
         // either promise that resolves a boolean value
-        // demo code:
-        const token = authService.parseTokenFromRequest(action.request);
+        const credentials = authService.parseBasicAuthFromRequest(action.request);
 
-        if (token === undefined) {
-            log.warn('No token given');
+        if (credentials === undefined) {
+            log.warn('No credentials given');
             return false;
         }
 
-        // Request user info at auth0 with the provided token
         try {
-            action.request.tokeninfo = await authService.getTokenInfo(token);
-            log.info('Successfully checked token');
+            action.request.user = await authService.validateUser(credentials.username, credentials.password);
+            log.info('Successfully checked credentials');
             return true;
         } catch (e) {
             log.warn(e);
