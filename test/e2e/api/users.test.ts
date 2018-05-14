@@ -5,7 +5,6 @@ import { User } from '../../../src/api/models/User';
 import { CreateBruce } from '../../../src/database/seeds/CreateBruce';
 import { runSeed } from '../../../src/lib/seed';
 import { closeDatabase } from '../../utils/database';
-import { fakeAuthenticationForUser } from '../utils/auth';
 import { BootstrapSettings } from '../utils/bootstrap';
 import { prepareServer } from '../utils/server';
 
@@ -21,7 +20,6 @@ describe('/api/users', () => {
     beforeAll(async () => {
         settings = await prepareServer({ migrate: true });
         bruce = await runSeed<User>(CreateBruce);
-        fakeAuthenticationForUser(bruce, true);
     });
 
     // -------------------------------------------------------------------------
@@ -40,7 +38,7 @@ describe('/api/users', () => {
     test('GET: / should return a list of users', async (done) => {
         const response = await request(settings.app)
             .get('/api/users')
-            .set('Authorization', `Bearer 1234`)
+            .set('Authorization', `Basic ${bruce.toBase64()}`)
             .expect('Content-Type', /json/)
             .expect(200);
 
@@ -51,7 +49,7 @@ describe('/api/users', () => {
     test('GET: /:id should return bruce', async (done) => {
         const response = await request(settings.app)
             .get(`/api/users/${bruce.id}`)
-            .set('Authorization', `Bearer 1234`)
+            .set('Authorization', `Basic ${bruce.toBase64()}`)
             .expect('Content-Type', /json/)
             .expect(200);
 
