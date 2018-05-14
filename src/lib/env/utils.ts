@@ -2,8 +2,8 @@ export function getOsEnv(key: string): string {
     return process.env[key] as string;
 }
 
-export function getOsEnvArray(key: string, delimiter: string = ','): string[] | boolean {
-    return process.env[key] && process.env[key].split(delimiter) || false;
+export function getOsEnvArray(key: string, delimiter: string = ','): string[] {
+    return process.env[key] && process.env[key].split(delimiter) || [];
 }
 
 export function toNumber(value: string): number {

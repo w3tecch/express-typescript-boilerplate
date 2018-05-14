@@ -27,7 +27,7 @@ export function importClassesFromDirectories(directories: string[], formats: str
             return formats.indexOf(path.extname(file)) !== -1 && dtsExtension !== '.d.ts';
         })
         .map(file => {
-            return require(file);
+            return require(path.join(process.cwd(), file));
         });
 
     return loadFileClasses(dirs, []);

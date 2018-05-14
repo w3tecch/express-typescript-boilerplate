@@ -1,5 +1,6 @@
 import { Application } from 'express';
 import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
+import * as path from 'path';
 import { createExpressServer } from 'routing-controllers';
 
 import { authorizationChecker } from '../auth/authorizationChecker';
@@ -23,9 +24,9 @@ export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSett
              * We can add options about how routing-controllers should configure itself.
              * Here we specify what controllers should be registered in our express server.
              */
-            controllers: env.app.dirs.controllers,
-            middlewares: env.app.dirs.middlewares,
-            interceptors: env.app.dirs.interceptors,
+            controllers: env.app.dirs.controllers.map(controller => path.join(process.cwd(), controller)),
+            middlewares: env.app.dirs.middlewares.map(middleware => path.join(process.cwd(), middleware)),
+            interceptors: env.app.dirs.interceptors.map(interceptor => path.join(process.cwd(), interceptor)),
 
             /**
              * Authorization features
