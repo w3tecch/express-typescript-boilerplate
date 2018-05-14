@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 
 import * as pkg from '../package.json';
-import { getOsEnv, getOsEnvArray, normalizePort, toBool, toNumber } from './lib/env';
+import { getOsEnv, getOsPath, getOsPaths, normalizePort, toBool, toNumber } from './lib/env';
 
 /**
  * Load .env file or for tests the .env.test file.
@@ -27,15 +27,16 @@ export const env = {
         port: normalizePort(process.env.PORT || getOsEnv('APP_PORT')),
         banner: toBool(getOsEnv('APP_BANNER')),
         dirs: {
-            migrations: getOsEnvArray('TYPEORM_MIGRATIONS'),
-            migrationsDir: getOsEnv('TYPEORM_MIGRATIONS_DIR'),
-            entities: getOsEnvArray('TYPEORM_ENTITIES'),
-            subscribers: getOsEnvArray('TYPEORM_SUBSCRIBERS'),
-            controllers: getOsEnvArray('CONTROLLERS'),
-            middlewares: getOsEnvArray('MIDDLEWARES'),
-            interceptors: getOsEnvArray('INTERCEPTORS'),
-            queries: getOsEnvArray('QUERIES'),
-            mutations: getOsEnvArray('MUTATIONS'),
+            migrations: getOsPaths('TYPEORM_MIGRATIONS'),
+            migrationsDir: getOsPath('TYPEORM_MIGRATIONS_DIR'),
+            entities: getOsPaths('TYPEORM_ENTITIES'),
+            entitiesDir: getOsPath('TYPEORM_ENTITIES_DIR'),
+            controllers: getOsPaths('CONTROLLERS'),
+            middlewares: getOsPaths('MIDDLEWARES'),
+            interceptors: getOsPaths('INTERCEPTORS'),
+            subscribers: getOsPaths('SUBSCRIBERS'),
+            queries: getOsPaths('QUERIES'),
+            mutations: getOsPaths('MUTATIONS'),
         },
     },
     log: {

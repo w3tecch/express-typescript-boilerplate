@@ -1,6 +1,5 @@
 import * as glob from 'glob';
 import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
-import * as path from 'path';
 
 import { env } from '../env';
 
@@ -16,7 +15,7 @@ export const eventDispatchLoader: MicroframeworkLoader = (settings: Microframewo
         patterns.forEach((pattern) => {
             glob(pattern, (err: any, files: string[]) => {
                 for (const file of files) {
-                    require(path.join(process.cwd(), file));
+                    require(file);
                 }
             });
         });
