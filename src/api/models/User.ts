@@ -17,6 +17,9 @@ export class User {
     @Column({ name: 'last_name' })
     public lastName: string;
 
+    @Column({ name: 'gender' })
+    public geder: string;
+
     @IsNotEmpty()
     @Column()
     public email: string;
