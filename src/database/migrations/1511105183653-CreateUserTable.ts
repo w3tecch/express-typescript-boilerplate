@@ -1,11 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { fixForPostgres } from '../../lib/env/utils';
 
 export class CreateUserTable1511105183653 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
         const table = new Table({
             name: 'user',
-            columns: [
+            columns: fixForPostgres([
                 {
                     name: 'id',
                     type: 'varchar',
@@ -31,7 +32,7 @@ export class CreateUserTable1511105183653 implements MigrationInterface {
                     isPrimary: false,
                     isNullable: false,
                 },
-            ],
+            ]),
         });
         await queryRunner.createTable(table);
     }

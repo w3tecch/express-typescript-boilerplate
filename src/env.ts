@@ -29,7 +29,7 @@ export const env = {
         dirs: {
             migrations: (
                 getOsEnvArray('TYPEORM_MIGRATIONS') ||
-                [path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations/**/*.ts'))]
+                [path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations/*.ts'))]
             ) as string[],
             migrationsDir: getOsEnv('TYPEORM_MIGRATIONS_DIR') || path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations')),
             entities: (
@@ -71,7 +71,7 @@ export const env = {
         route: getOsEnv('AUTH_ROUTE'),
     },
     db: {
-        type: getOsEnv('TYPEORM_CONNECTION'),
+        type: getOsEnv('TYPEORM_CONNECTION_TYPE'),
         host: getOsEnv('TYPEORM_HOST'),
         port: toNumber(getOsEnv('TYPEORM_PORT')),
         username: getOsEnv('TYPEORM_USERNAME'),

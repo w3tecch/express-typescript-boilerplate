@@ -24,3 +24,28 @@ export function normalizePort(port: string): number | string | boolean {
     }
     return false;
 }
+
+
+export function fixForPostgres(cols) : [any] {
+    return cols.map(col=>{
+        if(getOsEnv('TYPEORM_CONNECTION_TYPE')==="postgres"){
+            if(col.name.match('id')){
+                col.type = "uuid";
+                col.generationStrategy = "uuid";
+                col.isGenerated = true;
+                delete col.length;
+                if(col.name.match('_id')){
+                    col.isNullable = true;
+                    delete col.isGenerated;
+                    delete col.generationStrategy;
+                }
+                return col;
+            }
+            if(col.type.match('int')){
+                delete col.length;
+                return col;
+            }
+        }
+        return col;
+    })
+}

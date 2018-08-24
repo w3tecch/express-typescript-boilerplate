@@ -83,6 +83,7 @@
     "nps": "^5.7.1",
     "nps-utils": "^1.5.0",
     "path": "^0.12.7",
+    "pg": "^7.4.3",
     "reflect-metadata": "^0.1.10",
     "request": "^2.83.0",
     "routing-controllers": "^0.7.6",

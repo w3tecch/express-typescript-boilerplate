@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
-
+import { fixForPostgres } from '../../lib/env/utils';
 export class CreatePetTable1512663524808 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
         const table = new Table({
             name: 'pet',
-            columns: [
+            columns: fixForPostgres([
                 {
                     name: 'id',
                     type: 'varchar',
@@ -21,7 +21,7 @@ export class CreatePetTable1512663524808 implements MigrationInterface {
                 }, {
                     name: 'age',
                     type: 'int',
-                    length: '11',
+                    // length: '11',
                     isPrimary: false,
                     isNullable: false,
                 }, {
@@ -31,7 +31,7 @@ export class CreatePetTable1512663524808 implements MigrationInterface {
                     isPrimary: false,
                     isNullable: true,
                 },
-            ],
+            ]),
         });
         await queryRunner.createTable(table);
     }
