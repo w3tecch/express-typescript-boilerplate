@@ -1,17 +1,22 @@
 import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
-import * as winston from 'winston';
+import { configure, format, transports } from 'winston';
 
 import { env } from '../env';
 
 export const winstonLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
-    winston.configure({
+    configure({
         transports: [
-            new winston.transports.Console({
+            new transports.Console({
                 level: env.log.level,
                 handleExceptions: true,
-                json: env.log.json,
-                timestamp: env.node !== 'development',
-                colorize: env.node === 'development',
+                format: env.node !== 'development'
+                    ? format.combine(
+                        format.json()
+                    )
+                    : format.combine(
+                        format.colorize(),
+                        format.simple()
+                    ),
             }),
         ],
     });
