@@ -94,7 +94,7 @@
     "swagger-ui-express": "4.0.1",
     "ts-node": "^6.0.0",
     "tslint": "^5.8.0",
-    "typedi": "^0.7.2",
+    "typedi": "0.8.0",
     "typeorm": "^0.2.5",
     "typeorm-typedi-extensions": "^0.2.1",
     "typescript": "2.8.3",
