@@ -4955,9 +4955,15 @@ supports-color@^5.2.0, supports-color@^5.3.0:
   dependencies:
     has-flag "^3.0.0"
 
-swagger-ui-express@^3.0.8:
-  version "3.0.10"
-  resolved "https://registry.yarnpkg.com/swagger-ui-express/-/swagger-ui-express-3.0.10.tgz#c72b32107a57a47913f3b46003e8fd62a7378ea2"
+swagger-ui-dist@^3.18.1:
+  version "3.19.0"
+  resolved "https://registry.yarnpkg.com/swagger-ui-dist/-/swagger-ui-dist-3.19.0.tgz#95942ce1a556e7fe2705d7c92c6004a628d53207"
+
+swagger-ui-express@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/swagger-ui-express/-/swagger-ui-express-4.0.1.tgz#4c8a5a7799d6deb02bedbe032386ceb12fb23c91"
+  dependencies:
+    swagger-ui-dist "^3.18.1"
 
 symbol-tree@^3.2.2:
   version "3.2.2"
