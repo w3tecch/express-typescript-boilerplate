@@ -27,6 +27,7 @@ describe('PetService', () => {
 
     test('should create a new pet in the database', async (done) => {
         const pet = new Pet();
+        pet.id = 'xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx';
         pet.name = 'test';
         pet.age = 1;
         const service = Container.get<PetService>(PetService);
