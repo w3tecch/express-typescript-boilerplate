@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import * as figlet from 'figlet';
 
-figlet(process.argv[2], (error: any, data: any) => {
+figlet.text(process.argv[2], (error: any, data: any) => {
     if (error) {
         return process.exit(1);
     }

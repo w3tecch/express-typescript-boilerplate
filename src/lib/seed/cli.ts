@@ -1,5 +1,5 @@
 import * as Chalk from 'chalk';
-import * as commander from 'commander';
+import commander from 'commander';
 import * as path from 'path';
 import { createConnection, getConnectionOptions } from 'typeorm';
 

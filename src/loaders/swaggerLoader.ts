@@ -1,4 +1,4 @@
-import * as basicAuth from 'express-basic-auth';
+import basicAuth from 'express-basic-auth';
 import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
 import * as path from 'path';
 import * as swaggerUi from 'swagger-ui-express';

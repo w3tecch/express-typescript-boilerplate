@@ -1,4 +1,4 @@
 declare module '*.json' {
-    let json: any;
-    export default json;
+    const value: any;
+    export default value;
 }
