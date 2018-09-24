@@ -1,9 +1,9 @@
 import * as Chalk from 'chalk';
 import * as commander from 'commander';
 import * as path from 'path';
+import { createConnection, getConnectionOptions } from 'typeorm';
 
 import { loadEntityFactories } from './';
-import { getConnection } from './connection';
 import { loadSeeds } from './importer';
 import { runSeed, setConnection } from './index';
 
@@ -60,7 +60,8 @@ const run = async () => {
     // Get database connection and pass it to the seeder
     let connection;
     try {
-        connection = await getConnection();
+        const connectionOptions = await getConnectionOptions();
+        connection = await createConnection(connectionOptions);
         setConnection(connection);
     } catch (error) {
         return handleError(error);

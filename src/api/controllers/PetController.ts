@@ -21,22 +21,22 @@ export class PetController {
 
     @Get('/:id')
     @OnUndefined(PetNotFoundError)
-    public one( @Param('id') id: string): Promise<Pet | undefined> {
+    public one(@Param('id') id: string): Promise<Pet | undefined> {
         return this.petService.findOne(id);
     }
 
     @Post()
-    public create( @Body() pet: Pet): Promise<Pet> {
+    public create(@Body() pet: Pet): Promise<Pet> {
         return this.petService.create(pet);
     }
 
     @Put('/:id')
-    public update( @Param('id') id: string, @Body() pet: Pet): Promise<Pet> {
+    public update(@Param('id') id: string, @Body() pet: Pet): Promise<Pet> {
         return this.petService.update(id, pet);
     }
 
     @Delete('/:id')
-    public delete( @Param('id') id: string): Promise<void> {
+    public delete(@Param('id') id: string): Promise<void> {
         return this.petService.delete(id);
     }
 
