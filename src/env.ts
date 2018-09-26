@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 
 import * as pkg from '../package.json';
-import { getOsEnv, getOsPath, getOsPaths, normalizePort, toBool, toNumber } from './lib/env';
+import { getOsEnv, getOsEnvOptional, getOsPath, getOsPaths, normalizePort, toBool, toNumber } from './lib/env';
 /**
  * Load .env file or for tests the .env.test file.
  */
@@ -40,7 +40,7 @@ export const env = {
     },
     log: {
         level: getOsEnv('LOG_LEVEL'),
-        json: toBool(getOsEnv('LOG_JSON')),
+        json: toBool(getOsEnvOptional('LOG_JSON')),
         output: getOsEnv('LOG_OUTPUT'),
     },
     db: {
