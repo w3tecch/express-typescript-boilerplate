@@ -2,8 +2,7 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 
 import * as pkg from '../package.json';
-import {getOsEnv, getOsEnvArray, getOsEnvOptional, normalizePort, toBool, toNumber} from './lib/env';
-
+import { getOsEnv, getOsPath, getOsPaths, normalizePort, toBool, toNumber } from './lib/env';
 /**
  * Load .env file or for tests the .env.test file.
  */
@@ -27,48 +26,22 @@ export const env = {
         port: normalizePort(process.env.PORT || getOsEnv('APP_PORT')),
         banner: toBool(getOsEnv('APP_BANNER')),
         dirs: {
-            migrations: (
-                getOsEnvArray('TYPEORM_MIGRATIONS') ||
-                [path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations/**/*.ts'))]
-            ) as string[],
-            migrationsDir: getOsEnvOptional('TYPEORM_MIGRATIONS_DIR') || path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations')),
-            entities: (
-                getOsEnvArray('TYPEORM_ENTITIES') ||
-                [path.relative(path.join(process.cwd()), path.join(__dirname, 'api/models/**/*{.js,.ts}'))]
-            ) as string[],
-            subscribers: (
-                getOsEnvArray('TYPEORM_SUBSCRIBERS') ||
-                [path.join(__dirname, 'api/subscribers/**/*Subscriber{.js,.ts}')]
-            ) as string[],
-            controllers: (
-                getOsEnvArray('CONTROLLERS') ||
-                [path.join(__dirname, 'api/controllers/**/*Controller{.js,.ts}')]
-            ) as string[],
-            middlewares: (
-                getOsEnvArray('MIDDLEWARES') ||
-                [path.join(__dirname, 'api/middlewares/**/*Middleware{.js,.ts}')]
-            ) as string[],
-            interceptors: (
-                getOsEnvArray('INTERCEPTORS') ||
-                [path.join(__dirname, 'api/interceptors/**/*Interceptor{.js,.ts}')]
-            ) as string[],
-            queries: (
-                getOsEnvArray('QUERIES') ||
-                [path.join(__dirname, 'api/queries/**/*Query{.js,.ts}')]
-            ) as string[],
-            mutations: (
-                getOsEnvArray('MUTATIONS') ||
-                [path.join(__dirname, 'api/mutations/**/*Mutation{.js,.ts}')]
-            ) as string[],
+            migrations: getOsPaths('TYPEORM_MIGRATIONS'),
+            migrationsDir: getOsPath('TYPEORM_MIGRATIONS_DIR'),
+            entities: getOsPaths('TYPEORM_ENTITIES'),
+            entitiesDir: getOsPath('TYPEORM_ENTITIES_DIR'),
+            controllers: getOsPaths('CONTROLLERS'),
+            middlewares: getOsPaths('MIDDLEWARES'),
+            interceptors: getOsPaths('INTERCEPTORS'),
+            subscribers: getOsPaths('SUBSCRIBERS'),
+            queries: getOsPaths('QUERIES'),
+            mutations: getOsPaths('MUTATIONS'),
         },
     },
     log: {
         level: getOsEnv('LOG_LEVEL'),
         json: toBool(getOsEnv('LOG_JSON')),
         output: getOsEnv('LOG_OUTPUT'),
-    },
-    auth: {
-        route: getOsEnv('AUTH_ROUTE'),
     },
     db: {
         type: getOsEnv('TYPEORM_CONNECTION'),

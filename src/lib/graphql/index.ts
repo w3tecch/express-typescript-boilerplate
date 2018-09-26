@@ -1,6 +1,6 @@
-import * as DataLoader from 'dataloader';
+import DataLoader from 'dataloader';
 import * as express from 'express';
-import * as GraphQLHTTP from 'express-graphql';
+import GraphQLHTTP from 'express-graphql';
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 import { Container as container, ObjectType } from 'typedi';
 import { getCustomRepository, getRepository, Repository } from 'typeorm';

@@ -20,7 +20,6 @@ typings/
 
 # Dist #
 dist/
-ormconfig.json
 tsconfig.build.json
 
 # IDE #

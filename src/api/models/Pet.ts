@@ -1,12 +1,12 @@
 import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
 import { User } from './User';
 
 @Entity()
 export class Pet {
 
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryColumn('uuid')
     public id: string;
 
     @IsNotEmpty()

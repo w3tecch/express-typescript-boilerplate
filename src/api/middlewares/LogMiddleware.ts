@@ -1,5 +1,5 @@
 import * as express from 'express';
-import * as morgan from 'morgan';
+import morgan from 'morgan';
 import { ExpressMiddlewareInterface, Middleware } from 'routing-controllers';
 
 import { env } from '../../env';
