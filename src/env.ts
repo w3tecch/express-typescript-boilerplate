@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 
 import * as pkg from '../package.json';
-import { getOsEnv, getOsEnvArray, normalizePort, toBool, toNumber } from './lib/env';
+import {getOsEnv, getOsEnvArray, getOsEnvOptional, normalizePort, toBool, toNumber} from './lib/env';
 
 /**
  * Load .env file or for tests the .env.test file.
@@ -31,7 +31,7 @@ export const env = {
                 getOsEnvArray('TYPEORM_MIGRATIONS') ||
                 [path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations/**/*.ts'))]
             ) as string[],
-            migrationsDir: getOsEnv('TYPEORM_MIGRATIONS_DIR') || path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations')),
+            migrationsDir: getOsEnvOptional('TYPEORM_MIGRATIONS_DIR') || path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations')),
             entities: (
                 getOsEnvArray('TYPEORM_ENTITIES') ||
                 [path.relative(path.join(process.cwd()), path.join(__dirname, 'api/models/**/*{.js,.ts}'))]
@@ -72,12 +72,12 @@ export const env = {
     },
     db: {
         type: getOsEnv('TYPEORM_CONNECTION'),
-        host: getOsEnv('TYPEORM_HOST'),
-        port: toNumber(getOsEnv('TYPEORM_PORT')),
-        username: getOsEnv('TYPEORM_USERNAME'),
-        password: getOsEnv('TYPEORM_PASSWORD'),
+        host: getOsEnvOptional('TYPEORM_HOST'),
+        port: toNumber(getOsEnvOptional('TYPEORM_PORT')),
+        username: getOsEnvOptional('TYPEORM_USERNAME'),
+        password: getOsEnvOptional('TYPEORM_PASSWORD'),
         database: getOsEnv('TYPEORM_DATABASE'),
-        synchronize: toBool(getOsEnv('TYPEORM_SYNCHRONIZE')),
+        synchronize: toBool(getOsEnvOptional('TYPEORM_SYNCHRONIZE')),
         logging: toBool(getOsEnv('TYPEORM_LOGGING')),
     },
     graphql: {

@@ -6,6 +6,10 @@ export function getOsEnv(key: string): string {
     }
 }
 
+export function getOsEnvOptional(key: string): string | undefined {
+    return process.env[key];
+}
+
 export function getOsEnvArray(key: string, delimiter: string = ','): string[] | boolean {
     return process.env[key] && process.env[key].split(delimiter) || false;
 }
