@@ -1,5 +1,9 @@
 export function getOsEnv(key: string): string {
-    return process.env[key] as string;
+    if (typeof process.env[key] === 'undefined') {
+        throw new Error('Environment variable ' + key + ' is not set.');
+    } else {
+        return process.env[key] as string;
+    }
 }
 
 export function getOsEnvArray(key: string, delimiter: string = ','): string[] | boolean {
