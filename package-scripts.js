@@ -24,7 +24,7 @@ module.exports = {
                     'nodemon --watch src --watch .env --inspect'
                 ),
                 description: 'Serves the current app and watches for changes to restart it, ypu may attach inspector to it.'
-            }
+            },
             script: series(
                 'nps banner.serve',
                 'nodemon --watch src --watch .env'
