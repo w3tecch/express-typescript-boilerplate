@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import * as MockExpressRequest from 'mock-express-request';
+import MockExpressRequest from 'mock-express-request';
 import { User } from 'src/api/models/User';
 
 import { AuthService } from '../../../src/auth/AuthService';
