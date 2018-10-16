@@ -1,4 +1,4 @@
-import * as MockExpressResponse from 'mock-express-response';
+import MockExpressResponse from 'mock-express-response';
 import { HttpError } from 'routing-controllers';
 
 import { ErrorHandlerMiddleware } from '../../../src/api/middlewares/ErrorHandlerMiddleware';
