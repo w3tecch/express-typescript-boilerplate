@@ -87,7 +87,7 @@ export class EntityFactory<Entity, Settings> {
                     entity[attribute] = await entity[attribute];
                 }
 
-                if (typeof entity[attribute] === 'object') {
+                if (typeof entity[attribute] === 'object' && !(entity[attribute] instanceof Date) {
                     const subEntityFactory = entity[attribute];
                     try {
                         entity[attribute] = await (subEntityFactory as any).make();
