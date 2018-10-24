@@ -3,9 +3,9 @@ import { join } from 'path';
 export function getOsEnv(key: string): string {
     if (typeof process.env[key] === 'undefined') {
         throw new Error(`Environment variable ${key} is not set.`);
-    } else {
-        return process.env[key] as string;
     }
+
+    return process.env[key] as string;
 }
 
 export function getOsEnvOptional(key: string): string | undefined {
