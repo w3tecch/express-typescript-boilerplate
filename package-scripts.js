@@ -2,7 +2,7 @@
  * Windows: Please do not use trailing comma as windows will fail with token error
  */
 
-const { series, crossEnv, concurrent, rimraf, runInNewWindow } = require('nps-utils');
+const { series, rimraf, } = require('nps-utils');
 
 module.exports = {
     scripts: {
@@ -11,7 +11,7 @@ module.exports = {
          * Starts the builded app from the dist directory.
          */
         start: {
-            script: 'cross-env NODE_ENV=production node dist/src/app.js',
+            script: 'cross-env NODE_ENV=production node dist/app.js',
             description: 'Starts the builded app',
         },
         /**
@@ -60,7 +60,9 @@ module.exports = {
                 'nps lint',
                 'nps clean.dist',
                 'nps transpile',
-                'nps copy'
+                'nps copy',
+                'nps copy.tmp',
+                'nps clean.tmp',
             ),
             description: 'Builds the app into the dist directory'
         },
@@ -92,6 +94,10 @@ module.exports = {
             dist: {
                 script: rimraf('./dist'),
                 hiddenFromHelp: true
+            },
+            tmp: {
+                script: rimraf('./.tmp'),
+                hiddenFromHelp: true
             }
         },
         /**
@@ -115,6 +121,13 @@ module.exports = {
             public: {
                 script: copy(
                     './src/public/*',
+                    './dist'
+                ),
+                hiddenFromHelp: true
+            },
+            tmp: {
+                script: copyDir(
+                    './.tmp/src',
                     './dist'
                 ),
                 hiddenFromHelp: true
@@ -274,7 +287,11 @@ function banner(name) {
 }
 
 function copy(source, target) {
-    return `copyfiles ${source} ${target}`;
+    return `copyfiles --up 1 ${source} ${target}`;
+}
+
+function copyDir(source, target) {
+    return `ncp ${source} ${target}`;
 }
 
 function run(path) {
