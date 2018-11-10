@@ -8,11 +8,11 @@ module.exports = {
     scripts: {
         default: 'nps start',
         /**
-         * Starts the builded app from the dist directory
+         * Starts the builded app from the dist directory.
          */
         start: {
-            script: 'cross-env NODE_ENV=production node dist/app.js',
-            description: 'Starts the builded app from the dist directory'
+            script: 'cross-env NODE_ENV=production node dist/src/app.js',
+            description: 'Starts the builded app',
         },
         /**
          * Serves the current app and watches for changes to restart it
@@ -274,7 +274,7 @@ function banner(name) {
 }
 
 function copy(source, target) {
-    return `copyup ${source} ${target}`;
+    return `copyfiles ${source} ${target}`;
 }
 
 function run(path) {

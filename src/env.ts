@@ -2,7 +2,9 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 
 import * as pkg from '../package.json';
-import { getOsEnv, getOsPath, getOsPaths, normalizePort, toBool, toNumber } from './lib/env';
+import {
+    getOsEnv, getOsEnvOptional, getOsPath, getOsPaths, normalizePort, toBool, toNumber
+} from './lib/env';
 
 /**
  * Load .env file or for tests the .env.test file.
@@ -41,17 +43,17 @@ export const env = {
     },
     log: {
         level: getOsEnv('LOG_LEVEL'),
-        json: toBool(getOsEnv('LOG_JSON')),
+        json: toBool(getOsEnvOptional('LOG_JSON')),
         output: getOsEnv('LOG_OUTPUT'),
     },
     db: {
         type: getOsEnv('TYPEORM_CONNECTION'),
-        host: getOsEnv('TYPEORM_HOST'),
-        port: toNumber(getOsEnv('TYPEORM_PORT')),
-        username: getOsEnv('TYPEORM_USERNAME'),
-        password: getOsEnv('TYPEORM_PASSWORD'),
+        host: getOsEnvOptional('TYPEORM_HOST'),
+        port: toNumber(getOsEnvOptional('TYPEORM_PORT')),
+        username: getOsEnvOptional('TYPEORM_USERNAME'),
+        password: getOsEnvOptional('TYPEORM_PASSWORD'),
         database: getOsEnv('TYPEORM_DATABASE'),
-        synchronize: toBool(getOsEnv('TYPEORM_SYNCHRONIZE')),
+        synchronize: toBool(getOsEnvOptional('TYPEORM_SYNCHRONIZE')),
         logging: toBool(getOsEnv('TYPEORM_LOGGING')),
     },
     graphql: {
