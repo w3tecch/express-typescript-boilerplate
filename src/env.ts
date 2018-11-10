@@ -2,7 +2,9 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 
 import * as pkg from '../package.json';
-import { getOsEnv, normalizePort, toBool, toNumber } from './lib/env';
+import {
+    getOsEnv, getOsEnvOptional, getOsPath, getOsPaths, normalizePort, toBool, toNumber
+} from './lib/env';
 
 /**
  * Load .env file or for tests the .env.test file.
@@ -27,34 +29,32 @@ export const env = {
         port: normalizePort(process.env.PORT || getOsEnv('APP_PORT')),
         banner: toBool(getOsEnv('APP_BANNER')),
         dirs: {
-            migrations: [path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations/*.ts'))],
-            migrationsDir: path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations')),
-            entities: [path.relative(path.join(process.cwd()), path.join(__dirname, 'api/**/models/*{.js,.ts}'))],
-            subscribers: [path.join(__dirname, 'api/**/*Subscriber{.js,.ts}')],
-            controllers: [path.join(__dirname, 'api/**/*Controller{.js,.ts}')],
-            middlewares: [path.join(__dirname, 'api/**/*Middleware{.js,.ts}')],
-            interceptors: [path.join(__dirname, 'api/**/*Interceptor{.js,.ts}')],
-            queries: [path.join(__dirname, 'api/**/*Query{.js,.ts}')],
-            mutations: [path.join(__dirname, 'api/**/*Mutation{.js,.ts}')],
+            migrations: getOsPaths('TYPEORM_MIGRATIONS'),
+            migrationsDir: getOsPath('TYPEORM_MIGRATIONS_DIR'),
+            entities: getOsPaths('TYPEORM_ENTITIES'),
+            entitiesDir: getOsPath('TYPEORM_ENTITIES_DIR'),
+            controllers: getOsPaths('CONTROLLERS'),
+            middlewares: getOsPaths('MIDDLEWARES'),
+            interceptors: getOsPaths('INTERCEPTORS'),
+            subscribers: getOsPaths('SUBSCRIBERS'),
+            queries: getOsPaths('QUERIES'),
+            mutations: getOsPaths('MUTATIONS'),
         },
     },
     log: {
         level: getOsEnv('LOG_LEVEL'),
-        json: toBool(getOsEnv('LOG_JSON')),
+        json: toBool(getOsEnvOptional('LOG_JSON')),
         output: getOsEnv('LOG_OUTPUT'),
     },
-    auth: {
-        route: getOsEnv('AUTH_ROUTE'),
-    },
     db: {
-        type: getOsEnv('DB_TYPE'),
-        host: getOsEnv('DB_HOST'),
-        port: toNumber(getOsEnv('DB_PORT')),
-        username: getOsEnv('DB_USERNAME'),
-        password: getOsEnv('DB_PASSWORD'),
-        database: getOsEnv('DB_DATABASE'),
-        synchronize: toBool(getOsEnv('DB_SYNCHRONIZE')),
-        logging: toBool(getOsEnv('DB_LOGGING')),
+        type: getOsEnv('TYPEORM_CONNECTION'),
+        host: getOsEnvOptional('TYPEORM_HOST'),
+        port: toNumber(getOsEnvOptional('TYPEORM_PORT')),
+        username: getOsEnvOptional('TYPEORM_USERNAME'),
+        password: getOsEnvOptional('TYPEORM_PASSWORD'),
+        database: getOsEnv('TYPEORM_DATABASE'),
+        synchronize: toBool(getOsEnvOptional('TYPEORM_SYNCHRONIZE')),
+        logging: toBool(getOsEnv('TYPEORM_LOGGING')),
     },
     graphql: {
         enabled: toBool(getOsEnv('GRAPHQL_ENABLED')),

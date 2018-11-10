@@ -1,5 +1,5 @@
-import * as basicAuth from 'express-basic-auth';
-import * as monitor from 'express-status-monitor';
+import basicAuth from 'express-basic-auth';
+import monitor from 'express-status-monitor';
 import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
 
 import { env } from '../env';

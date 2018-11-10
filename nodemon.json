@@ -1,7 +1,7 @@
 {
     "delay": "0",
     "execMap": {
-        "ts": "ts-node"
+        "ts": "node -r ts-node/register"
     },
     "events": {
         "start": "tslint -c ./tslint.json -t stylish 'src/**/*.ts'"

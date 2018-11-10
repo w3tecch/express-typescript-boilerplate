@@ -1,4 +1,5 @@
-import { setConnection } from '../../../src/lib/seed';
+import { setConnection } from 'typeorm-seeding';
+
 import { migrateDatabase } from '../../utils/database';
 import { bootstrapApp } from './bootstrap';
 

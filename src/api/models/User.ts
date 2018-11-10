@@ -1,12 +1,33 @@
+import * as bcrypt from 'bcrypt';
+import { Exclude } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeInsert, Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
 import { Pet } from './Pet';
 
 @Entity()
 export class User {
 
-    @PrimaryGeneratedColumn('uuid')
+    public static hashPassword(password: string): Promise<string> {
+        return new Promise((resolve, reject) => {
+            bcrypt.hash(password, 10, (err, hash) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(hash);
+            });
+        });
+    }
+
+    public static comparePassword(user: User, password: string): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            bcrypt.compare(password, user.password, (err, res) => {
+                resolve(res === true);
+            });
+        });
+    }
+
+    @PrimaryColumn('uuid')
     public id: string;
 
     @IsNotEmpty()
@@ -21,11 +42,25 @@ export class User {
     @Column()
     public email: string;
 
+    @IsNotEmpty()
+    @Column()
+    @Exclude()
+    public password: string;
+
+    @IsNotEmpty()
+    @Column()
+    public username: string;
+
     @OneToMany(type => Pet, pet => pet.user)
     public pets: Pet[];
 
     public toString(): string {
         return `${this.firstName} ${this.lastName} (${this.email})`;
+    }
+
+    @BeforeInsert()
+    public async hashPassword(): Promise<void> {
+        this.password = await User.hashPassword(this.password);
     }
 
 }

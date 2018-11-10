@@ -1,76 +1,55 @@
 import { Request } from 'express';
-import * as MockExpressRequest from 'mock-express-request';
-import * as nock from 'nock';
-import * as request from 'request';
+import MockExpressRequest from 'mock-express-request';
+import { User } from 'src/api/models/User';
 
 import { AuthService } from '../../../src/auth/AuthService';
-import { env } from '../../../src/env';
 import { LogMock } from '../lib/LogMock';
+import { RepositoryMock } from '../lib/RepositoryMock';
 
 describe('AuthService', () => {
 
     let authService: AuthService;
+    let userRepository: RepositoryMock<User>;
     let log: LogMock;
     beforeEach(() => {
         log = new LogMock();
-        authService = new AuthService(request, log);
+        userRepository = new RepositoryMock<User>();
+        authService = new AuthService(log, userRepository as any);
     });
 
     describe('parseTokenFromRequest', () => {
-        test('Should return the token without Bearer', () => {
+        test('Should return the credentials of the basic authorization header', () => {
+            const base64 = Buffer.from(`bruce:1234`).toString('base64');
             const req: Request = new MockExpressRequest({
                 headers: {
-                    Authorization: 'Bearer 1234',
+                    Authorization: `Basic ${base64}`,
                 },
             });
-            const token = authService.parseTokenFromRequest(req);
-            expect(token).toBe('1234');
+            const credentials = authService.parseBasicAuthFromRequest(req);
+            expect(credentials.username).toBe('bruce');
+            expect(credentials.password).toBe('1234');
         });
 
-        test('Should return undefined if there is no Bearer', () => {
+        test('Should return undefined if there is no basic authorization header', () => {
+            const req: Request = new MockExpressRequest({
+                headers: {},
+            });
+            const token = authService.parseBasicAuthFromRequest(req);
+            expect(token).toBeUndefined();
+            expect(log.infoMock).toBeCalledWith('No credentials provided by the client', []);
+        });
+
+        test('Should return undefined if there is a invalid basic authorization header', () => {
             const req: Request = new MockExpressRequest({
                 headers: {
                     Authorization: 'Basic 1234',
                 },
             });
-            const token = authService.parseTokenFromRequest(req);
+            const token = authService.parseBasicAuthFromRequest(req);
             expect(token).toBeUndefined();
-            expect(log.infoMock).toBeCalledWith('No Token provided by the client', []);
+            expect(log.infoMock).toBeCalledWith('No credentials provided by the client', []);
         });
 
-        test('Should return undefined if there is no "Authorization" header', () => {
-            const req: Request = new MockExpressRequest();
-            const token = authService.parseTokenFromRequest(req);
-            expect(token).toBeUndefined();
-            expect(log.infoMock).toBeCalledWith('No Token provided by the client', []);
-        });
-    });
-
-    describe('getTokenInfo', () => {
-        test('Should get the tokeninfo', async (done) => {
-            nock(env.auth.route)
-                .post('')
-                .reply(200, {
-                    user_id: 'auth0|test@test.com',
-                });
-
-            const tokeninfo = await authService.getTokenInfo('1234');
-            expect(tokeninfo.user_id).toBe('auth0|test@test.com');
-            done();
-        });
-
-        test('Should fail due to invalid token', async (done) => {
-            nock(env.auth.route)
-                .post('')
-                .reply(401, 'Invalid token');
-
-            try {
-                await authService.getTokenInfo('1234');
-            } catch (error) {
-                expect(error).toBe('Invalid token');
-            }
-            done();
-        });
     });
 
 });

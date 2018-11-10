@@ -89,7 +89,7 @@ Install [Node.js and NPM](https://nodejs.org/en/download/)
 Install yarn globally
 
 ```bash
-npm install yarn -g
+yarn install yarn -g
 ```
 
 Install a MySQL database.
@@ -107,17 +107,17 @@ Create a new database with the name you have in your `.env`-file.
 Then setup your application environment.
 
 ```bash
-npm run setup
+yarn run setup
 ```
 
 > This installs all dependencies with yarn. After that it migrates the database and seeds some test data into it. So after that your development environment is ready to use.
 
 ### Step 3: Serve your App
 
-Go to the project dir and start your app with this npm script.
+Go to the project dir and start your app with this yarn script.
 
 ```bash
-npm start serve
+yarn start serve
 ```
 
 > This starts a local server using `nodemon`, which will watch for any file changes and will restart the sever according to these changes.
@@ -135,42 +135,42 @@ All script are defined in the `package-scripts.js` file, but the most important 
 
 ### Linting
 
-- Run code quality analysis using `npm start lint`. This runs tslint.
+- Run code quality analysis using `yarn start lint`. This runs tslint.
 - There is also a vscode task for this called `lint`.
 
 ### Tests
 
-- Run the unit tests using `npm start test` (There is also a vscode task for this called `test`).
-- Run the integration tests using `npm start test.integration`.
-- Run the e2e tests using `npm start test.e2e`.
+- Run the unit tests using `yarn start test` (There is also a vscode task for this called `test`).
+- Run the integration tests using `yarn start test.integration`.
+- Run the e2e tests using `yarn start test.e2e`.
 
 ### Running in dev mode
 
-- Run `npm start serve` to start nodemon with ts-node, to serve the app.
+- Run `yarn start serve` to start nodemon with ts-node, to serve the app.
 - The server address will be displayed to you as `http://0.0.0.0:3000`
 
 ### Building the project and run it
 
-- Run `npm start build` to generated all JavaScript files from the TypeScript sources (There is also a vscode task for this called `build`).
-- To start the builded app located in `dist` use `npm start`.
+- Run `yarn start build` to generated all JavaScript files from the TypeScript sources (There is also a vscode task for this called `build`).
+- To start the builded app located in `dist` use `yarn start`.
 
 ### Database Migration
 
-- Run `typeorm migrations:create -n <migration-file-name>` to create a new migration file.
+- Run `typeorm migration:create -n <migration-file-name>` to create a new migration file.
 - Try `typeorm -h` to see more useful cli commands like generating migration out of your models.
-- To migrate your database run `npm start db.migrate`.
-- To revert your latest migration run `npm start db.revert`.
-- Drops the complete database schema `npm start db.drop`.
+- To migrate your database run `yarn start db.migrate`.
+- To revert your latest migration run `yarn start db.revert`.
+- Drops the complete database schema `yarn start db.drop`.
 
 ### Database Seeding
 
-- Run `npm start db.seed` to seed your seeds into the database.
+- Run `yarn start db.seed` to seed your seeds into the database.
 
 ![divider](./w3tec-divider.png)
 
 ## ❯ Debugger in VSCode
 
-To debug your code run `npm start build` or hit <kbd>cmd</kbd> + <kbd>b</kbd> to build your app.
+To debug your code run `yarn start build` or hit <kbd>cmd</kbd> + <kbd>b</kbd> to build your app.
 Then, just set a breakpoint and hit <kbd>F5</kbd> in your Visual Studio Code.
 
 ![divider](./w3tec-divider.png)
@@ -228,7 +228,6 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **test/unit/** *.test.ts          | Unit tests |
 | .env.example                      | Environment configurations |
 | .env.test                         | Test environment configurations |
-| ormconfig.json                    | TypeORM configuration for the database. Used by seeds and the migration. (generated file) |
 | mydb.sql                          | SQLite database for integration tests. Ignored by git and only available after integration tests |
 
 ![divider](./w3tec-divider.png)
@@ -378,19 +377,18 @@ export class CreatePets implements SeedsInterface {
 The last step is the easiest, just hit the following command in your terminal, but be sure you are in the projects root folder.
 
 ```bash
-npm start db.seed
+yarn start db.seed
 ```
 
 #### CLI Interface
 
-| Command                                             | Description |
-| --------------------------------------------------- | ----------- |
-| `npm start "db.seed"`                               | Run all seeds |
-| `npm start "db.seed --run CreateBruce,CreatePets"`  | Run specific seeds (file names without extension) |
-| `npm start "db.seed -L"`                            | Log database queries to the terminal |
-| `npm start "db.seed --factories <path>"`            | Add a different path to your factories (Default: `src/database/`) |
-| `npm start "db.seed --seeds <path>"`                | Add a different path to your seeds (Default: `src/database/seeds/`) |
-| `npm start "db.seed --config <file>"`               | Path to your ormconfig.json file |
+| Command                                              | Description |
+| ---------------------------------------------------- | ----------- |
+| `yarn start "db.seed"`                               | Run all seeds |
+| `yarn start "db.seed --run CreateBruce,CreatePets"`  | Run specific seeds (file names without extension) |
+| `yarn start "db.seed -L"`                            | Log database queries to the terminal |
+| `yarn start "db.seed --factories <path>"`            | Add a different path to your factories (Default: `src/database/`) |
+| `yarn start "db.seed --seeds <path>"`                | Add a different path to your seeds (Default: `src/database/seeds/`) |
 
 ![divider](./w3tec-divider.png)
 

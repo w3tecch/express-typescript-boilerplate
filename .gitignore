@@ -14,13 +14,13 @@ yarn-error.log
 # OS generated files #
 .DS_Store
 Thumbs.db
+.tmp/
 
 # Typing #
 typings/
 
 # Dist #
 dist/
-ormconfig.json
 tsconfig.build.json
 
 # IDE #

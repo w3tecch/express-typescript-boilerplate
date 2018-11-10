@@ -4,6 +4,7 @@ import { Connection } from 'typeorm';
 import { Pet } from '../../src/api/models/Pet';
 import { PetService } from '../../src/api/services/PetService';
 import { closeDatabase, createDatabaseConnection, migrateDatabase } from '../utils/database';
+import { configureLogger } from '../utils/logger';
 
 describe('PetService', () => {
 
@@ -12,7 +13,10 @@ describe('PetService', () => {
     // -------------------------------------------------------------------------
 
     let connection: Connection;
-    beforeAll(async () => connection = await createDatabaseConnection());
+    beforeAll(async () => {
+        configureLogger();
+        connection = await createDatabaseConnection();
+    });
     beforeEach(() => migrateDatabase(connection));
 
     // -------------------------------------------------------------------------
@@ -27,6 +31,7 @@ describe('PetService', () => {
 
     test('should create a new pet in the database', async (done) => {
         const pet = new Pet();
+        pet.id = 'xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx';
         pet.name = 'test';
         pet.age = 1;
         const service = Container.get<PetService>(PetService);

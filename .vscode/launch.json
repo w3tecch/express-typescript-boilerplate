@@ -15,8 +15,15 @@
             ],
             "protocol": "inspector",
             "env": {
-                "NODE_ENV": "development"
+                "NODE_ENV": "production"
             }
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Nodemon Debug",
+            "port": 9229,
+            "restart": true
         }
     ]
 }

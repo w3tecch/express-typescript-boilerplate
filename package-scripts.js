@@ -2,22 +2,29 @@
  * Windows: Please do not use trailing comma as windows will fail with token error
  */
 
-const { series, crossEnv, concurrent, rimraf, runInNewWindow } = require('nps-utils');
+const { series, rimraf, } = require('nps-utils');
 
 module.exports = {
     scripts: {
         default: 'nps start',
         /**
-         * Starts the builded app from the dist directory
+         * Starts the builded app from the dist directory.
          */
         start: {
-            script: 'node dist/app.js',
-            description: 'Starts the builded app from the dist directory'
+            script: 'cross-env NODE_ENV=production node dist/app.js',
+            description: 'Starts the builded app',
         },
         /**
          * Serves the current app and watches for changes to restart it
          */
         serve: {
+            inspector: {
+                script: series(
+                    'nps banner.serve',
+                    'nodemon --watch src --watch .env --inspect'
+                ),
+                description: 'Serves the current app and watches for changes to restart it, you may attach inspector to it.'
+            },
             script: series(
                 'nps banner.serve',
                 'nodemon --watch src --watch .env'
@@ -30,9 +37,7 @@ module.exports = {
         setup: {
             script: series(
                 'yarn install',
-                'nps db.drop',
-                'nps db.migrate',
-                'nps db.seed'
+                'nps db.setup',
             ),
             description: 'Setup`s the development environment(yarn & database)'
         },
@@ -42,7 +47,6 @@ module.exports = {
         config: {
             script: series(
                 runFast('./commands/tsconfig.ts'),
-                runFast('./commands/ormconfig.ts')
             ),
             hiddenFromHelp: true
         },
@@ -56,7 +60,9 @@ module.exports = {
                 'nps lint',
                 'nps clean.dist',
                 'nps transpile',
-                'nps copy'
+                'nps copy',
+                'nps copy.tmp',
+                'nps clean.tmp',
             ),
             description: 'Builds the app into the dist directory'
         },
@@ -88,6 +94,10 @@ module.exports = {
             dist: {
                 script: rimraf('./dist'),
                 hiddenFromHelp: true
+            },
+            tmp: {
+                script: rimraf('./.tmp'),
+                hiddenFromHelp: true
             }
         },
         /**
@@ -114,6 +124,13 @@ module.exports = {
                     './dist'
                 ),
                 hiddenFromHelp: true
+            },
+            tmp: {
+                script: copyDir(
+                    './.tmp/src',
+                    './dist'
+                ),
+                hiddenFromHelp: true
             }
         },
         /**
@@ -124,7 +141,7 @@ module.exports = {
                 script: series(
                     'nps banner.migrate',
                     'nps config',
-                    runFast('./node_modules/typeorm/cli.js migrations:run')
+                    runFast('./node_modules/typeorm/cli.js migration:run')
                 ),
                 description: 'Migrates the database to newest version available'
             },
@@ -132,7 +149,7 @@ module.exports = {
                 script: series(
                     'nps banner.revert',
                     'nps config',
-                    runFast('./node_modules/typeorm/cli.js migrations:revert')
+                    runFast('./node_modules/typeorm/cli.js migration:revert')
                 ),
                 description: 'Downgrades the database'
             },
@@ -140,15 +157,22 @@ module.exports = {
                 script: series(
                     'nps banner.seed',
                     'nps config',
-                    runFast('./src/lib/seed/cli.ts')
+                    runFast('./commands/seed.ts')
                 ),
                 description: 'Seeds generated records into the database'
             },
             drop: {
                 script: runFast('./node_modules/typeorm/cli.js schema:drop'),
                 description: 'Drops the schema of the database'
+            },
+            setup: {
+                script: series(
+                    'nps db.drop',
+                    'nps db.migrate',
+                    'nps db.seed'
+                ),
+                description: 'Recreates the database with seeded data'
             }
-
         },
         /**
          * These run various kinds of tests. Default is unit.
@@ -263,15 +287,19 @@ function banner(name) {
 }
 
 function copy(source, target) {
-    return `copyup ${source} ${target}`;
+    return `copyfiles --up 1 ${source} ${target}`;
+}
+
+function copyDir(source, target) {
+    return `ncp ${source} ${target}`;
 }
 
 function run(path) {
-    return `ts-node --typeCheck ${path}`;
+    return `ts-node ${path}`;
 }
 
 function runFast(path) {
-    return `ts-node ${path}`;
+    return `ts-node --transpileOnly ${path}`;
 }
 
 function tslint(path) {

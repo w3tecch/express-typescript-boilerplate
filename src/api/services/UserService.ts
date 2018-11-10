@@ -39,9 +39,10 @@ export class UserService {
         return this.userRepository.save(user);
     }
 
-    public delete(id: string): Promise<void> {
+    public async delete(id: string): Promise<void> {
         this.log.info('Delete a user');
-        return this.userRepository.removeById(id);
+        await this.userRepository.delete(id);
+        return;
     }
 
 }

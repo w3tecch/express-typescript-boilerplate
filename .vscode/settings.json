@@ -3,7 +3,6 @@
     "cSpell.enabled": true,
     "files.exclude": {
         "tsconfig.build.json": true,
-        "ormconfig.json": true
     },
     "importSorter.generalConfiguration.sortOnBeforeSave": true,
     "files.trimTrailingWhitespace": true,
