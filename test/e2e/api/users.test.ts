@@ -1,9 +1,9 @@
 import * as nock from 'nock';
-import * as request from 'supertest';
+import request from 'supertest';
+import { runSeed } from 'typeorm-seeding';
 
 import { User } from '../../../src/api/models/User';
 import { CreateBruce } from '../../../src/database/seeds/CreateBruce';
-import { runSeed } from '../../../src/lib/seed';
 import { closeDatabase } from '../../utils/database';
 import { BootstrapSettings } from '../utils/bootstrap';
 import { prepareServer } from '../utils/server';
