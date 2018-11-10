@@ -1,8 +1,8 @@
 import { Connection } from 'typeorm';
+import { Factory, Seed } from 'typeorm-seeding';
 import * as uuid from 'uuid';
 
 import { User } from '../../../src/api/models/User';
-import { Factory, Seed } from '../../lib/seed/types';
 
 export class CreateBruce implements Seed {
 
