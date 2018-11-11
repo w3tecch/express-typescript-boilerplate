@@ -1,5 +1,6 @@
 import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
+import uuid from 'uuid';
 
 import { EventDispatcher, EventDispatcherInterface } from '../../decorators/EventDispatcher';
 import { Logger, LoggerInterface } from '../../decorators/Logger';
@@ -38,6 +39,7 @@ export class PetService {
 
     public async create(pet: Pet): Promise<Pet> {
         this.log.info('Create a new pet => ', pet.toString());
+        pet.id = uuid.v1();
         const newPet = await this.petRepository.save(pet);
         this.eventDispatcher.dispatch(events.pet.created, newPet);
         return newPet;

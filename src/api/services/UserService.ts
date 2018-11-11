@@ -1,5 +1,6 @@
 import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
+import uuid from 'uuid';
 
 import { EventDispatcher, EventDispatcherInterface } from '../../decorators/EventDispatcher';
 import { Logger, LoggerInterface } from '../../decorators/Logger';
@@ -22,12 +23,13 @@ export class UserService {
     }
 
     public findOne(id: string): Promise<User | undefined> {
-        this.log.info('Find all users');
+        this.log.info('Find one user');
         return this.userRepository.findOne({ id });
     }
 
     public async create(user: User): Promise<User> {
         this.log.info('Create a new user => ', user.toString());
+        user.id = uuid.v1();
         const newUser = await this.userRepository.save(user);
         this.eventDispatcher.dispatch(events.user.created, newUser);
         return newUser;

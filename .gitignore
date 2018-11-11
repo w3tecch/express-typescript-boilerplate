@@ -15,6 +15,7 @@ yarn-error.log
 .DS_Store
 Thumbs.db
 .tmp/
+src/api/schema.gql
 
 # Typing #
 typings/
