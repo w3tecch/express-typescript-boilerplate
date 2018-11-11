@@ -55,6 +55,7 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **Fast Database Building** with simple migration from [TypeORM](https://github.com/typeorm/typeorm).
 - **Easy Data Seeding** with our own factories.
 - **GraphQL** provides as a awesome query language for our api [GraphQL](http://graphql.org/).
+- **TypeGraphQL** thanks to [TypeGraphQL](https://19majkel94.github.io/type-graphql/) we have a some cool decorators to simplify the usage of GraphQL.
 - **DataLoaders** helps with performance thanks to caching and batching [DataLoaders](https://github.com/facebook/dataloader).
 
 ![divider](./w3tec-divider.png)
@@ -69,6 +70,8 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - [Logging](#-logging)
 - [Event Dispatching](#-event-dispatching)
 - [Seeding](#-seeding)
+- [GraphQL](#-graph-q-l)
+- [Docker](#-docker)
 - [Further Documentations](#-further-documentation)
 - [Related Projects](#-related-projects)
 - [License](#-license)
@@ -209,9 +212,9 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **src/api/services/**             | Service layer |
 | **src/api/subscribers/**          | Event subscribers |
 | **src/api/validators/**           | Custom validators, which can be used in the request classes |
-| **src/api/queries/**              | GraphQL queries |
-| **src/api/mutations/**            | GraphQL mutations |
-| **src/api/types/**                | GraphQL types |
+| **src/api/resolvers/**            | GraphQL resolvers (query, mutation & field-resolver) |
+| **src/api/types/**                | GraphQL types ,input-types and scalar types |
+| **src/api/** schema.gql           | Generated GraphQL schema |
 | **src/api/** swagger.json         | Swagger documentation |
 | **src/auth/**                     | Authentication checkers and services |
 | **src/core/**                     | The core features like logger and env variables |
@@ -392,7 +395,56 @@ yarn start db.seed
 
 ![divider](./w3tec-divider.png)
 
-## ❯ Run in Docker container
+## ❯ GraphQL
+
+For the GraphQL part we used the library [TypeGraphQL](https://19majkel94.github.io/type-graphql/) to build awesome GraphQL API's.
+
+The context(shown below) of the GraphQL is builded in the **graphqlLoader.ts** file. Inside of this loader we create a scoped container for each incoming request.
+
+```typescript
+export interface Context {
+  requestId: number;
+  request: express.Request;
+  response: express.Response;
+  container: ContainerInstance;
+}
+```
+
+### DataLoader
+
+For the usage of the DataLoaders we created a annotation, which automatically creates and registers a new DataLoader to the scoped container.
+
+Here is an example of the **PetResolver**.
+
+```typescript
+import DataLoader from 'dataloader';
+import { DLoader } from '../../decorators/DLoader';
+    ...
+    constructor(
+        private petService: PetService,
+        @Logger(__filename) private log: LoggerInterface,
+        @DLoader(UserModel) private userLoader: DataLoader<string, UserModel>
+    ) { }
+    ...
+```
+
+Or you could use the repository too.
+
+```typescript
+@DLoader(UserRepository) private userLoader: DataLoader<string, UserModel>
+```
+
+Or even use a custom method of your given repository.
+
+```typescript
+@DLoader(PetRepository, {
+    method: 'findByUserIds',
+    key: 'userId',
+    multiple: true,
+}) private petLoader: DataLoader<string, PetModel>
+```
+
+## ❯ Docker
 
 ### Install Docker
 
