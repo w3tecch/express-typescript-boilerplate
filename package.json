@@ -60,6 +60,7 @@
     "jsonfile": "5.0.0",
     "microframework-w3tec": "^0.6.3",
     "morgan": "^1.9.0",
+    "mysql": "^2.16.0",
     "nodemon": "^1.12.1",
     "nps": "^5.7.1",
     "nps-utils": "^1.5.0",
@@ -79,6 +80,9 @@
     "typescript": "3.0.3",
     "uuid": "^3.3.2",
     "winston": "3.1.0"
+  },
+  "resolutions": {
+    "**/event-stream": "^4.0.1"
   },
   "jest": {
     "transform": {
