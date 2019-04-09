@@ -137,6 +137,16 @@ module.exports = {
          * Database scripts
          */
         db: {
+            migration: {
+                generate: {
+                    script: runFast('./node_modules/.bin/typeorm migration:generate -n'),
+                    description: 'Generates a migration file with SQL queries reflecting models changes'
+                },
+                create: {
+                    script: runFast('./node_modules/.bin/typeorm migration:create -n'),
+                    description: 'Creates an empty migration file'
+                }
+            },
             migrate: {
                 script: series(
                     'nps banner.migrate',
