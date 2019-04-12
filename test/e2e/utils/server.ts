@@ -1,4 +1,4 @@
-import { setConnection } from 'typeorm-seeding';
+import { setConnection, loadEntityFactories } from 'typeorm-seeding';
 
 import { migrateDatabase } from '../../utils/database';
 import { bootstrapApp } from './bootstrap';
@@ -9,5 +9,7 @@ export const prepareServer = async (options?: { migrate: boolean }) => {
         await migrateDatabase(settings.connection);
     }
     setConnection(settings.connection);
+    await loadEntityFactories('src/database/factories');
+
     return settings;
 };
