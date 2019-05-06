@@ -1,7 +1,7 @@
 FROM node:8-alpine
 
 # Install Python
-RUN apk update && apk add yarn python g++ make && rm -rf /var/cache/apk/*
+RUN apk update && apk add python g++ make && rm -rf /var/cache/apk/*
 
 # Create work directory
 WORKDIR /usr/src/app
