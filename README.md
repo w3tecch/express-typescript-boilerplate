@@ -92,7 +92,7 @@ Install [Node.js and NPM](https://nodejs.org/en/download/)
 Install yarn globally
 
 ```bash
-yarn install yarn -g
+npm install yarn -g
 ```
 
 Install a MySQL database.
