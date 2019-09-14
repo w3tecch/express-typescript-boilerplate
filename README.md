@@ -46,7 +46,7 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - **Easy Exception Handling** thanks to [routing-controllers](https://github.com/pleerock/routing-controllers).
 - **Smart Validation** thanks to [class-validator](https://github.com/pleerock/class-validator) with some nice annotations.
 - **Custom Validators** to validate your request even better and stricter. [custom-validation-classes](https://github.com/pleerock/class-validator#custom-validation-classes).
-- **API Documentation** thanks to [swagger](http://swagger.io/).
+- **API Documentation** thanks to [swagger](http://swagger.io/) and [routing-controllers-openapi](https://github.com/epiphone/routing-controllers-openapi).
 - **API Monitoring** thanks to [express-status-monitor](https://github.com/RafalWilinski/express-status-monitor).
 - **Integrated Testing Tool** thanks to [Jest](https://facebook.github.io/jest).
 - **E2E API Testing** thanks to [supertest](https://github.com/visionmedia/supertest).
@@ -215,7 +215,6 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **src/api/resolvers/**            | GraphQL resolvers (query, mutation & field-resolver) |
 | **src/api/types/**                | GraphQL types ,input-types and scalar types |
 | **src/api/** schema.gql           | Generated GraphQL schema |
-| **src/api/** swagger.json         | Swagger documentation |
 | **src/auth/**                     | Authentication checkers and services |
 | **src/core/**                     | The core features like logger and env variables |
 | **src/database/factories**        | Factory the generate fake entities |

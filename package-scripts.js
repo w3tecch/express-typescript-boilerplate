@@ -106,15 +106,7 @@ module.exports = {
         copy: {
             default: {
                 script: series(
-                    `nps copy.swagger`,
                     `nps copy.public`
-                ),
-                hiddenFromHelp: true
-            },
-            swagger: {
-                script: copy(
-                    './src/api/swagger.json',
-                    './dist'
                 ),
                 hiddenFromHelp: true
             },
