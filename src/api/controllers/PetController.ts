@@ -2,7 +2,7 @@ import { IsNotEmpty, IsNumber, IsUUID, ValidateNested } from 'class-validator';
 import {
     Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put
 } from 'routing-controllers';
-import { ResponseSchema } from 'routing-controllers-openapi';
+import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 
 import { PetNotFoundError } from '../errors/PetNotFoundError';
 import { Pet } from '../models/Pet';
@@ -32,6 +32,7 @@ class CreatePetBody extends BasePet {
 
 @Authorized()
 @JsonController('/pets')
+@OpenAPI({ security: [{ basicAuth: [] }] })
 export class PetController {
 
     constructor(

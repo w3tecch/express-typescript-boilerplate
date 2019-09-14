@@ -22,9 +22,21 @@ export const swaggerLoader: MicroframeworkLoader = (settings: MicroframeworkSett
             refPointerPrefix: '#/components/schemas/',
         });
 
-        const swaggerFile = routingControllersToSpec(getMetadataArgsStorage(), {}, {
-            components: { schemas },
-        });
+        const swaggerFile = routingControllersToSpec(
+            getMetadataArgsStorage(),
+            {},
+            {
+                components: {
+                    schemas,
+                    securitySchemes: {
+                        basicAuth: {
+                            type: 'http',
+                            scheme: 'basic',
+                        },
+                    },
+                },
+            }
+        );
 
         // Add npm infos to the swagger doc
         swaggerFile.info = {
