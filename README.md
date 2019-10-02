@@ -207,7 +207,7 @@ The swagger and the monitor route can be altered in the `.env` file.
 | **src/api/errors/**               | Custom HttpErrors like 404 NotFound |
 | **src/api/interceptors/**         | Interceptors are used to change or replace the data returned to the client. |
 | **src/api/middlewares/**          | Express Middlewares like helmet security features |
-| **src/api/models/**               | Bookshelf Models |
+| **src/api/models/**               | TypeORM Models |
 | **src/api/repositories/**         | Repository / DB layer |
 | **src/api/services/**             | Service layer |
 | **src/api/subscribers/**          | Event subscribers |
