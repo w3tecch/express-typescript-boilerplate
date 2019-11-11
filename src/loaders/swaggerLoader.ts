@@ -1,6 +1,10 @@
+import { defaultMetadataStorage as classTransformerMetadataStorage } from 'class-transformer/storage';
+import { getFromContainer, MetadataStorage } from 'class-validator';
+import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 import basicAuth from 'express-basic-auth';
 import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
-import * as path from 'path';
+import { getMetadataArgsStorage } from 'routing-controllers';
+import { routingControllersToSpec } from 'routing-controllers-openapi';
 import * as swaggerUi from 'swagger-ui-express';
 
 import { env } from '../env';
@@ -8,7 +12,31 @@ import { env } from '../env';
 export const swaggerLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
     if (settings && env.swagger.enabled) {
         const expressApp = settings.getData('express_app');
-        const swaggerFile = require(path.join(__dirname, '..', env.swagger.file));
+
+        const { validationMetadatas } = getFromContainer(
+            MetadataStorage
+        ) as any;
+
+        const schemas = validationMetadatasToSchemas(validationMetadatas, {
+            classTransformerMetadataStorage,
+            refPointerPrefix: '#/components/schemas/',
+        });
+
+        const swaggerFile = routingControllersToSpec(
+            getMetadataArgsStorage(),
+            {},
+            {
+                components: {
+                    schemas,
+                    securitySchemes: {
+                        basicAuth: {
+                            type: 'http',
+                            scheme: 'basic',
+                        },
+                    },
+                },
+            }
+        );
 
         // Add npm infos to the swagger doc
         swaggerFile.info = {

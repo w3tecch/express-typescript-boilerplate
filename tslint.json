@@ -1,6 +1,7 @@
 {
     "extends": "tslint:recommended",
     "rules": {
+        "max-classes-per-file": false,
         "max-line-length": [
             true,
             160
