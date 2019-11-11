@@ -72,7 +72,7 @@ Try it!! We are happy to hear your feedback or any kind of new features.
 - [Seeding](#-seeding)
 - [GraphQL](#-graph-q-l)
 - [Docker](#-docker)
-- [Further Documentations](#-further-documentation)
+- [Further Documentations](#-further-documentations)
 - [Related Projects](#-related-projects)
 - [License](#-license)
 
