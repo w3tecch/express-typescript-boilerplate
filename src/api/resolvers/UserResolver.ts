@@ -1,6 +1,7 @@
-import { FieldResolver, Query, Resolver, Root } from 'type-graphql';
+import { Authorized, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql';
 import { Service } from 'typedi';
 
+import { Context } from '../Context';
 import { User as UserModel } from '../models/User';
 import { PetService } from '../services/PetService';
 import { UserService } from '../services/UserService';
@@ -17,6 +18,19 @@ export class UserResolver {
 
     @Query(returns => [User])
     public users(): Promise<any> {
+      return this.userService.find();
+    }
+
+    @Authorized()
+    @Query(returns => [User])
+    public usersWithAuthentication(): Promise<any> {
+      return this.userService.find();
+    }
+
+    @Authorized('admin')
+    @Query(returns => [User])
+    public usersWithAuthorization(@Ctx() { user }: Context): Promise<any> {
+      console.log(user.id, user.role)
       return this.userService.find();
     }
 
