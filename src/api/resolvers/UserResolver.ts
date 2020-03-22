@@ -30,7 +30,7 @@ export class UserResolver {
     @Authorized('admin')
     @Query(returns => [User])
     public usersWithAuthorization(@Ctx() { user }: Context): Promise<any> {
-      console.log(user.id, user.role)
+      console.log(user.id, user.role);
       return this.userService.find();
     }
 
