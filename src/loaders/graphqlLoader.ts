@@ -41,14 +41,14 @@ export const graphqlLoader: MicroframeworkLoader = async (settings: Microframewo
             const requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER); // uuid-like
             const container = Container.of(requestId); // get scoped container
             const context = { requestId, container, request, response,
-                user: {userId: undefined, role: "guest"} }; // create our context
+                user: {userId: undefined, role: 'guest'} }; // create our context
             container.set('context', context); // place context or other data in container
 
             try {
                 // example header value: {userId: "user-id", role: "admin"}
                 // todo: parse bearer token here
                 if (request.headers.authorization) {
-                    context.user = JSON.parse(request.headers.authorization)
+                    context.user = JSON.parse(request.headers.authorization);
                 }
             } catch (err) {
                 console.log('Cannot parse auhtorization header. It should be JSON.');
