@@ -5,6 +5,7 @@ import * as path from 'path';
 import { AuthChecker, buildSchema } from 'type-graphql';
 import Container from 'typedi';
 
+import { Context } from '../api/Context';
 import { env } from '../env';
 import { getErrorCode, getErrorMessage, handlingErrors } from '../lib/graphql';
 
