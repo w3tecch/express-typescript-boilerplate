@@ -62,4 +62,21 @@ describe('/api/users', () => {
         done();
     });
 
+    test('POST: / should return a BadRequestError in case of create user without password', async (done) => {
+        const response = await request(settings.app)
+            .post('/api/users').send({
+                email: 'example@example.com',
+                firstName: 'Guy',
+                lastName: 'Man',
+                username: 'GuyMan',
+            })
+            .set('Authorization', `Basic ${bruceAuthorization}`)
+            .expect('Content-Type', /json/)
+            .expect(400);
+
+        console.log(response.body)
+        expect(response.body.name).toEqual('BadRequestError')
+        expect(response.body.errors[0].property).toEqual('password')
+        done();
+    });
 });
