@@ -74,7 +74,6 @@ describe('/api/users', () => {
             .expect('Content-Type', /json/)
             .expect(400);
 
-        console.log(response.body)
         expect(response.body.name).toEqual('BadRequestError')
         expect(response.body.errors[0].property).toEqual('password')
         done();
