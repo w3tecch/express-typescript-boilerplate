@@ -129,8 +129,5 @@
     "nock": "10.0.0",
     "sqlite3": "^4.0.0",
     "ts-jest": "23.10.1"
-  },
-  "resolutions": {
-    "**/event-stream": "^4.0.1"
   }
 }
