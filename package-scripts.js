@@ -149,7 +149,7 @@ module.exports = {
                 script: series(
                     'nps banner.seed',
                     'nps config',
-                    runFast('./commands/seed.ts')
+                    runFast('./node_modules/typeorm-seeding/dist/cli.js seed')
                 ),
                 description: 'Seeds generated records into the database'
             },
