@@ -76,7 +76,7 @@
     "tslint": "^5.8.0",
     "type-graphql": "^0.15.0",
     "typedi": "0.8.0",
-    "typeorm": "^0.2.5",
+    "typeorm": "^0.2.25",
     "typeorm-seeding": "^1.0.0-beta.6",
     "typeorm-typedi-extensions": "^0.2.1",
     "typescript": "^3.6.3",
