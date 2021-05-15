@@ -11,7 +11,7 @@
     "setup": "npm start config && npm start setup.script"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=8.0.0 <12.0.0"
   },
   "repository": "git+ssh://git@github.com/w3tec/express-typescript-boilerplate.git",
   "keywords": [
