@@ -1879,10 +1879,10 @@ expect@^23.6.0:
     jest-message-util "^23.4.0"
     jest-regex-util "^23.3.0"
 
-express-basic-auth@^1.1.3:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/express-basic-auth/-/express-basic-auth-1.1.6.tgz#a9d20e4d8da8f7212d4865f6006f9214c4b41a20"
-  integrity sha512-fRh/UU2q/YhvY0/Pkzi3VcLyjIExveW2NOOnOGgO6yO0jKXt6zcKPVPWSrL8nlhlh+YEH5LOjz+CGFML5dJQNw==
+express-basic-auth@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/express-basic-auth/-/express-basic-auth-1.1.7.tgz#8682dea1023ec9694628f9ab561fb56d17e88741"
+  integrity sha512-gofejPlyXxuRQfbc2pfCBEjFgKUPwICLoEJuC6i2KqBPBszBU7bIKvpEKrsU0oCCFDo2L1YuK/KSG5gVyess+A==
   dependencies:
     basic-auth "^2.0.1"
 
