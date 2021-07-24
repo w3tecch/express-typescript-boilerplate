@@ -11,7 +11,7 @@
     "setup": "npm start config && npm start setup.script"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": "14.15.5"
   },
   "repository": "git+ssh://git@github.com/w3tec/express-typescript-boilerplate.git",
   "keywords": [
@@ -58,6 +58,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "chalk": "^4.1.1",
+    "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
     "class-validator-jsonschema": "^2.2.0",
     "commander": "^8.0.0",
@@ -99,7 +100,8 @@
     "typeorm-typedi-extensions": "^0.4.1",
     "typescript": "^4.3.5",
     "uuid": "^8.3.2",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
