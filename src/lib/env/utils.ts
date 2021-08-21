@@ -31,7 +31,7 @@ export function getOsPaths(key: string): string[] {
 }
 
 export function getOsEnvArray(key: string, delimiter: string = ','): string[] {
-    return process.env[key] && process.env[key].split(delimiter) || [];
+    return process.env[key] && process.env[key]?.split(delimiter) || [];
 }
 
 export function toNumber(value: string): number {
