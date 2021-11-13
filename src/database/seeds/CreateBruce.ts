@@ -1,12 +1,13 @@
 import { Connection } from 'typeorm';
-import { Factory, Seed } from 'typeorm-seeding';
+import { Factory, Seeder } from 'typeorm-seeding';
+import { sortAndDeduplicateDiagnostics } from 'typescript';
 import * as uuid from 'uuid';
 
 import { User } from '../../../src/api/models/User';
 
-export class CreateBruce implements Seed {
+export class CreateBruce implements Seeder {
 
-    public async seed(factory: Factory, connection: Connection): Promise<User> {
+    public async run(factory: Factory, connection: Connection): Promise<any> {
         // const userFactory = factory<User, { role: string }>(User as any);
         // const adminUserFactory = userFactory({ role: 'admin' });
 
@@ -36,7 +37,8 @@ export class CreateBruce implements Seed {
         user.email = 'bruce.wayne@wayne-enterprises.com';
         user.username = 'bruce';
         user.password = '1234';
-        return await em.save(user);
+        await em.save(user);
+        return 4;
     }
 
 }

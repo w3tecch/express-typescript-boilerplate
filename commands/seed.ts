@@ -1,9 +1,7 @@
 import chalk from 'chalk';
 import commander from 'commander';
 import * as path from 'path';
-import {
-    loadConnection, loadEntityFactories, loadSeeds, runSeed, setConnection
-} from 'typeorm-seeding';
+import { createConnection, factory, runSeeder, useSeeding } from 'typeorm-seeding';
 
 // Cli helper
 commander
@@ -38,8 +36,8 @@ const run = async () => {
   let factoryFiles;
   let seedFiles;
   try {
-    factoryFiles = await loadEntityFactories(factoryPath);
-    seedFiles = await loadSeeds(seedsPath);
+    factoryFiles = await factory(factoryPath);
+    seedFiles = await useSeeding(seedsPath);
   } catch (error) {
     return handleError(error);
   }
@@ -56,8 +54,7 @@ const run = async () => {
 
   // Get database connection and pass it to the seeder
   try {
-    const connection = await loadConnection();
-    setConnection(connection);
+    await createConnection();
   } catch (error) {
     return handleError(error);
   }
@@ -70,7 +67,7 @@ const run = async () => {
       className = className.split('-')[className.split('-').length - 1];
       log('\n' + chalk.gray.underline(`executing seed:  `), chalk.green.bold(`${className}`));
       const seedFileObject: any = require(seedFile);
-      await runSeed(seedFileObject[className]);
+      await runSeeder(seedFileObject[className]);
     } catch (error) {
       console.error('Could not run seed ', error);
       process.exit(1);
