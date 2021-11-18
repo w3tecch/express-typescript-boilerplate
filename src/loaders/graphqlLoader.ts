@@ -1,8 +1,8 @@
 import * as express from 'express';
-import GraphQLHTTP from 'express-graphql';
+import { graphqlHTTP } from 'express-graphql';
 import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
 import * as path from 'path';
-import { buildSchema } from 'type-graphql';
+import { buildSchema, NonEmptyArray } from 'type-graphql';
 import Container from 'typedi';
 
 import { env } from '../env';
@@ -13,7 +13,8 @@ export const graphqlLoader: MicroframeworkLoader = async (settings: Microframewo
         const expressApp = settings.getData('express_app');
 
         const schema = await buildSchema({
-            resolvers: env.app.dirs.resolvers,
+            container: Container,
+            resolvers: env.app.dirs.resolvers as NonEmptyArray<string>,
             // automatically create `schema.gql` file with schema definition in current folder
             emitSchemaFile: path.resolve(__dirname, '../api', 'schema.gql'),
         });
@@ -25,12 +26,12 @@ export const graphqlLoader: MicroframeworkLoader = async (settings: Microframewo
 
             // Build GraphQLContext
             const requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER); // uuid-like
-            const container = Container.of(requestId); // get scoped container
+            const container = Container.of(requestId.toString()); // get scoped container
             const context = { requestId, container, request, response }; // create our context
             container.set('context', context); // place context or other data in container
 
             // Setup GraphQL Server
-            GraphQLHTTP({
+            graphqlHTTP({
                 schema,
                 context,
                 graphiql: env.graphql.editor,

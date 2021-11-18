@@ -6,7 +6,7 @@ import { User } from '../../../src/api/models/User';
 export class CreateUsers implements Seeder {
 
     public async run(factory: Factory, connection: Connection): Promise<any> {
-        await factory(User)().seedMany(10);
+        await factory(User)().createMany(10);
     }
 
 }

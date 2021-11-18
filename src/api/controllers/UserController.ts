@@ -4,6 +4,7 @@ import {
     Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, Req
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
+import { Service } from 'typedi';
 
 import { UserNotFoundError } from '../errors/UserNotFoundError';
 import { User } from '../models/User';
@@ -39,6 +40,7 @@ class CreateUserBody extends BaseUser {
     public password: string;
 }
 
+@Service()
 @Authorized()
 @JsonController('/users')
 @OpenAPI({ security: [{ basicAuth: [] }] })

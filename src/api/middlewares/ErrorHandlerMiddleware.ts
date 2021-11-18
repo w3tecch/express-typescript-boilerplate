@@ -1,9 +1,11 @@
 import * as express from 'express';
 import { ExpressErrorMiddlewareInterface, HttpError, Middleware } from 'routing-controllers';
+import { Service } from 'typedi';
 
 import { Logger, LoggerInterface } from '../../decorators/Logger';
 import { env } from '../../env';
 
+@Service()
 @Middleware({ type: 'after' })
 export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
 

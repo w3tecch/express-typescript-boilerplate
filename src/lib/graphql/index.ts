@@ -1,6 +1,5 @@
 import DataLoader from 'dataloader';
-import { ObjectType } from 'typedi';
-import { getCustomRepository, getRepository, Repository } from 'typeorm';
+import { getCustomRepository, getRepository, ObjectType, Repository } from 'typeorm';
 
 // -------------------------------------------------------------------------
 // Main exports
@@ -33,7 +32,7 @@ export function createDataLoader<T>(obj: ObjectType<T>, options: CreateDataLoade
         }
     }
 
-    return new DataLoader(async (ids: number[]) => {
+    return new DataLoader(async (ids: readonly number[]) => {
         let items = [];
         if (options.method) {
             items = await repository[options.method](ids);

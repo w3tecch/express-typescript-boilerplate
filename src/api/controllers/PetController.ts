@@ -3,6 +3,7 @@ import {
     Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
+import { Service } from 'typedi';
 
 import { PetNotFoundError } from '../errors/PetNotFoundError';
 import { Pet } from '../models/Pet';
@@ -30,6 +31,7 @@ class CreatePetBody extends BasePet {
     public userId: string;
 }
 
+@Service()
 @Authorized()
 @JsonController('/pets')
 @OpenAPI({ security: [{ basicAuth: [] }] })

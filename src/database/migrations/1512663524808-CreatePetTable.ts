@@ -1,5 +1,7 @@
+import { Service } from 'typedi';
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
+@Service()
 export class CreatePetTable1512663524808 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {

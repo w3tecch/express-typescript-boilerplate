@@ -1,7 +1,8 @@
 import chalk from 'chalk';
-import commander from 'commander';
+import commander, { option } from 'commander';
+import G from 'glob';
 import * as path from 'path';
-import { createConnection, factory, runSeeder, useSeeding } from 'typeorm-seeding';
+import { createConnection, getConnectionOptions, runSeeder, useSeeding } from 'typeorm-seeding';
 
 // Cli helper
 commander
@@ -14,16 +15,6 @@ commander
   .option('--config <file>', 'path to your ormconfig.json file (must be a json)')
   .parse(process.argv);
 
-// Get cli parameter for a different factory path
-const factoryPath = (commander.factories)
-  ? commander.factories
-  : 'src/database/factories';
-
-// Get cli parameter for a different seeds path
-const seedsPath = (commander.seeds)
-  ? commander.seeds
-  : 'src/database/seeds/';
-
 // Get a list of seeds
 const listOfSeeds = (commander.run)
   ? commander.run.map(l => l.trim()).filter(l => l.length > 0)
@@ -33,11 +24,14 @@ const listOfSeeds = (commander.run)
 const run = async () => {
   const log = console.log;
 
-  let factoryFiles;
-  let seedFiles;
+  let seedFiles: string[];
+  let factories: string[];
+
   try {
-    factoryFiles = await factory(factoryPath);
-    seedFiles = await useSeeding(seedsPath);
+    const connectionOptions = await getConnectionOptions();
+    seedFiles =  G.sync(connectionOptions.seeds[0], {absolute: true});
+    factories =  G.sync(connectionOptions.factories[0], {absolute: true});
+
   } catch (error) {
     return handleError(error);
   }
@@ -50,11 +44,13 @@ const run = async () => {
   // Status logging to print out the amount of factories and seeds.
   log(chalk.bold('seeds'));
   log('🔎 ', chalk.gray.underline(`found:`),
-    chalk.blue.bold(`${factoryFiles.length} factories`, chalk.gray('&'), chalk.blue.bold(`${seedFiles.length} seeds`)));
+    chalk.blue.bold(`${factories.length} factories`, chalk.gray('&'), chalk.blue.bold(`${seedFiles.length} seeds`)));
 
   // Get database connection and pass it to the seeder
   try {
-    await createConnection();
+    const ma = await getConnectionOptions();
+    await useSeeding();
+    await createConnection(ma);
   } catch (error) {
     return handleError(error);
   }

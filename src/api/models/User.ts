@@ -21,7 +21,8 @@ export class User {
 
     public static comparePassword(user: User, password: string): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            bcrypt.compare(password, user.password, (err, res) => {
+            // tslint:disable-next-line:whitespace
+            bcrypt.compare(password, user?user.password:undefined, (err, res) => {
                 resolve(res === true);
             });
         });
