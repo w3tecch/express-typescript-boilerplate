@@ -11,7 +11,7 @@
     "setup": "npm start config && npm start setup.script"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=12.0.0"
   },
   "repository": "git+ssh://git@github.com/w3tec/express-typescript-boilerplate.git",
   "keywords": [
@@ -63,8 +63,8 @@
     "morgan": "^1.9.0",
     "mysql": "^2.16.0",
     "nodemon": "^1.12.1",
-    "nps": "^5.9.3",
-    "nps-utils": "^1.5.0",
+    "nps": "^5.10.0",
+    "nps-utils": "^1.7.0",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.10",
     "routing-controllers": "^0.7.6",
