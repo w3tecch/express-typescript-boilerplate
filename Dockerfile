@@ -13,4 +13,4 @@ COPY . /usr/src/app
 RUN yarn install
 
 # Build and run the app
-CMD npm start serve
+CMD yarn start setup & npm start serve
