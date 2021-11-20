@@ -1,5 +1,3 @@
-import { createConnection } from 'typeorm-seeding';
-
 import { User } from '../../../src/api/models/User';
 import { UserService } from '../../../src/api/services/UserService';
 import { events } from '../../../src/api/subscribers/events';
@@ -8,19 +6,8 @@ import { LogMock } from '../lib/LogMock';
 import { RepositoryMock } from '../lib/RepositoryMock';
 
 describe('UserService', () => {
-
     test('Find should return a list of users', async (done) => {
-        const a = await createConnection(
-            { name: 'firstconnection',
-            type: 'postgres',
-            host: 'localhost',
-            port: 5432,
-            username: 'admin',
-            password: 'admin',
-            database: 'postgres',
-         });
         const log = new LogMock();
-        log.info(a.name);
         const repo = new RepositoryMock();
         const ed = new EventDispatcherMock();
         const user = new User();
