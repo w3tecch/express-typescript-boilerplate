@@ -5,6 +5,7 @@
         "pretty": true,
         "sourceMap": true,
         "outDir": "dist",
+        "skipLibCheck": true,
         "importHelpers": true,
         "strict": true,
         "noImplicitAny": false,
@@ -37,9 +38,5 @@
             "es2015.symbol.wellknown",
             "esnext.asynciterable"
         ]
-    },
-    "exclude": [
-        "node_modules",
-        "typings"
-      ]
+    }
 }
