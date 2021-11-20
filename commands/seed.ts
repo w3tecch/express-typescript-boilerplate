@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import commander, { option } from 'commander';
+import * as commander from 'commander';
 import G from 'glob';
 import * as path from 'path';
 import { createConnection, getConnectionOptions, runSeeder, useSeeding } from 'typeorm-seeding';
