@@ -7,8 +7,7 @@ import { User } from '../../../src/api/models/User';
 export class CreateBruce implements Seeder {
 
     public async run(factory: Factory, connection: Connection): Promise<any> {
-        const em = connection.createEntityManager();
-
+        const userRepository = connection.getRepository(User);
         const user = new User();
         user.id = uuid.v1();
         user.firstName = 'Bruce';
@@ -16,8 +15,7 @@ export class CreateBruce implements Seeder {
         user.email = 'bruce.wayne@wayne-enterprises.com';
         user.username = 'bruce';
         user.password = '1234';
-        await em.save(user);
-        return 4;
-    }
 
+        return await userRepository.save(user);
+    }
 }
