@@ -7,12 +7,12 @@ import { User } from '../../../src/api/models/User';
 export class CreatePets implements Seeder {
 
     public async run(factory: Factory, connection: Connection): Promise<any> {
-        const em = connection.createEntityManager();
+        const userRepository = connection.getRepository(User);
         await times(10, async (n) => {
             const pet = await factory(Pet)().create();
             const user = await factory(User)().make();
             user.pets = [pet];
-            return await em.save(user);
+            return await userRepository.save(user);
         });
     }
 }
