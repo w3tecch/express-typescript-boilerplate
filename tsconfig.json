@@ -5,6 +5,7 @@
         "pretty": true,
         "sourceMap": true,
         "outDir": "dist",
+        "skipLibCheck": true,
         "importHelpers": true,
         "strict": true,
         "noImplicitAny": false,

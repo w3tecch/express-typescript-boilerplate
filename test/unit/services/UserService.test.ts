@@ -6,7 +6,6 @@ import { LogMock } from '../lib/LogMock';
 import { RepositoryMock } from '../lib/RepositoryMock';
 
 describe('UserService', () => {
-
     test('Find should return a list of users', async (done) => {
         const log = new LogMock();
         const repo = new RepositoryMock();

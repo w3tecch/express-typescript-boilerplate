@@ -1,5 +1,5 @@
 import { Service } from 'typedi';
-import { OrmRepository } from 'typeorm-typedi-extensions';
+import { InjectRepository } from 'typeorm-typedi-extensions';
 import uuid from 'uuid';
 
 import { EventDispatcher, EventDispatcherInterface } from '../../decorators/EventDispatcher';
@@ -12,7 +12,7 @@ import { events } from '../subscribers/events';
 export class UserService {
 
     constructor(
-        @OrmRepository() private userRepository: UserRepository,
+        @InjectRepository() private userRepository: UserRepository,
         @EventDispatcher() private eventDispatcher: EventDispatcherInterface,
         @Logger(__filename) private log: LoggerInterface
     ) { }

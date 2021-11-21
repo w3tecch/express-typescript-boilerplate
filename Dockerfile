@@ -1,10 +1,10 @@
-FROM node:alpine
+FROM node:17-alpine3.14
+
+# Update apk
+RUN apk add --update --no-cache curl py-pip
 
 # Create work directory
 WORKDIR /usr/src/app
-
-# Install runtime dependencies
-RUN npm install yarn -g
 
 # Copy app source to work directory
 COPY . /usr/src/app
@@ -13,4 +13,4 @@ COPY . /usr/src/app
 RUN yarn install
 
 # Build and run the app
-CMD npm start serve
+CMD yarn start setup & npm start serve

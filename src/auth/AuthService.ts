@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { Service } from 'typedi';
-import { OrmRepository } from 'typeorm-typedi-extensions';
+import { InjectRepository } from 'typeorm-typedi-extensions';
 
 import { User } from '../api/models/User';
 import { UserRepository } from '../api/repositories/UserRepository';
@@ -11,7 +11,7 @@ export class AuthService {
 
     constructor(
         @Logger(__filename) private log: LoggerInterface,
-        @OrmRepository() private userRepository: UserRepository
+        @InjectRepository() private userRepository: UserRepository
     ) { }
 
     public parseBasicAuthFromRequest(req: express.Request): { username: string, password: string } {

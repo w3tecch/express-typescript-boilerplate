@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    links:
+        - postgres
+    ports:
+      - "5000:5000"
+      - "9229:9229"
+    depends_on:
+      - postgres
+    stdin_open: true
+    env_file: ./.env.postgres
+    tty: true
+    container_name: web-server
+
+  postgres:
+    image: postgres:14
+    command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all -c max_connections=200
+    environment:
+        POSTGRES_DB: my_database
+        POSTGRES_USER: admin
+        POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    container_name: postgres
+
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    logging:
+      driver: none
+    links:
+    - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5601:80"

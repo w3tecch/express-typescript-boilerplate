@@ -6,5 +6,8 @@
     },
     "importSorter.generalConfiguration.sortOnBeforeSave": true,
     "files.trimTrailingWhitespace": true,
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
+    "cSpell.words": [
+        "Metadatas"
+    ]
 }

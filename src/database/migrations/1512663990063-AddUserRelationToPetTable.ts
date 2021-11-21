@@ -1,5 +1,7 @@
+import { Service } from 'typedi';
 import { MigrationInterface, QueryRunner, TableForeignKey } from 'typeorm';
 
+@Service()
 export class AddUserRelationToPetTable1512663990063 implements MigrationInterface {
 
     private tableForeignKey = new TableForeignKey({
