@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsEmail, IsNotEmpty, IsUUID, ValidateNested } from 'class-validator';
 import {
-    Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, Req
+    Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, QueryParam, Req
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 
@@ -65,6 +65,12 @@ export class UserController {
     @ResponseSchema(UserResponse)
     public one(@Param('id') id: string): Promise<User | undefined> {
         return this.userService.findOne(id);
+    }
+
+    @Get('/search')
+    @ResponseSchema(UserResponse, { isArray: true })
+    public search(@QueryParam('query') query: string): Promise<User[]> {
+        return this.userService.search(query);
     }
 
     @Post()
