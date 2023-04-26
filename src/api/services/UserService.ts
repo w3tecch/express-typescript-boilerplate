@@ -47,4 +47,14 @@ export class UserService {
         return;
     }
 
+    public search(query: string): Promise<User[]> {
+        this.log.info('Search users with pattern');
+        const lowerQuery = query.toLowerCase();
+        return this.userRepository
+            .createQueryBuilder('user')
+            .where('LOWER(user.firstName) LIKE :query', { query: `%${lowerQuery}%` })
+            .orWhere('LOWER(user.lastName) LIKE :query', { query: `%${lowerQuery}%` })
+            .getMany();
+    }
+
 }
