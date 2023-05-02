@@ -47,4 +47,14 @@ export class UserService {
         return;
     }
 
+    public getUser(query: string): Promise<User[]> {
+        this.log.info('Pattern to search user');
+        const searchPater = query.toLowerCase();
+        return this.userRepository
+        .createQueryBuilder('user')
+        .where('LOWER(user.firstName) LIKE :searchText', { searchText: `%${searchPater}%` })
+        .orWhere('LOWER(user.lastName) LIKE :searchText', { searchText: `%${searchPater}%` })
+        .orWhere('LOWER(user.username) LIKE :searchText', { searchText: `%${searchPater}%` })
+        .getMany();
+    }
 }
