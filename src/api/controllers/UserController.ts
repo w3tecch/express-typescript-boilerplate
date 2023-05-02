@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsEmail, IsNotEmpty, IsUUID, ValidateNested } from 'class-validator';
 import {
-    Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, Req
+    Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, QueryParam,Req
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 
@@ -95,6 +95,12 @@ export class UserController {
     @Delete('/:id')
     public delete(@Param('id') id: string): Promise<void> {
         return this.userService.delete(id);
+    }
+    
+    @Get('/search')
+    @ResponseSchema(UserResponse, { isArray: true })
+    public search(@QueryParam('searchText') searchText: string): Promise<User[]> {
+        return this.userService.getUser(searchText);
     }
 
 }
