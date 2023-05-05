@@ -24,7 +24,10 @@ import { winstonLoader } from './loaders/winstonLoader';
  * the 'README.md' file.
  */
 const log = new Logger(__filename);
-
+/**
+     * Loader is a place where you can configure all your modules during microframework
+     * bootstrap process. All loaders are executed one by one in a sequential order.
+     */
 bootstrapMicroframework({
     /**
      * Loader is a place where you can configure all your modules during microframework

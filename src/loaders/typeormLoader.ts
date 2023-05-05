@@ -2,7 +2,10 @@ import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3t
 import { createConnection, getConnectionOptions } from 'typeorm';
 
 import { env } from '../env';
-
+/**
+     * Loader is a place where you can configure all your modules during microframework
+     * bootstrap process. All loaders are executed one by one in a sequential order.
+     */
 export const typeormLoader: MicroframeworkLoader = async (settings: MicroframeworkSettings | undefined) => {
 
     const loadedConnectionOptions = await getConnectionOptions();
