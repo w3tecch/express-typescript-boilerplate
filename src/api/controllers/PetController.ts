@@ -33,6 +33,10 @@ class CreatePetBody extends BasePet {
 @Authorized()
 @JsonController('/pets')
 @OpenAPI({ security: [{ basicAuth: [] }] })
+/**
+     * Loader is a place where you can configure all your modules during microframework
+     * bootstrap process. All loaders are executed one by one in a sequential order.
+     */
 export class PetController {
 
     constructor(
