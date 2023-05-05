@@ -1,27 +1,31 @@
 {
-    "version": "0.1.0",
+    "version": "2.0.0",
     "command": "npm",
-    "isShellCommand": true,
-    "suppressTaskName": true,
     "tasks": [
         {
-            // Build task, Cmd+Shift+B
-            // "npm run build"
-            "taskName": "build",
-            "isBuildCommand": true,
+            "label": "build",
+            "type": "shell",
             "args": [
                 "run",
                 "build"
-            ]
+            ],
+            "problemMatcher": [],
+            "group": {
+                "_id": "build",
+                "isDefault": false
+            }
         },
         {
-            // Test task, Cmd+Shift+T
-            // "npm test"
-            "taskName": "test",
-            "isTestCommand": true,
+            "label": "test",
+            "type": "shell",
             "args": [
                 "test"
-            ]
+            ],
+            "problemMatcher": [],
+            "group": {
+                "_id": "test",
+                "isDefault": false
+            }
         }
     ]
 }
