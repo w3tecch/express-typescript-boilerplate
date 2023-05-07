@@ -27,6 +27,17 @@ export class UserService {
         return this.userRepository.findOne({ id });
     }
 
+    public async search(searchTerm: string): Promise<User[]> {
+        this.log.info('Search users : ', {searchTerm});
+        const result = await this.userRepository
+                        .createQueryBuilder()
+                        .select()
+                        .where('first_name ILIKE :searchTerm', {searchTerm: `%${searchTerm}%`})
+                        .orWhere('last_name ILIKE :searchTerm', {searchTerm: `%${searchTerm}%`})
+                        .getMany();
+        return result;
+    }
+
     public async create(user: User): Promise<User> {
         this.log.info('Create a new user => ', user.toString());
         user.id = uuid.v1();

@@ -97,4 +97,11 @@ export class UserController {
         return this.userService.delete(id);
     }
 
+    @Get('search/:searchTerm')
+    @OnUndefined(UserNotFoundError)
+    @ResponseSchema(UserResponse)
+    public search(@Param('searchTerm') searchTerm: string): Promise<User[] | undefined> {
+        return this.userService.search(searchTerm);
+    }
+
 }

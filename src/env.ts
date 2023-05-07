@@ -72,4 +72,8 @@ export const env = {
         username: getOsEnv('MONITOR_USERNAME'),
         password: getOsEnv('MONITOR_PASSWORD'),
     },
+    external:{
+        countryDataUrl: getOsEnv('COUNTRY_DATA_URL')
+    }
+    
 };
