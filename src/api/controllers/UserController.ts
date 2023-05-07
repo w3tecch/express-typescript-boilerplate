@@ -101,7 +101,7 @@ export class UserController {
     @OnUndefined(UserNotFoundError)
     @ResponseSchema(UserResponse)
     public search(@Param('searchTerm') searchTerm: string): Promise<User[] | undefined> {
-        return this.userService.search(searchTerm);
+        return this.userService.searchUser(searchTerm);
     }
 
 }
